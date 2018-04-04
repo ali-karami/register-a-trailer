@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Will the trailer be used outside the UK? {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+
+                <p>Please amend the following details:</p>
+                <ul class="error-summary-list error-list">
+                    <li class="error-message abroad hide"><a href="#abroad-a1">Select an option</a></li>
+                </ul>
+            </div>
+
+            <h1 class="heading-large">Will the trailer be used outside the UK?</h1>
+
+            <form class="form">
+                <div class="form-group" id="question">
+                    <span class="abroad error-message hide">Select an option</span>
+
+                    <fieldset class="inline">
+                        <legend class="visually-hidden">Will the trailer be used abroad?</legend>
+
+                        <div class="multiple-choice">
+                            <input id="abroad-a1" type="radio" name="abroad" value="Yes">
+                            <label class="block-label" for="abroad-a1" id="abroad-a1-label">Yes</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="abroad-a2" type="radio" name="abroad" value="No">
+                            <label class="block-label" for="abroad-a2" id="abroad-a2-label">No</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {{ button.input(class='button', type='button', value='Continue') }}
+            </form>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $('#proposition-name').html("Register a trailer");
+    
+    $('.button').click(checkAnswers);
+
+    function checkAnswers() {
+        var abroad = $('input[name=abroad]:checked').val();
+
+        if (abroad == 'Yes') {
+            member.abroad = abroad;
+            go('commercially');
+
+        } else if (abroad == 'No') {
+            go('../../exit/abroad');
+
+        } else {
+            $('body').scrollTop(0);
+            $('.error-summary').show();
+            $('.error-summary').focus();
+            $('.error-message').show();
+            $('#question').addClass('error');
+        }            
+    }
+</script>
+{% endblock %}

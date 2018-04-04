@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block page_title %} You don’t need to register your trailer {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="govuk-box-highlight grey">
+                <h1 class="bold-large banner-header">You don’t need to<br>register your trailer</h1>
+            </div>
+
+            <p>You don’t have to register your trailer but it’s optional if you want to.</p>
+            
+            {{ button.input(class='button', type='button', value='I still want to register') }}
+
+            <a href="https://www.gov.uk">Return to GOV.UK</a>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $('.button').click(next);
+
+    function next() { 
+        member.clear();
+        go('../what-would-you-like');
+    }
+</script>
+{% endblock %}

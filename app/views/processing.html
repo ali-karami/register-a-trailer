@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Checking card security {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+	<style>
+		.column-full {
+			padding-right: 0;
+			padding-left: 0;
+			text-align: center;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+<div class="grid-row phase">
+    {% include "includes/phase_banner.html" %}
+</div>
+
+<main id="content" role="main">
+	<div class="grid-row">
+		<div class="column-full">
+            <h1 class="heading-medium">Checking card security please wait...</h1>
+			<img src="/public/images/progress.gif" style="width:50px" class="animated-progress"/>
+		</div>
+	</div>
+</main>
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        var destination = 'success'
+
+        setTimeout(function(){
+            go(destination);
+        },3000);
+    });
+</script>
+{% endblock %}

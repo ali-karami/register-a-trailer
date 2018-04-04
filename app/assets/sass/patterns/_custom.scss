@@ -1,0 +1,116 @@
+// Custom styles
+// ==========================================================================
+
+/* Styles for custom phase banner */
+.grid-row.back { margin-bottom: 1.25em; }
+
+.grid-row.back,
+.grid-row.phase {
+    max-width: 960px;
+    margin: 0 15px;
+}
+@media (min-width: 641px) {
+    .grid-row.back,
+    .grid-row.phase {
+        margin: 0 30px;
+    }
+}
+@media (min-width: 1020px) {
+    .grid-row.back,
+    .grid-row.phase {
+        margin: 0 auto;
+    }
+}
+
+
+input#postcode { text-transform: uppercase; }
+
+
+
+span.payment {
+   width: 35%;
+   display: inline-block;
+}
+
+.reg-mark {
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   min-width: 80px;
+   min-height: 60px;
+   font: 40px UKNumberPlate;
+   padding: 6px;
+   line-height: 1;
+   color: #000000;
+   text-transform: uppercase;
+   border: 3px solid #000000;
+   background-color: #ffffff;
+   border-radius: 0.25em;
+}
+
+#address { width: 300px; }
+
+.hide { display: none; }
+
+.show { display: block; }
+
+strong { font-weight: 700; }
+
+
+.grey {
+  color: $black;
+  background: $panel-colour;
+}
+
+.disclosure-question { display: none; }
+
+.example-icon-list p {
+   display: list-item;
+   font-size: 19px;
+   padding-left: 40px;
+   margin-bottom: 1.5em;
+   margin-top: -1.50em;
+}
+
+.button-change {
+   font-weight:bold;
+}
+
+.list-summary-item {
+   border-bottom: 1px solid $border-colour;
+   @extend %contain-floats;
+   padding: .62em 0.0em 0.42em 0.0em;
+}
+
+.list-summary-item:first-child {
+   border-top: 1px solid $border-colour; // Add border top to first item in list
+}
+
+.list-summary-item span:nth-child(2) { font-weight: 700; }
+
+.list-summary-item span {
+   display: block; // Force each <span> onto it’s own line
+}
+
+@media (min-width: 440px) {
+   .list-summary-item span {
+       float: left; // Make each <span> line up in one row
+       width: 30%; // Give all <span>s the same width
+   }
+
+   .list-summary-item span:first-child {
+       width: 40%; // Make first <span> 40% wide
+   }
+
+   .list-summary-item span:nth-child(2) { font-weight: 700; }
+
+   .list-summary-item.playback span:first-child {
+       width: 80%;
+   }
+
+   .list-summary-item-right {
+       text-align: right; // Make 3rd <span> align right
+       float:none;
+   }
+
+}

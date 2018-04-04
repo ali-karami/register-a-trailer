@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Who is the trailer manufactured by? {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row no-bottom">
+        <div class="column-two-thirds">
+            <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+
+                <p>Please amend the following details:</p>
+                <ul class="error-summary-list error-list">
+                    <li class="manufacturer error-message hide"><a href="#manufacturer">Provide the trailer manufacturer</a></li>
+                </ul>
+            </div>
+
+            <h1 class="heading-large">Who is the trailer manufactured by?</h1>
+
+            <div class="form-group" id="question">
+                <label for="manufacturer">
+                    <span class="error-message manufacturer hide">Provide the trailer manufacturer</span><br>
+                </label>
+
+                <input class="form-control" id="manufacturer" type="text" name="manufacturer" style="text-transform: capitalize">
+            </div>
+        </div>
+    </div>
+    <br>
+
+    {{ button.input(class='button', type='button', value='Continue') }}
+</main>
+
+<script type="text/javascript">
+    $('#proposition-name').html("Register a trailer");
+
+    $('.button').click(checkAnswers);
+
+    function checkAnswers() {
+        var validInput = true;
+        var manufacturer = $('input[name=manufacturer]').val();
+
+        if (manufacturer) {
+            member.manufacturer = manufacturer;
+            go('max-mass');
+
+        } else {
+            $('body').scrollTop(0);
+            $('.error-summary').show();
+            $('.error-summary').focus();
+            $('.error-message').show();
+            $('#question').addClass('error');
+        }
+    }
+</script>
+{% endblock %}

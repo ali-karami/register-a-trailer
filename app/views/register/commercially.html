@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Will the trailer be used commercially? {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+
+                <p>Please amend the following details:</p>
+                <ul class="error-summary-list error-list">
+                    <li class="error-message commercial hide"><a href="#commercial-a1">Select an option</a></li>
+                    <li class="error-message over-3500 hide"><a href="#over-3500-container">Select an option</a></li>
+                </ul>
+            </div>
+
+            <h1 class="heading-large">Will the trailer be used commercially?</h1>
+
+            <form class="form">
+                <div class="form-group" id="question">
+                    <span class="error-message commercial hide">Select an option</span>
+
+                    <fieldset class="inline">
+                        <legend class="visually-hidden">Will the trailer be used commercially?</legend>
+
+                        <div class="multiple-choice">
+                            <input id="commercial-a1" type="radio" name="commercial" value="Yes">
+                            <label class="block-label" for="commercial-a1" id="commercial-a1-label">Yes</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="commercial-a2" type="radio" name="commercial" value="No">
+                            <label class="block-label" for="commercial-a2" id="commercial-a2-label">No</label>
+                        </div>
+                    </fieldset>
+
+                    <br>
+                    <fieldset id="over-3500-container" class="panel panel-border-narrow inline disclosure-question">
+                        <h2 class="heading-medium">Does the trailer weigh over 3,500kg?</h2>
+
+                        <div class="form-group" id="over-3500">
+                            <legend class="visually-hidden">Does the trailer weigh over 3,500kg?</legend>
+
+                            <span class="error-message over-3500 hide">Select an option<br></span>
+
+                            <div class="multiple-choice">
+                                <input id="over-3500-a1" type="radio" name="over-3500" value="Yes">
+                                <label class="block-label" for="over-3500-a1" id="over-3500-a1-label">Yes</label>
+                            </div>
+                            <div class="multiple-choice">
+                                <input id="over-3500-a2" type="radio" name="over-3500" value="No">
+                                <label class="block-label" for="over-3500-a2" id="over-3500-a2-label">No</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {{ button.input(class='button', type='button', value='Continue') }}
+            </form>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $('#proposition-name').html("Register a trailer");
+
+    $('.button').click(checkAnswers);
+
+    if ($('input[name=commercial]:checked').val() === 'No') {
+        $('#over-3500-container').show();
+    }
+
+    $('input[name=commercial]').change(function() {
+        $('#question').removeClass('error');
+        $('.error-message.commercial').hide();
+
+        if ($(this).val() === 'No') {
+            $('#over-3500-container').show();
+        } else {
+            $('#over-3500-container').hide();
+        }
+    });
+
+    function checkAnswers() {
+        var commercial = $('input[name=commercial]:checked').val();
+        var over3500 = $('input[name=over-3500]:checked').val();
+
+        if (commercial == 'Yes') {
+            member.commercial = commercial;
+            go('manufacturer');
+
+        } else if (commercial == 'No') {
+            if (over3500 == 'Yes') {
+                member.over3500 = over3500;
+                go('manufacturer')
+                
+            } else if (over3500 == 'No') {
+                member.over3500 = over3500;
+                go('../../exit/commercially');
+            } else {
+                $('#question').addClass('error');
+                $('.error-message.over-3500').show();
+            }
+
+        } else {
+            $('#question').addClass('error');
+            $('.error-summary').show();
+            $('.error-summary').focus();
+            $('.error-message.commercial').show();
+            $('body').scrollTop(0);
+        }            
+    }
+</script>
+{% endblock %}
