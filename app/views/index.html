@@ -17,34 +17,16 @@
 
             <h2 class="heading-large">Which trailer flow?</h2>
 
-            <p><a class="register" href="register">Register a trailer</a></p>
+            <p><a href="register">Register a trailer</a></p>
 
-            <p><a class="manage" href="manage">Manage a trailer</a></p>
+            <p><a href="manage">Manage a trailer</a></p>
         </div>
     </div>
 </main>
 
 <script type="text/javascript">
-    $( document ).ready(function() {
-        delete member;
-    });
-
     if (member.questions === undefined) {
         member.questions = {};
     }
-
-    $('.register').click(function() {
-        var serviceName = 'register';
-        member.questions.serviceName = serviceName;
-        console.log(member.questions.serviceName);
-        go('/register');
-    });
-
-    $('.manage').click(function() {
-        var serviceName = 'manage';
-        member.questions.serviceName = serviceName;
-        console.log(member.questions.serviceName);
-        go('/manage');
-    });
 </script>
 {% endblock %}

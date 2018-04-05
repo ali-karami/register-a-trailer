@@ -42,7 +42,10 @@
 </main>
 
 <script type="text/javascript">
-    $('#service-name').html('Register a trailer');
+    var changing = location.search.split('change=')[1];
+    if (changing === 'true') {
+        $('.button-back').hide();
+    }
 
     $('.button').click(checkAnswers);
 
@@ -52,8 +55,12 @@
 
         if (manufacturer) {
             member.manufacturer = manufacturer;
-            go('max-mass');
 
+            if (changing === "true") {
+                go('../check-your-answers');
+            } else {
+                go('max-mass');
+            }
         } else {
             $('body').scrollTop(0);
             $('.error-summary').show();

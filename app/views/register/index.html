@@ -59,13 +59,19 @@
 </main>
 
 <script type="text/javascript">
-    if (member.questions === undefined) {
-        member.questions = {};
-    }
-
     $('.button.button-start').click(next);
 
     function next() {
+        member.clear();
+
+        if (member.questions === undefined) {
+            member.questions = {};
+        }
+
+        member.questions.serviceName = 'register';
+
+        console.log(member.questions.serviceName);
+
         go('register/chassis');
     };
 </script>

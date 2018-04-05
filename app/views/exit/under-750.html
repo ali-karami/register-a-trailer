@@ -7,6 +7,10 @@
     {% include "includes/scripts.html" %}
 {% endblock %}
 
+{% block proposition_header %}
+    {% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
 {% block content %}
 {% include "includes/standard-back-phase-banner.html" %}
 <main id="content" role="main">
@@ -26,8 +30,7 @@
 <script type="text/javascript">
     $('.button').click(next);
 
-    function next() { 
-        member.clear();
+    function next() {
         go('https://www.gov.uk');
     }
 </script>

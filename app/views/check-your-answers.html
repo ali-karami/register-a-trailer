@@ -7,6 +7,10 @@
     {% include "includes/scripts.html" %}
 {% endblock %}
 
+{% block proposition_header %}
+    {% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
 {% block content %}
 {% include "includes/standard-back-phase-banner.html" %}
 <main id="content" role="main">
@@ -19,58 +23,59 @@
             <ul class="list-summary margin-bottom-2">
                 <li class="list-summary-item vin">
                     <span>Chassis number (VIN)</span>
-                    <span><strong><span id="chassisNumber" style="width: 100%; text-transform: uppercase;"></span></strong></span>
+                    <span><strong><span id="chassisNumber" style="width: 100%;text-transform: uppercase;"></span></strong></span>
                 </li>
                 
                 <li class="list-summary-item make">
                     <span>Manufacturer</span>
-                    <span><strong><span id="manufacturer" style="width: 100%; text-transform: capitalize;"></span></strong></span>
+                    <span><strong><span id="manufacturer" style="width: 100%;text-transform: capitalize;"></span></strong></span>
                     <span class="list-summary-item-right">
-                        <a class="button-change" href="manufacturer?change=true">Change <span class="visuallyhidden">manufacturer</span></a></span>
+                        <a class="button-change" href="register/manufacturer?change=true">Change <span class="visuallyhidden">manufacturer</span></a></span>
                 </li>
                 
                 <li class="list-summary-item maximum-mass">
                     <span>Permissible maximum mass (kg)</span>
                     <span><strong><span id="maximumMass" style="width: 100%;"></span></strong></span>
                     <span class="list-summary-item-right">
-                        <a class="button-change" href="max-mass?change=true">Change <span class="visuallyhidden">permissible maximum mass</span></a></span>
+                        <a class="button-change" href="register/max-mass?change=true">Change <span class="visuallyhidden">permissible maximum mass</span></a></span>
                 </li>
 
                 <li class="list-summary-item unladen-mass">
                     <span>Unladen mass (kg)</span>
                     <span><strong><span id="unladenMass" style="width: 100%;"></span></strong></span>
                     <span class="list-summary-item-right">
-                        <a class="button-change" href="unladen-mass?change=true">Change <span class="visuallyhidden">unladen mass</span></a></span>
+                        <a class="button-change" href="register/unladen-mass?change=true">Change <span class="visuallyhidden">unladen mass</span></a></span>
                 </li>
             </ul>
             
-            <h2 class="heading-medium margin-top-2">Personal details</h2>
+            <h2 class="heading-medium margin-top-2"><span id="app-type">Personal</span> details</h2>
 
             <ul class="list-summary margin-bottom-2">
-                <li class="list-summary-item code-1">
-                    <span>Name</span>
-                    <span><strong><span id="codeA" style="width: 100%; text-transform: capitalize;"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
+                <li class="list-summary-item keeper">
+                    <span>Keeper name</span>
+                    <span><strong><span id="keeperName" style="width: 100%;text-transform: capitalize;"></span></strong></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
                 </li>
 
-                <li class="list-summary-item code-2">
-                    <span>Name</span>
-                    <span><strong><span id="codeB" style="width: 100%; text-transform: capitalize;"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
+                <li class="list-summary-item company">
+                    <span>Company name</span>
+                    <span><strong><span id="companyName" style="width: 100%;text-transform: capitalize;"></span></strong></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
                 </li>
 
                 <li class="list-summary-item keeper-address">
                     <span>Address</span>
                     <span><strong><span id="address"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="find-individual-address?change=true">Change <span class="visuallyhidden">address</span></a></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/find-individual-address?change=true">Change <span class="visuallyhidden">address</span></a></span>
                 </li>
 
                 <li class="list-summary-item email-address">
                     <span>Email address</span>
                     <span><strong><span id="email" style="width: 100%;"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="email?change=true">Change <span class="visuallyhidden">email address</span></a></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/email?change=true">Change <span class="visuallyhidden">email address</span></a></span>
                 </li>
             </ul>
+            <br>
 
             {{ button.input(class='button', type='button', value='Continue to payment') }}
         </div>
@@ -78,6 +83,12 @@
 </main>
 
 <script type="text/javascript">
+    if (member.questions.serviceName === 'manage') {
+        $('#service-name').html('Manage a trailer');
+    } else if (member.questions.serviceName === 'register') {
+        $('#service-name').html('Register a trailer');
+    }
+
     if (!member.questions.chassisNumber) {
         $('.vin').remove();
     } else {
@@ -100,18 +111,19 @@
         $('.unladen-mass').remove();
     } else {
         $('#unladenMass').html(member.questions.unladenMass);
-    }    
-    
-    if (!member.questions.companyName){
-        $('.code-1').remove();
-    } else {
-        $('#codeA').html(member.questions.companyName);
     }
 
     if (!member.questions.keeperName){
-        $('.code-2').remove();
+        $('.keeper').remove();
     } else {
-        $('#codeB').html(member.questions.keeperName); 
+        $('#keeperName').html(member.questions.keeperName);
+    }  
+    
+    if (!member.questions.companyName){
+        $('.company').remove();
+    } else {
+        $('#companyName').html(member.questions.companyName);
+        $('#app-type').html('Company');
     }
     
     if (!member.questions.address) {

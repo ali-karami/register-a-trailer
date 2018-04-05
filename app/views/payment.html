@@ -5,6 +5,9 @@
 {% block head %}
     {% include "includes/head.html" %}
     {% include "includes/scripts.html" %}
+    <style type="text/css">
+        .form-label { font-weight: 700; }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -93,10 +96,12 @@
                     <summary role="button"><span class="summary">Where to find this</span></summary>
                     <div class="panel" id="details-content-0"> <img class="retina" alt="Image of the card security code" src="/public/images/creditcard_security_code_image.png"> </div>
                 </details>
+                <br>
 
                 {{ button.input(class='button', type='button', value='Pay now') }}
 
                 <a href="#">Cancel</a>
+                <br><br>
 
                 <p class="margin-top-3">Card information is transferred in accordance with our security statement and is held in accordance with our privacy statement. Please see our terms and conditions below for further information.</p>
 
@@ -107,6 +112,12 @@
 </main>
 
 <script type="text/javascript">
+    if (member.questions.serviceName = 'manage') {
+        $('#service-name').html('Manage a trailer');
+    } else {
+        $('#service-name').html('Register a trailer');
+    }
+    
     $('.button').click(checkAnswers);
 
     if (member.questions === undefined) {

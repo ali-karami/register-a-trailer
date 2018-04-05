@@ -93,8 +93,6 @@ EH1 9GP
 -->
 
 <script type="text/javascript">
-    $('#service-name').html('Register a trailer');
-
     $('.button').click(checkAnswers);
 
     var changing = location.search.split('change=')[1];
@@ -190,7 +188,7 @@ EH1 9GP
 
     function next() {
         if (changing == "true") {
-            go('check-your-answers');
+            go('../check-your-answers');
         } else {
             go('email');
         }

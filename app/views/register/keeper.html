@@ -80,8 +80,6 @@
 </main>
 
 <script type="text/javascript">
-    $('#service-name').html('Register a trailer');
-
     $('.button').click(checkAnswers);
 
     if (member.questions === undefined) {
@@ -142,7 +140,7 @@
             member.questions.keeperName = keeper;
             
             if (changing === "true") {
-                go('check-your-answers');
+                go('../check-your-answers');
             } else {
                 go('find-company-address');
             }

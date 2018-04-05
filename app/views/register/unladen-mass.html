@@ -44,7 +44,10 @@
 </main>
 
 <script type="text/javascript">
-    $('#service-name').html('Register a trailer');
+    var changing = location.search.split('change=')[1];
+    if (changing === 'true') {
+        $('.button-back').hide();
+    }
 
     $('.button').click(checkAnswers);
 
@@ -54,8 +57,12 @@
 
         if (unladenMass) {
             member.unladenMass = unladenMass;
-            go('keeper');
-
+            
+            if (changing === "true") {
+                go('../check-your-answers');
+            } else {
+                go('keeper');
+            }
         } else {
             $('body').scrollTop(0);
             $('.error-summary').show();

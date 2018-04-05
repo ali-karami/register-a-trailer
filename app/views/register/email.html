@@ -45,17 +45,15 @@
 </main>
 
 <script type="text/javascript">
-    $('#service-name').html('Register a trailer');
+    var changing = location.search.split('change=')[1];
+    if (changing === 'true') {
+        $('.button-back').hide();
+    }
 
     $('.button').click(checkAnswers);
 
     if (member.questions === undefined) {
         member.questions = {};
-    }
-    
-    var changing = location.search.split('change=')[1];
-    if (changing === 'true') {
-        $('.button-back').hide();
     }
     
     function checkAnswers() {

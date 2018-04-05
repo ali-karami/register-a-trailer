@@ -62,13 +62,19 @@
 </main>
 
 <script type="text/javascript">
-    if (member.questions === undefined) {
-        member.questions = {};
-    }
-
     $('.button.button-start').click(next);
 
     function next() {
+        member.clear();
+
+        if (member.questions === undefined) {
+            member.questions = {};
+        }
+
+        member.questions.serviceName = 'manage';
+
+        console.log(member.questions.serviceName);
+
         go('manage/what-would-you-like');
     };
 </script>
