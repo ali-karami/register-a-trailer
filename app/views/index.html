@@ -1,75 +1,50 @@
-{% extends "layout.html" %}
+{% extends "layout_unbranded.html" %}
 
-{% block page_title %} Register a trailer {% endblock %}
-
-{% block head %}
-    {% include "includes/head.html" %}
-    {% include "includes/scripts.html" %}
-{% endblock %}
+{% block page_title %} Register a trailer prototype {% endblock %}
 
 {% block content %}
 <main id="content" role="main">
-    <div class="breadcrumbs">
-        <ol>
-            <li><a href="https://www.gov.uk">Home</a></li>
-            <li><a href="https://www.gov.uk/browse/driving">Driving and transport</a></li>
-            <li><a href="https://www.gov.uk/browse/driving/number-plate">Number plates, vehicle registration and log books</a></li>
-        </ol>
-    </div>
-
     <div class="grid-row">
         <div class="column-two-thirds">
-            <h1 class="heading-xlarge">
-<!--                {% if serviceName %} {{ serviceName }} {% endif %}-->
-                Register a trailer for the first time or as a new owner
-            </h1>
+            <h1 class="heading-xlarge">DVLA GOV.UK Prototype</h1>
 
-            <p>Use this service to register a trailer.</p>
-
-            <ul class="list list-bullet">
-                <li>You only need to register if you meet certain criteria</li>
-                <li>You can use this service to check if you need to register.</li>
-            </ul>
-
-            <div class="panel panel-border-wide">
-                <p>This page is available in Welsh (<a href="#">Cymraeg</a>).</p>
+            <div class="notice">
+                <i class="icon icon-important">
+                    <span class="visually-hidden">Warning</span>
+                </i>
+                <strong class="lede">This kit is for testing only</strong>
             </div>
 
-            {{ button.input(class='button button-start', type='button', value='Start now') }}
+            <h2 class="heading-large">Which trailer flow?</h2>
 
-            <h2 class="heading-medium">Before you start</h2>
+            <p><a class="register" href="register">Register a trailer</a></p>
 
-            <p>You’ll need the details of the trailer and a valid email address.</p>
-        </div>
-
-        <div class="column-third">
-            <aside class="govuk-related-items" role="complementary">
-                <h2 class="heading-medium" id="subsection-title">Driving and transport</h2>
-                <nav role="navigation" aria-labelledby="subsection-title">
-                    <ul class="font-xsmall">
-                        <li><a href="manage">Manage your trailer registration</a></li>
-                        <li><a href="https://www.gov.uk/vehicle-registration">Vehicle registration</a></li>
-                        <li><a href="#" class="bold-xsmall">More <span class="visuallyhidden">in Subsection</span></a></li>
-                    </ul>
-                </nav>
-            </aside>
+            <p><a class="manage" href="manage">Manage a trailer</a></p>
         </div>
     </div>
 </main>
 
- <script type="text/javascript">
-    $('#proposition-name').html("Register a trailer");
-
-    $('.button.button-start').click(next);
-
-    function next() {
+<script type="text/javascript">
+    $( document ).ready(function() {
         delete member;
+    });
 
-        if (member.questions === undefined) {
-            member.questions = {};
-        }
+    if (member.questions === undefined) {
+        member.questions = {};
+    }
 
-        go('register/chassis');
-    };
+    $('.register').click(function() {
+        var serviceName = 'register';
+        member.questions.serviceName = serviceName;
+        console.log(member.questions.serviceName);
+        go('/register');
+    });
+
+    $('.manage').click(function() {
+        var serviceName = 'manage';
+        member.questions.serviceName = serviceName;
+        console.log(member.questions.serviceName);
+        go('/manage');
+    });
 </script>
 {% endblock %}

@@ -7,6 +7,10 @@
     {% include "includes/scripts.html" %}
 {% endblock %}
 
+{% block proposition_header %}
+    {% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
 {% block content %}
 {% include "includes/standard-back-phase-banner.html" %}
 <main id="content" role="main">
@@ -38,7 +42,7 @@
 </main>
 
 <script type="text/javascript">
-    $('#proposition-name').html("Register a trailer");
+    $('#service-name').html('Register a trailer');
 
     $('.button').click(checkAnswers);
 
