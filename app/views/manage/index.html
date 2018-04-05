@@ -2,14 +2,6 @@
 
 {% block page_title %} Manage your trailer registration {% endblock %}
 
-{% block proposition_header %}
-<!-- blank to remove the proposition header -->
-{% endblock %}
-
-{% block header_class %}
-<!-- blank to remove the proposition header -->
-{% endblock %}
-
 {% block head %}
     {% include "includes/head.html" %}
     {% include "includes/scripts.html" %}
@@ -73,8 +65,6 @@
     if (member.questions === undefined) {
         member.questions = {};
     }
-
-    $('#service-name').html(member.questions.serviceName);
 
     $('.button.button-start').click(next);
 

@@ -2,16 +2,6 @@
 
 {% block page_title %} Register a trailer for the first time or as a new owner {% endblock %}
 
-{% block proposition_header %}
-    {% include "includes/propositional_navigation_alpha.html" %}
-{% endblock %}
-
-{% block content %}
-
-{% block header_class %}
-<!-- blank to remove the proposition header -->
-{% endblock %}
-
 {% block head %}
     {% include "includes/head.html" %}
     {% include "includes/scripts.html" %}
@@ -72,8 +62,6 @@
     if (member.questions === undefined) {
         member.questions = {};
     }
-
-    $('#proposition-name').html(member.questions.serviceName);
 
     $('.button.button-start').click(next);
 
