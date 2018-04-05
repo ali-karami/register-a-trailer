@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Manage your trailer registration {% endblock %}
+
+{% block proposition_header %}
+<!-- blank to remove the proposition header -->
+{% endblock %}
+
+{% block header_class %}
+<!-- blank to remove the proposition header -->
+{% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+    <div class="breadcrumbs">
+        <ol>
+            <li><a href="https://www.gov.uk">Home</a></li>
+            <li><a href="https://www.gov.uk/browse/driving">Driving and transport</a></li>
+            <li><a href="https://www.gov.uk/browse/driving/number-plate">Number plates, vehicle registration and log books</a></li>
+        </ol>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge">
+                <!--                {% if serviceName %} {{ serviceName }} {% endif %}-->
+                Manage your trailer registration
+            </h1>
+
+            <p>Use this service to:</p>
+
+            <ul class="list list-bullet">
+                <li>change details on your trailer registration certificate</li>
+                <li>request a duplicate trailer registration certificate</li>
+                <li>tell DVLA you’ve sold, transferred or scrapped your trailer</li>
+                <li>tell DVLA you’ve bought a trailer</li>
+                <li>renew your trailer certificate.</li>
+            </ul>
+
+            <div class="panel panel-border-wide">
+                <p>This page is available in Welsh (<a href="#">Cymraeg</a>).</p>
+            </div>
+
+            {{ button.input(class='button button-start', type='button', value='Start now') }}
+
+            <h2 class="heading-medium">Before you start</h2>
+
+            <p>You’ll need the details of the trailer and a valid email address.</p>
+        </div>
+
+        <div class="column-third">
+            <aside class="govuk-related-items" role="complementary">
+                <h2 class="heading-medium" id="subsection-title">Driving and transport</h2>
+
+                <nav role="navigation" aria-labelledby="subsection-title">
+                    <ul class="font-xsmall">
+                        <li><a href="index">Register a trailer</a></li>
+                        <li><a href="https://www.gov.uk/vehicle-registration">Vehicle registration</a></li>
+                        <li><a href="#" class="bold-xsmall">More <span class="visuallyhidden">in Subsection</span></a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    if (member.questions === undefined) {
+        member.questions = {};
+    }
+
+    $('#service-name').html(member.questions.serviceName);
+
+    $('.button.button-start').click(next);
+
+    function next() {
+        go('manage/what-would-you-like');
+    };
+</script>
+{% endblock %}

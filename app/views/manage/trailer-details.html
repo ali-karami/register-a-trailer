@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Check your answers {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row">
+        <div class="column-full">
+            <h1 class="heading-large margin-bottom-1">Trailer details</h1>
+
+            <ul class="list-summary margin-bottom-2">
+                <li class="list-summary-item vin">
+                    <span>Chassis number (VIN)</span>
+                    <span><strong><span id="chassisNumber" style="width: 100%; text-transform: uppercase;"></span></strong></span>
+                </li>
+
+                <li class="list-summary-item make">
+                    <span>Manufacturer</span>
+                    <span><strong><span id="manufacturer" style="width: 100%; text-transform: capitalize;"></span></strong></span>
+                    <span class="list-summary-item-right">
+                        <a class="button-change" href="manufacturer?change=true">Change <span class="visuallyhidden">manufacturer</span></a></span>
+                </li>
+
+                <li class="list-summary-item maximum-mass">
+                    <span>Permissible maximum mass (kg)</span>
+                    <span><strong><span id="maximumMass" style="width: 100%;"></span></strong></span>
+                    <span class="list-summary-item-right">
+                        <a class="button-change" href="max-mass?change=true">Change <span class="visuallyhidden">permissible maximum mass</span></a></span>
+                </li>
+
+                <li class="list-summary-item unladen-mass">
+                    <span>Unladen mass (kg)</span>
+                    <span><strong><span id="unladenMass" style="width: 100%;"></span></strong></span>
+                    <span class="list-summary-item-right">
+                        <a class="button-change" href="unladen-mass?change=true">Change <span class="visuallyhidden">unladen mass</span></a></span>
+                </li>
+            </ul>
+
+            {{ button.input(class='button', type='button', value='Continue') }}
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    if (!member.questions.chassisNumber) {
+        $('.vin').remove();
+    } else {
+        $('#chassisNumber').html(member.questions.chassisNumber);
+    }
+
+    if (!member.questions.manufacturer) {
+        $('.make').remove();
+    } else {
+        $('#manufacturer').html(member.questions.manufacturer);
+    }
+
+    if (!member.questions.maximumMass) {
+        $('.maximum-mass').remove();
+    } else {
+        $('#maximumMass').html(member.questions.maximumMass);
+    }
+
+    if (!member.questions.unladenMass) {
+        $('.unladen-mass').remove();
+    } else {
+        $('#unladenMass').html(member.questions.unladenMass);
+    }
+
+    $('.button').click(next);
+    
+    function next() {        
+        go('keeper-details');
+    }
+</script>
+{% endblock %}

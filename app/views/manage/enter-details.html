@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Enter details {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main" tabindex="-1">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There’s a problem with the information you have provided</h1>
+
+                <p>Please amend the following details:</p>
+                <ul class="error-summary-list">
+                    <li class="reg error-message"><a href="#qreg">Provide a valid trailer registration number</a></li>
+                    <li class="key error-message"><a href="#qkey">Provide a valid trailer key</a></li>
+                </ul>
+            </div>
+
+            <h1 class="heading-large margin-bottom-1">Enter details</h1>
+
+            <form class="form">
+                <div class="form-group">
+                    <fieldset>
+                        <legend class="visuallyhidden">Trailer registration number</legend>
+
+                        <div class="form-group" id="qreg">
+                            <label class="form-label-bold" for="number">
+                                Trailer registration number
+                                <span class="form-hint">For example, A1B2 C3D4</span>
+                                <span class="reg error-message">Provide a valid trailer registration number</span>
+                            </label>
+                            <input spellcheck="false" class="form-control form-control-1-4" id="number" name="number" type="text" value="">
+                        </div>
+                        
+                        <legend class="visuallyhidden">Trailer key</legend>
+                        
+                        <div class="form-group" id="qkey">
+                            <label class="form-label-bold" for="postcode">
+                                Trailer key
+                                <span class="form-hint">For example, XXXX</span>
+                                <span class="key error-message">Provide a valid trailer key</span>
+                            </label>
+                            <input spellcheck="false" class="form-control form-control-1-4" id="postcode" name="postcode" type="text" value="">
+                        </div>
+                    </fieldset>
+                    
+                    {{ button.input(class='button', type='button', value='Continue') }}
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+</script>
+{% endblock %}
