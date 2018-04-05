@@ -21,7 +21,25 @@ $(document).ready(function () {
   showHideContent.init()
 })
 
+// Allow continue from enter press
+$(function() {
+    $("#content").keyup(function(event) {
+        if(event.keyCode == 13) {
+            $(".button").click();
+        }
+    });
+});
+
 // Shorthand URL
 function go(url) {
   window.location.href = url;
 }
+
+$(document).ready(function () {
+  if (member.questions.serviceName === "manage") {
+      $('#service-name').html('Manage a trailer');
+  } else if (member.questions.serviceName === "register") {
+      $('#service-name').html('Register a trailer');
+  }
+  console.log('Service type is ' + member.questions.serviceName)
+})
