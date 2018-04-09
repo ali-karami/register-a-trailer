@@ -82,10 +82,6 @@
 <script type="text/javascript">
     $('.button').click(checkAnswers);
 
-    if (member.questions === undefined) {
-        member.questions = {};
-    }
-
     var changing = location.search.split('change=')[1];
     if (changing === 'true') {
         $('.button-back').hide();
@@ -131,7 +127,6 @@
 
         if (validInput) {
             var value = $('input[name=keeper]:checked').val();
-            member.questions.pill = value;
 
             var company = $('input[name=companyName]').val();
             member.questions.companyName = company;
@@ -142,9 +137,12 @@
             if (changing === "true") {
                 go('../check-your-answers');
             } else {
-                go('find-company-address');
+                if (value == "Company") {
+                    go('find-company-address');
+                } else if (value == "Individual") {
+                    go('find-individual-address');
+                }
             }
-
         } else {
             $('body').scrollTop(0);
             $('.error-summary').focus();
