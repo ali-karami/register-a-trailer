@@ -10,6 +10,10 @@
     </style>
 {% endblock %}
 
+{% block proposition_header %}
+    {% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
 {% block content %}
 <main id="content" role="main">
     {% include "includes/phase_banner_alpha.html" %}
@@ -112,17 +116,7 @@
 </main>
 
 <script type="text/javascript">
-    if (member.questions.serviceName = 'manage') {
-        $('#service-name').html('Manage a trailer');
-    } else {
-        $('#service-name').html('Register a trailer');
-    }
-    
     $('.button').click(checkAnswers);
-
-    if (member.questions === undefined) {
-        member.questions = {};
-    }
 
     function checkAnswers() {
         var validInput = true;    
