@@ -5,6 +5,7 @@
 {% block head %}
     {% include "includes/head.html" %}
     {% include "includes/scripts.html" %}
+<script src="/public/javascripts/Autocomplete/accessible-autocomplete.min.js"></script>
 {% endblock %}
 
 {% block proposition_header %}
@@ -26,6 +27,190 @@
             </div>
 
             <h1 class="heading-large">Who is the trailer manufactured by?</h1>
+            
+            <form class="form" id="question">
+                <div class="form-group">
+                    <label for="manufacturer">
+                        <span class="error-message manufacturer hide">Provide the trailer manufacturer</span><br>
+                    </label>
+                    <input id="manufacturer" name="manufacturer" list="manufacturerList" class="form-control" />
+                    <datalist id="manufacturerList">
+                        <select>
+                            <option value="A.R.B">
+                            <option value="A1 International">
+                            <option value="Abel">
+                            <option value="Adcliffe">
+                            <option value="Adcliffe Drawdeal Ltd">
+                            <option value="AHP">
+                            <option value="Andover">
+                            <option value="Andover Trailers Ltd">
+                            <option value="Arthur Hingley Trailers">
+                            <option value="Artic Falkirk">
+                            <option value="Avalux Ltd">
+                            <option value="Bale Fabrications">
+                            <option value="Bartoletti">
+                            <option value="Belle Coachworks Ltd">
+                            <option value="Benalu">
+                            <option value="Berdex">
+                            <option value="Berger Fahrzeugtechnik Ges.m.b.H.">
+                            <option value="BMI Trailers">
+                            <option value="Boughton International">
+                            <option value="Britcom International">
+                            <option value="Brookland Speed">
+                            <option value="Brookland Engineering">
+                            <option value="Broshuis">
+                            <option value="Burg">
+                            <option value="Caldal">
+                            <option value="S. Cartwright & Sons (Coachbuilders) Ltd">
+                            <option value="Chassis Development Services Ltd">
+                            <option value="Chereau">
+                            <option value="Chieftain">
+                            <option value="Jean Chereau SAS">
+                            <option value="Chieftain Trailers Ltd">
+                            <option value="Cisternas COBO UK Ltd">
+                            <option value="Clayden">
+                            <option value="Clayton Commercials">
+                            <option value="COBO HNOS">
+                            <option value="Concept Trailers">
+                            <option value="Corus">
+                            <option value="Couldwell">
+                            <option value="County Trucking">
+                            <option value="CPS Mechanisation">
+                            <option value="Crossland">
+                            <option value="Crossland Tankers Ltd">
+                            <option value="D-TeC Products B.V.">
+                            <option value="Delta/VSS Kocise">
+                            <option value="Dennis">
+                            <option value="Dennison Trailers Ltd">
+                            <option value="Don-Bur (Bodies & Trailers) Ltd">
+                            <option value="Dyson">
+                            <option value="Estepe SpeciaL Truck Products B.V.">
+                            <option value="Feber Intercar">
+                            <option value="Faymonville AG">
+                            <option value="Feldbinder UK Ltd">
+                            <option value="Feldbinder Spezialfahrzeugwerke">
+                            <option value="F G M s.r.l.">
+                            <option value="Fliegl Fahrzeugbau GmbH">
+                            <option value="Fruehauf">
+                            <option value="FrUiTiGer CZ s.r.o">
+                            <option value="GOFA-Gocher Fahrzeugbau GmbH">
+                            <option value="Goldhofer">
+                            <option value="Granalu Transformations SL">
+                            <option value="Gray & Adams Ltd">
+                            <option value="GRW">
+                            <option value="Gurlesenyil Treyler">
+                            <option value="Hammar Maskin AB">
+                            <option value="Houghton Parkhouse Ltd">
+                            <option value="Hunwick Engineering Ltd">
+                            <option value="JPM Trailers Ltd">
+                            <option value="Kässbohrer Fahrzeugwerke GmbH">
+                            <option value="Kel-Berg Trailers & Trucks Ltd">
+                            <option value="King Trailers Ltd">
+                            <option value="Knapen Trailers B.V.">
+                            <option value="Kögel Trailer GmbH & Co. KG">
+                            <option value="Kraker Trailers">
+                            <option value="Fahrzeugwerk Bernard Krone GmbH">
+                            <option value="LAG Trailers NV">
+                            <option value="Lakeland Tankers Ltd">
+                            <option value="Langendorf GmbH">
+                            <option value="Lawrence David Ltd">
+                            <option value="Leci Trailers">
+                            <option value="Legras Industries">
+                            <option value="Lintrailers B.V.">
+                            <option value="Lohr">
+                            <option value="M & G Trailers">
+                            <option value="M1 Engineering Ltd">
+                            <option value="SMFF Magyar">
+                            <option value="Maisonneuve S.A.S">
+                            <option value="McCauley Trailers Ltd">
+                            <option value="Mega Sp. Z o.o.">
+                            <option value="Micra Truck Bodies Ltd">
+                            <option value="Montracon Ltd">
+                            <option value="Muldoon Transport Systems Ltd">
+                            <option value="NC Engineering">
+                            <option value="NC Sludge">
+                            <option value="NCS Trailers">
+                            <option value="Nooteboom Trailers B.V.">
+                            <option value="Oldbury">
+                            <option value="OMEPS s.r.l">
+                            <option value="Overlander">
+                            <option value="Pacton Trailers B.V.">
+                            <option value="Paneltex Martrans">
+                            <option value="Panema Trailers (Eng) Ltd">
+                            <option value="Parcisa, S.L.U.">
+                            <option value="Pezzaioli">
+                            <option value="Carrozzeria Pezzaioli s.r.l.">
+                            <option value="Piacenza">
+                            <option value="Plowman Brothers Ltd">
+                            <option value="Polski">
+                            <option value="Priden Engineering Ltd">
+                            <option value="Quiacrix (Parcisa) SLU">
+                            <option value="Raven">
+                            <option value="Ray Goudy">
+                            <option value="Ray Smith">
+                            <option value="Reload Systems">
+                            <option value="Renders">
+                            <option value="R M Trailers">
+                            <option value="Road Tankers Northern Ltd">
+                            <option value="Robinson">
+                            <option value="Robinson Distribution">
+                            <option value="Rojo">
+                            <option value="Rolfo">
+                            <option value="Rothdean">
+                            <option value="Royen">
+                            <option value="RTS Trailmaster">
+                            <option value="Sayers Road Tankers">
+                            <option value="Schmitz">
+                            <option value="SDC Trailers Ltd">
+                            <option value="Solomon Commercials Ltd">
+                            <option value="Sommer GmbH">
+                            <option value="Spitzer">
+                            <option value="STAS">
+                            <option value="Stokota">
+                            <option value="Talson Trailers B.V.">
+                            <option value="TCL">
+                            <option value="Terex">
+                            <option value="Tirsan">
+                            <option value="Titan">
+                            <option value="Tiger Trailers Ltd">
+                            <option value="Trail-Fab">
+                            <option value="Trailor">
+                            <option value="Transport Engineering">
+                            <option value="Transporter Enterprises">
+                            <option value="Trent">
+                            <option value="Triffitt">
+                            <option value="Truckmate">
+                            <option value="TTS">
+                            <option value="Turbos Hoet">
+                            <option value="Turner">
+                            <option value="Unique">
+                            <option value="United">
+                            <option value="Utility">
+                            <option value="Vallelly">
+                            <option value="Van der Peet">
+                            <option value="Van Hool">
+                            <option value="Vipex">
+                            <option value="Vlastuin Rolling Equipment B.V.">
+                            <option value="Ward Fabrications">
+                            <option value="Weightlifter Bodies Ltd">
+                            <option value="Weightmaster">
+                            <option value="Welgro">
+                            <option value="Whale Tankers Ltd">
+                            <option value="Wheelbase">
+                            <option value="Wielton S.A.">
+                            <option value="Wilcox">
+                            <option value="Wilcox Commercial Vehicles Ltd">
+                            <option value="Wilson">
+                            <option value="Woolf Eng">
+                            <option value="Wraith">
+                            <option value="York">
+                            <option value="ZVVZ Machinery">
+                        </select>
+                    </datalist>
+                </div>
+            </form>
+            
+            
 
             <!-- <div cslass="form-group" id="question">
                 <label for="manufacturer">
