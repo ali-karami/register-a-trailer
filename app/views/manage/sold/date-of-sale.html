@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block page_title %} When did you sell, transfer or scrap the trailer? {% endblock %}
+
+{% block head %}
+{% include "includes/head.html" %}
+{% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block proposition_header %}
+{% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row no-bottom">
+        <div class="column-two-thirds">
+            <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+
+                <p>Please amend the following details:</p>
+                <ul class="error-summary-list error-list">
+                    <li class="chassisNumber error-message hide"><a href="#chassisNumber">Provide the date you sold, transferred or scraped the trailer</a></li>
+                </ul>
+            </div>
+            
+            <h1 class="heading-large">When did you sell, transfer or scrap the trailer?</h1>
+            
+            <span class="form-label-hint">For example, 13 5 2018</span>
+            
+            <div class="form-date">
+                <div class="form-group form-group-day">
+                    <label class="from-label" for="dob-day">Day</label>
+                    <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*">
+                </div>
+                <div class="form-group form-group-month">
+                    <label class="from-label" for="dob-month">Month</label>
+                    <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*">
+                </div>
+                <div class="form-group form-group-year">
+                    <label class="from-label" for="dob-year">Year</label>
+                    <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*">
+                </div>
+            </div>

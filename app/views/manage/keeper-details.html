@@ -3,12 +3,12 @@
 {% block page_title %} Check your answers {% endblock %}
 
 {% block head %}
-    {% include "includes/head.html" %}
-    {% include "includes/scripts.html" %}
+{% include "includes/head.html" %}
+{% include "includes/scripts.html" %}
 {% endblock %}
 
 {% block proposition_header %}
-    {% include "includes/propositional_navigation_alpha.html" %}
+{% include "includes/propositional_navigation_alpha.html" %}
 {% endblock %}
 
 {% block content %}
@@ -16,50 +16,58 @@
 <main id="content" role="main">
     <div class="grid-row">
         <div class="column-full">
-            <h1 class="heading-large margin-bottom-1">Personal details</h1>
-            
+            <h1 class="heading-large"><span id="app-type">Personal</span> details</h1>
+
             <ul class="list-summary margin-bottom-2">
-                <li class="list-summary-item code-1">
-                    <span>Name</span>
-                    <span><strong><span id="codeA" style="width: 100%; text-transform: capitalize;"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
+                <li class="list-summary-item keeper">
+                    <span>Keeper name</span>
+                    <span><strong><span id="keeperName" style="width: 100%;text-transform: capitalize;"></span></strong></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
                 </li>
 
-                <li class="list-summary-item code-2">
-                    <span>Name</span>
-                    <span><strong><span id="codeB" style="width: 100%; text-transform: capitalize;"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
+                <li class="list-summary-item company">
+                    <span>Company name</span>
+                    <span><strong><span id="companyName" style="width: 100%;text-transform: capitalize;"></span></strong></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/keeper?change=true">Change <span class="visuallyhidden">name</span></a></span>
                 </li>
 
                 <li class="list-summary-item keeper-address">
                     <span>Address</span>
                     <span><strong><span id="address"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="find-individual-address?change=true">Change <span class="visuallyhidden">address</span></a></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/find-individual-address?change=true">Change <span class="visuallyhidden">address</span></a></span>
                 </li>
 
                 <li class="list-summary-item email-address">
                     <span>Email address</span>
                     <span><strong><span id="email" style="width: 100%;"></span></strong></span>
-                    <span class="list-summary-item-right"><a class="button-change" href="email?change=true">Change <span class="visuallyhidden">email address</span></a></span>
+                    <span class="list-summary-item-right"><a class="button-change" href="register/email?change=true">Change <span class="visuallyhidden">email address</span></a></span>
                 </li>
             </ul>
+            <br>
 
-            {{ button.input(id='continue', name='continue', class='button', type='button', value='Continue to payment') }}
+            {{ button.input(class='button', type='button', value='Continue') }}
         </div>
     </div>
 </main>
 
-<script type="text/javascript"> 
-    if (!member.questions.companyName){
-        $('.code-1').remove();
-    } else {
-        $('#codeA').html(member.questions.companyName);
+<script type="text/javascript">
+    if (member.questions.serviceName === 'manage') {
+        $('#service-name').html('Manage a trailer');
+    } else if (member.questions.serviceName === 'register') {
+        $('#service-name').html('Register a trailer');
     }
 
     if (!member.questions.keeperName){
-        $('.code-2').remove();
+        $('.keeper').remove();
     } else {
-        $('#codeB').html(member.questions.keeperName); 
+        $('#keeperName').html(member.questions.keeperName);
+    }  
+
+    if (!member.questions.companyName){
+        $('.company').remove();
+    } else {
+        $('#companyName').html(member.questions.companyName);
+        $('#app-type').html('Company');
     }
 
     if (!member.questions.address) {
@@ -75,9 +83,9 @@
     }
 
     $('.button').click(next);
-    
+
     function next() {        
-        go('payment');
+        go('change/success');
     }
 </script>
 {% endblock %}

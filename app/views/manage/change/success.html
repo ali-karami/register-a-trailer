@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Application successful {% endblock %}
+
+{% block head %}
+{% include "includes/head.html" %}
+{% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block proposition_header %}
+{% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <div class="govuk-box-highlight">
+                <h1 class="bold-large banner-header ">Application successful</h1>
+            </div>
+
+            <p>A confirmation email has been sent to your email address.</p>
+
+            <h2 class="heading-medium">Trailer details</h2>
+
+            <ul class="list-summary padding-bottom">
+                <li class="list-summary-item">
+                    <span>Registration number</span>
+                    <strong><span>A1B2 C3D4</span></strong>
+                </li>
+
+                <li class="list-summary-item">
+                    <span>Email address</span>
+                    <strong><span id="email"></span></strong>
+                </li>
+            </ul>
+
+            <br>
+
+            <p>You’ll receive your trailer certificate within 3 to 5 days. This should be kept with the trailer.</p>
+            
+            <p>The new trailer certificate is valid for 10 years from the date of issue.</p>
+
+            <p class="margin-top-2">You can <a href="#">print this page</a> for your records.</p>
+
+            <br>
+
+            {{ button.input(id='continue', name='continue', class='button', type='button', value='Return to GOV.UK') }}
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(".button").click(function(){
+        // Enter function name here
+        checkAnswers();
+    });
+    
+    if (!member.questions.email) {
+        $('.email-address').remove();
+    } else {
+        $('#email').html(member.questions.email);
+    }
+
+    function checkAnswers() { 
+        member.clear();
+        go('https://www.gov.uk/');
+    }
+</script>
+{% endblock %}
