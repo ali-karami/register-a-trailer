@@ -36,8 +36,9 @@ span.payment {
    display: inline-flex;
    justify-content: center;
    align-items: center;
-   min-width: 80px;
-   min-height: 60px;
+   text-align: center;
+   min-width: 90px;
+   min-height: 80px;
    font: 40px UKNumberPlate;
    padding: 6px;
    line-height: 1;
@@ -46,6 +47,14 @@ span.payment {
    border: 3px solid #000000;
    background-color: #ffffff;
    border-radius: 0.25em;
+}
+
+.reg-mark.small {
+    min-width: 40px;
+    min-height: 55px;
+    font: 30px UKNumberPlate;
+    padding: 6px;
+    line-height: 1;
 }
 
 #address { width: 300px; }
@@ -113,4 +122,17 @@ strong { font-weight: 700; }
        float:none;
    }
 
+}
+
+table.renewal {
+    tbody {
+        border-top: 1px solid #BFC1C3;
+    }
+    
+    th, td {
+        text-align: left;
+    }
+    td {
+        font-weight: 700;
+    }
 }
