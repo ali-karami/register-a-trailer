@@ -49,11 +49,7 @@
 <!--                                <span class="form-hint">For example, SA1 2BC</span>-->
                                 <span class="form-hint"></span>
                                 <span class="error-message postcode hide">Provide a valid postcode</span>
-                                <!--
-<span class="postcode format error-message">
-Provide correct postcode format
-</span>
--->
+
                             </label>
                             <input spellcheck="false" class="form-control form-control-1-4" id="postcode" name="postcode" type="text" value="">
                         </div>
@@ -62,14 +58,21 @@ Provide correct postcode format
                     {{ button.input(id='continue', name='continue', class='button', type='button', value='Find UK address') }}
                 </div>
             </form>
+            
+            <details>
+
+                <summary><span class="summary">The company doesn’t have a UK office</span></summary>
+
+                <div class="panel panel-border-narrow">
+
+                    <p>The trailer can only be registered at a UK address.</p>
+                </div>
+
+            </details>
+            
         </div>
     </div>
 </main>
-<!--
-122 Burns Crescent
-Edinburgh
-EH1 9GP
--->
 
 <script type="text/javascript">
     $('.button').click(checkAnswers);
