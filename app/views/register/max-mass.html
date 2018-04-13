@@ -29,16 +29,17 @@
 
             <div class="form-group" id="question">
                 <label for="maximumMass">
-                    <span class="error-message maximumMass hide">Provide the trailer’s permissible maximum mass</span><br>
+                    <span class="error-message maximumMass hide">Provide the trailer’s permissible maximum mass<br></span>
                 </label>
 
                 <input class="form-control form-control-1-4" id="maximumMass" type="number" name="maximumMass">
             </div>
+            
+            {{ button.input(class='button', type='button', value='Continue') }}
+            
         </div>
     </div>
-    <br>
 
-    {{ button.input(class='button', type='button', value='Continue') }}
 </main>
 
 <script type="text/javascript">

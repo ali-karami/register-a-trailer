@@ -29,16 +29,17 @@
 
             <div class="form-group" id="question">
                 <label for="chassisNumber">
-                    <span class="error-message chassisNumber hide">Provide the trailer chassis number</span><br>
+                    <span class="error-message chassisNumber hide">Provide the trailer chassis number<br></span>
                 </label>
 
                 <input class="form-control" id="chassisNumber" type="text" style="text-transform: uppercase" name="chassisNumber">
             </div>
+            
+            {{ button.input(class='button', type='button', value='Continue') }}
+            
         </div>
     </div>
-    <br>
 
-    {{ button.input(class='button', type='button', value='Continue') }}
 </main>
 
 <script type="text/javascript">

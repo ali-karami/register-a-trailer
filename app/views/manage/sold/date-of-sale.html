@@ -20,16 +20,17 @@
                 <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 
                 <p>Please amend the following details:</p>
+                
                 <ul class="error-summary-list error-list">
-                    <li class="chassisNumber error-message hide"><a href="#chassisNumber">Provide the date you sold, transferred or scraped the trailer</a></li>
+                    <li class="dateOfSale error-message hide"><a href="#dateOfSale">Provide the date you sold, transferred or scraped the trailer</a></li>
                 </ul>
             </div>
             
             <h1 class="heading-large">When did you sell, transfer or scrap the trailer?</h1>
             
-            <span class="form-label-hint">For example, 13 5 2018</span>
+            <span class="form-hint">For example, 13 5 2018</span>
             
-            <div class="form-date">
+            <div class="form-group form-date">
                 <div class="form-group form-group-day">
                     <label class="from-label" for="dob-day">Day</label>
                     <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*">
@@ -43,3 +44,14 @@
                     <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*">
                 </div>
             </div>
+            
+            {{ button.input(class='button', type='button', value='Finish') }}
+            
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}

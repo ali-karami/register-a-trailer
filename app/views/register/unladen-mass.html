@@ -31,16 +31,17 @@
             
             <div class="form-group" id="question">
                 <label for="unladenMass">
-                    <span class="error-message unladenMass hide">Provide the trailer’s unladen mass</span><br>
+                    <span class="error-message unladenMass hide">Provide the trailer’s unladen mass<br></span>
                 </label>
 
                 <input class="form-control form-control-1-4" id="unladenMass" type="number" name="unladenMass">
             </div>
+            
+            {{ button.input(class='button', type='button', value='Continue') }}
+            
         </div>
     </div>
-    <br>
 
-    {{ button.input(class='button', type='button', value='Continue') }}
 </main>
 
 <script type="text/javascript">

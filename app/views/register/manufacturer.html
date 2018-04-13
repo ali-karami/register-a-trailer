@@ -31,9 +31,9 @@
             <form class="form" id="question">
                 <div class="form-group">
                     <label for="manufacturer">
-                        <span class="error-message manufacturer hide">Provide the trailer manufacturer</span><br>
+                        <span class="error-message manufacturer hide">Provide the trailer manufacturer<br></span>
                     </label>
-                    <input id="manufacturer" name="manufacturer" list="manufacturerList" class="form-control" />
+                    <input id="manufacturer" name="manufacturer" list="manufacturerList" class="form-control form-control-2-3" />
                     <datalist id="manufacturerList">
                         <select>
                             <option value="A.R.B">
@@ -65,7 +65,7 @@
                             <option value="Chassis Development Services Ltd">
                             <option value="Chereau">
                             <option value="Chieftain">
-                            <option value="Jean Chereau SAS">
+                            <option value="Jean Chéreau SAS">
                             <option value="Chieftain Trailers Ltd">
                             <option value="Cisternas COBO UK Ltd">
                             <option value="Clayden">
@@ -92,7 +92,7 @@
                             <option value="F G M s.r.l.">
                             <option value="Fliegl Fahrzeugbau GmbH">
                             <option value="Fruehauf">
-                            <option value="FrUiTiGer CZ s.r.o">
+                            <option value="Frutiger CZ s.r.o.">
                             <option value="GOFA-Gocher Fahrzeugbau GmbH">
                             <option value="Goldhofer">
                             <option value="Granalu Transformations SL">
@@ -219,11 +219,12 @@
 
                 <input class="form-control" id="manufacturer" type="text" name="manufacturer" style="text-transform: capitalize">
             </div> -->
+             
+            {{ button.input(class='button', type='button', value='Continue') }}
+            
         </div>
     </div>
-    <br>
 
-    {{ button.input(class='button', type='button', value='Continue') }}
 </main>
 
 <script type="text/javascript">
