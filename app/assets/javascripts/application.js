@@ -36,10 +36,12 @@ function go(url) {
 }
 
 $(document).ready(function () {
-  if (member.questions.serviceName === "manage") {
-      $('#service-name').html('Manage a trailer');
+if (member.questions.serviceName === "manage") {
+    $('#service-name').html('Manage a trailer');
+    $('.service-url').attr('href', '/manage');
   } else if (member.questions.serviceName === "register") {
       $('#service-name').html('Register a trailer');
+      $('.service-url').attr('href', '/register');
   }
   console.log('Service type is ' + member.questions.serviceName)
 })
