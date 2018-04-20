@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block page_title %} Will you only be travelling to the following countries? {% endblock %}
+
+{% block head %}
+{% include "includes/head.html" %}
+{% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block proposition_header %}
+{% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/standard-back-phase-banner.html" %}
+<main id="content" role="main">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+
+                <p>Please amend the following details:</p>
+                <ul class="error-summary-list error-list">
+                    <li class="error-message convention hide"><a href="#convention-a1">Select if the trailer will only be travelling to the following countries</a></li>
+                </ul>
+            </div>
+
+            <h1 class="heading-large">Will you only be travelling to the following countries?</h1>
+            
+            <ul class="lede list list-bullet">
+                <li>Cyprus</li>
+                <li>Ireland</li>
+                <li>Malta</li>
+                <li>Spain</li>
+            </ul>
+
+            <form class="form">
+                <div class="form-group" id="question">
+                    <span class="convention error-message hide">Select an option</span>
+
+                    <fieldset class="inline">
+                        <legend class="visually-hidden">Will you only be travelling to the following countries?</legend>
+
+                        <div class="multiple-choice">
+                            <input id="convention-a1" type="radio" name="convention" value="Yes">
+                            <label class="block-label" for="convention-a1" id="convention-a1-label">Yes</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="convention-a2" type="radio" name="convention" value="No">
+                            <label class="block-label" for="convention-a2" id="convention-a2-label">No</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {{ button.input(class='button', type='button', value='Continue') }}
+            </form>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $('.button').click(checkAnswers);
+
+    function checkAnswers() {
+        var convention = $('input[name=convention]:checked').val();
+
+        if (convention == 'Yes') {
+            member.convention = convention;
+            go('commercially');
+
+        } else if (convention == 'No') {
+            go('../../exit/abroad');
+
+        } else {
+            $('body').scrollTop(0);
+            $('.error-summary').show();
+            $('.error-summary').focus();
+            $('.error-message').show();
+            $('#question').addClass('error');
+        }            
+    }
+</script>
+{% endblock %}
