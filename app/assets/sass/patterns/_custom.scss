@@ -144,3 +144,15 @@ input#manufacturer { text-transform: capitalize; }
 input#companyName { text-transform: capitalize; }
 
 input#keeperName { text-transform: capitalize; }
+
+.modified-date.form-hint {
+    padding-top: 20px;
+}
+
+.modified-date {
+    font-size: 16px;
+}
+
+input#regNumber { text-transform: uppercase; }
+
+input#chassisNumber { text-transform: uppercase; }
