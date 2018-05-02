@@ -48,6 +48,10 @@
         $('.button-back').hide();
     }
 
+    if (changing === 'true') {
+        $('input[name=maximumMass]').val(member.maximumMass);
+    }
+    
     $('.button').click(checkAnswers);
 
     function checkAnswers() {

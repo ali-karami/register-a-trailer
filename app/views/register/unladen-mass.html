@@ -50,6 +50,10 @@
         $('.button-back').hide();
     }
 
+    if (changing === 'true') {
+        $('input[name=unladenMass]').val(member.unladenMass);
+    }
+    
     $('.button').click(checkAnswers);
 
     function checkAnswers() {
