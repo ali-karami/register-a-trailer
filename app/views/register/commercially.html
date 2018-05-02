@@ -86,8 +86,10 @@
         $('.error-message.commercial').hide();
 
         if ($(this).val() === 'No') {
+            $('.error-summary').hide();
             $('#over-3500-container').show();
         } else {
+            $('.error-summary').hide();
             $('#over-3500-container').hide();
         }
     });
@@ -98,18 +100,19 @@
 
         if (commercial == 'Yes') {
             member.commercial = commercial;
-            go('manufacturer');
+            go('max-mass');
 
         } else if (commercial == 'No') {
             if (over3500 == 'Yes') {
                 member.over3500 = over3500;
-                go('manufacturer')
+                go('max-mass')
                 
             } else if (over3500 == 'No') {
                 member.over3500 = over3500;
                 go('../../exit/commercially');
             } else {
-                $('#question').addClass('error');
+                $('.error-summary').show();
+                $('.panel.panel-border-narrow').addClass('error');
                 $('.error-message.over-3500').show();
             }
 
