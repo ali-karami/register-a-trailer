@@ -16,23 +16,28 @@
 <main id="content" role="main">
     <div class="grid-row">
         <div class="column-full">
-            <h1 class="heading-large">Check your answers</h1>
+            <h1 class="heading-large">Check your <span id="checkType">answers</span></h1>
 
             <h2 class="heading-medium margin-top-2">Trailer details</h2>
 
             <ul class="list-summary margin-bottom-2">
-                <li class="list-summary-item vin">
-                    <span>Chassis number (VIN)</span>
+                <li class="list-summary-item reg">
+                    <span>Registration number</span>
+                    <span><strong><span id="regNumber" style="width: 150%;text-transform: uppercase;"></span></strong></span>
+                </li>
+                
+                <li class="list-summary-item">
+                    <span>Vehicle identification number (VIN)</span>
                     <span><strong><span id="chassisNumber" style="width: 150%;text-transform: uppercase;"></span></strong></span>
-                    <span class="list-summary-item-right">
-                        <a class="button-change" href="register/chassis?change=true">Change <span class="visuallyhidden">chassis number</span></a></span>
+                    <span class="list-summary-item-right vin">
+                        <a class="button-change" href="register/trailer-details?change=true">Change <span class="visuallyhidden">chassis number</span></a></span>
                 </li>
                 
                 <li class="list-summary-item make">
-                    <span>Make</span>
+                    <span>Manufacturer</span>
                     <span><strong><span id="manufacturer" style="width: 150%;text-transform: capitalize;"></span></strong></span>
                     <span class="list-summary-item-right">
-                        <a class="button-change" href="register/manufacturer?change=true">Change <span class="visuallyhidden">make</span></a></span>
+                        <a class="button-change" href="register/trailer-details?change=true">Change <span class="visuallyhidden">manufacturer</span></a></span>
                 </li>
                 
                 <li class="list-summary-item maximum-mass">
@@ -85,12 +90,23 @@
 </main>
 
 <script type="text/javascript">
-    if (member.questions.serviceName === 'manage') {
-        $('#service-name').html('Manage a trailer');
-    } else if (member.questions.serviceName === 'register') {
-        $('#service-name').html('Register a trailer');
+    if (member.questions.chassisNumber === "EXAMPLEVIN001") {
+        $('#checkType').html('details');
+        $(document).attr('title','Check your details');
+        $('.list-summary-item-right.vin').hide();
+        $('.button').attr('value','Finish');
+    } else {
+        $('#checkType').html('answers');
+        $(document).attr('title','Check your answers');
+        $('.button').attr('Continue to payment');
     }
 
+    if (!member.questions.regNumber) {
+        $('.reg').remove();
+    } else {
+        $('#regNumber').html(member.questions.regNumber);
+    }
+    
     if (!member.questions.chassisNumber) {
         $('.vin').remove();
     } else {
@@ -142,8 +158,12 @@
 
     $('.button').click(next);
 
-    function next() {        
-        go('payment');
+    function next() {
+        if (member.questions.chassisNumber === "EXAMPLEVIN001") {
+            go('success');
+        } else {
+            go('payment');
+        }    
     }
 </script>
 {% endblock %}
