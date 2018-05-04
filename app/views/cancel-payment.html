@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block page_title %} You’re about to cancel your application {% endblock %}
+
+{% block head %}
+{% include "includes/head.html" %}
+{% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block proposition_header %}
+{% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <br>
+            <div class="notice">
+                <i class="icon icon-important">
+                    <span class="visually-hidden">Warning</span>
+                </i>
+                <strong class="bold-large">
+                    You’re about to cancel your application
+                </strong>
+            </div>
+            <br>
+            <p>If you cancel, all the details you have entered won’t be saved.</p>
+
+            <form class="form">
+                {{ button.input(class='button', type='button', value='Cancel application') }}
+            </form>
+            
+            <p><a href="payment">Go back to the payment page</a></p>
+            
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $('.button').click(checkAnswers);
+
+    function checkAnswers() {
+        go('exit/cancel-payment-confirmation');
+    }
+</script>
+{% endblock %}

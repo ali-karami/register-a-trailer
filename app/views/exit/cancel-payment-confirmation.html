@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block page_title %} You’ve cancelled your application {% endblock %}
+
+{% block head %}
+{% include "includes/head.html" %}
+{% include "includes/scripts.html" %}
+{% endblock %}
+
+{% block proposition_header %}
+{% include "includes/propositional_navigation_alpha.html" %}
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="govuk-box-highlight grey">
+                <h1 class="bold-large banner-header">You’ve cancelled your application</h1>
+            </div>
+
+            <p>Your details haven’t been saved and you will need to start from the beginning if you want to register the trailer.</p>
+
+            {{ button.input(class='button', type='button', value='Return to GOV.UK') }}
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $('.button').click(next);
+
+    function next() {
+        go('https://www.gov.uk');
+    }
+</script>
+{% endblock %}
