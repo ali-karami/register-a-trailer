@@ -55,7 +55,7 @@
 
             <p class="margin-top-2">You can <a href="#">print this page</a> for your records.</p>
             
-            <p><a href="register/chassis">I have another trailer to register</a></p>
+            <p><a href="javascript:registerAnother()">I have another trailer to register</a></p>
             
             <br>
 
@@ -65,11 +65,15 @@
 </main>
 
 <script type="text/javascript">
-    $(".button").click(function(){
-        // Enter function name here
+    $('.button').click(function() {
         checkAnswers();
     });
-
+    
+    function registerAnother() {
+        member.registerAnother = 'Y';
+        go('register/trailer-details');
+    }
+    
     function checkAnswers() { 
         member.clear();
         go('https://www.gov.uk/');

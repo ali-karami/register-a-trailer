@@ -58,14 +58,19 @@
 
     function checkAnswers() {
         var validInput = true;
+        
+
+        
         var unladenMass = $('input[name=unladenMass]').val();
 
         if (unladenMass) {
             member.unladenMass = unladenMass;
-            
-            if (changing === "true") {
+
+            if ((member.registerAnother === "Y") || (changing === "true")) {
+                console.log("true");
                 go('../check-your-answers');
             } else {
+                console.log("false");
                 go('keeper');
             }
         } else {
