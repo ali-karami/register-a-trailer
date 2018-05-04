@@ -32,7 +32,7 @@
                     <span class="error-message chassisNumber hide">Enter the trailer chassis number<br></span>
                 </label>
 
-                <input class="form-control" id="chassisNumber" type="text" style="text-transform: uppercase" name="chassisNumber">
+                <input class="form-control" id="chassisNumber" type="text" name="chassisNumber">
             </div>
             
             {{ button.input(class='button', type='button', value='Continue') }}
@@ -79,15 +79,23 @@
 
     function checkAnswers() {
         var validInput = true;
-        var chassisNumber = $('input[name=chassisNumber]').val();
+        var chassisNumber = $('input[name=chassisNumber]').val().toUpperCase();
 
         if (chassisNumber) {
             member.chassisNumber = chassisNumber;
 
             if (changing === "true") {
-                go('../check-your-answers');
+                if (chassisNumber === "EXAMPLEVIN001") {
+                    go('../exit/already-registered');
+                } else {
+                    go('../check-your-answers');
+                }
             } else {
-                go('over-750');
+                if (chassisNumber === "EXAMPLEVIN001") {
+                    go('../exit/already-registered');
+                } else {
+                    go('over-750');
+                }  
             }
         } else {
             $('body').scrollTop(0);
