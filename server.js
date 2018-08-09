@@ -1,28 +1,21 @@
-// Core dependencies
-const crypto = require('crypto')
-const path = require('path')
+require('dotenv').config()
+var crypto = require('crypto')
+var path = require('path')
+var express = require('express')
+var session = require('express-session')
+var nunjucks = require('nunjucks')
+var routes = require('./app/routes.js')
+var documentationRoutes = require('./docs/documentation_routes.js')
+var favicon = require('serve-favicon')
+var app = express()
+var documentationApp = express()
+var bodyParser = require('body-parser')
+var browserSync = require('browser-sync')
+var config = require('./app/config.js')
+var utils = require('./lib/utils.js')
+var packageJson = require('./package.json')
 
-// NPM dependencies
-const bodyParser = require('body-parser')
-const browserSync = require('browser-sync')
-const dotenv = require('dotenv')
-const express = require('express')
-const favicon = require('serve-favicon')
-const nunjucks = require('nunjucks')
-const session = require('express-session')
-
-// Local dependencies
-const config = require('./app/config.js')
-const documentationRoutes = require('./docs/documentation_routes.js')
-const packageJson = require('./package.json')
-const routes = require('./app/routes.js')
-const utils = require('./lib/utils.js')
-
-const app = express()
-const documentationApp = express()
-dotenv.config()
-
-// Set up configuration variables
+// Grab environment variables specified in Procfile or as Heroku config vars
 var releaseVersion = packageJson.version
 var username = process.env.USERNAME
 var password = process.env.PASSWORD
@@ -31,7 +24,7 @@ var useAuth = process.env.USE_AUTH || config.useAuth
 var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
 var useHttps = process.env.USE_HTTPS || config.useHttps
 var useBrowserSync = config.useBrowserSync
-var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
+var analyticsId = process.env.ANALYTICS_TRACKING_ID
 
 env = env.toLowerCase()
 useAuth = useAuth.toLowerCase()
@@ -47,15 +40,19 @@ promoMode = promoMode.toLowerCase()
 // Disable promo mode if docs aren't enabled
 if (!useDocumentation) promoMode = 'false'
 
-// Force HTTPS on production. Do this before using basicAuth to avoid
-// asking for username/password twice (for `http`, then `https`).
+// Force HTTPs on production connections. Do this before asking for basicAuth to
+// avoid making users fill in the username/password twice (once for `http`, and
+// once for `https`).
+
 var isSecure = (env === 'production' && useHttps === 'true')
+
 if (isSecure) {
   app.use(utils.forceHttps)
   app.set('trust proxy', 1) // needed for secure cookies on heroku
 }
 
-// Ask for username and password on production
+// Authenticate against the environment-provided credentials, if running
+// the app in production (Heroku, effectively)
 if (env === 'production' && useAuth === 'true') {
   app.use(utils.basicAuth(username, password))
 }
@@ -70,7 +67,7 @@ var nunjucksAppEnv = nunjucks.configure(appViews, {
   watch: true
 })
 
-// Add Nunjucks filters
+// Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
 
 // Set views engine
@@ -109,7 +106,7 @@ app.use(bodyParser.urlencoded({
 }))
 
 // Add variables that are available in all views
-app.locals.gtmId = gtmId
+app.locals.analyticsId = analyticsId
 app.locals.asset_path = '/public/'
 app.locals.useAutoStoreData = (useAutoStoreData === 'true')
 app.locals.cookieText = config.cookieText
@@ -130,14 +127,61 @@ app.use(session({
   secret: crypto.randomBytes(64).toString('hex')
 }))
 
-// Automatically store all data users enter
-if (useAutoStoreData === 'true') {
-  app.use(utils.autoStoreData)
-  utils.addCheckedFunction(nunjucksAppEnv)
-  utils.addCheckedFunction(nunjucksDocumentationEnv)
+// add nunjucks function called 'checked' to populate radios and checkboxes,
+// needs to be here as it needs access to req.session and nunjucks environment
+var addCheckedFunction = function (app, nunjucksEnv) {
+  app.use(function (req, res, next) {
+    nunjucksEnv.addGlobal('checked', function (name, value) {
+      // check session data exists
+      if (req.session.data === undefined) {
+        return ''
+      }
+
+      var storedValue = req.session.data[name]
+
+      // check the requested data exists
+      if (storedValue === undefined) {
+        return ''
+      }
+
+      var checked = ''
+
+      // if data is an array, check it exists in the array
+      if (Array.isArray(storedValue)) {
+        if (storedValue.indexOf(value) !== -1) {
+          checked = 'checked'
+        }
+      } else {
+        // the data is just a simple value, check it matches
+        if (storedValue === value) {
+          checked = 'checked'
+        }
+      }
+      return checked
+    })
+
+    next()
+  })
 }
 
-// Clear all data in session if you open /prototype-admin/clear-data
+if (useAutoStoreData === 'true') {
+  app.use(utils.autoStoreData)
+  addCheckedFunction(app, nunjucksAppEnv)
+  addCheckedFunction(documentationApp, nunjucksDocumentationEnv)
+}
+
+// Disallow search index idexing
+app.use(function (req, res, next) {
+  // Setting headers stops pages being indexed even if indexed pages link to them.
+  res.setHeader('X-Robots-Tag', 'noindex')
+  next()
+})
+
+app.get('/robots.txt', function (req, res) {
+  res.type('text/plain')
+  res.send('User-agent: *\nDisallow: /')
+})
+
 app.get('/prototype-admin/clear-data', function (req, res) {
   req.session.destroy()
   res.render('prototype-admin/clear-data')
@@ -151,13 +195,13 @@ if (promoMode === 'true') {
     res.redirect('/docs')
   })
 
-  // Allow search engines to index the prototype kit promo site
+  // allow search engines to index the prototype kit promo site
   app.get('/robots.txt', function (req, res) {
     res.type('text/plain')
     res.send('User-agent: *\nAllow: /')
   })
 } else {
-  // Prevent search indexing
+  // Disallow search index idexing
   app.use(function (req, res, next) {
     // Setting headers stops pages being indexed even if indexed pages link to them.
     res.setHeader('X-Robots-Tag', 'noindex')
@@ -170,7 +214,7 @@ if (promoMode === 'true') {
   })
 }
 
-// Load routes (found in app/routes.js)
+// routes (found in app/routes.js)
 if (typeof (routes) !== 'function') {
   console.log(routes.bind)
   console.log('Warning: the use of bind in routes is deprecated - please check the prototype kit documentation for writing routes.')
@@ -179,7 +223,7 @@ if (typeof (routes) !== 'function') {
   app.use('/', routes)
 }
 
-// Redirect to the zip of the latest release of the prototype kit on GitHub
+// Returns a url to the zip of the latest release on github
 app.get('/prototype-admin/download-latest', function (req, res) {
   var url = utils.getLatestRelease()
   res.redirect(url)
@@ -221,15 +265,16 @@ if (useDocumentation) {
   })
 }
 
-// Redirect all POSTs to GETs - this allows users to use POST for autoStoreData
+// redirect all POSTs to GETs - this allows users to use POST for autoStoreData
 app.post(/^\/([^.]+)$/, function (req, res) {
   res.redirect('/' + req.params[0])
 })
 
 console.log('\nGOV.UK Prototype kit v' + releaseVersion)
+// Display warning not to use kit for production services.
 console.log('\nNOTICE: the kit is for building prototypes, do not use it for production services.')
 
-// Find a free port and start the server
+// start the app
 utils.findAvailablePort(app, function (port) {
   console.log('Listening on port ' + port + '   url: http://localhost:' + port)
   if (env === 'production' || useBrowserSync === 'false') {
