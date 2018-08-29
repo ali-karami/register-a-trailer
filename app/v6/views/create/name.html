@@ -32,7 +32,7 @@
                             <h1 class="heading-large"><span class="title">What is your name?</span></h1>
                         </legend>
 
-                        <label class="form-label visually-hidden" for="name">Company name</label>
+                        <label class="form-label visually-hidden" for="name">Name</label>
                         <input class="form-control" id="name" type="text" name="name">
                     </fieldset>
                 </div>
@@ -125,12 +125,12 @@
         } else {
             if (type == "company") {
                 document.title = 'What is your company name?';
-                $('.title').html('company name');
+                $('.title').html('What is your company name?');
                 $('.error-message').html('Enter your company name');
                 $('.button').html('Continue');
             } else if (type == "personal") {
                 document.title = 'What is your name?';
-                $('.title').html('name');
+                $('.title').html('What is your name?');
                 $('.error-message').html('Enter your name');
                 $('.button').html('Continue');
             }
