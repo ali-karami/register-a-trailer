@@ -1,0 +1,52 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What is your email address? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <h1 class="heading-large">What is your email address?</h1>
+
+                    <p class="paragraph">We will send you a code to confirm your email address</p>
+
+                    <fieldset>
+                        <legend class="visuallyhidden">What is your email address?</legend>
+
+                        <label class="form-label visually-hidden" for="email">Email address</label>
+                        <input class="form-control" id="email" type="text" name="email">
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <button class="button" type="button">Continue</button>
+                </div>
+
+                <a href="">Get help</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        function next() {
+            go('/scp/email-address/confirm');
+        }
+    </script>
+{% endblock %}

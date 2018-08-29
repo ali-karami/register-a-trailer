@@ -1,0 +1,31 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Trailer manufacturer not listed {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight grey">
+                    <h1 class="heading-large">Trailer manufacturer not listed</h1>
+                </div>
+
+                <p>Our records show the trailer has already been registered.</p>
+
+                <div class="form-group">
+                    <button class="button">Tell us you have bought a trailer</button>
+                </div>
+
+                <a href="/trailer-record">Go to trailer record</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

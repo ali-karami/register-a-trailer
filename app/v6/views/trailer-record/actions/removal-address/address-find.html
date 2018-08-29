@@ -1,0 +1,135 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What is the new keepers address? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+            <!-- <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                    <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There’s a problem with the information you have provided</h1>
+
+                    <p>Please amend the following details:</p>
+                    <ul class="error-summary-list">
+                        <li class="error-message postcode hide"><a href="#qpostcode">Provide a valid postcode</a></li>
+                    </ul>
+                </div> -->
+
+                <form class="form">
+                    <div class="form-group">
+                        <fieldset>
+                            <legend>
+                                <h1 class="heading-large">What is the new keepers address?</h1>
+                            </legend>
+
+                            <div class="form-group">
+                                <label class="form-label" for="number">Building name or number (optional)</label>
+                                <input class="form-control" id="number" name="number" type="text">
+                            </div>
+                            <div class="form-group postcode">
+                                <label class="form-label" for="postcode">Postcode</label>
+                                <input class="form-control" id="postcode" name="postcode" type="text">
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="button" type="button" onclick="validate()">Find UK address</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = {
+                // "number": "122",
+                "postcode": "SA6 7JL"
+            };
+            // $('input[id=number]').val(testData.number);
+            $('input[id=postcode]').val(testData.postcode);
+        });
+
+        var changing = location.search.split('change=')[1];
+
+        $('.button').click(validate);
+
+        function validate() {
+            // resetErrors();
+            var validInput = true;
+            var request = '?';
+
+            var postcode = $('input[name=postcode]').val();
+            if ((postcode == '') || (postcode == undefined)) {
+                $('#qpostcode').addClass('error');
+                $('.postcode.error-message').show();
+                $('.error-summary').show();
+                $('body').scrollTop(0);
+                validInput = false;
+            } else {
+                request += "postcode=" + postcode;
+            }
+
+            var number = $('input[name=number]').val();
+            if ((number == '') || (number == undefined)) {
+                // Do nothing
+            } else {
+                request += "&number=" + number;
+            }
+
+            if (validInput) {
+                // Create a playback string
+                $.getJSON('/api/address-lookup' + encodeURI(request), function(addresses) {
+                    member.addresses = addresses;
+
+                    if (member.addresses.length === 1) {
+                        // Load address into fields and allow to manually edit
+                        member.address = member.addresses[0];
+
+                        if (changing == "true") {
+                            go('/trailer-record/actions/removal-address/address-confirmation?change=true');
+                        } else {
+                            go('/trailer-record/actions/removal-address/address-confirmation');
+                        }
+                    } else if (member.addresses.length > 1) {
+                        // Show list of addresses
+
+                        if (changing == "true") {
+                            go('/trailer-record/actions/removal-address/address-list?change=true');
+                        } else {
+                            go('/trailer-record/actions/removal-address/address-list');
+                        }
+                    } else {
+                        // No results, enter manually
+
+                        if (changing == "true") {
+                            go('/trailer-record/actions/removal-address/address-manual?change=true');
+                        } else {
+                            go('/trailer-record/actions/removal-address/address-manual');
+                        }
+                    }
+                    console.log(addresses);
+                });
+
+                //next();
+            } else {
+                // showErrors();
+            }
+        }
+    </script>
+{% endblock %}

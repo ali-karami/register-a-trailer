@@ -1,0 +1,179 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Does this trailer have a registration number? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        .error-summary,
+        .error-message { display: none; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
+                <div class="form-group">
+                    <fieldset class="inline">
+                        <legend>
+                            <h1 class="heading-large">Does this trailer have a registration number?</h1>
+                            {% include "includes/errors/error-message.html" %}
+                        </legend>
+
+                        <div class="multiple-choice" data-target="vin-input">
+                            <input id="radio-1" type="radio" name="have-reg" value="Y">
+                            <label for="radio-1">Yes</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="have-reg" value="N">
+                            <label for="radio-2">No</label>
+                        </div>
+
+                        <div class="panel panel-border-narrow js-hidden" id="vin-input">
+                            <legend class="visuallyhidden">
+                                Registration number
+                                {% include "includes/errors/error-message-2.html" %}
+                            </legend>
+
+                            <div class="form-group">
+                                <label class="form-label" for="reg-number"><span class="reg-no-error">Registration</span> <span class="reg-error">number</span></label>
+                                <input class="form-control" id="reg-number" type="text" name="reg-number">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var reg = '';
+
+        $('.reg-no-error').click(function() {
+            // var testData = { 'reg': 'A1143826' };
+            $('input[id=reg-number]').val(randomReg());
+        });
+
+        $('.reg-error').click(function() {
+            var testData = { 'reg': 'A3679333' };
+            $('input[id=reg-number]').val(testData.reg);
+        });
+
+        $('.button').click(validate);
+
+        function validate() {
+            var validInput = true
+            var value1 = $('input[name=have-reg]:checked').val();
+            var value2 = $('input[name=reg-number]').val();
+
+            if (member.trailer === undefined) {
+                member.trailer = {};
+            }
+
+            if (value1 === 'Y') {
+                if (!value2) {
+                    validInput = false;
+                    showErrors2();
+                    $('.error-message').hide();
+                }
+
+                if (validInput) {
+                    if (value2 == 'A3679333') {
+                       go('/register/exit')
+                    } else {
+                        member.trailer.reg = value2;
+                        next();
+                    }
+                }
+            } else if (value1 === 'N') {
+                member.trailer.reg = randomReg();
+                member.trailer.regRandom = "Y";
+                next();
+            } else {
+                showErrors();
+                $('.error-message.2').hide();
+            }
+        }
+
+        function next() {
+            console.log('reg = ' + member.trailer.reg);
+            go('/register/have-vin-number');
+        }
+
+        $('input[name=have-reg]').click(function () {
+            // $('.error-message').hide();
+            hideErrors();
+        });
+
+        function showErrors() {
+            var title = $(document).prop('title');
+            if (title.indexOf('Error') > -1) {
+            } else {
+                $(document).prop('title', 'Error: ' + title);
+            }
+            $('body').scrollTop(0);
+            $('fieldset').closest('.form-group').addClass('form-group-error');
+            // $('#over-3500').addClass('form-group-error');
+            $('.form-control').addClass('form-control-error');
+            $('.error-message').show().css('display', 'block');
+            // $('.error-message.2').hide();
+            $('.error-summary').show().focus();
+            $('legend').attr('id', 'error-link');
+        }
+
+        function showErrors2() {
+            var title = $(document).prop('title');
+            if (title.indexOf('Error') > -1) {
+            } else {
+                $(document).prop('title', 'Error: ' + title);
+            }
+            $('body').scrollTop(0);
+            $('fieldset').closest('.form-group').addClass('form-group-error');
+            $('input').closest('.panel.panel-border-narrow').css({'border-left':'none','padding-left':'0'});
+            $('#over-3500').addClass('form-group-error');
+            $('.form-control').addClass('form-control-error');
+            $('.error-message').hide();
+            $('.error-message.2').show();
+            $('.error-summary').show().focus();
+            $('legend').attr('id', 'error-link');
+        }
+
+        function hideErrors() {
+            $('.error-summary').hide();
+            $('fieldset').closest('.form-group').removeClass('form-group-error');
+            $('.form-control').removeClass('form-control-error');
+            $('.error-message').hide();
+            $('.error-message.2').hide();
+            $('legend').attr('id', 'error-link');
+        }
+
+        var changing = location.search.split('change=')[1];
+        if (changing === 'true') {
+            $('input[name=address1]').val(member.user.address.Line1);
+            $('input[name=address2]').val(member.user.address.Line2);
+            $('input[name=posttown]').val(member.user.address.City);
+            $('input[name=postcode]').val(member.user.address.PostalCode);
+            $('.button').html('Save and continue');
+        } else {
+            $('input[name=address1]').val(member.user.address.Line1);
+            $('input[name=address2]').val(member.user.address.Line2);
+            $('input[name=posttown]').val(member.user.address.City);
+            $('input[name=postcode]').val(member.user.address.PostalCode);
+        }
+    </script>
+{% endblock %}

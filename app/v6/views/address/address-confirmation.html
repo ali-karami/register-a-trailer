@@ -1,0 +1,90 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Is this address correct? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        dd { font-weight: 700; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+<main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <form class="form">
+                    <div class="form-group">
+                        <fieldset>
+                            <legend><h1 class="heading-large">Is this address correct?</h1></legend>
+
+                            <dl>
+                                <div>
+                                    <dd class="cya-answer">
+                                        <span id="address"></span>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="button" type="button">Yes, continue</button>
+                    </div>
+
+                    <a href="/address/address-manual">This address is not correct</a>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var refUrl = getRefUrl();
+
+        $('.button').click(next);
+
+        function next() {
+            member.user.address = member.address;
+            delete member.address;
+            delete member.addresses;
+
+            if (changing == "true") {
+                if (refUrl == 'check-your-answers') {
+                    go('/create/check-your-answers');
+                } else {
+                    go('/success');
+                }
+            } else {
+                go('/create/email-address');
+            }
+        }
+
+        var changing = location.search.split('change=')[1];
+        if (changing === 'true') {
+            // $('input[name=address1]').val(member.user.address.Line1);
+            // $('input[name=address2]').val(member.user.address.Line2);
+            // $('input[name=address3]').val(member.user.address.Line3);
+            // $('input[name=posttown]').val(member.user.address.City);
+            // $('input[name=postcode]').val(member.user.address.PostalCode);
+            // $('.button').html('Save and continue');
+        } else {
+            var addressPlayback = '';
+            if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
+            if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
+            if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
+            if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
+            if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
+            $('#address').html(addressPlayback);
+        }
+    </script>
+{% endblock %}

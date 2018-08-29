@@ -1,0 +1,43 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Trailer record created {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight">
+                    <h1 class="heading-large">Trailer record created</h1>
+                </div>
+
+                <p>You can now register your trailers.</p>
+
+                <div class="form-group">
+                    <button class="button">Go to your trailer record</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        function next() {
+            go('/trailer-record');
+        }
+    </script>
+{% endblock %}

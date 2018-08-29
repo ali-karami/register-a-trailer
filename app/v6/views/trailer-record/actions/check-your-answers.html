@@ -1,0 +1,161 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Check your answers {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <h1 class="heading-large">Check your answers</h1>
+
+                    <h2 class="heading-medium">Date of sale or transfer</h2>
+
+                    <div class="form-group">
+                        <dl class="govuk-check-your-answers cya-questions-short">
+                            <div>
+                                <dt class="cya-question">Date</dt>
+                                <dd class="cya-answer"><span id="date"></span></dd>
+                                <dd class="cya-change"><a href="/create/name?change=true">Change<span class="visually-hidden"> name</span></a></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <span id="trailer-details"></span>
+
+                    <!-- only add a heading for a list if there is more than one list -->
+                    <h2 class="heading-medium">New keepers details</h2>
+
+                    <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
+                    <!--   * `cya-questions-short` for short questions -->
+                    <!--   * `cya-questions-long` for long questions -->
+                    <!--   * none for single group of q&a -->
+                    <div class="form-group">
+                        <dl class="govuk-check-your-answers cya-questions-short">
+                            <div>
+                                <dt class="cya-question">Name</dt>
+                                <dd class="cya-answer"><span id="name"></span></dd>
+                                <dd class="cya-change"><a href="/create/name?change=true">Change<span class="visually-hidden"> name</span></a></dd>
+                            </div>
+
+                            <div>
+                                <dt class="cya-question">Address</dt>
+                                <dd class="cya-answer"><span id="address"></span></dd>
+                                <dd class="cya-change"><a href="/create/address-find?change=true">Change<span class="visually-hidden"> home address</span></a></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <p>By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
+
+                    <div class="form-group">
+                        <button class="button">Accept and send application</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var months = new Array(12);
+        months[0] = "January";
+        months[1] = "February";
+        months[2] = "March";
+        months[3] = "April";
+        months[4] = "May";
+        months[5] = "June";
+        months[6] = "July";
+        months[7] = "August";
+        months[8] = "September";
+        months[9] = "October";
+        months[10] = "November";
+        months[11] = "December";
+
+        // var current_date = new Date();
+        // day = member.disposal.date.day;
+        // month = member.disposal.date.day;
+        // year = member.disposal.date.year;
+
+        // var current_date = new Date();
+        day = member.disposal.day;
+        month = member.disposal.month;
+        year = member.disposal.year;
+
+        var date = day + ' ' + months[month] + ' ' + year;
+        $('#date').html(date);
+
+
+
+
+
+        $('#name').html(member.disposal.name).css('text-transform', 'capitalize');
+
+        var currentTrailer = member.trailers[member.currentTrailerPosition];
+
+        if (!member.trailers || member.trailers.length == 0) {
+            $('#trailer-details').html('<p>No trailer found</p>');
+        } else {
+            var trailerDetails = '<div class="form-group"><dl class="govuk-check-your-answers cya-questions-short">';
+
+            if (!currentTrailer.vin) {
+            } else {
+                trailerDetails += '<div><dt>VIN/Chassis number</dt>';
+                trailerDetails += '<dd class="cya-answer">' + currentTrailer.vin + '</dd><dd class="cya-change">&nbsp;</dd></div>';
+            }
+            if (!currentTrailer.chassis) {
+            } else {
+                trailerDetails += '<div>';
+                        trailerDetails += '<dt class="cya-question">VIN number</dt>';
+                trailerDetails += '<dd class="cya-answer">' + currentTrailer.chassis + '</dd><dd class="cya-change">&nbsp;</dd></div>';
+            }
+            trailerDetails += '<div>';
+            trailerDetails += '<dt class="cya-question">Manufacturer</dt>';
+            trailerDetails += '<dd class="cya-answer">' + currentTrailer.manufacturer + '</dd>';
+            trailerDetails += '<dd class="cya-change">&nbsp;</dd>';
+            trailerDetails += '</div>';
+
+            trailerDetails += '<div>';
+            trailerDetails += '<dt class="cya-question">Gross weight</dt>';
+            trailerDetails += '<dd class="cya-answer">' + Number(currentTrailer.gross).toLocaleString('en') + 'kg</dd>';
+            trailerDetails += '<dd class="cya-change">&nbsp;</dd>';
+            trailerDetails += '</div>';
+
+            trailerDetails += '<div>';
+            trailerDetails += '<dt class="cya-question">Unladen weight</dt>';
+            trailerDetails += '<dd class="cya-answer">' + Number(currentTrailer.unladen).toLocaleString('en') + 'kg</dd>';
+            trailerDetails += '<dd class="cya-change">&nbsp;</dd>';
+            trailerDetails += '</div>';
+
+
+            $('#trailer-details').html(trailerDetails + '</dl></div>');
+        }
+
+        var addressPlayback = '';
+        if (member.disposal.address.Line1) { addressPlayback += member.disposal.address.Line1 + '<br>'; }
+        if (member.disposal.address.Line2) { addressPlayback += member.disposal.address.Line2 + '<br>'; }
+        if (member.disposal.address.Line3) { addressPlayback += member.disposal.address.Line3 + '<br>'; }
+        if (member.disposal.address.City) { addressPlayback += member.disposal.address.City + '<br>'; }
+        if (member.disposal.address.PostalCode) { addressPlayback += member.disposal.address.PostalCode; }
+        $('#address').html(addressPlayback);
+
+        $('.button').click(next);
+
+        function next() {
+            go('/success');
+        }
+    </script>
+{% endblock %}

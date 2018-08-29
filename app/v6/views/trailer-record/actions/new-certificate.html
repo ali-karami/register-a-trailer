@@ -1,0 +1,64 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Request a replacement trailer UK Trailer Registration Certificate {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">Order a replacement UK Trailer Registration Certificate <span class="trailer-reg"></span></h1>
+
+                <p>A replacement certificate costs <strong><span id="certificate-cost">£XX.XX</span></strong></p>
+
+                <p>Replacement certificates must be sent to the name and address on your trailer record.</p>
+
+                <h2 class="heading-medium">Are these details correct?</h2></legend>
+
+                <div class="form-group">
+                    <span id="name"></span><br>
+                    <span id="address"></span>
+                </div>
+
+                <div class="form-group">
+                    <button class="button" type="button">Yes, continue to payment</button>
+                </div>
+
+                <a href="/trailer-record/change-details">These details are not correct</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        $('#certificate-cost').html('£' + certificateCost + '.00');
+
+        $('#name').html(member.user.name).css('text-transform', 'capitalize');
+        var addressPlayback = '';
+        if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
+        if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
+        if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
+        if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
+        if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
+        $('#address').html(addressPlayback);
+
+        function next() {
+            member.cost = certificateCost;
+            go('/payment');
+        }
+    </script>
+{% endblock %}

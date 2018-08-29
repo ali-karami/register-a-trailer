@@ -1,0 +1,76 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Select your address from the list {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-full">
+                <div class=
+                <h1 class="heading-large">Select your address from the list</h1>
+
+                <form class="form">
+                    <div class="form-group">
+                        <fieldset>
+                            <legend class="visuallyhidden">Select your address from the list</legend>
+
+                            <div class="form-group" id="address-list">
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var changing = location.search.split('change=')[1];
+
+        var addressHTML = '';
+        for (var i = 0; i < member.addresses.length; ++i) {
+            addressHTML += '<p><a href="javascript:select('+ i +')">' + member.addresses[i].Line1 + ', ';
+            if (member.addresses[i].Line2 !== '') {
+                addressHTML += member.addresses[i].Line2 + ', ';
+            }
+            if (member.addresses[i].Line3 !== '') {
+                addressHTML += member.addresses[i].Line3 + ', ';
+            }
+            if (member.addresses[i].Line4 !== '') {
+                addressHTML += member.addresses[i].Line4 + ', ';
+            }
+            if (member.addresses[i].Line5 !== '') {
+                addressHTML += member.addresses[i].Line5 + ', ';
+            }
+            addressHTML += member.addresses[i].City + ', ';
+            addressHTML += member.addresses[i].PostalCode + '</a></p>';
+        }
+        addressHTML += '<p>or</p>';
+        addressHTML += '<a href="/address/address-manual">Enter address manually</a>';
+
+        $('#address-list').html(addressHTML);
+
+        function select(index) {
+            member.user.address = member.addresses[index];
+
+            if (changing == "true") {
+                go('/address/address-confirmation?change=true');
+            } else {
+                go('/address/address-confirmation');
+            }
+        }
+    </script>
+{% endblock %}

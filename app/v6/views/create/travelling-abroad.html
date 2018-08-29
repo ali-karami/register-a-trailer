@@ -1,0 +1,97 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Will you be travelling to any of the following countries, with any of these trailers? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <!-- <form> -->
+                    <div class="form-group">
+                        <fieldset data-required>
+                            <legend>
+                                <h1 class="heading-large">Will you be travelling to any of the following countries, with any of these trailers?</h1>
+                            </legend>
+
+                            <span class="body-text">Select all the countries that apply</span>
+
+                            <div class="multiple-choice">
+                                <input id="country-ireland" name="countries" type="checkbox" value="Republic of Ireland">
+                                <label for="country-ireland">Republic of Ireland</label>
+                            </div>
+                            <div class="multiple-choice">
+                                <input id="spain" name="countries" type="checkbox" value="Spain">
+                                <label for="spain">Spain</label>
+                            </div>
+                            <div class="multiple-choice">
+                                <input id="country-cyprus" name="countries" type="checkbox" value="Cyprus">
+                                <label for="country-cyprus">Cyprus</label>
+                            </div>
+                            <div class="multiple-choice">
+                                <input id="country-malta" name="countries" type="checkbox" value="Malta">
+                                <label for="country-malta">Malta</label>
+                            </div>
+
+                            <p class="form-block">or</p>
+
+                            <div class="multiple-choice">
+                                <input id="country-none" name="countries" type="checkbox" value="none">
+                                <label for="country-none">No, I will not be travelling to any of these countries</label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    {% include "includes/buttons/continue.html" %}
+                <!-- </form> -->
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('input#country-none').click(function () {
+            $('input[name=countries]').not(this).removeAttr('checked');
+        });
+
+        $('input[name=countries]').not('input#country-none').click(function () {
+            $('input#country-none').removeAttr('checked');
+        });
+
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=countries ]:checked').val();
+
+            if (!value) {
+                checkErrors();
+            } else {
+                next();
+            }
+
+            function next() {
+                if (value == 'none') {
+                    go('/create/used-commercially');
+                } else {
+                    member.countries = [];
+                    $('input[name=countries]:checked').each(function (num, el) {
+                        member.countries.push(el.getAttribute('value'));
+                    });
+                    go('/create/travelling-through');
+                }
+            }
+        }
+    </script>
+{% endblock %}

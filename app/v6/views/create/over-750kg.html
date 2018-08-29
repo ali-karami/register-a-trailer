@@ -1,0 +1,78 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Do you have any trailers that weigh over 750kg in gross weight? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset class="inline" data-required>
+                        <legend>
+                            <h1 class="heading-large">Do you have any trailers that weigh over 750kg in gross weight?</h1>
+                        </legend>
+
+                        <div class="form-group details">
+                            <details>
+                                <summary><span class="summary">What is gross weight?</span></summary>
+
+                                <div class="panel panel-border-narrow">
+                                  <p>This is specified by the manufacturer and it means the maximum weight the trailer is allowed to be when fully loaded.
+                                    It is the unladen weight of the trailer plus the maximum permitted payload.
+                                    It is also known as the Maximum Permissible Mass.</p>
+                                </div>
+                            </details>
+                        </div>
+
+                        <div class="multiple-choice details">
+                            <input id="radio-1" type="radio" name="radio-group" value="Y">
+                            <label for="radio-1">Yes</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="N">
+                            <label for="radio-2">No</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=radio-group]:checked').val();
+
+            if (!value) {
+                checkErrors();
+            } else {
+                next();
+            }
+
+            function next() {
+                if (value == 'Y') {
+                    go('/create/used-outside-uk');
+                } else if (value == 'N') {
+                    go('/exit');
+                }
+            }
+        }
+    </script>
+{% endblock %}

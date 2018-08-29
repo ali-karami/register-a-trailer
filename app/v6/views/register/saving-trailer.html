@@ -1,0 +1,52 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Saving-trailer {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block body_end %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var reg = member.trailer.reg;
+            var regRandom = member.trailer.regRandom;
+            if (member.trailer.vin) { var vin = member.trailer.vin; }
+            if (member.trailer.chassis) { var chassis = member.trailer.chassis; }
+            var manufacturer = member.trailer.manufacturer;
+            var gross = member.trailer.gross;
+            var unladen = member.trailer.unladen;
+            var registered = false;
+
+            var trailer = {
+                reg,
+                regRandom,
+                vin,
+                chassis,
+                manufacturer,
+                gross,
+                unladen,
+                registered,
+            };
+
+            if (!member.trailers || member.trailers.length == 0) {
+                member.trailers = [];
+                member.trailers.push(trailer);
+            } else {
+                for (i = 0; i < member.trailers.length; i++) {
+                    var found = false;
+                }
+                if (found == false) {
+                    member.trailers.push(trailer);
+                }
+            }
+        });
+
+        setTimeout(function() {
+            go('/register/trailer-summary');
+        }, 0001);
+    </script>
+{% endblock %}

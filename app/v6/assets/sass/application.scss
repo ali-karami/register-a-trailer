@@ -1,0 +1,352 @@
+// Path to assets for use with the file-url function
+// in the govuk frontend toolkit's url-helpers partial
+$path: "/public/v6/images/";
+
+// Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
+// Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
+@import 'govuk-elements';
+// @import 'fetknew/all';
+
+// Take a look at in app/assets/sass/patterns/ to see which files are imported.
+@import 'patterns/check-your-answers';
+@import 'patterns/task-list';
+
+// @import 'patterns/white-button';
+@import 'patterns/captions';
+@import 'patterns/accordion';
+@import 'patterns/autocomplete';
+@import 'patterns/errors';
+
+// Related items
+// (These styles will be moved to GOV.UK elements, duplicating here for now.)
+.govuk-related-items {
+  margin-top: $gutter;
+  border-top: 10px solid $govuk-blue;
+  padding-top: 5px;
+
+  .heading-medium {
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+  }
+
+  li {
+    margin-bottom: 10px;
+    list-style-type: none;
+  }
+}
+
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+
+
+
+
+
+// global use
+// ==========================================================================
+strong { font-weight: 700; }
+.visually-hidden { display: none; }
+// details { margin-bottom: 1em; }
+// summary { margin-bottom: 2em; }
+// .inline .multiple-choice:first-child { margin-bottom: .25em !important; }
+// fieldset { margin-top: 1.5em; }
+// .heading-large { margin-top: 0; }
+
+// .grid-row.no-back { min-height: 51px; }
+
+// Margin padding
+// .margin-top-1 { margin-top: 1em !important; }
+// .margin-top-2 { margin-top: 2em !important; }
+.form-control#postcode { text-transform: uppercase; }
+// #plural { display: none; }
+// #record-type { display: none; }
+.question { margin-top: 1.25em; }
+h1.heading-large { margin-top: 0; }
+.form-group.postcode { margin-bottom: 0; }
+
+
+
+
+
+
+
+// Phase banner
+// ==========================================================================
+
+//  Standard
+.grid-row.back { margin-bottom: 1.25em; }
+
+.grid-row.back,
+.grid-row.phase {
+  max-width: 960px;
+  margin: 0 15px;
+}
+// @media (min-width: 468px) {
+//   .phase-banner p { display: inline-block; }
+// }
+@media (min-width: 641px) {
+  .grid-row.back,
+  .grid-row.phase { margin: 0 30px; }
+}
+@media (min-width: 1020px) {
+  .grid-row.back,
+  .grid-row.phase { margin: 0 auto; }
+}
+// @media (min-width: 641px) {
+//   .grid-row.back,
+//   .grid-row.phase { margin: 0 30px; }
+// }
+// @media (min-width: 1020px) {
+//   .grid-row.back,
+//   .grid-row.phase { margin: 0 auto; }
+// }
+
+// login
+// .grid-row.phase {
+//   .phase-banner {
+//     float: left;
+//     width: 53%;
+//   }
+//   .logged-user {
+//     // position: relative;
+//     float: right;
+//     width: 47%;
+//     // margin-top: .5em;
+//     padding: 0;
+//     border-bottom: 1px solid $border-colour;
+
+//     p {
+//       margin-bottom: 0;
+//       // padding: 0;
+//       // position: absolute;
+//       // right: 0;
+//       padding-top: 8px;
+//       padding-bottom: 10px;
+//       text-align: right;
+//       font-size: 16px;
+//       line-height: 1.25;
+//     }
+//   }
+// }
+// @media only screen and (max-width: 768px) {
+//   .grid-row.phase {
+//     .phase-banner {
+//       float: none;
+//       width: 100%;
+//     }
+//     .logged-user { display: none; }
+//   }
+// }
+// @media only screen and (max-width: 772px) {
+//   .grid-row.phase {
+//     .phase-banner {
+//       // float: none;
+//       // width: 100%;
+//     }
+//     // .logged-user { display: none; }
+//   }
+// }
+// .logged-user-name.white-text {
+//   font-weight: 700;
+//   color: $page-colour !important;
+// }
+// #global-header .header-proposition a.menu { font-weight: 700; }
+// #global-header .header-proposition a.menu:after { content: ""; }
+
+// .logged-user {
+//   float: right;
+//   // margin-top: -20px;
+//   padding-top: 0;
+// }
+
+
+
+
+
+// No back
+// ==========================================================================
+// .no-back {
+//   min-height: 1.25em;
+//   margin: 0 auto;
+// }
+
+
+// Grey highlight box
+// ==========================================================================
+.govuk-box-highlight {
+  .heading-large {
+    margin-top: .5em;
+    margin-bottom: .4em;
+  }
+  &.grey {
+    background: $panel-colour;
+    color: $text-colour;
+  }
+}
+
+
+// Company details address playback
+// ==========================================================================
+.cya-question { font-weight: 400 !important; }
+.cya-answer,
+.cya-change { font-weight: 700 !important; }
+
+
+// Errors
+// ==========================================================================
+// .error-message { display: none; margin-bottom: 3em !important; padding-bottom: 4em !important; }
+// .error-message { display: none; margin-bottom: .5em; }
+.error-message { margin-bottom: .75em; }
+.error-summary { margin-top: 4px; }
+
+
+// Flash card
+// ==========================================================================
+.flash-card {
+  margin: 1.25em .19em 0;
+  padding: 60px;
+  background: $link-colour;
+  color: $page-colour;
+
+  h1 { margin-top: 0; }
+
+  a:link,
+  a:visited,
+  details summary { color: $page-colour; }
+
+  .button {
+    background: $page-colour;
+    color: $link-colour;
+    font-weight: bold;
+    -webkit-box-shadow: 0 2px 0 #003259;
+    box-shadow: 0 2px 0 #003259;
+    text-transform: capitalize
+  }
+}
+
+
+// Blue button
+// ==========================================================================
+.button {
+  &.blue {
+    background: $link-colour;
+
+    &:hover { background-color: darken($link-colour, 5%); }
+    &:focus { background-color: $link-colour; }
+      // background: #1B75BB;
+    // color: #FFFFFF;
+    /* -webkit-box-shadow: 0 2px 0 #003259; */
+    /* box-shadow: 0 2px 0 #003259 */
+  }
+}
+
+
+
+
+
+// /payment.html
+// ==========================================================================
+#content.payment {
+  .form-label { font-weight: 700; }
+  dt, dd { display: inline-block; }
+  dt { width: 10em;}
+  dd {
+    padding-left: 1.25em;
+    font-weight: 700;
+  }
+}
+
+
+
+
+
+// /trailer-record/index.html
+// ==========================================================================
+#content.trailer-record {
+  .column-full { margin-top: 1em; }
+
+  .heading-section {
+    width: 100%;
+
+    .heading {
+      float: left;
+      width: 55%;
+
+      .heading-large { margin-top: 0; }
+    }
+
+    .change {
+      float: right;
+      position: relative;
+      width: 45%;
+      /* margin-top: 2.5em; */
+
+      a {
+        position: absolute;
+        right: 0;
+      }
+    }
+    .clear { clear: both; }
+  }
+
+  #trailer-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #005ea5;
+  }
+
+  #manage { text-align: right; font-weight: 700; }
+}
+
+
+
+
+
+// register/trailer-summary.html
+// ==========================================================================
+#content.trailer-summary-page {
+  .column-third { margin-top: 1.25em; }
+  .accordion.with-js { border: none; }
+  .accordion-section {
+    border: 2px solid $border-colour;
+    margin-bottom: .5em;
+  }
+  .accordion-section-header { background-color: $highlight-colour; }
+  .accordion-section-body {
+    padding-top: .75em;
+  }
+  .cya-question { width: 40%; }
+  .remove-row {
+    background-color: $highlight-colour;
+    min-height: 30px;
+    max-height: 40px;
+
+    .remove {
+      margin: .75em 0 1em;
+      font-weight: 700;
+      // padding: .526315em .789473em .263157em;
+    }
+  }
+
+  .button.blue { margin-right: 1em; }
+
+  // .remove-row
+  // .button.remove {
+  //   background-color: #005EA5;
+  //   border-bottom: 0;
+  // }
+}
+
+#order-summary {
+  // margin-top: 2.9em;
+  padding: 1em 2em 1em;
+  background-color: $panel-colour;
+  border: 4px solid $border-colour;
+
+  .heading-medium { margin-top: 0em; }
+
+  #trailer-amount,
+  #cost {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}

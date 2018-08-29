@@ -1,0 +1,136 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Manage trailer {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        dd { font-weight: 700; margin-bottom: .5em; padding-bottom: 1em; border-bottom: 1px solid #BFC1C3; }
+        .multiple-choice { margin-bottom: 10px !important; }
+        .column-third {
+            /* width: 100%; */
+            /* height: 5px; */
+            /* background-color: #005ea5; */
+            border-top: 10px solid #005ea5;
+        }
+        h2.heading-medium { margin-top: .5em; }
+        fieldset { margin-top: 0;}
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large manage">Manage trailer <span class="trailer-reg"></span></h1>
+
+                <div class="form-group">
+                    <fieldset>
+                        <legend><h2 class="heading-medium">What would you like to do?</h2></legend>
+
+                        <!-- <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="certificate">
+                            <label for="radio-2">Request a replacement trailer certificate</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-3" type="radio" name="radio-group" value="remove">
+                            <label for="radio-3">Remove this trailer from my record</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-1" type="radio" name="radio-group" value="weight">
+                            <label for="radio-1">Update trailer weight</label>
+                        </div> -->
+                        <div class="multiple-choice">
+                            <input id="radio-1" type="radio" name="radio-group" value="certificate">
+                            <label for="radio-1">Order replacement UK Trailer Registration Certificate</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="remove">
+                            <label for="radio-2">Remove from trailer record</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-3" type="radio" name="radio-group" value="weight">
+                            <label for="radio-3">Change weights</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <button class="button">Continue</button>
+                </div>
+
+                <a id="return-to-record" href="/trailer-record">Return to trailer record</a>
+            </div>
+
+            <div class="column-third">
+                <h3 class="heading-medium">Trailer details</h3>
+
+                <span id="trailer-details">
+                </span>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var currentTrailer = member.trailers[member.currentTrailerPosition];
+
+        if (!member.trailers || member.trailers.length == 0) {
+            $('#trailer-details').html('<p>No trailer found</p>');
+        } else {
+            var trailerDetails = "";
+
+            // var unladen = currentTrailer.unladen;
+            // currentTrailer.unladen = Number(unladen).toLocaleString('en');
+
+            trailerDetails += '<dl>';
+            if (!currentTrailer.vin) {
+            } else {
+                trailerDetails += '<dt>VIN/Chassis number</dt>';
+                trailerDetails += '<dd>' + currentTrailer.vin + '</dd>';
+            }
+            if (!currentTrailer.chassis) {
+            } else {
+                trailerDetails += '<dt>VIN number</dt>';
+                trailerDetails += '<dd>' + currentTrailer.chassis + '</dd>';
+            }
+            trailerDetails += '<dt>Manufacturer</dt>';
+            trailerDetails += '<dd>' + currentTrailer.manufacturer + '</dd>';
+            trailerDetails += '<dt>Gross weight</dt>';
+            trailerDetails += '<dd>' + Number(currentTrailer.gross).toLocaleString('en') + 'kg</dd>';
+            trailerDetails += '<dt>Unladen weight</dt>';
+            trailerDetails += '<dd>' + Number(currentTrailer.unladen).toLocaleString('en') + 'kg</dd>';
+            trailerDetails += '</dl>';
+
+            $('#trailer-details').html(trailerDetails);
+        }
+
+        $('.trailer-reg').html(currentTrailer.reg);
+
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=radio-group]:checked').val();
+
+            if (value == 'weight') {
+                go('/register/trailer-weights?change=true');
+            } else if (value == 'certificate') {
+                
+                go('/trailer-record/actions/new-certificate');
+            } else if (value == 'remove') {
+                go('/trailer-record/actions/remove');
+            } else {
+                showErrors();
+            }
+        }
+    </script>
+{% endblock %}

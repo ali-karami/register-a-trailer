@@ -1,0 +1,101 @@
+// Captions
+// ==========================================================================
+.caption {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  display: block;
+  color: #6f777b;
+
+  &.xlarge {
+    font-size: 27px;
+    line-height: 1.11111;
+    margin-bottom: 5px;
+  }
+
+  &.large {
+    font-size: 24px;
+    line-height: 1.25;
+    margin-bottom: 5px;
+  }
+
+  &.medium {
+    font-size: 16px;
+    line-height: 1.31579;
+  }
+}
+
+@media print {
+  .caption-xl {
+    font-family: sans-serif
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .caption-xl {
+    font-size: 27px;
+    line-height: 1.11111
+  }
+}
+
+@media print {
+  .caption-xl {
+    font-size: 18pt;
+    line-height: 1.15
+  }
+}
+
+
+@media print {
+  .caption-l {
+    font-family: sans-serif
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .caption-l {
+    font-size: 24px;
+    line-height: 1.25
+  }
+}
+
+@media print {
+  .caption-l {
+    font-size: 18pt;
+    line-height: 1.15
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .caption-l {
+    margin-bottom: 0
+  }
+}
+
+
+@media print {
+  .caption-m {
+    font-family: sans-serif
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .caption-m {
+    font-size: 19px;
+    line-height: 1.31579
+  }
+}
+
+@media print {
+  .caption-m {
+    font-size: 14pt;
+    line-height: 1.15
+  }
+}
+
+.table__caption {
+  font-weight: 700;
+  display: table-caption;
+  text-align: left
+}

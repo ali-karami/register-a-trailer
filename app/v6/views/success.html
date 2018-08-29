@@ -1,0 +1,221 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Success {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-noback.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <span id="page-content">
+                </span>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var value = getRefUrl();
+
+        if (value === 'check-your-answers') {
+            $('.grid-row.phase .phase-banner').css({'float':'none','width':'100%'});
+            $('.logged-user').css('display', 'none');
+        }
+
+        try {
+            var trailerList = '<div class="form-group"><table><thead><tr><th scope="col">Registration number</th><th scope="col">VIN/chassis</th></tr></thead><tbody>';
+            for (i = 0; i < member.trailers.length; i++) {
+                if (member.trailers[i].registered == false) {
+                    trailerList += '<tr>';
+                    trailerList += '<td scope="row">' + member.trailers[i].reg + '</td>';
+                    if (!member.trailers[i].vin) {
+                    } else {
+                        trailerList += '<td scope="row">' + member.trailers[i].vin + '</td>';
+                    }
+                    if (!member.trailers[i].chassis) {
+                    } else {
+                        trailerList += '<td scope="row">' + member.trailers[i].chassis + '</td>';
+                    }
+                    trailerList += '</tr>';
+                }
+            }
+            trailerList +='</tbody></table></div>';
+        } catch(err){}
+
+        // Paragraphs
+        var emailConf = '<p>A confirmation email has been sent to <strong><span class="email">' + member.user.email + '</span></strong>.</p>';
+        var newCertificate = '<p>You’ll receive your new UK Trailer Registration Certificate<span id="plural">s</span> within <strong>3 to 5 days</strong>. <span class="this-these"></span> must be kept with the trailer.</p>';
+        var gateway = '<p>Your Government Gateway email address has not changed.</p>';
+        var confirmations = '<p>All future confirmations will be sent to your new email address (' + member.user.email + ').</p>';
+        var receipt = '<p>A receipt of the transaction and an ' + enpac + ' has been sent to <strong>' + member.user.email + '</strong>.</p>';
+        var manage = '<p>To manage your trailers you will need your Government Gateway ID and password.</p>';
+        var next = '<h2 class="heading-medium">What to do next</h2><p>Get number plates made up with your nearest <a href="">registered number plate supplier (RNPS)</a> using the ' + enpac + '. You do not need to wait for the registration certificate to arrive in the post.</p><p>You can <a href="">print this page</a> for your records.</p>';
+        var trailerRemoved = '<p>This trailer has been removed from your trailer record.</p>';
+        var removeReg = '<p>Once the trailer has been exported you may take the registration number off.</p>';
+        var registerTrailers = '<p>You can now register your trailers.</p>';
+        //Buttons
+        var buttonRecord = '<div class="form-group"><button class="button record">Go to trailer record</button></div>';
+        var buttonDetails = '<div class="form-group"><button class="button company" type="submit">Go to company details</button></div>';
+        // Links
+        var linkRegister = '<a id="return-to-record" href="/register/declaration">Register more trailers</a>';
+        var linkRecord = '<a id="return-to-record" href="/trailer-record">Go to trailer record</a>';
+        // From change-details
+        var name = '<div class="govuk-box-highlight"><h1 class="heading-large"></h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
+        var address = '<div class="govuk-box-highlight"><h1 class="heading-large">Address changed successfully</h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
+        var email = '<div class="govuk-box-highlight"><h1 class="heading-large">Email address changed successfully</h1></div>' + emailConf + confirmations + gateway + buttonDetails + linkRecord;
+        // From manage
+        var removed = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer removed successfully</h1></div>' + emailConf + trailerRemoved + buttonRecord;
+        var exported = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer exported successfully</h1></div>' + emailConf + trailerRemoved + removeReg + buttonRecord;
+        var weight = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer weights changed successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
+        // From payment
+        // var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div><span id="trailer-list">' + trailerList + '</span>' + receipt + newCertificate + next + buttonRecord;
+        var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div>' + trailerList + receipt + newCertificate + next + buttonRecord;
+        // var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div><span id="trailer-list">' + trailerList + '</span>' + emailConf + newCertificate + buttonRecord;
+        var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
+        var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer record created successfully</h1></div>' + registerTrailers + buttonRecord;
+
+        // $(document).ready(function() {
+            if (value === 'name') {
+                $('#page-content').html(name);
+                if (member.user.type == 'company') {
+                    $('.heading-large').html('Company name changed successfully');
+                } else if (member.user.type == 'personal') {
+                    $('.heading-large').html('Name changed successfully');
+                } else {
+                    $('.heading-large').html('Name changed successfully');
+                }
+            }
+
+            if (value === 'address-confirmation') {
+                $('#page-content').html(address);
+                if (member.user.type == 'company') {
+                    $('.heading-large').html('Company address changed');
+                } else if (member.user.type == 'personal') {
+                    $('.heading-large').html('Address changed');
+                }
+            }
+
+            if (value === 'email-address') {
+                $('#page-content').html(email);
+                if (member.user.type == 'company') {
+                    $('.heading-large').html('Company email address changed');
+                } else if (member.user.type == 'personal') {
+                    $('.heading-large').html('Email address changed');
+                }
+            }
+
+            if (value === 'processing') {
+                if (member.paymentType === 'register') {
+                    $('#page-content').html(register);
+
+                    if (registeredTrailers === 1) {
+                        $('.this-these').html('This');
+                    } else if ((registeredTrailers === 0) || (registeredTrailers > 1)) {
+                        $('.this-these').html('These');
+                    }
+                }
+                if (member.paymentType === 'duplicate') {
+                    $('#page-content').html(duplicate);
+                    $('#plural').html('');
+                    $('.this-these').html('This');
+                }
+            }
+
+            // if (member.paymentType === 'new-certificate') {
+            //     $('#page-content').html(duplicate);
+            //     $('#plural').html('');
+            //     $('.this-these').html('This');
+            // }
+
+            if (value === 'trailer-weights') {
+                $('#page-content').html(weight);
+
+                $('#plural').html('');
+                $('.this-these').html('This');
+            }
+
+            if (value === 'removal-date') {
+                if (member.disposalType === 'exported') {
+                    $('#page-content').html(exported);
+                } else {
+                    $('#page-content').html(removed);
+                }
+            }
+
+            if (value === 'check-your-answers') {
+                if (member.disposalType === 'sold') {
+                    $('#page-content').html(removed);
+                } else {
+                    $('#page-content').html(recordCreated);
+                }
+            }
+
+        // });
+
+        $('.button.record').click(next1);
+        $('.button.company').click(next2);
+
+        function next1() {
+            try {
+                if (member.paymentReference) {
+                    delete member.paymentReference;
+                }
+            } catch(err) {}
+
+            try {
+                if (member.paymentType) {
+                    delete member.paymentType;
+                }
+            } catch(err) {}
+
+            try {
+                if (member.cost) {
+                    delete member.cost;
+                }
+            } catch(err) {}
+
+            try {
+                if (member.disposalType == "remove") {
+                    member.trailers.splice(member.currentTrailerPosition, 1);
+                    delete member.disposalType;
+                } else if (member.disposalType == "scrapped") {
+                    member.trailers.splice(member.currentTrailerPosition, 1);
+                    delete member.disposalType;
+                } else if (member.disposalType == "exported") {
+                    member.trailers.splice(member.currentTrailerPosition, 1);
+                    delete member.disposalType;
+                } else if (member.disposalType == "outside-uk") {
+                    member.trailers.splice(member.currentTrailerPosition, 1);
+                    delete member.disposalType;
+                } else if (member.disposalType == "sold") {
+                    member.trailers.splice(member.currentTrailerPosition, 1);
+                    delete member.disposalType;
+                }
+            } catch(err) {}
+
+            try {
+                for (i = 0; i < member.trailers.length; i++) {
+                    member.trailers[i].registered = true;
+                }
+            } catch(err) {}
+
+            go('/trailer-record');
+        }
+
+        function next2() {
+            go('/trailer-record/change-details');
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Will any of these trailers be used commercially? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        #company { display: none; }
+        #personal { display: none; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">What to expect</h1>
+
+                <span id="company">
+                    <p>You will need log-in using a Government Gateway ID.</p>
+
+                    <p>If your company already has a Government Gateway ID, you can use that to log-in.</p>
+
+                    <div class="form-group">
+                        <div class="notice">
+                            <i class="icon icon-important">
+                                <span class="visually-hidden">Warning</span>
+                            </i>
+                            <strong class="bold-small">
+                                Do not use a personal email address or personal Government Gateway ID to create a trailer on behalf of a company.
+                            </strong>
+                        </div>
+                    </div>
+
+                    <p>You will need to provide:</p>
+
+                    <ul class="list list-bullet">
+                        <li>your company’s name</li>
+                        <li>your company’s email address</li>
+                    </ul>
+                </span>
+
+                <span id="personal">
+                    <p>You will need log-in using a Government Gateway ID.</p>
+
+                    <p>If you have created a Government Gateway ID before for a different service, you can use that to log-in.</p>
+
+                    <p>You will need to provide:</p>
+
+                    <ul class="list list-bullet">
+                        <li>your name</li>
+                        <li>your email address</li>
+                    </ul>
+                </span>
+
+                <div class="form-group">
+                    <button class="button white">Continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer_support_links %}
+    {% include "includes/footer-links.html" %}
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        // $('#content .grid-row').addClass('flash-card');
+
+        if (member.user.type === 'company') {
+            $('#company').show();
+        } else {
+            $('#personal').show();
+        }
+
+        $('.button').click(next);
+
+        function next() {
+            go('/scp/sign-in');
+        }
+    </script>
+{% endblock %}

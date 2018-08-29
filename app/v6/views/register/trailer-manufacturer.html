@@ -1,0 +1,97 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Enter manufactured this trailer {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts/default.html" %}
+    <style type="text/css">
+        .autocomplete-wrapper {
+            max-width: 20em;
+            margin-bottom: 2rem;
+        }
+    </style>
+    <script type="text/javascript" src="/public/v6/javascripts/manufacturers.js"></script>
+{% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset data-required>
+                        <legend>
+                            <h1 class="heading-large"><span class="title">Enter manufactured this trailer</span></h1>
+                        </legend>
+
+                        <label class="form-label visually-hidden" for="manufacturer">Trailer manufacturer</label>
+                        <!-- <label for="autocomplete-default">Select your country</label> -->
+                        <div id="tt-default" class="autocomplete-wrapper"></div>
+                        <!-- <input class="form-control" id="manufacturer" type="text" name="manufacturer"> -->
+                    </fieldset>
+
+                    <p><a href="/register/exit">Manufacturer not listed</a></p>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    {% include "includes/scripts/trailer-manufacturer-accordion.html" %}
+
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = { "manufacturer": "Titan" };
+            $('input[name=input-autocomplete]').val(testData.manufacturer);
+        });
+
+        $('.button').click(validate);
+
+        function validate() {
+            var validInput = true;
+            var value = $('input[name=input-autocomplete]').val();
+
+            if (!value) {
+                validInput = false;
+            }
+
+            if (validInput) {
+                if (changing == "true") {
+                    member.trailers[member.currentTrailerPosition].manufacturer = value;
+                    console.log('manufacturer = ' + currentTrailer.manufacturer);
+                    go('/register/trailer-summary');
+                } else {
+                    member.trailer.manufacturer = value;
+                    console.log('manufacturer = ' + member.trailer.manufacturer);
+                    go('/register/trailer-weights');
+                }
+            } else {
+                checkErrors();
+            }
+        }
+
+        var changing = location.search.split('change=')[1];
+        if (changing === 'true') {
+            document.title = 'Change trailer manufacturer';
+            $('input[name=input-autocomplete]').val(currentTrailer.manufacturer);
+            // $('.button-back').hide();
+            $('.title').html('Change trailer manufacturer');
+            $('button').html('Save and continue');
+        }
+    </script>
+{% endblock %}

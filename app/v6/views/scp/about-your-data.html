@@ -1,0 +1,63 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} About your data {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">About your data</h1>
+
+                <p>We will need to collect, process and store certain data about you.</p>
+
+                <p>To continue to create a digital government ID you must accept the privacy policy (opens in a new window or tab).</p>
+
+                I have read and accept the privacy policy
+
+
+                <div class="form-group">
+                    <button class="button" type="button">Continue</button>
+                </div>
+
+                Get help
+
+                <!-- <h1 class="heading-large">Request a replacement trailer certificate <span class="trailer-reg"></span></h1>
+
+                <p>A replacement trailer certificate costs <strong><span id="certificate-cost">£XX.XX</span></strong></p>
+
+                <p>Replacement certificates must be sent to the name and address on your trailer record.</p>
+
+                <h2 class="heading-medium">Are these details correct?</h2></legend>
+
+                <div class="form-group">
+                    <span id="company-name"></span><br>
+                    <span id="address"></span>
+                </div>
+
+                <a href="/trailer-record/change-details">These details are not correct</a> -->
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        function next() {
+            go('/scp/email-address');
+        }
+    </script>
+{% endblock %}

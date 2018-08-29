@@ -1,0 +1,43 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Set up recovery word for your user ID {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">Set up recovery word for your user ID</h1>
+
+                <p>You need to set up a recovery word so that you can get back into Government Gateway of you forget your password.</p>
+
+                <div class="form-group">
+                    <button class="button" type="button">Continue</button>
+                </div>
+
+                <a href="">Get help</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        function next() {
+            go('/scp/recovery-word-setup');
+        }
+    </script>
+{% endblock %}

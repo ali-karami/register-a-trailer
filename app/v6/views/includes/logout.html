@@ -1,0 +1,36 @@
+<div class="logged-user">
+    <!-- <p><span class="logged-user-name white-text"></span>: <a class="log-out" href="#">Log out</a></p> -->
+    <p><a class="log-out" href="#">Log out</a></p>
+</div>
+
+<style type="text/css">
+    .logged-user-name.white-text { font-weight: 300 !important; }
+    .header-proposition .content p {
+        float: right;
+        margin: 0;
+        padding: 0;
+        padding-top: .2em;
+        font-size: 19px;
+        font-weight: 300 !important;
+        color: white;
+    }
+    .header-proposition .content p a {
+        color: white;
+        font-weight: 700;
+    }
+</style>
+
+<script type="text/javascript">
+    try {
+        if (!member.user.name) {
+            $('.logged-user').hide();
+        }
+        $('.logged-user-name.white-text').html(member.user.name).css('text-transform', 'capitalize');
+    } catch(err){}
+
+    $('a.log-out').click(function(e) {
+        e.preventDefault();
+        member.clear();
+        go('/v2');
+    });
+</script>

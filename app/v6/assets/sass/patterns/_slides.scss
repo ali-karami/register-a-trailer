@@ -1,0 +1,119 @@
+// Slides
+// ==========================================================================
+.slides~.verify-logo-right,
+.no-right-hand-logo~.verify-logo-right {
+  display: none;
+}
+
+.slides+.feedback-link+.verify-logo-right,
+.slides+.verify-logo-right,
+.no-right-hand-logo+.feedback-link+.verify-logo-right,
+.no-right-hand-logo+.verify-logo-right {
+  display: none;
+}
+
+.js-show { display: none; }
+.js-enabled .js-show { display: block; }
+
+.slides {
+  background-color: $link-colour;
+  color: $page-colour;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 480px;
+  padding: 30px;
+}
+@media (min-width: 641px) {
+  .slides {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 641px) {
+  .slides {
+    padding: 45px;
+  }
+}
+@media (min-width: 769px) {
+  .slides {
+    padding: 75px 70px;
+  }
+}
+
+.slides h1 {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+@media (max-width: 640px) {
+  .slides h1 {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+}
+
+.slides p,
+.slides ul {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 18px;
+  line-height: 1.2;
+}
+@media (min-width: 641px) {
+  .slides p,
+  .slides ul {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+}
+
+.slides a,
+.slides a:focus,
+.slides a:hover,
+.slides a:active { color: inherit; }
+
+.slides .multiple-choice>label::before,
+.slides .multiple-choice>label::after {
+  background-color: $page-colour;
+  border-color: $text-colour;
+}
+
+.slides .actions { margin: 30px 0 15px; }
+
+.slides .actions .button {
+  background: $page-colour;
+  color: $link-colour;
+  font-weight: bold;
+  -webkit-box-shadow: 0 2px 0 #003259;
+  box-shadow: 0 2px 0 #003259;
+}
+
+.slides .small-details {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+@media (min-width: 641px) {
+  .slides .small-details {
+    font-size: 19px;
+    line-height: 1.3157894737;
+  }
+}
+
+.slides figure { max-width: 200px; }
+.slides figure img { width: 100%; }
+
+@media (max-width: 640px) {
+  .slides figure {
+    width: 140px;
+  }
+}
+
+.slides details summary { color: $page-colour; }
+.slides details .panel { border-left-color: $page-colour; }
+.slides details p,
+.slides details ul { font-size: 1em; }

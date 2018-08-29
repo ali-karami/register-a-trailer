@@ -1,0 +1,47 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Success {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-noback.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight">
+                    <h1 class="heading-large">Your user ID is<br>49 21 78 79 24 95</h1>
+                </div>
+
+                <p>Your user ID has been sent to <strong>email@email.com</strong></p>
+
+                <p>You will need this ID and your password every time you sign in to Government Gateway.</p>
+
+                <div class="form-group">
+                    <button class="button" type="button">Continue</button>
+                </div>
+
+                <a href="">Get help</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        function next() {
+            go('/create/how-dvla-uses-your-data');
+        }
+    </script>
+{% endblock %}

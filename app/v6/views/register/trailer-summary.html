@@ -1,0 +1,226 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Trailer summary {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-noback.html" %}
+    <style>
+        .accordion-section-header h2.heading-medium {padding-left: .5em; }
+        .cya-question { padding-left: .5em; }
+        .cya-change { padding-right: .5em !important; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" class="trailer-summary-page" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <h1 class="heading-large">Trailers pending registration</h1>
+
+                    <p class="paragraph">These trailers have been saved</p>
+
+                    <div class="form-group buttons">
+                        <button class="button register blue">Register another trailer</button>
+                        <button class="button continue">Go to payment</button>
+                    </div>
+
+                    <div class="accordion" id="trailer-list">
+                    </div>
+
+                    <!-- <span id="radio-section">
+                        <div class="form-group radio">
+                            <fieldset class="inline">
+                                <legend><h2 class="heading-medium">Register another trailer?</h2></legend>
+
+                                <div class="multiple-choice">
+                                    <input id="radio-1" type="radio" name="radio-group" value="Y">
+                                    <label for="radio-1">Yes</label>
+                                </div>
+                                <div class="multiple-choice">
+                                    <input id="radio-2" type="radio" name="radio-group" value="N">
+                                    <label for="radio-2">No, go to payment</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </span> -->
+                </div>
+
+                <div class="form-group register">
+                    <button class="button register">Register a trailer</button>
+                </div>
+            </div>
+
+            <div class="column-third">
+                <div id="order-summary">
+                    <div class="payment-total">
+                        <h2 class="heading-medium">Order summary</h2>
+
+                        <div class="payment-items">
+                            <span id="trailer-amount">0</span> x trailer<span id="plural">s</span> (£<span id="trailer-cost"></span>)
+                        </div>
+                        <div class="">Amount to pay</div>
+                        <div id="cost">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        delete member.trailer;
+        delete member.currentTrailerPosition;
+
+        if (getPendingTrailers()) {
+            console.log(getPendingTrailers());
+            $('#trailer-amount').html(pendingTrailers);
+        }
+
+        $('#trailer-cost').html(trailerCost);
+        $('#trailer-amount').html(pendingTrailers);
+
+        var quantity = pendingTrailers;
+        var cost = 0;
+        cost = pendingTrailers * trailerCost;
+        $('#cost').html('£' + cost);
+
+        if (!member.trailers || member.trailers.length == 0) {
+            $('.paragraph').html('You have no trailers pending registration');
+            $('.form-group.buttons').hide();
+            $('.accordion').hide();
+            $('.column-third').hide();
+        } else {
+            $('.form-group.register').hide();
+            var trailerList = '';
+
+            for (i = 0; i < member.trailers.length; i++) {
+                if (member.trailers[i].registered == false) {
+                    trailerList += '<div class="accordion-section"><div class="accordion-section-header">';
+
+                    // Accordion heading section
+                    if (!member.trailers[i].vin) {
+                    } else {
+                        trailerList += '<h2 class="heading-medium">VIN: ' + member.trailers[i].vin + '</h2>';
+                    }
+                    if (!member.trailers[i].chassis) {
+                    } else {
+                        trailerList += '<h2 class="heading-medium">VIN: ' + member.trailers[i].chassis + '</h2>';
+                    }
+
+                    trailerList += '</div><div class="accordion-section-body"><dl class="govuk-check-your-answers cya-questions-short">';
+
+                    // Show reg if entered manually
+                    if (member.trailers[i].regRandom) {
+                    } else {
+                        trailerList += '<div><dt class="cya-question">Registration number</dt>';
+                        trailerList += '<dd class="cya-answer">' + member.trailers[i].reg + '</dd>';
+                        trailerList += '<dd class="cya-change"><a href="/register/have-registration-number?change=true" data="' + i + '">Change<span class="visually-hidden"> registration number</span></a></dd>';
+                        trailerList += '</div>';
+                    }
+
+                    // Show either vin or vin/chassis
+                    trailerList += '<div>';
+                    if (!member.trailers[i].vin) {
+                    } else {
+                        trailerList += '<dt class="cya-question"><abbr title="Vehicle identification number">VIN</abbr></dt><dd class="cya-answer">' + member.trailers[i].vin + '</dd>';
+                    }
+                    if (!member.trailers[i].chassis) {
+                    } else {
+                        trailerList += '<dt class="cya-question"><abbr title="Vehicle identification number">VIN</abbr>/Chassis number</dt><dd class="cya-answer">' + member.trailers[i].chassis + '</dd>';
+                    }
+                    trailerList += '<dd class="cya-change"><a href="/register/have-vin-number?change=true" data="' + i + '">Change<span class="visually-hidden"> <abbr title="Vehicle identification number">VIN</abbr></span></a></dd></div>';
+                    trailerList += '<div><dt class="cya-question">Manufacturer</dt><dd class="cya-answer">' + member.trailers[i].manufacturer + '</dd><dd class="cya-change"><a href="/register/trailer-manufacturer?change=true" data="' + i + '">Change<span class="visually-hidden"> licence type</span></a></dd></div>';
+                    trailerList += '<div><dt class="cya-question">Gross weight</dt><dd class="cya-answer">' + Number(member.trailers[i].gross).toLocaleString('en') + 'kg</dd><dd class="cya-change"><a href="/register/trailer-weights?change=true" data="' + i + '">Change<span class="visually-hidden"> home address</span></a></dd></div>';
+                    trailerList += '<div><dt class="cya-question">Unladen weight</dt><dd class="cya-answer">' + Number(member.trailers[i].unladen).toLocaleString('en') + 'kg</dd><dd class="cya-change"><a href="/register/trailer-weights?change=true" data="' + i + '">Change<span class="visually-hidden"> weight details</span></a></dd></div>';
+                    trailerList += '<div class="remove-row"><dt class="cya-question"><a class="remove" href="" data="' + i + '">Remove trailer</a></dt><dd class="cya-answer"></dd><dd class="cya-change"></dd></div>';
+                    trailerList += '</dl></div></div>';
+                    // trailerList += '<div class="form-group"><button class="button remove" data="' + i + '">Remove trailer</button></div></dl></div></div>';
+                } else if (member.trailers[i].registered == true) {
+                    // $('.heading-large').html('No trailers pending registration');
+                    // $('.paragraph').hide();
+                    // $('#trailer-list').hide();
+                    // $('#radio-section').hide();
+                    // $('.column-third').hide();
+                    // $('.form-group.continue').hide();
+                    // $('.form-group.register').show();
+                }
+            }
+
+            $('#trailer-list').html(trailerList);
+        }
+
+        $('a.remove').click(function(e) {
+            e.preventDefault();
+            var trailer = $(this).attr('data');
+            member.currentTrailerPosition = trailer;
+            member.trailers.splice(member.currentTrailerPosition, 1);
+            location.reload();
+        });
+
+        $('.cya-change a').click(function(e) {
+            e.preventDefault();
+            var trailer = $(this).attr('data');
+            var href = $(this).attr('href');
+            member.currentTrailerPosition = trailer;
+            go(href);
+        });
+
+        // $('.button.continue').click(next1);
+        // $('.button.register').click(next2);
+
+        // function next1() {
+        //     var value = $('input[name=radio-group]:checked').val();
+
+        //     if (value == 'Y') {
+        //         go('/register/declaration');
+        //     } else if (value == 'N') {
+        //         member.cost = cost;
+        //         go('/payment');
+        //     } else {
+        //         showErrors();
+        //     }
+        // }
+
+        // function next2() {
+        //     go('/register/declaration');
+        // }
+
+        $('.button.register').click(next2);
+        $('.button.continue').click(next1);
+
+        function next1() {
+            member.cost = cost;
+            go('/payment');
+        }
+
+        function next2() {
+            go('/register/declaration');
+        }
+
+        $('.accordion .accordion-section:first-child').addClass('accordion-section--expanded');
+        if (
+            'addEventListener' in document &&
+            document.querySelectorAll
+        ) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var accordions = document.querySelectorAll('.accordion')
+
+                for (var i = accordions.length - 1; i >= 0; i--) {
+                    new Accordion(accordions[i])
+                };
+            })
+        }
+    </script>
+
+    <script src="/public/v6/javascripts/accordion/accordion.js"></script>
+{% endblock %}

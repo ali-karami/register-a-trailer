@@ -1,0 +1,47 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} How DVLA uses your data {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-noback.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <h1 class="heading-large">How DVLA uses your data</h1>
+
+                    <p>DVLA handles your personal data in accordance with road vehicle law and data protection laws. The law allows us to release your data to the police and other enforcement bodies.</p>
+
+                    <p>For further information about how we process your data, your rights and who to contact, <a href="https://www.gov.uk/dvla/privacy-policy">see our privacy notice</a>.</p>
+                </div>
+
+                <div class="form-group">
+                    <button class="button white">Accept and continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer_support_links %}
+    {% include "includes/footer-links.html" %}
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/create/name');
+        });
+    </script>
+{% endblock %}

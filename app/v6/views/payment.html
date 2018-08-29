@@ -1,0 +1,195 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Enter payment details {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" class="payment" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <!-- <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1" style="display: none">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+
+                        <p>Please amend the following details:</p>
+                        <ul class="error-summary-list">
+                            <li class="error-message nameCard hide"><a href="#nameCard">Provide the name on the card</a></li>
+                            <li class="error-message cardNum hide"><a href="#cardNum">Provide a valid card number</a></li>
+                            <li class="error-message expiry-date hide"><a href="#expirymonth">Provide a valid date</a></li>
+                            <li class="error-message card-security hide"><a href="#card-security">Provide a valid card security number</a></li>
+                        </ul>
+                    </div> -->
+
+                    <h1 class="heading-large">Enter payment details</h1>
+
+                    <h2 class="heading-medium">Pay by debit or credit card</h2>
+
+                    <div><img src="/public/v6/images/payment/accepted-cards-432×64.png" width="216px" height="32px"> </div>
+
+                    <p>You can pay using UK Maestro, Visa debit and credit, Mastercard debit and credit or Visa Electron cards.</p>
+
+                    <div class="form-group">
+                        <dl>
+                            <dt>Payment reference</dt>
+                            <!-- <dd id="reference">DVLA12345678</dd><br> -->
+                            <dd id="reference"></dd><br>
+                            <dt>Total amount to pay</dt>
+                            <dd id="cost">£XX.00</dd>
+                        </dl>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="card-name">
+                            <span class="form-label">Name on card</span>
+                            <span class="form-hint">Your name as it appears on the front of your card</span>
+                            <!-- <span class="error-message nameCard">Provide the name on the card</span> -->
+                        </label>
+                        <input class="form-control form-control-3-4" id="card-name" type="text" name="card-name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="card-number">
+                            <span class="form-label">Card number</span>
+                            <span class="form-hint">The long number on the front of your card</span>
+                            <!-- <span class="error-message nameCard">Provide a valid card number</span> -->
+                        </label>
+                        <input class="form-control form-control-3-4" id="card-number" type="text" name="card-number">
+                    </div>
+
+                    <div class="form-group" id="qexpiry-date">
+                        <legend>
+                            <span class="form-label">Expiry date</span>
+                            <span class="form-hint" id="expiry-hint">For example, 8 21</span>
+                            <!-- <span class="error-message expiry-date hide">Provide a valid date</span> -->
+                        </legend>
+
+                        <div class="form-date">
+                            <div class="form-group form-group-month">
+                                <label class="form-label" for="expiry-month">Month</label>
+                                <input class="form-control" id="expiry-month" name="expiry-month" type="number" pattern="[0-9]*" maxlength="2" min="0" max="12">
+                            </div>
+                            <div class="form-group form-group-month">
+                                <label class="form-label" for="expiry-year">Year</label>
+                                <input class="form-control" id="expiry-year" name="expiry-year" type="number" pattern="[0-9]*" maxlength="2" min="0" max="99">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="qcard-security">
+                        <label for="input1">
+                            <span class="form-label">Card security code</span>
+                            <span class="form-hint">The 3 digit code found on the back of your card</span>
+                            <!-- <span class="error-message card-security hide">Provide the card security code</span> -->
+                        </label>
+                        <input class="form-control form-control-1-8" id="card-security" type="number" name="card-security" value="" maxlength="2" min="0" max="99">
+                    </div>
+
+                    <details class="margin-top-1 margin-bottom-2" role="group">
+                        <summary role="button"><span class="summary">Where to find this</span></summary>
+                        <div class="panel" id="details-content-0"> <img class="retina" alt="Image of the card security code" src="/public/v6/images/payment/cvc-code-510x256.png" width="250px"> </div>
+                    </details>
+                </div>
+
+                <div class="form-group">
+                    <button class="button">Continue</button>
+                </div>
+
+                <a href="cancel-payment">Cancel</a>
+                <br><br>
+
+                <p class="margin-top-3">Card information is transferred in accordance with our security statement and is held in accordance with our privacy statement. Please see our terms and conditions below for further information.</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = { "name": "Al Selsigen", "card": "4568171854361900", "month": "06", "year": "22", "cvc": "112" };
+            $('input[id=card-name]').val(testData.name);
+            $('input[id=card-number]').val(testData.card);
+            $('input[id=expiry-month]').val(testData.month);
+            $('input[id=expiry-year]').val(testData.year);
+            $('input[id=card-security]').val(testData.cvc);
+        });
+
+        member.paymentReference = randomReference();
+        $('#reference').html(member.paymentReference);
+        $('#cost').html('£' + member.cost + '.00');
+
+        $('.button').click(checkAnswers);
+
+        function checkAnswers() {
+            var validInput = true;
+
+            $('.error-message hide').hide;
+            $(".error.form-group-error").removeClass("error form-group-error");
+            $('.error-summary').hide();
+
+            // var name = $('input[name=card-name]').val();
+            // var card = $('input[name=card-number]').val();
+            // var month = $('input[name=expiry-month]').val();
+            // var year = $('input[name=expiry-year]').val();
+            // // var expiry-date = moment($('#expirymonth').val() + "-" + $('#expiryyear').val(), "MM-YY");
+            // // var expiry = $('#expiry-month').val() + "-" + $('#expiry-year').val();
+            // var cvc = $('input[name=card-security]').val();
+
+            // if ((name == '') || (name == undefined)) {
+            //     $('#qnameCard').addClass('form-group-error error');
+            //     $('.nameCard.error-message hide').show();
+            //     $('.error-summary').show();
+            //     $('body').scrollTop(0);
+            //     $('.error-summary').focus();
+            //     validInput = false;
+            // }
+            // if ((card == '') || (card == undefined)) {
+            //     $('#qcardNum').addClass('form-group-error error');
+            //     $('.cardNum.error-message hide').show();
+            //     $('.error-summary').show();
+            //     $('body').scrollTop(0);
+            //     $('.error-summary').focus();
+            //     validInput = false;
+            // }
+            // if  (month === '' || month === undefined || year === '' || year === undefined) {
+            //     $('#qexpiry-date').addClass('form-group-error error');
+            //     $('.expiry-date.error-message hide').show();
+            //     $('.error-summary').show();
+            //     $('body').scrollTop(0);
+            //     $('.error-summary').focus();
+            //     validInput = false;
+            // }
+            // if ((cvc == '') || (cvc == undefined)) {
+            //     $('#qcard-security').addClass('form-group-error error');
+            //     $('.card-security.error-message hide').show();
+            //     $('.error-summary').show();
+            //     $('body').scrollTop(0);
+            //     $('.error-summary').focus();
+            //     validInput = false;
+            // }
+
+            var refUrl = document.referrer.substring(document.referrer.lastIndexOf('/') + 1).split("?")[0];
+            console.log('url = ' + refUrl);
+
+            if (validInput) {
+                if (refUrl === 'trailer-summary') {
+                    member.paymentType = 'register';
+                } else if (refUrl === 'new-certificate') {
+                    member.paymentType = 'duplicate';
+                }
+
+                go('/processing');
+            }
+        }
+    </script>
+{% endblock %}

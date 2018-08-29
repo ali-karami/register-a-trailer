@@ -1,0 +1,99 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Sign in using Government Gateway {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">Sign in using Government Gateway</h1>
+
+                <div class="form-group">
+                    <fieldset>
+                        <legend class="visuallyhidden">Create a password</legend>
+
+                        <div class="form-group">
+                            <label class="form-label" for="user-id">User ID</label>
+                            <span class="form-hint">This could be up to 12 characters. It is sometimes known as a Government Gateway ID</span>
+                            <input class="form-control" id="user-id" type="text" name="user-id">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" id="password" type="password" name="password">
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <button class="button" type="button">Sign in</button>
+                </div>
+
+                <p><a href="/scp/email-address">Set up a user ID</a></p>
+
+                <h2 class="heading-medium">Problems signing in</h2>
+
+                <p><a href="">Help with signing in</a></p>
+
+                <p><a href="">I have forgotten my password</a><br>
+                <a href="">I have forgotten my user ID</a><br>
+                <a href="">I have forgotten my user ID and password</a></p>
+
+                <p><a href="">Get help</a></p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = {"userId": "enquiries@alshaulage.com"};
+            $('input[id=user-id]').val(testData.userId);
+        });
+
+        $('.button').click(validate);
+
+        function validate() {
+            resetErrors();
+            var validInput = true;
+            var value1 = $('input[name=user-id]').val();
+            var value2 = $('input[name=password]').val();
+
+            if (!value1) {
+                validInput = false;
+            }
+
+            if (!value2) {
+                validInput = false;
+            }
+
+            if (validInput) {
+                if (value2 === 'record') {
+                    next();
+                } else if (value2 === 'norecord') {
+                    go('/exit');
+                }
+
+            } else {
+                showErrors();
+            }
+        }
+
+        function next() {
+            go('/scp/email-address');
+        }
+    </script>
+{% endblock %}

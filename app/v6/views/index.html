@@ -1,0 +1,87 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Register and manage your trailers {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-noback.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="breadcrumbs">
+            <ol>
+                <li><a href="https://www.gov.uk">Home</a></li>
+                <li><a href="">Driving and transport</a></li>
+                <li>Number plates, vehicle registration and log books</li>
+            </ol>
+        </div>
+
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-xlarge">{% if serviceName %} {{ serviceName }} {% endif %}</h1>
+
+                <p>You can use this service to check if you need to register a trailer.</p>
+
+                <p>A trailer is anything on wheels which is intended or adapted to be drawn by a motor vehicle.</p>
+
+                <p>If you do need to register you’ll need to create a trailer record. A trailer record is where you can register and manage your trailers.</p>
+
+                <p>You’ll have to pay a fee of <span id="registration-fee"></span> if you’re registering a trailer for the first time with DVLA.</p>
+
+                <p>The replacement fee for UK Trailer Registration Certificates is <span id="replacement-fee"></span>.</p>
+
+                <div class="panel panel-border-wide">
+                    <p>This page is also available in <a href="">Welsh (Cymraeg)</a>.</p>
+                </div>
+
+                <p><a class="button button-start" href="#" role="button">Start now</a></p>
+
+                <h2 class="heading-medium">Before you start</h2>
+
+                <p>You will need:</p>
+                <ul class="list list-bullet">
+                    <li>details of your trailers</li>
+                    <li>a valid email address</li>
+                    <li>a debit or credit card</li>
+                </ul>
+            </div>
+
+            <div class="column-third">
+                <aside class="govuk-related-items" role="complementary">
+                    <h2 class="heading-medium" id="subsection-title">Driving and transport</h2>
+                    <nav role="navigation" aria-labelledby="subsection-title">
+                        <ul class="font-xsmall">
+                            <li><a href="#">Vehicle registration</a></li>
+                            <li><a href="#" class="bold-xsmall">More<span class="visuallyhidden">in Subsection</span></a></li>
+                        </ul>
+                    </nav>
+                </aside>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('#registration-fee').html('£' + trailerCost);
+        $('#replacement-fee').html('£' + certificateCost);
+
+        $('.button').click(function() {
+            member.clear();
+
+            if (member === undefined) {
+                member = {};
+            }
+
+            go('/create/have-trailer-record');
+        });
+    </script>
+{% endblock %}

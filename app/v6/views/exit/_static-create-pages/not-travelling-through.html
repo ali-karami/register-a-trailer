@@ -1,0 +1,46 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} You do not need to create a trailer record {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight grey">
+                    <h1 class="heading-large">You do not need to<br>create a trailer record</h1>
+                </div>
+
+                <p>Trailers travelling to the Republic of Ireland, Spain, Cyprus and Malta are not required to register,
+                    unless you pass through a foreign country that has ratified the Vienna Convention.</p>
+
+                <p>You can still create a trailer record if you want to.</p>
+
+                <div class="form-group">
+                    <button class="button">I still want to create a trailer record</button>
+                </div>
+
+                <a href="https://www.gov.uk">Return to GOV.UK</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/create/what-to-expect');
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What is your email address? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <h1 class="heading-large"><span class="title">What is your email address?</span></h1>
+
+                    <p class="paragraph">Confirmation of any transactions will be sent to this email address</p>
+
+                    <fieldset data-required data-error="Enter an email address">
+                        <legend class="visuallyhidden">
+                            <span class="title">What is your email address?</span>
+                        </legend>
+
+                        <label class="form-label visually-hidden" for="email">Email address</label>
+                        <input class="form-control" id="email" type="text" name="email">
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <button class="button" type="submit">Continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = { "email": "enquiries@alshaulage.com" };
+            $('input[id=email]').val(testData.email);
+        });
+
+        try { var type = member.user.type; } catch(err){}
+        var refUrl = getRefUrl();
+
+        $('.button').click(validate);
+
+        function validate() {
+            var validInput = true;
+            var value = $('input[name=email]').val();
+
+            if (!value) {
+                validInput = false;
+                checkErrors();
+            }
+
+            if (validInput) {
+                member.user.email = value;
+                next();
+            }
+        }
+
+        function next() {
+            if (changing == "true") {
+                if (refUrl == 'check-your-answers') {
+                    go('/create/check-your-answers');
+                } else {
+                    go('/success');
+                }
+            } else {
+                go('/create/check-your-answers');
+            }
+        }
+
+        var changing = location.search.split('change=')[1];
+        if (changing === 'true') {
+            if (type == "company") {
+                document.title = 'Change your company email address';
+                $('.title').html('Change your company email address');
+                $('.button').html('Save and continue');
+            } else if (type == "personal") {
+                document.title = 'Change your email address';
+                $('.title').html('Change your email address');
+                $('.button').html('Save and continue');
+            }
+        } else {
+            if (type == "company") {
+                document.title = 'What is your company email address';
+                $('.title').html('What is your company email address');
+                $('.button').html('Continue');
+            } else if (type == "personal") {
+                document.title = 'What is your email address';
+                $('.title').html('What is your email address');
+                $('.button').html('Continue');
+            }
+        }
+    </script>
+{% endblock %}

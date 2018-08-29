@@ -1,0 +1,70 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Trailer registration declaration {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset class="inline" data-required>
+                        <legend>
+                            <h1 class="heading-large">Trailer registration declaration</h1>
+                        </legend>
+
+                        <p>You must register any trailers that:</p>
+                        <ul class="list list-bullet">
+                            <li>travel abroad, weigh over 750kg and are used commercially</li>
+                            <li>travel abroad, weigh over 3,500kg and are not used commerciall</li>
+                        </ul>
+
+                        <p>Trailers travelling to the Republic of Ireland, Spain, Cyprus and Malta are not required to register,
+                            unless they pass through a foreign country that has ratified the Vienna Convention.</p>
+
+                        <!-- <p>You cannot register trailers that weigh less than 750kg.</p> -->
+
+                        <p class="bold-small">It is optional to register for all other trailers.</p>
+
+                        <div class="form-group">
+                            <div class="multiple-choice">
+                                <input id="declaration" name="declaration" type="checkbox" value="true">
+                                <label for="declaration">I have read and understand which trailers need to be registered</label>
+                            </div>
+                        </div>
+
+                        <button class="button">Continue</button>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=declaration]:checked').val();
+
+            if (value == 'true') {
+                console.log($('input[name=declaration]:checked').val());
+                go('/register/have-registration-number');
+            } else {
+                checkErrors();
+            }
+        }
+    </script>
+{% endblock %}

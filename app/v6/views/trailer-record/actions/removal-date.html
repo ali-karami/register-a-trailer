@@ -1,0 +1,114 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What have you done with this trailer? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <!-- <form> -->
+                    <div class="form-group">
+                        <fieldset data-required data-error="Date cannot be blank">
+                            <legend>
+                                <h1 class="heading-large">
+                                    <span class="question"></span>
+                                </h1>
+                                <span class="form-hint">For example, 7 9 2018</span>
+                            </legend>
+
+                            <div class="form-date">
+                                <div class="form-group form-group-day">
+                                    <label class="form-label" for="day">Day</label>
+                                    <input class="form-control" id="day" name="day" type="text" pattern="[0-9]*" min="0" max="31" aria-describedby="dob-hint">
+                                </div>
+                                <div class="form-group form-group-month">
+                                    <label class="form-label" for="month">Month</label>
+                                    <input class="form-control" id="month" name="month" type="text" pattern="[0-9]*" min="0" max="12">
+                                </div>
+                                <div class="form-group form-group-year">
+                                    <label class="form-label" for="year">Year</label>
+                                    <input class="form-control" id="year" name="year" type="text" pattern="[0-9]*" min="0" max="2018">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    {% include "includes/buttons/continue.html" %}
+
+                <!-- </form> -->
+
+                <a href="">Cancel and go to trailer record</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = { "day": "7", "month": "9", "year": "2018" };
+            $('input[id=day]').val(testData.day);
+            $('input[id=month]').val(testData.month);
+            $('input[id=year]').val(testData.year);
+        });
+
+        if (member.disposalType == 'sold') {
+            $('.question').html('When was this trailer sold or transferred?');
+        } else if (member.disposalType == 'scrapped') {
+            $('.question').html('When was this trailer scrapped or written off?');
+        } else if (member.disposalType == 'exported') {
+            $('.question').html('When was this trailer exported?');
+        } else if (member.disposalType == 'outside') {
+            $('.question').html('When did you stop using this trailer outside of the <abbr title="United Kingdom">UK</abbr>?');
+        }
+
+        $('.button').click(validate);
+
+        function validate() {
+            var day = $('input[id=day]').val();
+            var month = $('input[id=month]').val();
+            var year = $('input[id=year]').val();
+
+            if (
+                (day === '' || day === undefined) ||
+                (month === '' || month === undefined) ||
+                (year === '' || year === undefined)
+            ) {
+                checkErrors();
+            } else {
+                disposalDate = day + ' ' + month + ' ' + year;
+                next();
+            }
+
+            function next() {
+                if (member.disposalType == 'sold') {
+                    if (member.disposal === undefined) {
+                        member.disposal = {};
+                    }
+                    if (member.disposal.date === undefined) {
+                        member.disposal.date = {};
+                    }
+                    member.disposal.dateFull = disposalDate;
+                    member.disposal.day = day;
+                    member.disposal.month = month;
+                    member.disposal.year = year;
+
+                    go('/trailer-record/actions/removal-name');
+                } else {
+                    go('/success');
+                }
+            }
+        }
+    </script>
+{% endblock %}

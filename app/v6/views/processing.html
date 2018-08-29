@@ -1,0 +1,49 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Processing payment {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts/default.html" %}
+    <style type="text/css">
+        a#proposition-name { display: none; color: black !important; }
+        .logged-user { display: none; }
+        .center { text-align: center; }
+    </style>
+{% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-noback.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-full center">
+                <div class="form-group">
+                    <h1 class="heading-large">DVLA is processing your payment</h1>
+
+                    <p>This may take a few seconds.</p>
+
+                    <img src="/public/v6/images/progress.gif" width="50px" />
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        setTimeout(function() {
+            go('success');
+        }, 3000);
+    </script>
+{% endblock %}

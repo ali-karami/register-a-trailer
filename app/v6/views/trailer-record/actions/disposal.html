@@ -1,0 +1,70 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What have you done with this trailer? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset>
+                        <legend><h1 class="heading-large">What have you done with this trailer?</h1></legend>
+
+                        <div class="multiple-choice">
+                            <input id="radio-1" type="radio" name="radio-group" value="sold-transferred">
+                            <label for="radio-1">Sold or transferred it</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="scrapped-writtenoff">
+                            <label for="radio-2">Scrapped or written it off</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="scrapped-writtenoff">
+                            <label for="radio-2">Exported it</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="scrapped-writtenoff">
+                            <label for="radio-2">No longer using it outside <abbr title="United Kingdom">UK</abbr></label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <button class="button">Continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=radio-group]:checked').val();
+
+            if (value == 'sold-transferred') {
+                member.disposalType = "sold";
+                go('/trailer-record/actions/disposal-date');
+            } else if (value == 'scrapped-writtenoff') {
+                member.disposalType = "scrapped";
+                go('/trailer-record/actions/disposal-date');
+            } else {
+                showErrors();
+            }
+        }
+    </script>
+{% endblock %}

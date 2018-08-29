@@ -1,0 +1,60 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} When was this trailer exported? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        dd { font-weight: 700; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">When was this trailer exported?</h1>
+
+                <p>A replacement trailer certificate costs <strong>£XX.XX</strong></p>
+
+                <h2 class="heading-medium">Declaration</h2>
+
+                <div class="form-group">
+                    <div class="multiple-choice">
+                        <input id="declaration" name="declaration" type="checkbox" value="true">
+                        <label for="declaration">I declare that the vehicle will be exported on the date shown</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="button">Continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=declaration]:checked').val();
+
+            if (value == 'true') {
+                console.log($('input[name=declaration]:checked').val());
+                go('/success');
+            } else {
+                showErrors();
+            }
+        }
+    </script>
+{% endblock %}

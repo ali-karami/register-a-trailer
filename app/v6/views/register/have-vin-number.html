@@ -1,0 +1,238 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Do you have a 17 character Vehicle Identification Number (VIN)? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        .error-summary,
+        .error-message { display: none; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
+                <div class="form-group">
+                    <fieldset class="inline">
+                        <legend>
+                            <h1 class="heading-large">Do you have a 17 character Vehicle Identification Number (VIN)?</h1>
+                            {% include "includes/errors/error-message.html" %}
+                        </legend>
+
+                        <div class="multiple-choice" data-target="vin-input-yes">
+                            <input id="radio-1" type="radio" name="have-vin" value="Y">
+                            <label for="radio-1">Yes</label>
+                        </div>
+                        <div class="multiple-choice" data-target="vin-input-no">
+                            <input id="radio-2" type="radio" name="have-vin" value="N">
+                            <label for="radio-2">No</label>
+                        </div>
+
+                        <div class="panel panel-border-narrow js-hidden" id="vin-input-yes">
+                            <legend class="visuallyhidden">VIN number</legend>
+
+                            <div class="form-group">
+                                <label class="form-label vin" for="vin-number">
+                                    VIN number
+                                    {% include "includes/errors/error-message-2.html" %}
+                                </label>
+                                <input class="form-control" id="vin-number" type="text" name="vin-number">
+                            </div>
+                        </div>
+
+                        <div class="panel panel-border-narrow js-hidden" id="vin-input-no">
+                            <legend class="visuallyhidden">VIN or chassis number</legend>
+
+                            <div class="form-group">
+                                <label class="form-label chassis" for="vin-chassis-number">
+                                    VIN or chassis number
+                                    {% include "includes/errors/error-message-2.html" %}
+                                </label>
+                                <input class="form-control" id="vin-chassis-number" type="text" name="vin-chassis-number">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+    <!-- 1HGBH41JXMN109186 -->
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var vin = '';
+
+        $('.form-label.vin').click(function() {
+            randomVin();
+            $('input[id=vin-number]').val(vin);
+        });
+        $('.form-label.chassis').click(function() {
+            var testData = { "chassis": "4W289151" };
+            $('input[id=vin-chassis-number]').val(testData.chassis);
+        });
+
+        $('.multiple-choice').change(function() {
+            $('.error-message').hide();
+            $('.form-control').removeClass('form-control-error');
+            // resetErrors();
+            // $('input').closest('.panel.panel-border-narrow').css({'border-left':'5px solid #bfc1c3','padding-left':'0.78947em'});
+        });
+
+        $('.button').click(validate);
+
+        function validate() {
+            // resetErrors();
+            var validInput = true;
+            var value1 = $('input[name=have-vin]:checked').val();
+            var value2 = $('input[name=vin-number]').val();
+            var value3 = $('input[name=vin-chassis-number]').val();
+
+            if (value1 === 'Y') {
+                if ((value2 === '') || (value2 === undefined)) {
+                    validInput = false;
+                    $('.error-message.2').html('VIN is empty');
+                } else if ((value2 > 0)|| (value2 < 17) ) {
+                    validInput = false;
+                    $('.error-message.2').html('VIN must be 17 characters');
+                }
+
+                if (validInput) {
+                    if (changing == "true") {
+                        member.trailers[member.currentTrailerPosition].vin = value2;
+                    } else {
+                        if (!member.trailer.regRandom) {
+                            member.trailer.vin = value2;
+                            member.trailer.manufacturer = 'Rolfo';
+                            var weight1 = randomWeight(1,5000);
+                            var weight2 = randomWeight(750,5000);
+                            member.trailer.gross = weight2 + weight1;
+                            member.trailer.unladen = weight2;
+                            console.log('manufacturer = ' + member.trailer.manufacturer);
+                            console.log('gross = ' + member.trailer.gross);
+                            console.log('unladen = ' + member.trailer.unladen);
+                        } else {
+                            console.log('vin = ' + member.trailer.vin);
+                            member.trailer.vin = value2;
+                        }
+                    }
+                    next();
+                } else {
+                    showErrors2();
+                    // $('.error-message').html('VIN must be 17 characters');
+                }
+            } else if (value1 === 'N') {
+                if (!value3) {
+                    validInput = false;
+                    $('.error-message.2').html('VIN is empty');
+                }
+
+                if (validInput) {
+                    if (changing == "true") {
+                        member.trailers[member.currentTrailerPosition].chassis = value3;
+                    } else {
+                        console.log('chassis = ' + member.trailer.chassis);
+                        member.trailer.chassis = value3;
+                    }
+                    next();
+                } else {
+                    showErrors2();
+                    // $('.error-message').html('VIN must be 17 characters');
+                }
+            } else {
+                showErrors();
+            }
+
+            function next() {
+                if (changing == "true") {
+                    member.trailers[member.currentTrailerPosition].gross = value1;
+                    go('/register/trailer-summary');
+                } else {
+                    if (!member.trailer.regRandom) {
+                        go('/register/saving-trailer');
+                    } else {
+                        go('/register/trailer-manufacturer');
+                    }
+                }
+            }
+        }
+
+        $('input[name=have-vin]').click(function () {
+            $('.error-message').hide();
+            hideErrors();
+        });
+
+        function showErrors() {
+            var title = $(document).prop('title');
+            if (title.indexOf('Error') > -1) {
+            } else {
+                $(document).prop('title', 'Error: ' + title);
+            }
+            $('body').scrollTop(0);
+            $('fieldset').closest('.form-group').addClass('form-group-error');
+            // $('#over-3500').addClass('form-group-error');
+            $('.form-control').addClass('form-control-error');
+            $('.error-message').show().css('display', 'block');
+            // $('.error-message.2').hide();
+            $('.error-summary').show().focus();
+            $('legend').attr('id', 'error-link');
+        }
+
+        function showErrors2() {
+            var title = $(document).prop('title');
+            if (title.indexOf('Error') > -1) {
+            } else {
+                $(document).prop('title', 'Error: ' + title);
+            }
+            $('body').scrollTop(0);
+            $('fieldset').closest('.form-group').addClass('form-group-error');
+            $('input').closest('.panel.panel-border-narrow').css({'border-left':'none','padding-left':'0'});
+            $('#over-3500').addClass('form-group-error');
+            $('.form-control').addClass('form-control-error');
+            $('.error-message').hide();
+            $('.error-message.2').show().css('display', 'block');
+            $('.error-summary').show().focus();
+            $('legend').attr('id', 'error-link');
+        }
+
+        function hideErrors() {
+            $('.error-summary').hide();
+            $('fieldset').closest('.form-group').removeClass('form-group-error');
+            $('.form-control').removeClass('form-control-error');
+            $('.error-message').hide();
+            $('.error-message.2').hide();
+            $('legend').attr('id', 'error-link');
+        }
+
+        var changing = location.search.split('change=')[1];
+        if (changing === 'true') {
+            if (currentTrailer.vin) {
+                document.title = 'Change Vehicle Identification Number (VIN)';
+                $('.title').html('Change Vehicle Identification Number (VIN)');
+                $('input[value="Y"]').attr('checked', true);
+                $('input[id=vin-number]').val(currentTrailer.vin);
+            }
+            if (currentTrailer.chassis) {
+                document.title = 'Change Vehicle Identification Number (VIN)/Chassis number';
+                $('.title').html('Change Vehicle Identification Number (VIN)/Chassis number');
+                $('input[value="N"]').attr('checked', true);
+                $('input[id=vin-chassis-number]').val(currentTrailer.chassis);
+            }
+            $('.button').html('Save and continue');
+        }
+    </script>
+{% endblock %}

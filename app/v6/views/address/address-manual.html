@@ -1,0 +1,150 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Confirm your address {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+
+                <h1 class="heading-large">We weren’t able to match your address</h1>
+
+                <span class="form-hint">Instead, enter your address manually</span>
+                <br>
+
+                <form class="form">
+                    <div class="form-group">
+                        <fieldset>
+                            <legend class="visuallyhidden">Enter your address</legend>
+
+                            <div class="form-group" id="qaddress">
+                                <label class="form-label" for="address1">
+                                    Building and street
+                                    <span class="form-hint"></span>
+                                </label>
+                                <input spellcheck="false" class="form-control" id="address1" name="address1" type="text" value="">
+                            </div>
+
+                            <div class="form-group" id="qaddress2">
+                                <label class="visuallyhidden form-label" for="address2">
+                                    Address line 2
+                                </label>
+                                <input spellcheck="false" class="form-control" id="address2" name="address2" type="text" value="">
+                            </div>
+
+                            <div class="form-group" id="qposttown">
+                                <label class="form-label" for="posttown">
+                                    Town or city
+                                    <span class="form-hint"></span>
+                                </label>
+                                <input spellcheck="false" class="form-control form-control-1-3" id="posttown" name="posttown" type="text" value="">
+                            </div>
+
+                            <div class="form-group" id="qpostcode">
+                                <label class="form-label" for="postcode">
+                                    Postcode
+                                    <span class="form-hint"></span>
+                                </label>
+                                <input spellcheck="false" class="form-control form-control-1-4" id="postcode" name="postcode" type="text" value="">
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="button" type="button" onclick="validate()">Find address</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = {
+                "address1": "122 Burns Crescent",
+                "address2": "Edinburgh",
+                "posttown": "Edinburgh",
+                "postcode": "EH1 9GP"
+            };
+            $('input[id=address1]').val(testData.address1);
+            $('input[id=address2]').val(testData.address2);
+            $('input[id=posttown]').val(testData.posttown);
+            $('input[id=postcode]').val(testData.postcode);
+        });
+
+        $('.button').click(checkAnswers);
+
+        var address = {};
+
+        function checkAnswers() {
+            var validInput = true;
+
+            // Hide before rechecking validation
+            $('.address1.error-message').hide();
+            $('#qaddress').removeClass('form-group-error error');
+            $('.posttown.error-message').hide();
+            $('#qposttown').removeClass('form-group-error error');
+            $('.postcode.error-message').hide();
+            $('#qpostcode').removeClass('form-group-error error');
+            $('.postcode.format.error-message').hide();
+
+            var address1 = $('input[name=address1]').val();
+            var address2 = $('input[name=address2]').val();
+            if ((address1 == '') || (address1 == undefined)) {
+                $('#qaddress').addClass('form-group-error error');
+                showerror('.address1.error-message');
+                $('.error-summary').show();
+                $('body').scrollTop(0);
+                validInput = false;
+            }
+
+            var posttown = $('input[name=posttown]').val();
+            if ((posttown == '') || (posttown == undefined)) {
+                $('#qposttown').addClass('form-group-error error');
+                showerror('.posttown.error-message');
+                $('.error-summary').show();
+                $('body').scrollTop(0);
+                validInput = false;
+            }
+
+            var postcode = $('input[name=postcode]').val();
+            if ((postcode == '') || (postcode == undefined)) {
+                $('#qpostcode').addClass('form-group-error error');
+                showerror('.postcode.error-message');
+                $('.error-summary').show();
+                $('body').scrollTop(0);
+                validInput = false;
+            }
+
+            if (validInput) {
+                var address = address1 + "<br>";
+                if (address2 && address2.length>0 )
+                    address += address2+"<br>";
+                address += posttown+"<br>";
+                address += postcode;
+
+                member.address = address; 
+
+                next();
+            }
+        }
+
+        function next() {
+            go('/create/email-address');
+        }
+    </script>
+{% endblock %}

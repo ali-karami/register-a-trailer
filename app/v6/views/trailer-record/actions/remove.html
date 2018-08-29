@@ -1,0 +1,80 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What have you done with this trailer? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset data-required>
+                        <legend>
+                            <h1 class="heading-large">What have you done with this trailer?</h1>
+                        </legend>
+
+                        <div class="multiple-choice">
+                            <input id="radio-1" type="radio" name="radio-group" value="sold">
+                            <label for="radio-1">Sold or transferred it</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="scrapped">
+                            <label for="radio-2">Scrapped or written it off</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-3" type="radio" name="radio-group" value="exported">
+                            <label for="radio-3">Exported it</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-4" type="radio" name="radio-group" value="outside-uk">
+                            <label for="radio-4">No longer using it outside <abbr title="United Kingdom">UK</abbr></label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=radio-group]:checked').val();
+
+            if (!value) {
+                checkErrors();
+            } else {
+                next();
+            }
+
+            function next() {
+                if (value == 'sold') {
+                    member.disposalType = "sold";
+                } else if (value == 'scrapped') {
+                    member.disposalType = "scrapped";
+                } else if (value == 'exported') {
+                    member.disposalType = "exported";
+                } else if (value == 'outside-uk') {
+                    member.disposalType = "outside";
+                }
+
+                go('/trailer-record/actions/removal-date');
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Will any of these trailers be used outside of the UK? {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset class="inline" data-required>
+                        <legend>
+                            <h1 class="heading-large">Will any of these trailers be used outside of the UK?</h1>
+                        </legend>
+
+                        <div class="multiple-choice">
+                            <input id="radio-1" type="radio" name="radio-group" value="Y">
+                            <label for="radio-1">Yes</label>
+                        </div>
+                        <div class="multiple-choice">
+                            <input id="radio-2" type="radio" name="radio-group" value="N">
+                            <label for="radio-2">No</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value = $('input[name=radio-group]:checked').val();
+
+            if (!value) {
+                checkErrors();
+            } else {
+                next();
+            }
+
+            function next() {
+                if (value == 'Y') {
+                    go('/create/travelling-abroad');
+                } else if (value == 'N') {
+                    go('/exit');
+                }
+            }
+        }
+    </script>
+{% endblock %}

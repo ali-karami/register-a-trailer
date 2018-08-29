@@ -1,0 +1,60 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Set up a recovery word {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">Set up a recovery word</h1>
+
+                <p>Make a note of this word incase you need it in the future.</p>
+
+                <p>The word must:</p>
+
+                <ul class="list list-bullet">
+                    <li>be between 6 and 12 characters</li>
+                    <li>not contain spaces or special characters</li>
+                    <li>not contain numbers</li>
+                </ul>
+
+                <div class="form-group">
+                    <fieldset>
+                        <legend class="visuallyhidden">Create a password</legend>
+
+                        <label class="form-label" for="name">Recovery word</label>
+                        <input class="form-control" id="name" type="text" name="name">
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <button class="button" type="button">Continue</button>
+                </div>
+
+                <a href="">Get help</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(next);
+
+        function next() {
+            go('/scp/success');
+        }
+    </script>
+{% endblock %}

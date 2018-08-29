@@ -1,0 +1,71 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Company details {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">Your<span id="record-type"> company</span> details</h1>
+
+                <div class="form-group">
+                    <dl class="govuk-check-your-answers cya-questions-short">
+                        <div>
+                            <dt class="cya-question">Name</dt>
+                            <dd class="cya-answer"><span id="name"></span></dd>
+                            <dd class="cya-change"><a href="/create/name?change=true">Change<span class="visually-hidden"> name</span></a></dd>
+                        </div>
+
+                        <div>
+                            <dt class="cya-question">Address</dt>
+                            <dd class="cya-answer">
+                                <span id="address"></span>
+                            </dd>
+                            <dd class="cya-change"><a href="/address/address-find?change=true">Change<span class="visually-hidden"> address</span></a></dd>
+                        </div>
+
+                        <div>
+                            <dt class="cya-question">Email address</dt>
+                            <dd class="cya-answer"><span id="email"></span></dd>
+                            <dd class="cya-change"><a href="/create/email-address?change=true">Change<span class="visually-hidden"> email address</span></a></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="form-group">
+                    <button class="button">Return to trailer record</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('#name').html(member.user.name).css('text-transform', 'capitalize');
+        var addressPlayback = ''
+        if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
+        if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
+        if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
+        if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
+        if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
+        $('#address').html(addressPlayback);
+        $('#email').html(member.user.email);
+
+        $('.button').click(function() {
+            go('/trailer-record');
+        });
+    </script>
+{% endblock %}

@@ -4,7 +4,7 @@
 
 module.exports = {
   // Service name used in header. Eg: 'Renew your passport'
-  serviceName: 'Register a trailer',
+  serviceName: 'Register and manage your trailers',
 
   // Default port that prototype runs on
   port: '3000',
@@ -13,18 +13,17 @@ module.exports = {
   useAuth: 'true',
 
   // Automatically stores form data, and send to all views
-  useAutoStoreData: 'true',
+  useAutoStoreData: 'false',
 
   // Enable or disable built-in docs and examples.
   useDocumentation: 'true',
 
-  // Force HTTP to redirect to HTTPs on production
+  // Force HTTP to redirect to HTTPS on production
   useHttps: 'true',
 
   // Cookie warning - update link to service's cookie page.
   cookieText: 'GOV.UK uses cookies to make the site simpler. <a href="#">Find out more about cookies</a>',
 
   // Enable or disable Browser Sync
-  useBrowserSync: 'true'
-
+  useBrowserSync: 'false'
 }

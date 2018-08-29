@@ -1,0 +1,139 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} What is the name of your company? {% endblock %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts/default.html" %}
+    <style type="text/css">
+        .autocomplete-wrapper {
+            max-width: 20em;
+            margin-bottom: 0;
+        }
+    </style>
+    <script type="text/javascript" src="/public/v6/javascripts/manufacturers.js"></script>
+{% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset data-required data-error="Enter a name">
+                        <legend class="visuallhidden">
+                            <h1 class="heading-large"><span class="title">What is your name?</span></h1>
+                        </legend>
+
+                        <label class="form-label visually-hidden" for="name">Company name</label>
+                        <input class="form-control" id="name" type="text" name="name">
+                    </fieldset>
+                </div>
+
+                <!-- <div class="form-group">
+                    <fieldset data-required>
+                        <legend>
+                            <h1 class="heading-large"><span class="title">What is the name of your company?</span></h1>
+                        </legend>
+
+                        <label class="form-label visually-hidden" for="manufacturer">Company name</label>
+                        <!-- <label for="autocomplete-default">Company name</label> --
+                        <div id="tt-default" class="autocomplete-wrapper"></div>
+                        <!-- <input class="form-control" id="manufacturer" type="text" name="manufacturer"> --
+                    </fieldset>
+                </div> -->
+
+                <p><a href="#">Company not listed</a></p>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('h1').click(function() {
+            var testData = {"companyName": "Road International Transport and Logistics GmbH (Austria)"};
+            // $('input[name=input-autocomplete]').val(testData.companyName);
+            $('input[name=name]').val(testData.companyName);
+        });
+
+        try { var type = member.user.type; } catch(err){}
+        var refUrl = getRefUrl();
+
+        $('.button').click(validate);
+
+        function validate() {
+            var validInput = true;
+            var value = $('input[name=name]').val();
+
+            if (!value) {
+                validInput = false;
+                checkErrors();
+            }
+
+            if (validInput) {
+                if (member.user === undefined) {
+                    member.user = {};
+                }
+
+                member.user.name = value;
+                console.log('Company name: ' + member.user.name);
+                next();
+            }
+
+            function next() {
+                if (changing == "true") {
+                    if (refUrl == 'check-your-answers') {
+                        go('/create/check-your-answers');
+                    } else {
+                        go('/success');
+                    }
+                } else {
+                    go('/address/address-find');
+                }
+            }
+        }
+
+        var changing = location.search.split('change=')[1];
+        if (changing === 'true') {
+            if (type == "company") {
+                document.title = 'Change your company name';
+                $('.title').html('Change your company name');
+                $('.error-message').html('Enter your company name');
+                $('.paragraph').hide();
+                $('.button').html('Save and continue');
+            } else if (type == "personal") {
+                document.title = 'Change your name';
+                $('.title').html('Change your name');
+                $('.error-message').html('Enter your name');
+                $('.paragraph').hide();
+                $('.button').html('Save and continue');
+            }
+        } else {
+            if (type == "company") {
+                document.title = 'What is your company name?';
+                $('.title').html('company name');
+                $('.error-message').html('Enter your company name');
+                $('.button').html('Continue');
+            } else if (type == "personal") {
+                document.title = 'What is your name?';
+                $('.title').html('name');
+                $('.error-message').html('Enter your name');
+                $('.button').html('Continue');
+            }
+        }
+    </script>
+{% endblock %}
