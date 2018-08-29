@@ -63,13 +63,13 @@
             $('input[id=year]').val(testData.year);
         });
 
-        if (member.disposalType == 'sold') {
+        if (member.disposal.type == 'sold') {
             $('.question').html('When was this trailer sold or transferred?');
-        } else if (member.disposalType == 'scrapped') {
+        } else if (member.disposal.type == 'scrapped') {
             $('.question').html('When was this trailer scrapped or written off?');
-        } else if (member.disposalType == 'exported') {
+        } else if (member.disposal.type == 'exported') {
             $('.question').html('When was this trailer exported?');
-        } else if (member.disposalType == 'outside') {
+        } else if (member.disposal.type == 'outside') {
             $('.question').html('When did you stop using this trailer outside of the <abbr title="United Kingdom">UK</abbr>?');
         }
 
@@ -88,27 +88,29 @@
                 checkErrors();
             } else {
                 disposalDate = day + ' ' + month + ' ' + year;
+                if (member.disposal === undefined) {
+                    member.disposal = {};
+                }
+                member.disposal.dateFull = disposalDate;
+                member.disposal.day = day;
+                member.disposal.month = month;
+                member.disposal.year = year;
                 next();
             }
 
             function next() {
-                if (member.disposalType == 'sold') {
-                    if (member.disposal === undefined) {
-                        member.disposal = {};
-                    }
-                    if (member.disposal.date === undefined) {
-                        member.disposal.date = {};
-                    }
-                    member.disposal.dateFull = disposalDate;
-                    member.disposal.day = day;
-                    member.disposal.month = month;
-                    member.disposal.year = year;
-
-                    go('/trailer-record/actions/removal-name');
+                if (changing == "true") {
+                    go('/trailer-record/actions/check-your-answers');
                 } else {
-                    go('/success');
+                    if (member.disposal.type == 'sold') {
+                        go('/trailer-record/actions/removal-name');
+                    } else {
+                        go('/success');
+                    }
                 }
             }
         }
+
+        var changing = location.search.split('change=')[1];
     </script>
 {% endblock %}

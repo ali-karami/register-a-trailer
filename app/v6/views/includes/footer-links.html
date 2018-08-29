@@ -9,6 +9,114 @@
     <li><a href="/privacy-policy" target="_blank">Privacy policy</a></li>
     <li><a href="/cymraeg">Cymraeg</a></li>
     <li>
-        <p>Built by the <a href="https://www.gov.uk/government/organisations/driver-and-vehicle-licensing-agency">Driver and Vehicle Licensing Agency</a></p>
+        <!-- <p>Built by the <a href="https://www.gov.uk/government/organisations/driver-and-vehicle-licensing-agency">Driver and Vehicle Licensing Agency</a></p> -->
+        Built by the
+        <details class="member-things">
+                <summary><span class="summary">Driver and Vehicle Licensing Agency</span></summary>
+        
+                <p>Some things to ‘member, or not.</p>
+                  <div class="panel panel-border-narrow">
+                    <div class="form-group">
+                      <label class="form-label" for="add-trailers">Add this many trailers to member</label>
+                      <select class="form-control" id="add-trailers" name="add-trailers">
+                        <option value="1">1 Trailer</option>
+                        <option value="2">2 Trailers</option>
+                        <option value="3">3 trailers</option>
+                        <option value="4">4 trailers</option>
+                        <option value="5">5 trailers</option>
+                        <option value="10">10 trailers</option>
+                        <option value="15">15 trailers</option>
+                        <option value="20">20 trailers</option>
+                        <option value="25">25 trailers</option>
+                        <option value="50">50 trailers</option>
+                        <option value="75">75 trailers</option>
+                        <option value="100">100 trailers</option>
+                        <option value="200">200 trailers</option>
+                      </select>
+                    </div>
+                    <a href="#" class="add-trailers">Add trailers</a><br>
+                    <a href="#" class="delete-trailers">Delete all trailers</a>
+        
+        
+                  </div>
+                </details>
     </li>
 </ul>
+
+<script type="text/javascript">
+    $('a.delete-trailers').click(function(e) {
+        e.preventDefault();
+        delete member.trailers;
+        location.reload();
+    });
+
+    $('a.add-trailers').click(function(e) {
+        e.preventDefault();
+        var trailerAmount = $('#add-trailers').val();
+
+        if (member.trailer === undefined) {
+            member.trailer = {};
+        }
+
+
+
+        var counter = 0;
+        for(var i=0; i < trailerAmount; i++){
+            addTrailer();
+            location.reload();
+        }
+
+
+
+        function addTrailer() {
+            // var reg = '', vin = '', maufacturer = '', weight1 = '', weight2 = '', gross = '', unladen = '', registered = '';
+            var reg = randomReg();
+            var vin = randomVin();
+            var manufacturer = 'Rolfo';
+            var weight1 = randomWeight(1,5000);
+            var weight2 = randomWeight(750,5000);
+            var gross = weight2 + weight1;
+            var unladen = weight2;
+            var registered = true;
+
+            var trailer = { reg, vin, manufacturer, gross, unladen, registered, };
+            console.log(trailer);
+
+            if (!member.trailers || member.trailers.length == 0) {
+                member.trailers = [];
+                member.trailers.push(trailer);
+            } else {
+                for (i = 0; i < member.trailers.length; i++) {
+                    var found = false;
+                }
+                if (found == false) {
+                    member.trailers.push(trailer);
+                }
+            }
+        }
+
+
+        // (function () {
+        //     var counter = 0;
+        //     foo();
+        //     function foo() {
+        //         addTrailer();
+
+        //         if ((++counter) < trailerAmount);
+        //     }
+        // })();
+
+
+        // var counter = 1;
+        // function foo() {
+        //     addTrailer();
+        //     if (counter < trailerAmount){
+        //         counter++
+        //         // window.setTimeout(foo, 1000);
+        //     }
+        // }
+
+        // foo()
+
+    });
+</script>

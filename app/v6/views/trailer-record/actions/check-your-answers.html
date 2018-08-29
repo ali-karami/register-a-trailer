@@ -18,22 +18,21 @@
                     <h1 class="heading-large">Check your answers</h1>
 
                     <h2 class="heading-medium">Date of sale or transfer</h2>
-
                     <div class="form-group">
                         <dl class="govuk-check-your-answers cya-questions-short">
                             <div>
                                 <dt class="cya-question">Date</dt>
                                 <dd class="cya-answer"><span id="date"></span></dd>
-                                <dd class="cya-change"><a href="/create/name?change=true">Change<span class="visually-hidden"> name</span></a></dd>
+                                <dd class="cya-change"><a href="/trailer-record/actions/removal-date?change=true">Change<span class="visually-hidden"> name</span></a></dd>
                             </div>
                         </dl>
                     </div>
 
+                    <h2 class="heading-medium">Trailer details</h2>
                     <span id="trailer-details"></span>
 
                     <!-- only add a heading for a list if there is more than one list -->
-                    <h2 class="heading-medium">New keepers details</h2>
-
+                    <h2 class="heading-medium">New keeper details</h2>
                     <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
                     <!--   * `cya-questions-short` for short questions -->
                     <!--   * `cya-questions-long` for long questions -->
@@ -43,13 +42,13 @@
                             <div>
                                 <dt class="cya-question">Name</dt>
                                 <dd class="cya-answer"><span id="name"></span></dd>
-                                <dd class="cya-change"><a href="/create/name?change=true">Change<span class="visually-hidden"> name</span></a></dd>
+                                <dd class="cya-change"><a href="/trailer-record/actions/removal-name?change=true">Change<span class="visually-hidden"> name</span></a></dd>
                             </div>
 
                             <div>
                                 <dt class="cya-question">Address</dt>
                                 <dd class="cya-answer"><span id="address"></span></dd>
-                                <dd class="cya-change"><a href="/create/address-find?change=true">Change<span class="visually-hidden"> home address</span></a></dd>
+                                <dd class="cya-change"><a href="/trailer-record/actions/removal/removal-address/address-find?change=true">Change<span class="visually-hidden"> home address</span></a></dd>
                             </div>
                         </dl>
                     </div>
@@ -98,10 +97,6 @@
         var date = day + ' ' + months[month] + ' ' + year;
         $('#date').html(date);
 
-
-
-
-
         $('#name').html(member.disposal.name).css('text-transform', 'capitalize');
 
         var currentTrailer = member.trailers[member.currentTrailerPosition];
@@ -111,6 +106,12 @@
         } else {
             var trailerDetails = '<div class="form-group"><dl class="govuk-check-your-answers cya-questions-short">';
 
+
+            trailerDetails += '<div>';
+            trailerDetails += '<dt class="cya-question">Registration number</dt>';
+            trailerDetails += '<dd class="cya-answer">' + currentTrailer.reg + '</dd>';
+            trailerDetails += '<dd class="cya-change">&nbsp;</dd>';
+            trailerDetails += '</div>';
             if (!currentTrailer.vin) {
             } else {
                 trailerDetails += '<div><dt>VIN/Chassis number</dt>';

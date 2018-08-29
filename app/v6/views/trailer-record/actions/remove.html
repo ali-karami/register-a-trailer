@@ -64,13 +64,13 @@
 
             function next() {
                 if (value == 'sold') {
-                    member.disposalType = "sold";
+                    member.disposal.type = "sold";
                 } else if (value == 'scrapped') {
-                    member.disposalType = "scrapped";
+                    member.disposal.type = "scrapped";
                 } else if (value == 'exported') {
-                    member.disposalType = "exported";
+                    member.disposal.type = "exported";
                 } else if (value == 'outside-uk') {
-                    member.disposalType = "outside";
+                    member.disposal.type = "outside";
                 }
 
                 go('/trailer-record/actions/removal-date');

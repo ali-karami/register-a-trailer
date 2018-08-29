@@ -43,6 +43,7 @@ var enpac = 'electronic number plate authorisation certificate (eV948)';
 
 // Create random vin number
 function randomVin() {
+  var vin = '';
   var possibleNumber = "0123456789";
   var possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -58,6 +59,7 @@ function randomVin() {
 
 // Create random registration number
 function randomReg() {
+  var reg = '';
   var possible = "0123456789";
   for (var i = 0; i < 7; i++) reg += possible.charAt(Math.floor(Math.random() * possible.length));
   return 'A' + reg;

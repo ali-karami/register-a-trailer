@@ -147,7 +147,7 @@
             }
 
             if (value === 'removal-date') {
-                if (member.disposalType === 'exported') {
+                if (member.disposal.type === 'exported') {
                     $('#page-content').html(exported);
                 } else {
                     $('#page-content').html(removed);
@@ -155,7 +155,8 @@
             }
 
             if (value === 'check-your-answers') {
-                if (member.disposalType === 'sold') {
+                if (member.disposal.type === 'sold') {
+                    
                     $('#page-content').html(removed);
                 } else {
                     $('#page-content').html(recordCreated);
@@ -187,21 +188,9 @@
             } catch(err) {}
 
             try {
-                if (member.disposalType == "remove") {
+                if (member.disposal) {
                     member.trailers.splice(member.currentTrailerPosition, 1);
-                    delete member.disposalType;
-                } else if (member.disposalType == "scrapped") {
-                    member.trailers.splice(member.currentTrailerPosition, 1);
-                    delete member.disposalType;
-                } else if (member.disposalType == "exported") {
-                    member.trailers.splice(member.currentTrailerPosition, 1);
-                    delete member.disposalType;
-                } else if (member.disposalType == "outside-uk") {
-                    member.trailers.splice(member.currentTrailerPosition, 1);
-                    delete member.disposalType;
-                } else if (member.disposalType == "sold") {
-                    member.trailers.splice(member.currentTrailerPosition, 1);
-                    delete member.disposalType;
+                    delete member.disposal;
                 }
             } catch(err) {}
 

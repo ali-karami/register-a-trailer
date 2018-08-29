@@ -22,7 +22,7 @@
                 {% include "includes/errors/error-summary.html" %}
 
                 <div class="form-group">
-                    <fieldset class="inline" data-required>
+                    <fieldset data-required>
                         <legend>
                             <h1 class="heading-large">Are you selling or transferring this trailer to a company?</h1>
                             {% include "includes/errors/error-message.html" %}
@@ -110,9 +110,8 @@
 
                 if (validInput) {
                     if (changing == "true") {
-                        // member.trailers[member.currentTrailerPosition].chassis = value3;
+                        go('/trailer-record/actions/check-your-answers');
                     } else {
-                        // console.log('chassis = ' + member.trailer.chassis);
                         member.disposal.name = value2;
                     }
                     next();
@@ -128,9 +127,8 @@
 
                 if (validInput) {
                     if (changing == "true") {
-                        // member.trailers[member.currentTrailerPosition].chassis = value3;
+                        go('/trailer-record/actions/check-your-answers');
                     } else {
-                        // console.log('chassis = ' + member.trailer.chassis);
                         member.disposal.name = value3;
                     }
                     next();
@@ -144,10 +142,9 @@
 
             function next() {
                 if (changing == "true") {
-                    // member.trailers[member.currentTrailerPosition].gross = value1;
-                    go('/register/trailer-summary');
+                    go('/trailer-record/actions/check-your-answers');
                 } else {
-                    go('/trailer-record/actions/removal-address/address-find.html');
+                    go('/trailer-record/actions/removal-address/address-find');
                 }
             }
         }
@@ -205,13 +202,13 @@
                 document.title = 'Change Vehicle Identification Number (VIN)';
                 $('.title').html('Change Vehicle Identification Number (VIN)');
                 $('input[value="Y"]').attr('checked', true);
-                $('input[id=company-name]').val(currentTrailer.vin);
+                $('input[id=company-name]').val(member.disposal.name);
             }
             if (currentTrailer.chassis) {
                 document.title = 'Change Vehicle Identification Number (VIN)/Chassis number';
                 $('.title').html('Change Vehicle Identification Number (VIN)/Chassis number');
                 $('input[value="N"]').attr('checked', true);
-                $('input[id=name]').val(currentTrailer.chassis);
+                $('input[id=name]').val(member.disposal.name);
             }
             $('.button').html('Save and continue');
         }

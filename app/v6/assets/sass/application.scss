@@ -63,6 +63,24 @@ strong { font-weight: 700; }
 h1.heading-large { margin-top: 0; }
 .form-group.postcode { margin-bottom: 0; }
 
+details.member-things  {
+  display: -webkit-inline-box;
+}
+details.member-things .panel.panel-border-narrow  {
+  background: $page-colour !important;
+}
+details.member-things summary {
+  // display: contents;
+  color: #454a4c;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0.26316em;
+  padding-left: 0;
+  text-decoration: none !important;
+}
+details.member-things summary:before {
+  content: none; 
+}
 
 
 
