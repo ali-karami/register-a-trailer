@@ -54,6 +54,7 @@ strong { font-weight: 700; }
 // .grid-row.no-back { min-height: 51px; }
 
 // Margin padding
+.margin-bottom-0 { margin-bottom: 0 !important; }
 // .margin-top-1 { margin-top: 1em !important; }
 // .margin-top-2 { margin-top: 2em !important; }
 .form-control#postcode { text-transform: uppercase; }
@@ -63,23 +64,31 @@ strong { font-weight: 700; }
 h1.heading-large { margin-top: 0; }
 .form-group.postcode { margin-bottom: 0; }
 
+
+#footer .footer-meta .footer-meta-inner ul { margin-bottom: 0; }
+li.li-member-things { display: block !important; }
 details.member-things  {
   display: -webkit-inline-box;
+  display: block;
+
+  summary {
+    color: #dee0e2;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 0.26316em;
+    padding-left: 0;
+    text-decoration: none !important;
+
+    &:before {
+      content: none; 
+    }
+
+  }
+  p.bold-medium { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  p.bold-medium:not(:first-child) { margin-top: 1em !important; }
 }
 details.member-things .panel.panel-border-narrow  {
   background: $page-colour !important;
-}
-details.member-things summary {
-  // display: contents;
-  color: #454a4c;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 0.26316em;
-  padding-left: 0;
-  text-decoration: none !important;
-}
-details.member-things summary:before {
-  content: none; 
 }
 
 

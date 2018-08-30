@@ -56,15 +56,17 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        $('#name').html(member.user.name).css('text-transform', 'capitalize');
-        var addressPlayback = ''
-        if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
-        if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
-        if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
-        if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
-        if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
-        $('#address').html(addressPlayback);
-        $('#email').html(member.user.email);
+        try {
+            $('#name').html(member.user.name).css('text-transform', 'capitalize');
+            var addressPlayback = '';
+            if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
+            if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
+            if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
+            if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
+            if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
+            $('#address').html(addressPlayback);
+            $('#email').html(member.user.email);
+        } catch(err){}
 
         $('.button').click(function() {
             go('/trailer-record');

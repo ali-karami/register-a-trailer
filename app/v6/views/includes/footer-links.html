@@ -8,42 +8,77 @@
     <!-- <li><a href="/terms-and-conditions" target="_blank">Terms and conditions</a></li> -->
     <li><a href="/privacy-policy" target="_blank">Privacy policy</a></li>
     <li><a href="/cymraeg">Cymraeg</a></li>
-    <li>
-        <!-- <p>Built by the <a href="https://www.gov.uk/government/organisations/driver-and-vehicle-licensing-agency">Driver and Vehicle Licensing Agency</a></p> -->
-        Built by the
+    <li><a href="/cymraeg">Cymraeg</a></li>
+    <li class="margin-bottom-0"><p class="margin-bottom-0">Built by the <a class="margin-bottom-0" href="https://www.gov.uk/government/organisations/driver-and-vehicle-licensing-agency">Driver and Vehicle Licensing Agency</a></p></li>
+    <li class="li-member-things">
         <details class="member-things">
-                <summary><span class="summary">Driver and Vehicle Licensing Agency</span></summary>
-        
+            <summary><span class="summary">Built by the Driver and Vehicle Licensing Agency</span></summary>
+
+            <div class="panel panel-border-narrow">
                 <p>Some things to ‘member, or not.</p>
-                  <div class="panel panel-border-narrow">
-                    <div class="form-group">
-                      <label class="form-label" for="add-trailers">Add this many trailers to member</label>
-                      <select class="form-control" id="add-trailers" name="add-trailers">
-                        <option value="1">1 Trailer</option>
-                        <option value="2">2 Trailers</option>
-                        <option value="3">3 trailers</option>
-                        <option value="4">4 trailers</option>
-                        <option value="5">5 trailers</option>
-                        <option value="10">10 trailers</option>
-                        <option value="15">15 trailers</option>
-                        <option value="20">20 trailers</option>
-                        <option value="25">25 trailers</option>
-                        <option value="50">50 trailers</option>
-                        <option value="75">75 trailers</option>
-                        <option value="100">100 trailers</option>
-                        <option value="200">200 trailers</option>
-                      </select>
-                    </div>
-                    <a href="#" class="add-trailers">Add trailers</a><br>
-                    <a href="#" class="delete-trailers">Delete all trailers</a>
-        
-        
-                  </div>
-                </details>
+
+                <p class="bold-medium">Users</p>
+                <ul class="list list-bullet">
+                    <li><a href="#" class="add-company">Add user</a></li>
+                    <li><a href="#" class="delete-user">Delete user</a></li>
+                </ul>
+
+                <p class="bold-medium">Trailers</p>
+                <ul class="list list-bullet">
+                    <li>
+                        <div class="form-group">
+                            <label class="font-xsmall" for="add-trailers">Add this many trailers to member</label>
+                            <select class="form-control" id="add-trailers" name="add-trailers">
+                                <option value="0">1 Trailer</option>
+                                <option value="1">2 Trailers</option>
+                                <option value="2">3 trailers</option>
+                                <option value="3">4 trailers</option>
+                                <option value="4">5 trailers</option>
+                                <option value="9">10 trailers</option>
+                                <option value="14">15 trailers</option>
+                                <option value="19">20 trailers</option>
+                                <option value="24">25 trailers</option>
+                                <option value="49">50 trailers</option>
+                                <option value="74">75 trailers</option>
+                                <option value="99">100 trailers</option>
+                                <option value="199">200 trailers</option>
+                            </select><br>
+                            <a href="#" class="add-trailers">Add trailers</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="#" class="delete-trailers">Delete all trailers</a>
+                        </div>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
+        </details>
     </li>
 </ul>
 
 <script type="text/javascript">
+    $('a.add-company').click(function(e) {
+        e.preventDefault();
+        if (member.user === undefined) {
+            member.user = {};
+        }
+        if (member.user.address === undefined) {
+            member.user.address = {};
+        }
+        member.user.name = 'Road International Transport and Logistics GmbH (Austria)';
+        member.user.address.Line1 = 'Longview Road';
+        member.user.address.Line2 = 'Clase';
+        member.user.address.Line3 = '';
+        member.user.address.City = 'Swansea';
+        member.user.address.PostalCode = 'SA6 7JL';
+        member.user.email = 'enquiries@alshaulage.com';
+        location.reload();
+    });
+
+    $('a.delete-user').click(function(e) {
+        e.preventDefault();
+        delete member.user;
+        location.reload();
+    });
+
     $('a.delete-trailers').click(function(e) {
         e.preventDefault();
         delete member.trailers;
@@ -59,13 +94,22 @@
         }
 
 
+        var i = 0;
 
-        var counter = 0;
-        for(var i=0; i < trailerAmount; i++){
+        do {
             addTrailer();
-            location.reload();
         }
+        while (i < trailerAmount);
 
+        delete i;
+        delete member.trailer;
+        location.reload();
+
+
+        // var counter = 0;
+        // for(var i = 0; i < trailerAmount; i++) {
+        //     addTrailer();
+        // }
 
 
         function addTrailer() {
