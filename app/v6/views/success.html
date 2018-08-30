@@ -155,14 +155,16 @@
             }
 
             if (value === 'check-your-answers') {
-                if (member.disposal.type === 'sold') {
-                    
-                    $('#page-content').html(removed);
-                } else {
+                try {
+                    if (member.disposal.type === 'sold') {
+                        $('#page-content').html(removed);
+                    } else {
+                        $('#page-content').html(recordCreated);
+                    }
+                } catch(err){
                     $('#page-content').html(recordCreated);
                 }
             }
-
         // });
 
         $('.button.record').click(next1);
