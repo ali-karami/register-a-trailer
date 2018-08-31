@@ -93,30 +93,20 @@
             member.trailer = {};
         }
 
-
         var i = 0;
-
         do {
             addTrailer();
         }
         while (i < trailerAmount);
-
         delete i;
         delete member.trailer;
         location.reload();
-
-
-        // var counter = 0;
-        // for(var i = 0; i < trailerAmount; i++) {
-        //     addTrailer();
-        // }
-
 
         function addTrailer() {
             // var reg = '', vin = '', maufacturer = '', weight1 = '', weight2 = '', gross = '', unladen = '', registered = '';
             var reg = randomReg();
             var vin = randomVin();
-            var manufacturer = 'Rolfo';
+            var manufacturer = randomManufacturer();
             var weight1 = randomWeight(1,5000);
             var weight2 = randomWeight(750,5000);
             var gross = weight2 + weight1;
@@ -138,29 +128,5 @@
                 }
             }
         }
-
-
-        // (function () {
-        //     var counter = 0;
-        //     foo();
-        //     function foo() {
-        //         addTrailer();
-
-        //         if ((++counter) < trailerAmount);
-        //     }
-        // })();
-
-
-        // var counter = 1;
-        // function foo() {
-        //     addTrailer();
-        //     if (counter < trailerAmount){
-        //         counter++
-        //         // window.setTimeout(foo, 1000);
-        //     }
-        // }
-
-        // foo()
-
     });
 </script>
