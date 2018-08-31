@@ -11,7 +11,7 @@
             margin-bottom: 2rem;
         }
     </style>
-    <script type="text/javascript" src="/public/v6/javascripts/manufacturers.js"></script>
+    <!-- <script type="text/javascript" src="/public/v6/javascripts/manufacturers.js"></script> -->
 {% endblock %}
 
 {% block after_header %}
@@ -56,8 +56,8 @@
 
     <script type="text/javascript">
         $('h1').click(function() {
-            var testData = { "manufacturer": "Titan" };
-            $('input[name=input-autocomplete]').val(testData.manufacturer);
+            var manufacturer = randomManufacturer();
+            $('input[name=input-autocomplete]').val(manufacturer);
         });
 
         $('.button').click(validate);
