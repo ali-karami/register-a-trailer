@@ -80,7 +80,7 @@ details.member-things  {
     text-decoration: none !important;
 
     &:before {
-      content: none; 
+      content: none;
     }
 
   }
@@ -118,72 +118,6 @@ details.member-things .panel.panel-border-narrow  {
   .grid-row.back,
   .grid-row.phase { margin: 0 auto; }
 }
-// @media (min-width: 641px) {
-//   .grid-row.back,
-//   .grid-row.phase { margin: 0 30px; }
-// }
-// @media (min-width: 1020px) {
-//   .grid-row.back,
-//   .grid-row.phase { margin: 0 auto; }
-// }
-
-// login
-// .grid-row.phase {
-//   .phase-banner {
-//     float: left;
-//     width: 53%;
-//   }
-//   .logged-user {
-//     // position: relative;
-//     float: right;
-//     width: 47%;
-//     // margin-top: .5em;
-//     padding: 0;
-//     border-bottom: 1px solid $border-colour;
-
-//     p {
-//       margin-bottom: 0;
-//       // padding: 0;
-//       // position: absolute;
-//       // right: 0;
-//       padding-top: 8px;
-//       padding-bottom: 10px;
-//       text-align: right;
-//       font-size: 16px;
-//       line-height: 1.25;
-//     }
-//   }
-// }
-// @media only screen and (max-width: 768px) {
-//   .grid-row.phase {
-//     .phase-banner {
-//       float: none;
-//       width: 100%;
-//     }
-//     .logged-user { display: none; }
-//   }
-// }
-// @media only screen and (max-width: 772px) {
-//   .grid-row.phase {
-//     .phase-banner {
-//       // float: none;
-//       // width: 100%;
-//     }
-//     // .logged-user { display: none; }
-//   }
-// }
-// .logged-user-name.white-text {
-//   font-weight: 700;
-//   color: $page-colour !important;
-// }
-// #global-header .header-proposition a.menu { font-weight: 700; }
-// #global-header .header-proposition a.menu:after { content: ""; }
-
-// .logged-user {
-//   float: right;
-//   // margin-top: -20px;
-//   padding-top: 0;
-// }
 
 
 
@@ -322,6 +256,32 @@ details.member-things .panel.panel-border-narrow  {
   }
 
   #manage { text-align: right; font-weight: 700; }
+}
+
+// Sortable table
+table#sortable-table thead tr th:hover { cursor: pointer; }
+
+th {
+  &::after {
+    content: '.';
+    color: transparent;
+    display: inline-block;
+    cursor: pointer;
+    width: 14px;
+    margin-bottom: -0.05em;
+    margin-left: .5em;
+  }
+  &.sort-default::after {
+    background: url('/public/v6/images/sort-arrow-sprite-2x.png');
+  }
+  &.sort-a-z::after {
+    background: url('/public/v6/images/sort-arrow-sprite-2x.png') 0 -52px;
+    background-repeat: no-repeat;
+  }
+  &.sort-z-a::after {
+    background: url('/public/v6/images/sort-arrow-sprite-2x.png') 0 -20px;
+    background-repeat: no-repeat;
+  }
 }
 
 

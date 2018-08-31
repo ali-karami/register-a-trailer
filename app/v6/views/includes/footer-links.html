@@ -42,6 +42,7 @@
                                 <option value="74">75 trailers</option>
                                 <option value="99">100 trailers</option>
                                 <option value="199">200 trailers</option>
+                                <option value="1999">2000 trailers</option>
                             </select><br>
                             <a href="#" class="add-trailers">Add trailers</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="#" class="delete-trailers">Delete all trailers</a>
@@ -98,11 +99,15 @@
             member.trailer = {};
         }
 
+
+
         var i = 0;
+        console.time('Adding trailers');
         do {
             addTrailer();
         }
         while (i < trailerAmount);
+        console.timeEnd('Adding trailers');
         delete i;
         delete member.trailer;
         location.reload();

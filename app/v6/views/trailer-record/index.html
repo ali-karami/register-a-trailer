@@ -48,6 +48,8 @@
 
 
 {% block body_end %}
+    <script type="text/javascript" src="/public/v6/javascripts/sortable-table.js"></script>
+
     <script type="text/javascript">
         try {
             $('.heading-large span').html(member.user.name).css('text-transform', 'capitalize');
@@ -67,7 +69,17 @@
             } else {
                 $('#no-trailers').hide();
 
-                var trailerRow = '<h2 class="heading-medium">' + registeredTrailers + ' trailer<span class="plural"></span></h2><table><thead><tr><th scope="col">Registration number</th><th scope="col">VIN/Chassis number</th><th scope="col">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
+                var trailerRow = '<h2 class="heading-medium">' + registeredTrailers + ' trailer<span class="plural"></span></h2>\
+                <table id="sortable-table">\
+                        <thead>\
+                        <tr>\
+                            <th scope="col" onclick="sortTable(0)" id="reg" class="sort-default">Registration number</th>\
+                            <th scope="col" onclick="sortTable(1)" id="vin" class="sort-default">VIN/Chassis number</th>\
+                            <th scope="col" onclick="sortTable(2)" id="manu" class="sort-default">Manufacturer</th>\
+                            <th scope="col">&nbsp;</th>\
+                        </tr>\
+                    </thead>\
+                <tbody>';
                 for (i = 0; i < member.trailers.length; i++) {
                     if (member.trailers[i].registered == true) {
                         trailerRow += '<tr>';
@@ -95,6 +107,40 @@
             var trailer = $(this).attr('data');
             member.currentTrailerPosition = trailer;
             go('/trailer-record/manage');
+        });
+
+        $('th#reg').click(function () {
+            if ($(this).hasClass('sort-default')) {
+                $(this).removeClass('sort-default').addClass('sort-a-z');
+            } else if ($(this).hasClass('sort-a-z')) {
+                $(this).removeClass('sort-a-z').addClass('sort-z-a');
+            } else {
+                $(this).removeClass('sort-z-a').addClass('sort-default');
+            }
+            $('th#vin').removeClass().addClass('sort-default');
+            $('th#manu').removeClass().addClass('sort-default');
+        });
+        $('th#vin').click(function () {
+            if ($(this).hasClass('sort-default')) {
+                $(this).removeClass('sort-default').addClass('sort-a-z');
+            } else if ($(this).hasClass('sort-a-z')) {
+                $(this).removeClass('sort-a-z').addClass('sort-z-a');
+            } else {
+                $(this).removeClass('sort-z-a').addClass('sort-default');
+            }
+            $('th#reg').removeClass().addClass('sort-default');
+            $('th#manu').removeClass().addClass('sort-default');
+        });
+        $('th#manu').click(function () {
+            if ($(this).hasClass('sort-default')) {
+                $(this).removeClass('sort-default').addClass('sort-a-z');
+            } else if ($(this).hasClass('sort-a-z')) {
+                $(this).removeClass('sort-a-z').addClass('sort-z-a');
+            } else {
+                $(this).removeClass('sort-z-a').addClass('sort-default');
+            }
+            $('th#reg').removeClass().addClass('sort-default');
+            $('th#vin').removeClass().addClass('sort-default');
         });
 
         $('.button').click(next);
