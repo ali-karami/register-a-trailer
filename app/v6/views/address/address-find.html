@@ -14,18 +14,9 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
-            <!-- <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
-                    <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There’s a problem with the information you have provided</h1>
-
-                    <p>Please amend the following details:</p>
-                    <ul class="error-summary-list">
-                        <li class="error-message postcode hide"><a href="#qpostcode">Provide a valid postcode</a></li>
-                    </ul>
-                </div> -->
-
                 <form class="form">
                     <div class="form-group">
-                        <fieldset>
+                        <fieldset data-required data-error="Provide a valid postcode">
                             <legend>
                                 <h1 class="heading-large">Find your address</h1>
                             </legend>
@@ -76,11 +67,12 @@
 
             var postcode = $('input[name=postcode]').val();
             if ((postcode == '') || (postcode == undefined)) {
-                $('#qpostcode').addClass('error');
-                $('.postcode.error-message').show();
-                $('.error-summary').show();
-                $('body').scrollTop(0);
+                // $('#qpostcode').addClass('error');
+                // $('.postcode.error-message').show();
+                // $('.error-summary').show();
+                // $('body').scrollTop(0);
                 validInput = false;
+                checkErrors();
             } else {
                 request += "postcode=" + postcode;
             }

@@ -41,13 +41,6 @@ var trailerCost = 55;
 var certificateCost = 20;
 var enpac = 'electronic number plate authorisation certificate (eV948)';
 
-// Get random manufacturer
-function randomManufacturer() {
-  var manu = ['A.R.B', 'A1 International', 'Abel', 'Adcliffe', 'Adcliffe Drawdeal Ltd', 'AHP', 'Andover', 'Andover Trailers Ltd', 'Arthur Hingley Trailers', 'Artic Falkirk', 'Avalux Ltd', 'Bale Fabrications', 'Bartoletti', 'Belle Coachworks Ltd', 'Benalu', 'Berdex', 'Berger Fahrzeugtechnik Ges.m.b.H.', 'BMI Trailers', 'Boughton International', 'Britcom International', 'Brookland Speed', 'Brookland Engineering', 'Broshuis', 'Burg', 'Caldal', 'S. Cartwright & Sons (Coachbuilders) Ltd', 'Chassis Development Services Ltd', 'Chereau', 'Chieftain', 'Jean Chéreau SAS', 'Chieftain Trailers Ltd', 'Cisternas COBO UK Ltd', 'Clayden', 'Clayton Commercials', 'COBO HNOS', 'Concept Trailers', 'Corus', 'Couldwell', 'County Trucking', 'CPS Mechanisation', 'Crossland', 'Crossland Tankers Ltd', 'D-TeC Products B.V.', 'Delta/VSS Kocise', 'Dennis', 'Dennison Trailers Ltd', 'Don-Bur (Bodies & Trailers) Ltd', 'Dyson', 'Estepe SpeciaL Truck Products B.V.', 'Feber Intercar', 'Faymonville AG', 'Feldbinder UK Ltd', 'Feldbinder Spezialfahrzeugwerke', 'F G M s.r.l.', 'Fliegl Fahrzeugbau GmbH', 'Fruehauf', 'Frutiger CZ s.r.o.', 'GOFA-Gocher Fahrzeugbau GmbH', 'Goldhofer', 'Granalu Transformations SL', 'Gray & Adams Ltd', 'GRW', 'Gurlesenyil Treyler', 'Hammar Maskin AB', 'Houghton Parkhouse Ltd', 'Hunwick Engineering Ltd', 'JPM Trailers Ltd', 'Kässbohrer Fahrzeugwerke GmbH', 'Kel-Berg Trailers & Trucks Ltd', 'King Trailers Ltd', 'Knapen Trailers B.V.', 'Kögel Trailer GmbH & Co. KG', 'Kraker Trailers', 'Fahrzeugwerk Bernard Krone GmbH', 'LAG Trailers NV', 'Lakeland Tankers Ltd', 'Langendorf GmbH', 'Lawrence David Ltd', 'Leci Trailers', 'Legras Industries', 'Lintrailers B.V.', 'Lohr', 'M & G Trailers', 'M1 Engineering Ltd', 'SMFF Magyar', 'Maisonneuve S.A.S', 'McCauley Trailers Ltd', 'Mega Sp. Z o.o.', 'Micra Truck Bodies Ltd', 'Montracon Ltd', 'Muldoon Transport Systems Ltd', 'NC Engineering', 'NC Sludge', 'NCS Trailers', 'Nooteboom Trailers B.V.', 'Oldbury', 'OMEPS s.r.l', 'Overlander', 'Pacton Trailers B.V.', 'Paneltex Martrans', 'Panema Trailers (Eng) Ltd', 'Parcisa, S.L.U.', 'Pezzaioli', 'Carrozzeria Pezzaioli s.r.l.', 'Piacenza', 'Plowman Brothers Ltd', 'Polski', 'Priden Engineering Ltd', 'Quiacrix (Parcisa) SLU', 'Raven', 'Ray Goudy', 'Ray Smith', 'Reload Systems', 'Renders', 'R M Trailers', 'Road Tankers Northern Ltd', 'Robinson', 'Robinson Distribution', 'Rojo', 'Rolfo', 'Rothdean', 'Royen', 'RTS Trailmaster', 'Sayers Road Tankers', 'Schmitz', 'SDC Trailers Ltd', 'Solomon Commercials Ltd', 'Sommer GmbH', 'Spitzer', 'STAS', 'Stokota', 'Talson Trailers B.V.', 'TCL', 'Terex', 'Tirsan', 'Titan', 'Tiger Trailers Ltd', 'Trail-Fab', 'Trailor', 'Transport Engineering', 'Transporter Enterprises', 'Trent', 'Triffitt', 'Truckmate', 'TTS', 'Turbos Hoet', 'Turner', 'Unique', 'United', 'Utility', 'Vallelly', 'Van der Peet', 'Van Hool', 'Vipex', 'Vlastuin Rolling Equipment B.V.', 'Ward Fabrications', 'Weightlifter Bodies Ltd', 'Weightmaster', 'Welgro', 'Whale Tankers Ltd', 'Wheelbase', 'Wielton S.A.', 'Wilcox', 'Wilcox Commercial Vehicles Ltd', 'Wilson', 'Woolf Eng', 'Wraith', 'York', 'ZVVZ Machinery']
-  var rand = manu[Math.floor(Math.random() * manu.length)];
-  return rand;
-}
-
 // Create random registration number
 function randomReg() {
   var reg = '';
@@ -70,6 +63,33 @@ function randomVin() {
   for (var i = 0; i < 3; i++) vin += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length));
   for (var i = 0; i < 6; i++) vin += possibleNumber.charAt(Math.floor(Math.random() * possibleNumber.length));
   return vin;
+}
+
+// Get random manufacturer
+function randomManufacturer() {
+  var manu = ['A.R.B', 'A1 International', 'Abel', 'Adcliffe', 'Adcliffe Drawdeal Ltd', 'AHP', 'Andover', 'Andover Trailers Ltd', 'Arthur Hingley Trailers',
+    'Artic Falkirk', 'Avalux Ltd', 'Bale Fabrications', 'Bartoletti', 'Belle Coachworks Ltd', 'Benalu', 'Berdex', 'Berger Fahrzeugtechnik Ges.m.b.H.',
+    'BMI Trailers', 'Boughton International', 'Britcom International', 'Brookland Speed', 'Brookland Engineering', 'Broshuis', 'Burg', 'Caldal',
+    'S. Cartwright & Sons (Coachbuilders) Ltd', 'Chassis Development Services Ltd', 'Chereau', 'Chieftain', 'Jean Chéreau SAS', 'Chieftain Trailers Ltd',
+    'Cisternas COBO UK Ltd', 'Clayden', 'Clayton Commercials', 'COBO HNOS', 'Concept Trailers', 'Corus', 'Couldwell', 'County Trucking', 'CPS Mechanisation',
+    'Crossland', 'Crossland Tankers Ltd', 'D-TeC Products B.V.', 'Delta/VSS Kocise', 'Dennis', 'Dennison Trailers Ltd', 'Don-Bur (Bodies & Trailers) Ltd',
+    'Dyson', 'Estepe SpeciaL Truck Products B.V.', 'Feber Intercar', 'Faymonville AG', 'Feldbinder UK Ltd', 'Feldbinder Spezialfahrzeugwerke', 'F G M s.r.l.',
+    'Fliegl Fahrzeugbau GmbH', 'Fruehauf', 'Frutiger CZ s.r.o.', 'GOFA-Gocher Fahrzeugbau GmbH', 'Goldhofer', 'Granalu Transformations SL', 'Gray & Adams Ltd',
+    'GRW', 'Gurlesenyil Treyler', 'Hammar Maskin AB', 'Houghton Parkhouse Ltd', 'Hunwick Engineering Ltd', 'JPM Trailers Ltd', 'Kässbohrer Fahrzeugwerke GmbH',
+    'Kel-Berg Trailers & Trucks Ltd', 'King Trailers Ltd', 'Knapen Trailers B.V.', 'Kögel Trailer GmbH & Co. KG', 'Kraker Trailers', 'Fahrzeugwerk Bernard Krone GmbH',
+    'LAG Trailers NV', 'Lakeland Tankers Ltd', 'Langendorf GmbH', 'Lawrence David Ltd', 'Leci Trailers', 'Legras Industries', 'Lintrailers B.V.', 'Lohr',
+    'M & G Trailers', 'M1 Engineering Ltd', 'SMFF Magyar', 'Maisonneuve S.A.S', 'McCauley Trailers Ltd', 'Mega Sp. Z o.o.', 'Micra Truck Bodies Ltd',
+    'Montracon Ltd', 'Muldoon Transport Systems Ltd', 'NC Engineering', 'NC Sludge', 'NCS Trailers', 'Nooteboom Trailers B.V.', 'Oldbury', 'OMEPS s.r.l',
+    'Overlander', 'Pacton Trailers B.V.', 'Paneltex Martrans', 'Panema Trailers (Eng) Ltd', 'Parcisa, S.L.U.', 'Pezzaioli', 'Carrozzeria Pezzaioli s.r.l.',
+    'Piacenza', 'Plowman Brothers Ltd', 'Polski', 'Priden Engineering Ltd', 'Quiacrix (Parcisa) SLU', 'Raven', 'Ray Goudy', 'Ray Smith', 'Reload Systems',
+    'Renders', 'R M Trailers', 'Road Tankers Northern Ltd', 'Robinson', 'Robinson Distribution', 'Rojo', 'Rolfo', 'Rothdean', 'Royen', 'RTS Trailmaster',
+    'Sayers Road Tankers', 'Schmitz', 'SDC Trailers Ltd', 'Solomon Commercials Ltd', 'Sommer GmbH', 'Spitzer', 'STAS', 'Stokota', 'Talson Trailers B.V.',
+    'TCL', 'Terex', 'Tirsan', 'Titan', 'Tiger Trailers Ltd', 'Trail-Fab', 'Trailor', 'Transport Engineering', 'Transporter Enterprises', 'Trent', 'Triffitt',
+    'Truckmate', 'TTS', 'Turbos Hoet', 'Turner', 'Unique', 'United', 'Utility', 'Vallelly', 'Van der Peet', 'Van Hool', 'Vipex', 'Vlastuin Rolling Equipment B.V.',
+    'Ward Fabrications', 'Weightlifter Bodies Ltd', 'Weightmaster', 'Welgro', 'Whale Tankers Ltd', 'Wheelbase', 'Wielton S.A.', 'Wilcox', 'Wilcox Commercial Vehicles Ltd',
+    'Wilson', 'Woolf Eng', 'Wraith', 'York', 'ZVVZ Machinery']
+  var rand = manu[Math.floor(Math.random() * manu.length)];
+  return rand;
 }
 
 // Create random weights

@@ -11,7 +11,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+<!-- <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
                 <div class="form-group">
@@ -19,7 +19,7 @@
 
                     <p class="paragraph">Confirmation of any transactions will be sent to this email address</p>
 
-                    <fieldset data-required data-error="Enter an email address">
+                    <fieldset data-required data-start="What is your email address?" data-error="Cannot be blank">
                         <legend class="visuallyhidden">
                             <span class="title">What is your email address?</span>
                         </legend>
@@ -34,7 +34,29 @@
                 </div>
             </div>
         </div>
-    </main>
+    </main> -->
+    <main id="content" role="main">
+            <div class="grid-row">
+                <div class="column-two-thirds">
+                    <div class="form-group">
+                        <fieldset data-required data-start="Email address" data-error="Cannot be blank">
+                            <legend>
+                                <h1 class="heading-large"><span class="title">What is your email address?</span></h1>
+                            </legend>
+
+                            <p class="paragraph">Confirmation of any transactions will be sent to this email address</p>
+
+                            <label class="form-label visually-hidden" for="email">Email address</label>
+                            <input class="form-control" id="email" type="text" name="email">
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="button" type="submit">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </main>
 {% endblock %}
 
 
@@ -83,8 +105,8 @@
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             if (type == "company") {
-                document.title = 'Change your company email address';
-                $('.title').html('Change your company email address');
+                document.title = 'Change your company email address?';
+                $('.title').html('Change your company email address?');
                 $('.button').html('Save and continue');
             } else if (type == "personal") {
                 document.title = 'Change your email address';
@@ -93,8 +115,8 @@
             }
         } else {
             if (type == "company") {
-                document.title = 'What is your company email address';
-                $('.title').html('What is your company email address');
+                document.title = 'What is your company email address?';
+                $('.title').html('What is your company email address?');
                 $('.button').html('Continue');
             } else if (type == "personal") {
                 document.title = 'What is your email address';
