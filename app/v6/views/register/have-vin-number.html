@@ -75,11 +75,10 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        var vin = '';
 
         $('.form-label.vin').click(function() {
-            randomVin();
-            $('input[id=vin-number]').val(vin);
+            var vin = '';
+            $('input[id=vin-number]').val(randomVin());
         });
         $('.form-label.chassis').click(function() {
             var testData = { "chassis": "4W289151" };
@@ -117,7 +116,8 @@
                     } else {
                         if (!member.trailer.regRandom) {
                             member.trailer.vin = value2;
-                            member.trailer.manufacturer = 'Rolfo';
+                            var manufacturer = randomManufacturer();
+                            member.trailer.manufacturer = manufacturer;
                             var weight1 = randomWeight(1,5000);
                             var weight2 = randomWeight(750,5000);
                             member.trailer.gross = weight2 + weight1;

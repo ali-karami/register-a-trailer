@@ -49,6 +49,11 @@
                     </li>
                     <li></li>
                 </ul>
+
+                <p class="bold-medium">member</p>
+                <ul class="list list-bullet">
+                    <li><a href="#" class="clear-member">Clear member</a></li>
+                </ul>
             </div>
         </details>
     </li>
@@ -128,5 +133,11 @@
                 }
             }
         }
+    });
+
+    $('a.clear-member').click(function(e) {
+        e.preventDefault();
+        delete member;
+        location.reload();
     });
 </script>
