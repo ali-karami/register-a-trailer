@@ -284,6 +284,47 @@ th {
   }
 }
 
+table#sortable-table .table-label {display: none; }
+table#sortable-table a.manage-link { display: none; }
+
+@media (max-width: 641px) {
+  span#trailer-table {
+    width: 100%;
+    position: relative;
+
+    thead { display: none; }
+
+    td {
+      display: block;
+      float: left;
+      width: 95%;
+
+      &:nth-child(2),
+      &:nth-child(3) { margin-top: .1em !important; padding-top: .1em !important; }
+    }
+  }
+
+  // Only show certain borders
+  table#sortable-table tr:first-child td:first-child { border-top: 1px solid #bfc1c3; }
+  table#sortable-table td:first-child,
+  table#sortable-table td:nth-child(2),
+  table#sortable-table td:last-child { border: none; }
+
+  // Table cells
+  table#sortable-table .table-label,
+  table#sortable-table .table-details { display: inline-block; }
+  table#sortable-table .table-label { width: 30%; min-width: 30% !important; }
+  table#sortable-table .table-details { width: 70%; min-width: 70% !important; font-weight: 700; }
+
+  table#sortable-table td#manage { display: none; }
+  table#sortable-table a.manage-link {
+    position: unset;
+    display: block;
+    float: right;
+    margin-top: -1.25em;
+  }
+}
+
 
 
 
