@@ -103,7 +103,8 @@
             $('.form-group.register').hide();
             var trailerList = '';
 
-            for (i = 0; i < member.trailers.length; i++) {
+            // for (i = 0; i < member.trailers.length; i++) {
+            for (i = member.trailers.length - 1; i >= 0; i--) {
                 if (member.trailers[i].registered == false) {
                     trailerList += '<div class="accordion-section"><div class="accordion-section-header">';
 
