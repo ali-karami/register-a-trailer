@@ -54,29 +54,35 @@
         $('.button').click(next);
 
         function next() {
-            member.user.address = member.address;
-            delete member.address;
-            delete member.addresses;
-
             if (changing == "true") {
                 if (refUrl == 'check-your-answers') {
+                    member.user.address = member.address;
+                    delete member.address;
+                    delete member.addresses;
                     go('/create/check-your-answers');
                 } else {
+                    member.user.address = member.address;
+                    delete member.address;
+                    delete member.addresses;
                     go('/success');
                 }
             } else {
+                member.user.address = member.address;
+                delete member.address;
+                delete member.addresses;
                 go('/create/email-address');
             }
         }
 
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
-            // $('input[name=address1]').val(member.user.address.Line1);
-            // $('input[name=address2]').val(member.user.address.Line2);
-            // $('input[name=address3]').val(member.user.address.Line3);
-            // $('input[name=posttown]').val(member.user.address.City);
-            // $('input[name=postcode]').val(member.user.address.PostalCode);
-            // $('.button').html('Save and continue');
+            var addressPlayback = '';
+            if (member.address.Line1) { addressPlayback += member.address.Line1 + '<br>'; }
+            if (member.address.Line2) { addressPlayback += member.address.Line2 + '<br>'; }
+            if (member.address.Line3) { addressPlayback += member.address.Line3 + '<br>'; }
+            if (member.address.City) { addressPlayback += member.address.City + '<br>'; }
+            if (member.address.PostalCode) { addressPlayback += member.address.PostalCode; }
+            $('#address').html(addressPlayback);
         } else {
             var addressPlayback = '';
             if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }

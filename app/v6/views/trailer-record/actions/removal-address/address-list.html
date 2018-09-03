@@ -28,7 +28,7 @@
                     </div>
                 </form>
 
-                <a href="/trailer-record">Cancel and go to trailer record</a>
+                <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
             </div>
         </div>
     </main>
@@ -66,12 +66,12 @@
         $('#address-list').html(addressHTML);
 
         function select(index) {
-            member.user.address = member.addresses[index];
+            member.address = member.addresses[index];
 
             if (changing == "true") {
-                go('/address/address-confirmation?change=true');
+                go('/trailer-record/actions/removal-address/address-confirmation?change=true');
             } else {
-                go('/address/address-confirmation');
+                go('/trailer-record/actions/removal-address/address-confirmation');
             }
         }
     </script>

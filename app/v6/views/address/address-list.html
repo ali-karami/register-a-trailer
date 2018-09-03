@@ -64,11 +64,12 @@
         $('#address-list').html(addressHTML);
 
         function select(index) {
-            member.user.address = member.addresses[index];
-
+            
             if (changing == "true") {
+                member.address = member.addresses[index];
                 go('/address/address-confirmation?change=true');
             } else {
+                member.user.address = member.addresses[index];
                 go('/address/address-confirmation');
             }
         }

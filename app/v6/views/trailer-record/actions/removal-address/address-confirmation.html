@@ -35,10 +35,10 @@
                     <div class="form-group">
                         <button class="button" type="button">Yes, continue</button>
                     </div>
-                    
+
                     <a href="/address/address-manual">This address is not correct</a><br><br>
 
-                    <a href="/trailer-record">Cancel and go to trailer record</a>
+                    <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
                 </form>
             </div>
         </div>
@@ -81,11 +81,11 @@
             // $('.button').html('Save and continue');
         } else {
             var addressPlayback = '';
-            if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
-            if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
-            if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
-            if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
-            if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
+            if (member.disposal.address.Line1) { addressPlayback += member.disposal.address.Line1 + '<br>'; }
+            if (member.disposal.address.Line2) { addressPlayback += member.disposal.address.Line2 + '<br>'; }
+            if (member.disposal.address.Line3) { addressPlayback += member.disposal.address.Line3 + '<br>'; }
+            if (member.disposal.address.City) { addressPlayback += member.disposal.address.City + '<br>'; }
+            if (member.disposal.address.PostalCode) { addressPlayback += member.disposal.address.PostalCode; }
             $('#address').html(addressPlayback);
         }
     </script>

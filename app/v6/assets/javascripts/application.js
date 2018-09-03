@@ -174,7 +174,7 @@ $(document).ready(function () {
       $('.logged-user').css('display', 'none');
     }
     $('#logged-user-name').html(member.user.name).css('text-transform', 'capitalize');
-  
+
     $('a.log-out').click(function(e) {
       // e.preventDefault();
       member.clear();
@@ -184,3 +184,8 @@ $(document).ready(function () {
   // Add space for new style errors
   $('main#content').find('.grid-row').addClass('question');
 });
+
+// Delete disposal on link click
+function deleteDisposal() {
+  delete member.disposal;
+}
