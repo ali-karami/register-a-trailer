@@ -35,13 +35,14 @@
                                 <option value="3">4 trailers</option>
                                 <option value="4">5 trailers</option>
                                 <option value="9">10 trailers</option>
-                                <option value="14">15 trailers</option>
                                 <option value="19">20 trailers</option>
-                                <option value="24">25 trailers</option>
                                 <option value="49">50 trailers</option>
                                 <option value="74">75 trailers</option>
                                 <option value="99">100 trailers</option>
                                 <option value="199">200 trailers</option>
+                                <option value="499">500 trailers</option>
+                                <option value="749">750 trailers</option>
+                                <option value="999">1000 trailers</option>
                                 <option value="1999">2000 trailers</option>
                             </select><br>
                             <a href="#" class="add-trailers">Add trailers</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,12 +84,14 @@
         e.preventDefault();
         delete member.user;
         location.reload();
+        $(document).scrollTop(0);
     });
 
     $('a.delete-trailers').click(function(e) {
         e.preventDefault();
         delete member.trailers;
         location.reload();
+        $(document).scrollTop(0);
     });
 
     $('a.add-trailers').click(function(e) {
@@ -111,6 +114,7 @@
         delete i;
         delete member.trailer;
         location.reload();
+        $(document).scrollTop(0);
 
         function addTrailer() {
             // var reg = '', vin = '', maufacturer = '', weight1 = '', weight2 = '', gross = '', unladen = '', registered = '';
@@ -144,5 +148,6 @@
         e.preventDefault();
         delete member;
         location.reload();
+        $(document).scrollTop(0);
     });
 </script>
