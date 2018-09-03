@@ -1,0 +1,88 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Will this trailer be used commercially? {% endblock %}
+
+{% block head %}
+  {% include "includes/head.html" %}
+  {% include "includes/scripts/default.html" %}
+{% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        .error-summary,
+        .error-message { display: none; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="form-group">
+                    <fieldset class="inline" data-required>
+                        <legend>
+                            <h1 class="heading-large">Will this trailer be used commercially?</h1>
+                        </legend>
+
+                        <div class="form-group">
+                            <details>
+                                <summary><span class="summary">What do we mean by commercially?</span></summary>
+
+                                <div class="panel panel-border-narrow">
+                                  <p>A commercial trailer is a trailer used for the transport of goods or passengers’ belongings for commercial purposes,
+                                      such as transport for hire and reward or own-account transport, or for other professional purposes.</p>
+                                </div>
+                            </details>
+                        </div>
+
+                        {% include "includes/errors/error-message.html" %}
+
+                        <div class="multiple-choice">
+                            <input id="radio-1" type="radio" name="radio-group-commercial" value="Y">
+                            <label for="radio-1">Yes</label>
+                        </div>
+                        <div class="multiple-choice" data-target="over-3500">
+                            <input id="radio-2" type="radio" name="radio-group-commercial" value="N">
+                            <label for="radio-2">No</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(validate);
+
+        function validate() {
+            var value1 = $('input[name=radio-group-commercial]:checked').val();
+
+            if (!value) {
+                checkErrors();
+            } else {
+                next();
+            }
+
+            function next() {
+                if (value1 === 'Y') {
+                    go('/register/have-registration-number');
+                } else if (value1 === 'N') {
+                    go('/exit');
+                }
+            }
+        }
+    </script>
+{% endblock %}

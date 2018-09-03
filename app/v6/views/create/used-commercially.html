@@ -3,8 +3,8 @@
 {% block page_title %} Will any of these trailers be used commercially? {% endblock %}
 
 {% block head %}
-  {% include "includes/head.html" %}
-  {% include "includes/scripts/default.html" %}
+    {% include "includes/head.html" %}
+    {% include "includes/scripts/default.html" %}
 {% endblock %}
 
 {% block after_header %}
@@ -116,12 +116,6 @@
             // $('.error-message').hide();
             hideErrors();
         });
-/*
-
-        $('input[name=countries]').not('input#country-none').click(function () {
-            $('input#country-none').removeAttr('checked');
-        });
-*/
 
         function showErrors() {
             var title = $(document).prop('title');

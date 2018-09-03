@@ -1,6 +1,6 @@
 {% extends "layout-v6.html" %}
 
-{% block page_title %} Will you be travelling to any of the following countries with any of these trailers? {% endblock %}
+{% block page_title %} Will you be travelling to any of the following countries with this trailer? {% endblock %}
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <fieldset data-required>
                             <legend>
-                                <h1 class="heading-large">Will you be travelling to any of the following countries with any of these trailers?</h1>
+                                <h1 class="heading-large">Will you be travelling to any of the following countries with this trailer?</h1>
                             </legend>
 
                             <span class="body-text">Select all the countries that apply</span>
@@ -83,13 +83,21 @@
 
             function next() {
                 if (value == 'none') {
-                    go('/create/used-commercially');
+                    if (member.user.type == 'company') {
+                        go('/register/have-registration-number');
+                    } else {
+                        if (member.trailer.gross > 3500) {
+                            go('/register/have-registration-number');
+                        } else {
+                            go('/register/check/used-commercially');
+                        }
+                    }
                 } else {
                     member.countries = [];
                     $('input[name=countries]:checked').each(function (num, el) {
                         member.countries.push(el.getAttribute('value'));
                     });
-                    go('/create/travelling-through');
+                    go('/register/check/travelling-through');
                 }
             }
         }
