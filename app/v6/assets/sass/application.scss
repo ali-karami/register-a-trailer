@@ -257,6 +257,47 @@ details.member-things .panel.panel-border-narrow  {
 
   #manage { text-align: right; font-weight: 700; }
 }
+@media (max-width: 641px) {
+  #content.trailer-record {
+    .column-full {
+      button { margin-top: 1.5em; }
+    }
+    .heading-section {
+      .heading {
+        float: none;
+        width: 100%;
+
+        h1.heading-large {
+          width: 100%;
+          display: block;
+          span { margin-bottom: 2em; }
+        }
+      }
+
+      .change {
+        display: block;
+        float: none;
+        width: 100%;
+        height: 50px;
+        // margin-top: -1em;
+        // position: relative;
+
+        p {
+          display: block;
+          margin-top: -5em;
+          // position: absolute;
+          // text-align: left;
+          // left: 0;
+          a {
+            // position: fixed;
+            left: 0 !important;
+            // padding-left: 1em;
+          }
+        }
+      }
+    }
+  }
+}
 
 // Sortable table
 table#sortable-table thead tr th:hover { cursor: pointer; }
