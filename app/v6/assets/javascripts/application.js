@@ -37,8 +37,8 @@ try {
   var currentTrailer = member.trailers[member.currentTrailerPosition];
 } catch(err){}
 
-var trailerCost = 55;
-var certificateCost = 20;
+var trailerCost = 0;
+var certificateCost = 0;
 var enpac = 'electronic number plate authorisation certificate (eV948)';
 
 // Create random registration number
