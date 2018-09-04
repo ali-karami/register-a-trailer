@@ -102,7 +102,7 @@
             if (value1 === 'Y') {
                 if ((value2 === '') || (value2 === undefined)) {
                     validInput = false;
-                    $('.error-message.2').html('VIN is empty');
+                    $('.error-message.2').html('VIN cannot be empty');
                 } else if ((value2 > 0)|| (value2 < 17) ) {
                     validInput = false;
                     $('.error-message.2').html('VIN must be 17 characters');
@@ -136,7 +136,7 @@
             } else if (value1 === 'N') {
                 if (!value3) {
                     validInput = false;
-                    $('.error-message.2').html('VIN is empty');
+                    $('.error-message.2').html('VIN cannot be empty');
                 }
 
                 if (validInput) {

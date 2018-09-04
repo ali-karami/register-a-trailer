@@ -2,11 +2,11 @@
 // ==========================================================================
 
 // Config
-// var defaultErrorSummaryHeading = 'There has been a problem';
-var defaultErrorSummaryHeading = 'There’s a problem with the information you have provided';
-// var defaultErrorSummaryDescription = 'Amend the following to continue';
-var defaultErrorSummaryDescription = 'Amend the following details to continue';
-var defaultErrorMessage = 'Select an option to continue';
+var defaultErrorSummaryHeading = 'There has been a problem';
+var defaultErrorSummaryDescription = 'Amend the following to continue';
+var defaultTextFieldErrorMessage = 'Cannot be empty';
+var defaultSelectorErrorSummaryErrorMessage = 'Select an option to continue';
+var defaultSelectorErrorMessage = 'Select an option to continue';
 
 // $(document).on('submit', 'form', function (e) {
 function checkErrors() {
@@ -108,16 +108,14 @@ function checkTextFields(errors) {
                 $(this).attr('id', $(this).attr('name'));
             }
 
-            errors.push(
-                {
-                    id: $(this).attr('id'),
-                    name: $(this).attr('name'),
-                    errorMessage: $formgroup.attr('data-error') || defaultErrorMessage,
-                    // label: label,
-                    label: $formgroup.attr('data-start') || defaultLabel,
-                    type: 'text, password'
-                }
-            );
+        errors.push({
+                id: $(this).attr('id'),
+                name: $(this).attr('name'),
+                errorMessage: $formgroup.attr('data-error') || defaultTextFieldErrorMessage,
+                // label: label,
+                label: $formgroup.attr('data-start') || defaultLabel,
+                type: 'text, password'
+            });
         }
     });
     return;
@@ -138,16 +136,14 @@ function checkSelectors(errors) {
 
             if (checked.indexOf($(this).attr('name')) < 0) {
                 checked.push($(this).attr('name'));
-                errors.push(
-                    {
-                        id: $(this).attr('id'),
-                        name: $(this).attr('name'),
-                        errorMessage: $fieldset.attr('data-error') || defaultErrorMessage,
-                        // label: label,
-                        label: $fieldset.attr('data-start') || defaultLabel,
-                        type: 'text, password'
-                    }
-                );
+                errors.push({
+                    id: $(this).attr('id'),
+                    name: $(this).attr('name'),
+                    errorMessage: $fieldset.attr('data-error') || defaultSelectorErrorMessage,
+                    // label: label,
+                    label: $fieldset.attr('data-start') || defaultLabel,
+                    type: 'text, password'
+                });
             }
         }
     });

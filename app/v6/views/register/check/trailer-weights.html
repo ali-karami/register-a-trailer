@@ -4,7 +4,7 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style>
+    <style type="text/css">
         details { margin-top: .75em; }
     </style>
 {% endblock %}
@@ -17,8 +17,8 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
-                <fieldset data-required>
-                    <div class="form-group">
+                <div class="form-group">
+                    <fieldset data-required data-start="Gross weight" data-error="Cannot be empty">
 
                         <h1 class="heading-large">
                             <span class="title">Enter trailer weights</span>
@@ -38,9 +38,12 @@
                                     It is also known as the Maximum Permissible Mass.</p>
                             </div>
                         </details>
-                    </div>
+                    </fieldset>
+                </div>
 
-                    <div class="form-group">
+                <div class="form-group">
+                    <fieldset data-required data-start="Unladen weight" data-error="Cannot be empty">
+
                         <label class="form-label" for="unladen-weight">Unladen weight (kg)</label>
                         <input class="form-control" id="unladen-weight" name="unladen-weight" type="text">
 
@@ -53,10 +56,10 @@
                                 <p>The weight of an empty trailer, including any permanent modifications.</p>
                             </div>
                         </details>
-                    </div>
+                    </fieldset>
+                </div>
 
-                    {% include "includes/buttons/continue.html" %}
-                </fieldset>
+                {% include "includes/buttons/continue.html" %}
             </div>
         </div>
     </main>

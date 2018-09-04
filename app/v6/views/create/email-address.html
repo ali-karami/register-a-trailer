@@ -11,35 +11,11 @@
 
 
 {% block content %}
-<!-- <main id="content" role="main">
-        <div class="grid-row">
-            <div class="column-two-thirds">
-                <div class="form-group">
-                    <h1 class="heading-large"><span class="title">What is your email address?</span></h1>
-
-                    <p class="paragraph">Confirmation of any transactions will be sent to this email address</p>
-
-                    <fieldset data-required data-start="What is your email address?" data-error="Cannot be blank">
-                        <legend class="visuallyhidden">
-                            <span class="title">What is your email address?</span>
-                        </legend>
-
-                        <label class="form-label visually-hidden" for="email">Email address</label>
-                        <input class="form-control" id="email" type="text" name="email">
-                    </fieldset>
-                </div>
-
-                <div class="form-group">
-                    <button class="button" type="submit">Continue</button>
-                </div>
-            </div>
-        </div>
-    </main> -->
     <main id="content" role="main">
             <div class="grid-row">
                 <div class="column-two-thirds">
                     <div class="form-group">
-                        <fieldset data-required data-start="Email address" data-error="Cannot be blank">
+                        <fieldset data-required data-start="Email address" data-error="Cannot be empty">
                             <legend>
                                 <h1 class="heading-large"><span class="title">What is your email address?</span></h1>
                             </legend>
@@ -51,9 +27,7 @@
                         </fieldset>
                     </div>
 
-                    <div class="form-group">
-                        <button class="button" type="submit">Continue</button>
-                    </div>
+                    {% include "includes/buttons/continue.html" %}
                 </div>
             </div>
         </main>

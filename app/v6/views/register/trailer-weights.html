@@ -4,7 +4,7 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style>
+    <style type="text/css">
         details { margin-top: .75em; }
     </style>
 {% endblock %}
@@ -17,46 +17,71 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
-                <fieldset data-required>
-                    <div class="form-group">
+                <h1 class="heading-large"><span class="title">Enter trailer weights</span></h1>
 
-                        <h1 class="heading-large">
-                            <span class="title">Enter trailer weights</span>
-                        </h1>
 
-                        <label class="form-label" for="gross-weight">Gross weight (kg)</label>
+
+
+                <!-- <div class="form-group">
+                    <fieldset data-required data-start="Gross weight" data-error="Cannot be blank">
+                        <label class="form-label" for="full-name">
+                            Full name
+                            <span class="form-hint">As shown on your birth certificate or passport</span>
+                        </label>
+                        <legend>Full name</legend>
+                        <input id="full-name" class="form-control" name="full-name" type="text">
+                    </fieldset>
+                </div> -->
+
+
+
+                <div class="form-group">
+                    <fieldset data-required data-start="Gross weight" data-error="Cannot be empty">
+                        <label class="form-label" for="gross-weight">
+                            <legend>Gross weight (kg)</legend>
+                        </label>
                         <input class="form-control" id="gross-weight" name="gross-weight" type="text">
+                    </fieldset>
+                </div>
 
-                        <details>
-                            <summary>
-                                <span class="summary">What is gross weight?</span>
-                            </summary>
+                <div class="form-group">
+                    <details>
+                        <summary>
+                            <span class="summary">What is gross weight?</span>
+                        </summary>
+    
+                        <div class="panel panel-border-narrow">
+                            <p>This is specified by the manufacturer and it means the maximum weight the trailer is allowed to be when fully loaded.
+                                It is the unladen weight of the trailer plus the maximum permitted payload.
+                                It is also known as the Maximum Permissible Mass.</p>
+                        </div>
+                    </details>
+                </div>
 
-                            <div class="panel panel-border-narrow">
-                                <p>This is specified by the manufacturer and it means the maximum weight the trailer is allowed to be when fully loaded.
-                                    It is the unladen weight of the trailer plus the maximum permitted payload.
-                                    It is also known as the Maximum Permissible Mass.</p>
-                            </div>
-                        </details>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="unladen-weight">Unladen weight (kg)</label>
+
+                <div class="form-group">
+                    <fieldset data-required data-start="Unladen weight" data-error="Cannot be empty">
+                        <label class="form-label" for="unladen-weight">
+                            <legend>Unladen weight (kg)</legend>
+                        </label>
                         <input class="form-control" id="unladen-weight" name="unladen-weight" type="text">
+                    </fieldset>
+                </div>
 
-                        <details>
-                            <summary>
-                                <span class="summary">What is unladen weight?</span>
-                            </summary>
+                <div class="form-group">
+                    <details>
+                        <summary>
+                            <span class="summary">What is unladen weight?</span>
+                        </summary>
 
-                            <div class="panel panel-border-narrow">
-                                <p>The weight of an empty trailer, including any permanent modifications.</p>
-                            </div>
-                        </details>
-                    </div>
+                        <div class="panel panel-border-narrow">
+                            <p>The weight of an empty trailer, including any permanent modifications.</p>
+                        </div>
+                    </details>
+                </div>
 
-                    {% include "includes/buttons/continue.html" %}
-                </fieldset>
+                {% include "includes/buttons/continue.html" %}
             </div>
         </div>
     </main>

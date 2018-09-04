@@ -14,28 +14,26 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
-                <form class="form">
-                    <div class="form-group">
-                        <fieldset data-required data-error="Provide a valid postcode">
-                            <legend>
-                                <h1 class="heading-large">Find your address</h1>
-                            </legend>
+                <h1 class="heading-large">Find your address</h1>
 
-                            <div class="form-group">
-                                <label class="form-label" for="number">Building name or number (optional)</label>
-                                <input class="form-control" id="number" name="number" type="text">
-                            </div>
-                            <div class="form-group postcode">
-                                <label class="form-label" for="postcode">Postcode</label>
-                                <input class="form-control" id="postcode" name="postcode" type="text">
-                            </div>
-                        </fieldset>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label" for="number">Building name or number (optional)</label>
+                    <input class="form-control" id="number" name="number" type="text">
+                </div>
 
-                    <div class="form-group">
-                        <button class="button" type="button" onclick="validate()">Find UK address</button>
-                    </div>
-                </form>
+                <div class="form-group postcode">
+                    <fieldset data-required data-start="Postcode" data-error="Provide a valid postcode">
+                        <label class="form-label" for="postcode">
+                            Postcode
+                            <legend></legend>
+                        </label>
+                        <input class="form-control" id="postcode" name="postcode" type="text">
+                    </fieldset>
+                </div><br>
+
+                <div class="form-group">
+                    <button class="button" type="button" onclick="validate()">Find UK address</button>
+                </div>
             </div>
         </div>
     </main>
