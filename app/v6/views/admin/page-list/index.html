@@ -3,7 +3,7 @@
 {% block page_title %} Admin | Page list {% endblock %}
 
 {% block after_header %}
-    {% include "includes/phase-banner/standard-noback.html" %}
+    {% include "includes/phase-banner/standard.html" %}
     <style type="text/css">
         .grid-row.no-back { display: none; }
         .grid-row.question { margin-top: 0; }
@@ -23,7 +23,7 @@
 
 {% block content %}
     <main id="content" role="main">
-        <div class="grid-row">
+        <div class="grid-row no-question">
             <div class="column-full">
                 <div class="breadcrumbs">
                     <ol>

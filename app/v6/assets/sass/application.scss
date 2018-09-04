@@ -54,13 +54,15 @@ strong { font-weight: 700; }
 // .grid-row.no-back { min-height: 51px; }
 
 // Margin padding
-.margin-bottom-0 { margin-bottom: 0 !important; }
-// .margin-top-1 { margin-top: 1em !important; }
+.margin-top-0 { margin-top: 0 !important; }
+.margin-top-1 { margin-top: 1em !important; }
 // .margin-top-2 { margin-top: 2em !important; }
+.margin-bottom-0 { margin-bottom: 0 !important; }
 .form-control#postcode { text-transform: uppercase; }
 // #plural { display: none; }
 // #record-type { display: none; }
 .question { margin-top: 1.25em; }
+.no-question { margin-top: 2em; }
 h1.heading-large { margin-top: 0; }
 .form-group.postcode { margin-bottom: 0; }
 
@@ -125,9 +127,10 @@ details.member-things .panel.panel-border-narrow  {
 
 // No back
 // ==========================================================================
-.no-back {
-  min-height: 1.25em;
-  margin: 0 auto;
+.no-back * {
+  color: $page-colour !important;
+//   min-height: 1.25em;
+//   margin: 0 auto;
 }
 
 
@@ -378,7 +381,7 @@ table#sortable-table a.manage-link { display: none; }
 // register/trailer-summary.html
 // ==========================================================================
 #content.trailer-summary-page {
-  .column-third { margin-top: 1.25em; }
+  .column-third { margin-top: .1em; }
   .accordion.with-js { border: none; }
   .accordion-section {
     border: 2px solid $border-colour;

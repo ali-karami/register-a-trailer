@@ -181,8 +181,21 @@ $(document).ready(function () {
       go('/');
     });
   } catch(err){}
+
   // Add space for new style errors
-  $('main#content').find('.grid-row').addClass('question');
+  // $('main#content').find('.grid-row').addClass('question');
+
+
+  if ($('main#content').find('.grid-row').hasClass('no-question')) {
+    console.log('.no-question FOUND');
+  } else {
+    console.log('.no-question not found');
+    $('main#content').find('.grid-row').addClass('question');
+  }
+
+
+
+
 });
 
 // Delete disposal on link click
