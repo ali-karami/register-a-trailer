@@ -8,7 +8,6 @@ var defaultTextFieldErrorMessage = 'Cannot be empty';
 var defaultSelectorErrorSummaryErrorMessage = 'Select an option to continue';
 var defaultSelectorErrorMessage = 'Select an option to continue';
 
-// $(document).on('submit', 'form', function (e) {
 function checkErrors() {
     var requiredFieldsPresent = $(document).find('[data-required]').length > 0;
 
@@ -21,16 +20,11 @@ function checkErrors() {
         checkSelectors(errors);
 
         if (errors.length > 0) {
-            // e.preventDefault();
             creatErrorSummary();
             createErrorMessages(errors);
             $(document).scrollTop(0);
         }
-        // else {
-        //     next();
-        // }
     }
-// });
 }
 
 function removeErrors() {
@@ -67,7 +61,7 @@ function createErrorMessages(errors) {
     for (var i = 0; i < errors.length; i++) {
         if ($(document).find('a[href="#' + errors[i].id + '"]').length === 0) {
             $('.error-summary-list').append(
-                '<li><a href="#' + errors[i].id + '">' + errors[i].label + ' - ' + errors[i].errorMessage + '</a></li>'
+                '<li><a href="#' + errors[i].id + '">' + errors[i].label + ' ' + errors[i].errorMessage.toLowerCase() + '</a></li>'
             );
 
             var $formgroup = $(document).find('#' + errors[i].id).parents('.form-group');
@@ -81,7 +75,7 @@ function createErrorMessages(errors) {
                             '<span class="error-message">' + errors[i].errorMessage + '</span>'
                         );
                     } else {
-                        $formgroup.find('legend').after().append(
+                        $formgroup.find('label').after().append(
                             '<span class="error-message">' + errors[i].errorMessage + '</span>'
                         );
 
@@ -100,8 +94,7 @@ function createErrorMessages(errors) {
 function checkTextFields(errors) {
     $(document).find('input[type="text"],input[type="password"], textarea').each(function () {
         var $formgroup = $(this).parents('fieldset');
-        // var label = $(this).parent().find('error-start').clone().children().remove().end().text();
-        var defaultLabel = $(this).parent().find('error-start').clone().children().remove().end().text();
+        var defaultLabel = $(this).parent().find('label').clone().children().remove().end().text();
 
         if ($formgroup.attr('data-required') !== undefined && $(this).val() === '' && !$(this).parent().hasClass('js-hidden')) {
             if ($(this).attr('id') === undefined) {
@@ -113,7 +106,7 @@ function checkTextFields(errors) {
                 name: $(this).attr('name'),
                 errorMessage: $formgroup.attr('data-error') || defaultTextFieldErrorMessage,
                 // label: label,
-                label: $formgroup.attr('data-start') || defaultLabel,
+                label: $formgroup.attr('data-error-start') || defaultLabel,
                 type: 'text, password'
             });
         }
@@ -126,7 +119,6 @@ function checkSelectors(errors) {
 
     $(document).find('input[type="radio"], input[type="checkbox"]').each(function () {
         var $fieldset = $(this).parents('fieldset');
-        // var label = $fieldset.find('legend h1').clone().children().remove().end().text();
         var defaultLabel = $fieldset.find('legend h1').clone().children().remove().end().text();
 
         if ($fieldset.attr('data-required') !== undefined && $fieldset.find(':checked').length === 0) {
@@ -140,8 +132,7 @@ function checkSelectors(errors) {
                     id: $(this).attr('id'),
                     name: $(this).attr('name'),
                     errorMessage: $fieldset.attr('data-error') || defaultSelectorErrorMessage,
-                    // label: label,
-                    label: $fieldset.attr('data-start') || defaultLabel,
+                    label: $fieldset.attr('data-error-start') || defaultLabel,
                     type: 'text, password'
                 });
             }

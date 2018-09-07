@@ -32,8 +32,7 @@
                             <h1 class="heading-large"><span class="title">What is your name?</span></h1>
                         </legend>
 
-                        <label class="form-label visually-hidden" for="name">Name</label>
-                        <input class="form-control" id="name" type="text" name="name">
+                        <span id="name-input"></span>
                     </fieldset>
                 </div>
 
@@ -64,24 +63,53 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        $('h1').click(function() {
-            var testData = {"companyName": "Road International Transport and Logistics GmbH (Austria)"};
-            // $('input[name=input-autocomplete]').val(testData.companyName);
-            $('input[name=name]').val(testData.companyName);
-        });
-
         try { var type = member.user.type; } catch(err){}
         var refUrl = getRefUrl();
+
+        $(document).ready(function() {
+            if (type == "company") {
+                $('h1').click(function() {
+                    var testData = {"companyName": "Road International Transport and Logistics GmbH (Austria)"};
+                    $('input[name=company-name]').val(testData.companyName);
+                });
+                $('#company').show();
+                $('#personal').hide();
+                $('#name-input').html('<div class="form-group"><label class="form-label" for="company-name">Company name</label><input class="form-control" id="company-name" name="company-name" type="text"></div>');
+            } else if (type == "personal") {
+                $('h1').click(function() {
+                    var testData = { "firstName": "Matthew", "lastName": "Davies" };
+                    $('input[name=first-name]').val(testData.firstName);
+                    $('input[name=last-name]').val(testData.lastName);
+                });
+                $('#company').hide();
+                $('#personal').show();
+                $('#name-input').html('<div class="form-group"><label class="form-label" for="first-name">First name</label><input class="form-control" id="first-name" name="first-name" type="text"></div><div class="form-group"><label class="form-label" for="last-name">Last name</label><input class="form-control" id="last-name" name="last-name" type="text"></div>');
+            }
+        });
 
         $('.button').click(validate);
 
         function validate() {
             var validInput = true;
-            var value = $('input[name=name]').val();
+            var value1 = $('input[name=first-name]').val();
+            var value2 = $('input[name=last-name]').val();
+            var value3 = $('input[name=company-name]').val();
 
-            if (!value) {
-                validInput = false;
-                checkErrors();
+            if (type == "company") {
+                if (!value3) {
+                    validInput = false;
+                    checkErrors();
+                }
+            } else if (type == "personal") {
+                if (!value1) {
+                    validInput = false;
+                    checkErrors();
+                }
+
+                if (!value2) {
+                    validInput = false;
+                    checkErrors();
+                }
             }
 
             if (validInput) {
@@ -89,8 +117,16 @@
                     member.user = {};
                 }
 
-                member.user.name = value;
-                console.log('Company name: ' + member.user.name);
+                if (type == "company") {
+                    member.user.name = value3;
+                } else if (type == "personal") {
+                    member.user.firstName = value1;
+                    member.user.lastName = value2;
+                    member.user.fullName = value1 + ' ' + value2;
+                }
+                console.log('First name: ' + member.user.firstName);
+                console.log('Last name: ' + member.user.lastName);
+                console.log('name: ' + member.user.name);
                 next();
             }
 
