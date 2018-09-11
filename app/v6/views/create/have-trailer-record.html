@@ -14,10 +14,13 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
                 <div class="form-group">
-                    <fieldset class="inline" data-required>
+                    <fieldset class="inline">
                         <legend>
                             <h1 class="heading-large">Do you have a trailer record?</h1>
+                            {% include "includes/errors/error-message.html" %}
                         </legend>
 
                         <!-- <div class="form-group">
@@ -60,10 +63,15 @@
         function validate() {
             var value = $('input[name=radio-group]:checked').val();
 
-            if (!value) {
-                checkErrors();
-            } else {
+            if (value == 'Y') {
                 next();
+            } else if (value == 'N') {
+                next();
+            } else {
+                hideErrors();
+                showErrors();
+                $('.error-summary-list li a').html('Select an option to continue');
+                $('.error-message').html('Select an option');
             }
 
             function next() {

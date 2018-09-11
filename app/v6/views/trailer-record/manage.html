@@ -109,19 +109,23 @@
         function validate() {
             var value = $('input[name=radio-group]:checked').val();
 
-            if (!value) {
-                checkErrors();
-            } else {
+            if (value == 'certificate') {
                 next();
+            } else if (value == 'remove') {
+                next();
+            } else if (value == 'weight') {
+                next();
+            } else {
+                showErrors();
             }
 
             function next() {
-                if (value == 'weight') {
-                    go('/register/trailer-weights?change=true');
-                } else if (value == 'certificate') {
+                if (value == 'certificate') {
                     go('/trailer-record/actions/new-certificate');
                 } else if (value == 'remove') {
                     go('/trailer-record/actions/remove');
+                } else if (value == 'weight') {
+                    go('/register/trailer-weights');
                 } else {
                     showErrors();
                 }

@@ -43,29 +43,29 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        // $(document).ready(function () {
-            var countries = '';
-            for (i=0; i < member.countries.length; i++) {
-                if (i === (member.countries.length - 1)) {
-                    countries += member.countries[i];
-                } else if (i === (member.countries.length - 2)) {
-                    countries += member.countries[i] + ' and ';
-                } else {
-                    countries += member.countries[i] + ', ';
-                }
+        var countries = '';
+        for (i=0; i < member.countries.length; i++) {
+            if (i === (member.countries.length - 1)) {
+                countries += member.countries[i];
+            } else if (i === (member.countries.length - 2)) {
+                countries += member.countries[i] + ' and ';
+            } else {
+                countries += member.countries[i] + ', ';
             }
-            $('.countries').html(countries);
-        // });
+        }
+        $('.countries').html(countries);
 
         $('.button').click(validate);
 
         function validate() {
             var value = $('input[name=radio-group]:checked').val();
 
-            if (!value) {
-                checkErrors();
-            } else {
+            if (value == 'Y') {
                 next();
+            } else if (value == 'N') {
+                next();
+            } else {
+                showErrors();
             }
 
             function next() {

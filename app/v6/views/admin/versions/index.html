@@ -26,11 +26,11 @@
                 <div class="breadcrumbs">
                     <ol>
                         <li><a href="/admin">Admin</a></li>
-                        <li>Page list</li>
+                        <li>Prototype versions</li>
                     </ol>
                 </div>
 
-                <h1 class="heading-large">Page list</h1>
+                <h1 class="heading-large">Prototype versions</h1>
             </div>
         </div>
 
@@ -38,41 +38,11 @@
         <div class="grid-row">
             <div class="column-full">
                 <div class="column-third first">
-                    {% include "admin/page-list/_create.html" %}
+                    {% include "admin/versions/_ux.html" %}
                 </div>
 
                 <div class="column-third">
-                    {% include "admin/page-list/_register.html" %}
-                </div>
-
-                <div class="column-third">
-                    {% include "admin/page-list/_keeper-details.html" %}
-                </div>
-            </div>
-        </div>
-
-
-        <div class="grid-row">
-            <div class="column-full">
-                <div class="column-third">
-                    {% include "admin/page-list/_change-weight.html" %}
-                </div>
-
-                <div class="column-third">
-                    {% include "admin/page-list/_replacement-certificate.html" %}
-                </div>
-                
-                <div class="column-third">
-                    {% include "admin/page-list/_sold.html" %}
-                </div>
-            </div>
-        </div>
-
-
-        <div class="grid-row">
-            <div class="column-full">
-                <div class="column-third">
-                    {% include "admin/page-list/_export.html" %}
+                    {% include "admin/versions/_build.html" %}
                 </div>
             </div>
         </div>

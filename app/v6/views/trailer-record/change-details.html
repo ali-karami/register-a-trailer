@@ -57,7 +57,7 @@
 {% block body_end %}
     <script type="text/javascript">
         try {
-            $('#name').html(member.user.name).css('text-transform', 'capitalize');
+            $('#name').html(member.user.fullName).css('text-transform', 'capitalize');
             var addressPlayback = '';
             if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
             if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }

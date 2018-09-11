@@ -58,26 +58,27 @@
         function validate() {
             var value = $('input[name=radio-group]:checked').val();
 
-            if (!value) {
-                checkErrors();
-            } else {
+            if (member.disposal === undefined) {
+                member.disposal = {};
+            }
+
+            if (value == 'sold') {
+                member.disposal.type = "sold";
                 next();
+            } else if (value == 'scrapped') {
+                member.disposal.type = "scrapped";
+                next();
+            } else if (value == 'exported') {
+                member.disposal.type = "exported";
+                next();
+            } else if (value == 'outside-uk') {
+                member.disposal.type = "outside";
+                next();
+            } else {
+                showErrors();
             }
 
             function next() {
-                if (member.disposal === undefined) {
-                    member.disposal = {};
-                }
-                if (value == 'sold') {
-                    member.disposal.type = "sold";
-                } else if (value == 'scrapped') {
-                    member.disposal.type = "scrapped";
-                } else if (value == 'exported') {
-                    member.disposal.type = "exported";
-                } else if (value == 'outside-uk') {
-                    member.disposal.type = "outside";
-                }
-
                 go('/trailer-record/actions/removal-date');
             }
         }

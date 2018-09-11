@@ -17,11 +17,25 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                    <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There has been a problem</h1>
+
+                    <p>Amend the following to continue</p>
+
+                    <ul class="error-summary-list">
+
+                    </ul>
+                </div>
+
+
+
+
                 <div class="form-group">
                     <fieldset data-required data-start="Gross weight" data-error="Cannot be empty">
 
                         <h1 class="heading-large">
                             <span class="title">Enter trailer weights</span>
+                            <span class="error-message">Cannot be empty</span>
                         </h1>
 
                         <label class="form-label" for="gross-weight">Gross weight (kg)</label>
@@ -93,11 +107,11 @@
                 member.trailer = {};
             }
 
-            if (!value1) {
+            if ((!value1) || (!value2)) {
                 validInput = false;
             }
 
-            if (!value2) {
+            if (value1 <= 750) {
                 validInput = false;
             }
 
@@ -123,10 +137,11 @@
                     go('/register/check/used-outside-uk');
                 }
             } else {
-                checkErrors();
+                showErrors();
             }
         }
 
+        // If coming from check your answers page
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             $('input[id=gross-weight]').val(currentTrailer.gross);

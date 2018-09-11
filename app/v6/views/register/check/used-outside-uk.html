@@ -48,10 +48,12 @@
         function validate() {
             var value = $('input[name=radio-group]:checked').val();
 
-            if (!value) {
-                checkErrors();
-            } else {
+            if (value == 'Y') {
                 next();
+            } else if (value == 'N') {
+                next();
+            } else {
+                showErrors();
             }
 
             function next() {

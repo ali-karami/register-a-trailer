@@ -9,10 +9,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        .error-summary,
-        .error-message { display: none; }
-    </style>
 {% endblock %}
 
 
@@ -57,7 +53,7 @@
                             <legend>
                                 <h2 class="heading-medium">Do any of these trailers weigh over 3,500kg?</h2>
                             </legend>
-
+                            
                             {% include "includes/errors/error-message-2.html" %}
 
                             <div class="multiple-choice">
@@ -100,11 +96,9 @@
                     go('/exit');
                 } else {
                     showErrors2();
-                    $('.error-message').hide();
                 }
             } else {
-                showErrors();
-                $('.error-message.2').hide();
+                showErrors1();
             }
         }
 
@@ -116,44 +110,27 @@
             hideErrors();
         });
 
-        function showErrors() {
-            var title = $(document).prop('title');
-            if (title.indexOf('Error') > -1) {
-            } else {
-                $(document).prop('title', 'Error: ' + title);
-            }
+        function showErrors1() {
+            fixPageTitle();
             $('body').scrollTop(0);
             $('fieldset').closest('.form-group').addClass('form-group-error');
             // $('#over-3500').addClass('form-group-error');
             $('.form-control').addClass('form-control-error');
-            $('.error-message').show().css('display', 'block');
-            // $('.error-message.2').hide();
+            $('.error-message').css('display', 'block');
+            $('.error-message.prog2').hide();
             $('.error-summary').show().focus();
             $('legend').attr('id', 'error-link');
         }
 
         function showErrors2() {
-            var title = $(document).prop('title');
-            if (title.indexOf('Error') > -1) {
-            } else {
-                $(document).prop('title', 'Error: ' + title);
-            }
+            fixPageTitle();
             $('body').scrollTop(0);
             $('fieldset').closest('.form-group').addClass('form-group-error');
             $('#over-3500').addClass('form-group-error');
             $('.form-control').addClass('form-control-error');
             $('.error-message').hide();
-            $('.error-message.2').show();
+            $('.error-message.prog2').css('display', 'block');
             $('.error-summary').show().focus();
-            $('legend').attr('id', 'error-link');
-        }
-
-        function hideErrors() {
-            $('.error-summary').hide();
-            $('fieldset').closest('.form-group').removeClass('form-group-error');
-            $('.form-control').removeClass('form-control-error');
-            $('.error-message').hide();
-            $('.error-message.2').hide();
             $('legend').attr('id', 'error-link');
         }
     </script>

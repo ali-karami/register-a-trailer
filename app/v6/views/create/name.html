@@ -11,7 +11,6 @@
             margin-bottom: 0;
         }
     </style>
-    <script type="text/javascript" src="/public/v6/javascripts/manufacturers.js"></script>
 {% endblock %}
 
 {% block after_header %}
@@ -26,6 +25,8 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
                 <div class="form-group">
                     <fieldset data-required data-start="Name" data-error="Cannot be empty">
                         <legend class="visuallhidden">
@@ -74,16 +75,30 @@
                 });
                 $('#company').show();
                 $('#personal').hide();
-                $('#name-input').html('<div class="form-group"><label class="form-label" for="company-name">Company name</label><input class="form-control" id="company-name" name="company-name" type="text"></div>');
+                $('#name-input').html('<div class="form-group"><label class="form-label" for="company-name">Company name<span class="error-message input">Cannot be empty</span></label><input class="form-control" id="company-name" name="company-name" type="text"></div>');
             } else if (type == "personal") {
                 $('h1').click(function() {
-                    var testData = { "firstName": "Matthew", "lastName": "Davies" };
+                    var testData = { "firstName": "Al", "lastName": "Selsig" };
                     $('input[name=first-name]').val(testData.firstName);
                     $('input[name=last-name]').val(testData.lastName);
                 });
                 $('#company').hide();
                 $('#personal').show();
-                $('#name-input').html('<div class="form-group"><label class="form-label" for="first-name">First name</label><input class="form-control" id="first-name" name="first-name" type="text"></div><div class="form-group"><label class="form-label" for="last-name">Last name</label><input class="form-control" id="last-name" name="last-name" type="text"></div>');
+                $('#name-input').html('\
+                <div class="form-group">\
+                    <label class="form-label" for="first-name">\
+                        First name\
+                        <span class="error-message input">Cannot be empty</span>\
+                    </label>\
+                    <input class="form-control" id="first-name" name="first-name" type="text">\
+                </div>\
+                <div class="form-group">\
+                    <label class="form-label" for="last-name">\
+                        Last name\
+                        <span class="error-message input2">Cannot be empty</span>\
+                    </label>\
+                    <input class="form-control" id="last-name" name="last-name" type="text">\
+                </div>');
             }
         });
 
@@ -98,17 +113,14 @@
             if (type == "company") {
                 if (!value3) {
                     validInput = false;
-                    checkErrors();
+                    hideErrors();
+                    showErrors();
                 }
             } else if (type == "personal") {
-                if (!value1) {
+                if ((!value1) || (!value2)) {
                     validInput = false;
-                    checkErrors();
-                }
-
-                if (!value2) {
-                    validInput = false;
-                    checkErrors();
+                    hideErrors();
+                    showErrors();
                 }
             }
 
@@ -143,6 +155,7 @@
             }
         }
 
+        // If coming from check your answers page
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             if (type == "company") {

@@ -158,9 +158,25 @@ details.member-things .panel.panel-border-narrow  {
 // Errors
 // ==========================================================================
 // .error-message { display: none; margin-bottom: 3em !important; padding-bottom: 4em !important; }
-// .error-message { display: none; margin-bottom: .5em; }
-.error-message { margin-bottom: .75em; }
-.error-summary { margin-top: 4px; }
+// .error-summary { display: none; margin-bottom: .5em; }
+// // .error-message { display: none; margin-bottom: .75em; }
+// .error-summary { display: none; margin-top: 4px; }
+.error-summary,
+.error-message { display: none; }
+.error-summary {
+  margin-top: 0;
+  margin-bottom: 49px;
+}
+.error-message { margin-bottom: 1em; }
+.error-message.prog2 {
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+}
+
+.form-group.declaration-input { margin-bottom: 0 !important; }
+#name-input {
+  .form-group:last-child { margin-bottom: 0 ; }
+}
 
 
 // Flash card

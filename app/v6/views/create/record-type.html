@@ -14,11 +14,15 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
                 <div class="form-group">
-                    <fieldset data-required>
+                    <fieldset>
                         <legend>
                             <h1 class="heading-large">Are you creating a trailer record on behalf of a company?</h1>
                         </legend>
+
+                        {% include "includes/errors/error-message.html" %}
 
                         <div class="multiple-choice">
                             <input id="radio-1" type="radio" name="radio-group" value="Y">
@@ -48,22 +52,22 @@
         function validate() {
             var value = $('input[name=radio-group]:checked').val();
 
-            if (!value) {
-                checkErrors();
-            } else {
+            if (member.user === undefined) {
+                member.user = {};
+            }
+
+            if (value == 'Y') {
+                member.user.type = 'company';
                 next();
+            } else if (value == 'N') {
+                member.user.type = 'personal';
+                next();
+            } else {
+                hideErrors();
+                showErrors();
             }
 
             function next() {
-                if (member.user === undefined) {
-                    member.user = {};
-                }
-
-                if (value === 'Y') {
-                    member.user.type = 'company';
-                } else if (value === 'N') {
-                    member.user.type = 'personal';
-                }
                 go('/create/what-to-expect');
             }
         }

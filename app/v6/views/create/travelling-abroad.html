@@ -14,14 +14,17 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                    {% include "includes/errors/error-summary-checkbox.html" %}
                 <!-- <form> -->
                     <div class="form-group">
-                        <fieldset data-required>
+                        <fieldset data-required data-error-start="You need to select an option to continue" data-error=" ">
                             <legend>
                                 <h1 class="heading-large">Will you be travelling to any of the following countries with any of these trailers?</h1>
                             </legend>
 
                             <span class="body-text">Select all the countries that apply</span>
+
+                            {% include "includes/errors/error-message-input.html" %}
 
                             <div class="multiple-choice">
                                 <input id="country-ireland" name="countries" type="checkbox" value="the Republic of Ireland">
@@ -73,10 +76,11 @@
         $('.button').click(validate);
 
         function validate() {
-            var value = $('input[name=countries ]:checked').val();
+            var value = $('input[name=countries]:checked').val();
 
             if (!value) {
-                checkErrors();
+                hideErrors();
+                showErrors();
             } else {
                 next();
             }

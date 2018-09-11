@@ -4,10 +4,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        .error-summary,
-        .error-message { display: none; }
-    </style>
 {% endblock %}
 
 
@@ -24,6 +20,7 @@
                     <fieldset class="inline">
                         <legend>
                             <h1 class="heading-large">Does this trailer have a registration number?</h1>
+                            <p class="form-hint">This is not the trailer identification number also known as a ‘C’ number or ministry number</p>
                             {% include "includes/errors/error-message.html" %}
                         </legend>
 
@@ -160,6 +157,7 @@
             $('legend').attr('id', 'error-link');
         }
 
+        // If coming from check your answers page
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             $('input[name=address1]').val(member.user.address.Line1);

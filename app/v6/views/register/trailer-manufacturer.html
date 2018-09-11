@@ -26,6 +26,27 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
+                <div class="form-group">
+                    <fieldset>
+                        <legend>
+                            <h1 class="heading-large"><span class="title">Enter trailer manufacturer</span></h1>
+                        </legend>
+                        {% include "includes/errors/error-message.html" %}
+
+                        <label class="form-label visually-hidden" for="manufacturer">Manufacturer</label>
+                        <input class="form-control" id="manufacturer" type="text" name="manufacturer">
+                    </fieldset>
+                </div>
+
+                {% include "includes/buttons/continue.html" %}
+            </div>
+        </div>
+    </main>
+    <!-- <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-two-thirds">
                 <div class="form-group">
                     <fieldset data-required data-start="Manufacturer">
                         <legend>
@@ -33,9 +54,9 @@
                         </legend>
 
                         <label class="form-label visually-hidden" for="manufacturer">Trailer manufacturer</label>
-                        <!-- <label for="autocomplete-default">Select your country</label> -->
+                        <-- <label for="autocomplete-default">Select your country</label> --
                         <div id="tt-default" class="autocomplete-wrapper"></div>
-                        <!-- <input class="form-control" id="manufacturer" type="text" name="manufacturer"> -->
+                        <-- <input class="form-control" id="manufacturer" type="text" name="manufacturer"> --
                     </fieldset>
 
                     <p><a href="/register/exit">Manufacturer not listed</a></p>
@@ -44,7 +65,7 @@
                 {% include "includes/buttons/continue.html" %}
             </div>
         </div>
-    </main>
+    </main> -->
 {% endblock %}
 
 
@@ -57,14 +78,14 @@
     <script type="text/javascript">
         $('h1').click(function() {
             var manufacturer = randomManufacturer();
-            $('input[name=input-autocomplete]').val(manufacturer);
+            $('input[name=manufacturer]').val(manufacturer);
         });
 
         $('.button').click(validate);
 
         function validate() {
             var validInput = true;
-            var value = $('input[name=input-autocomplete]').val();
+            var value = $('input[name=manufacturer]').val();
 
             if (!value) {
                 validInput = false;
@@ -85,10 +106,14 @@
                     }
                 }
             } else {
-                checkErrors();
+                hideErrors();
+                showErrors();
+                $('.error-summary-list li a').html('Provide a manufacturer to continue');
+                $('.error-message').html('Provide a manufacturer');
             }
         }
 
+        // If coming from check your answers page
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             document.title = 'Change trailer manufacturer';

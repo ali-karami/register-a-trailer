@@ -14,8 +14,10 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
                 <div class="form-group">
-                    <fieldset class="inline" data-required>
+                    <fieldset class="inline">
                         <legend>
                             <h1 class="heading-large">Trailer registration declaration</h1>
                         </legend>
@@ -37,17 +39,18 @@
                             <p>If you’re still unsure, you can <a href="/register/check/trailer-weights">check if you need to register your trailer</a>.</p>
                         </div>
 
-                        <div class="form-group">
+                        {% include "includes/errors/error-message.html" %}
+
+                        <div class="form-group declaration-input">
                             <div class="multiple-choice">
                                 <input id="declaration" name="declaration" type="checkbox" value="true">
                                 <label for="declaration">I have read and understand which trailers need to be registered</label>
                             </div>
                         </div>
-
-                        {% include "includes/buttons/continue.html" %}
-
                     </fieldset>
                 </div>
+
+                {% include "includes/buttons/continue.html" %}
             </div>
         </div>
     </main>
@@ -68,7 +71,10 @@
                 console.log($('input[name=declaration]:checked').val());
                 go('/register/have-registration-number');
             } else {
-                checkErrors();
+                showErrors();
+                $('.error-summary p').hide();
+                $('.error-summary-list li a').html('You must agree to the declaration to continue');
+                $('.error-message').html('You must agree to the declaration');
             }
         }
     </script>

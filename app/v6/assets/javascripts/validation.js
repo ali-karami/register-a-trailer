@@ -1,141 +1,55 @@
-// Validation
-// ==========================================================================
-
-// Config
 var defaultErrorSummaryHeading = 'There has been a problem';
 var defaultErrorSummaryDescription = 'Amend the following to continue';
 var defaultTextFieldErrorMessage = 'Cannot be empty';
 var defaultSelectorErrorSummaryErrorMessage = 'Select an option to continue';
 var defaultSelectorErrorMessage = 'Select an option to continue';
 
-function checkErrors() {
-    var requiredFieldsPresent = $(document).find('[data-required]').length > 0;
-
-    removeErrors();
-
-    if (requiredFieldsPresent) {
-        var errors = [];
-
-        checkTextFields(errors);
-        checkSelectors(errors);
-
-        if (errors.length > 0) {
-            creatErrorSummary();
-            createErrorMessages(errors);
-            $(document).scrollTop(0);
-        }
-    }
+// Show errors on page
+function showErrors() {
+  fixPageTitle();
+  $('fieldset').closest('.form-group').addClass('form-group-error');
+  $('.error-summary').css('display', 'block').focus();
+//   $('.form-control').addClass('form-control-error');
+  $('.error-message').css('display', 'block');
+  $('legend').attr('id', 'error-link');
+  $('body').scrollTop(0);
 }
 
-function removeErrors() {
-    $('.error-summary').remove();
+// Set radio focus from errory summary link click
+$(function() {
+  $('ul.error-summary-list li a').click(function(e) {
+      e.preventDefault();
+      $('.multiple-choice').find('input[type=radio], input[type=checkbox]').filter(':first').focus();
+  });
+});
 
-    $('.error-message').each(function () {
-        $(this).remove();
-    });
+// Stops duplicate errors appearing in page title
+function fixPageTitle() {
+  var title = $(document).prop('title');
+  var error = title.includes("Error");
 
-    $('.form-control-error').each(function () {
-        $(this).removeClass('form-control-error');
-    });
+  if (error) {
+    // do nothing
+  } else {
+    $(document).prop('title', 'Error: ' + title);
+  }
 
-    $('.form-group-error').each(function() {
-        $(this).removeClass('form-group-error');
-    });
+//   var title = $(document).prop('title');
+//   if (title.indexOf('Error') > -1) {
+//   } else {
+//       $(document).prop('title', 'Error: ' + title);
+//   }
 }
 
-function creatErrorSummary() {
-    var summaryNotPresent = $(document).find('.error-summary').length === 0;
-    var summary = '<div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">' +
-        '<h1 class="heading-medium error-summary-heading" id="error-summary-heading">' + defaultErrorSummaryHeading + '</h1>' +
-        '<p>' + defaultErrorSummaryDescription + '</p>' +
-        '<ul class="error-summary-list">' +
-        '</ul>' +
-        '</div>';
-
-    if (summaryNotPresent) {
-        $('.form-group').first().before(summary);
-    }
-}
-
-function createErrorMessages(errors) {
-    for (var i = 0; i < errors.length; i++) {
-        if ($(document).find('a[href="#' + errors[i].id + '"]').length === 0) {
-            $('.error-summary-list').append(
-                '<li><a href="#' + errors[i].id + '">' + errors[i].label + ' ' + errors[i].errorMessage.toLowerCase() + '</a></li>'
-            );
-
-            var $formgroup = $(document).find('#' + errors[i].id).parents('.form-group');
-
-            $formgroup.addClass('form-group-error');
-
-            if ($formgroup.find('.error-message').length === 0) {
-                if ($formgroup.find('input[type="text"], input[type="password"]').length > 0 || $formgroup.find('textarea').length > 0) {
-                    if ($formgroup.find('.form-date').length > 0) {
-                        $formgroup.find('.form-date').before(
-                            '<span class="error-message">' + errors[i].errorMessage + '</span>'
-                        );
-                    } else {
-                        $formgroup.find('label').after().append(
-                            '<span class="error-message">' + errors[i].errorMessage + '</span>'
-                        );
-
-                        $formgroup.find('.form-control').addClass('form-control-error');
-                    }
-                } else if ($formgroup.find('input[type="radio"]').length > 0 || $formgroup.find('input[type="checkbox"]')) {
-                    $formgroup.find('legend').after().append(
-                        '<span class="error-message">' + errors[i].errorMessage + '</span>'
-                    );
-                }
-            }
-        }
-    }
-}
-
-function checkTextFields(errors) {
-    $(document).find('input[type="text"],input[type="password"], textarea').each(function () {
-        var $formgroup = $(this).parents('fieldset');
-        var defaultLabel = $(this).parent().find('label').clone().children().remove().end().text();
-
-        if ($formgroup.attr('data-required') !== undefined && $(this).val() === '' && !$(this).parent().hasClass('js-hidden')) {
-            if ($(this).attr('id') === undefined) {
-                $(this).attr('id', $(this).attr('name'));
-            }
-
-        errors.push({
-                id: $(this).attr('id'),
-                name: $(this).attr('name'),
-                errorMessage: $formgroup.attr('data-error') || defaultTextFieldErrorMessage,
-                // label: label,
-                label: $formgroup.attr('data-error-start') || defaultLabel,
-                type: 'text, password'
-            });
-        }
-    });
-    return;
-}
-
-function checkSelectors(errors) {
-    var checked = [];
-
-    $(document).find('input[type="radio"], input[type="checkbox"]').each(function () {
-        var $fieldset = $(this).parents('fieldset');
-        var defaultLabel = $fieldset.find('legend h1').clone().children().remove().end().text();
-
-        if ($fieldset.attr('data-required') !== undefined && $fieldset.find(':checked').length === 0) {
-            if ($(this).attr('id') === undefined) {
-                $(this).attr('id', $(this).attr('name'));
-            }
-
-            if (checked.indexOf($(this).attr('name')) < 0) {
-                checked.push($(this).attr('name'));
-                errors.push({
-                    id: $(this).attr('id'),
-                    name: $(this).attr('name'),
-                    errorMessage: $fieldset.attr('data-error') || defaultSelectorErrorMessage,
-                    label: $fieldset.attr('data-error-start') || defaultLabel,
-                    type: 'text, password'
-                });
-            }
-        }
-    });
+// Hide errors on page
+function hideErrors() {
+  $('.error-summary').hide();
+  $('fieldset').closest('.form-group').removeClass('form-group-error');
+  $('.form-control').removeClass('form-control-error');
+  $('.error-message').hide();
+  $('.error-message.prog2').hide();
+  $('.error-message.input').hide();
+  $('.error-message.input2').hide();
+  $('body').scrollTop(0);
+  // $('legend').removeAttr('id', 'error-link');
 }

@@ -14,6 +14,8 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
                 <h1 class="heading-large">Find your address</h1>
 
                 <div class="form-group">
@@ -22,10 +24,11 @@
                 </div>
 
                 <div class="form-group postcode">
-                    <fieldset data-required data-start="Postcode" data-error="Provide a valid postcode">
+                    <fieldset>
                         <label class="form-label" for="postcode">
                             Postcode
                             <legend></legend>
+                            {% include "includes/errors/error-message-input.html" %}
                         </label>
                         <input class="form-control" id="postcode" name="postcode" type="text">
                     </fieldset>
@@ -70,7 +73,11 @@
                 // $('.error-summary').show();
                 // $('body').scrollTop(0);
                 validInput = false;
-                checkErrors();
+                showErrors();
+                $('input[name=postcode]').find().closest('form-group').addClass('form-control-error');
+                $('.error-summary-list li a').html('Provide a postcode to continue');
+                $('.error-message').html('Provide a postcode');
+                
             } else {
                 request += "postcode=" + postcode;
             }

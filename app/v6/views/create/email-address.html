@@ -12,25 +12,29 @@
 
 {% block content %}
     <main id="content" role="main">
-            <div class="grid-row">
-                <div class="column-two-thirds">
-                    <div class="form-group">
-                        <fieldset data-required data-start="Email address" data-error="Cannot be empty">
-                            <legend>
-                                <h1 class="heading-large"><span class="title">What is your email address?</span></h1>
-                            </legend>
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
 
-                            <p class="paragraph">Confirmation of any transactions will be sent to this email address</p>
+                <div class="form-group">
+                    <fieldset data-required data-start="Email address" data-error="Cannot be empty">
+                        <legend>
+                            <h1 class="heading-large"><span class="title">What is your email address?</span></h1>
+                        </legend>
 
-                            <label class="form-label visually-hidden" for="email">Email address</label>
-                            <input class="form-control" id="email" type="text" name="email">
-                        </fieldset>
-                    </div>
+                        <p class="paragraph">Confirmation of any transactions will be sent to this email address</p>
 
-                    {% include "includes/buttons/continue.html" %}
+                        {% include "includes/errors/error-message.html" %}
+
+                        <label class="form-label visually-hidden" for="email">Email address</label>
+                        <input class="form-control" id="email" type="text" name="email">
+                    </fieldset>
                 </div>
+
+                {% include "includes/buttons/continue.html" %}
             </div>
-        </main>
+        </div>
+    </main>
 {% endblock %}
 
 
@@ -55,7 +59,10 @@
 
             if (!value) {
                 validInput = false;
-                checkErrors();
+                hideErrors();
+                showErrors();
+                $('.error-summary-list li a').html('Provide an email address to continue');
+                $('.error-message').html('Provide an email address');
             }
 
             if (validInput) {
@@ -76,6 +83,7 @@
             }
         }
 
+        // If coming from check your answers page
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             if (type == "company") {
