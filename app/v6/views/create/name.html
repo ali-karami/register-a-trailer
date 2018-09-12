@@ -79,12 +79,20 @@
             } else if (type == "personal") {
                 $('h1').click(function() {
                     var testData = { "firstName": "Al", "lastName": "Selsig" };
+                    $('input[name=title]').val(testData.title);
                     $('input[name=first-name]').val(testData.firstName);
                     $('input[name=last-name]').val(testData.lastName);
                 });
                 $('#company').hide();
                 $('#personal').show();
                 $('#name-input').html('\
+                <div class="form-group">\
+                    <label class="form-label" for="title">\
+                        Title\
+                        <span class="error-message input">Cannot be empty</span>\
+                    </label>\
+                    <input class="form-control form-control-1-3" id="title" name="title" type="text">\
+                </div>\
                 <div class="form-group">\
                     <label class="form-label" for="first-name">\
                         First name\
@@ -106,6 +114,7 @@
 
         function validate() {
             var validInput = true;
+            var value1a = $('input[name=title]').val();
             var value1 = $('input[name=first-name]').val();
             var value2 = $('input[name=last-name]').val();
             var value3 = $('input[name=company-name]').val();
@@ -132,10 +141,12 @@
                 if (type == "company") {
                     member.user.name = value3;
                 } else if (type == "personal") {
+                    member.user.title = value1a;
                     member.user.firstName = value1;
                     member.user.lastName = value2;
-                    member.user.name = value1 + ' ' + value2;
+                    member.user.name = value1a + ' ' + value1 + ' ' + value2;
                 }
+                console.log('Title: ' + member.user.title);
                 console.log('First name: ' + member.user.firstName);
                 console.log('Last name: ' + member.user.lastName);
                 console.log('name: ' + member.user.name);
