@@ -75,7 +75,7 @@
                 });
                 $('#company').show();
                 $('#personal').hide();
-                $('#name-input').html('<div class="form-group"><label class="form-label" for="company-name">Company name<span class="error-message input">Cannot be empty</span></label><input class="form-control" id="company-name" name="company-name" type="text"></div>');
+                $('#name-input').html('<div class="form-group"><label class="form-label" for="company-name">Company name<span class="error-message input">Cannot be empty</span></label><input class="form-control form-control-full" id="company-name" name="company-name" type="text"></div>');
             } else if (type == "personal") {
                 $('h1').click(function() {
                     var testData = { "firstName": "Al", "lastName": "Selsig" };
@@ -134,7 +134,7 @@
                 } else if (type == "personal") {
                     member.user.firstName = value1;
                     member.user.lastName = value2;
-                    member.user.fullName = value1 + ' ' + value2;
+                    member.user.name = value1 + ' ' + value2;
                 }
                 console.log('First name: ' + member.user.firstName);
                 console.log('Last name: ' + member.user.lastName);
