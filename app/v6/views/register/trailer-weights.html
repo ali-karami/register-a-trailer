@@ -151,6 +151,9 @@
             }
 
             if (validInput) {
+                if (value1 < 750) {
+                    go('/exit/under-750-register');
+                }
                 if (changing == "true") {
                     member.trailers[member.currentTrailerPosition].gross = value1;
                     member.trailers[member.currentTrailerPosition].unladen = value2;

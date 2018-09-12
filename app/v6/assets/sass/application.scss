@@ -168,7 +168,7 @@ details.member-things .panel.panel-border-narrow  {
   margin-top: 0;
   margin-bottom: 49px;
 }
-.error-message { margin-bottom: 1em; }
+.error-message { margin-bottom: 0.25em; }
 .error-message.prog2 {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
@@ -177,6 +177,12 @@ details.member-things .panel.panel-border-narrow  {
 .form-group.declaration-input { margin-bottom: 0 !important; }
 #name-input {
   .form-group:last-child { margin-bottom: 0 ; }
+}
+
+.form-group-error {
+  .form-control {
+    border: solid 4px $error-colour;
+  }
 }
 
 
