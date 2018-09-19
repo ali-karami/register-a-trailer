@@ -28,7 +28,7 @@
                 {% include "includes/errors/error-summary.html" %}
 
                 <div class="form-group">
-                    <fieldset data-required data-start="Name" data-error="Cannot be empty">
+                    <fieldset>
                         <legend class="visuallhidden">
                             <h1 class="heading-large"><span class="title">What is your name?</span></h1>
                         </legend>
@@ -38,7 +38,7 @@
                 </div>
 
                 <!-- <div class="form-group">
-                    <fieldset data-required>
+                    <fieldset>
                         <legend>
                             <h1 class="heading-large"><span class="title">What is the name of your company?</span></h1>
                         </legend>
@@ -70,15 +70,22 @@
         $(document).ready(function() {
             if (type == "company") {
                 $('h1').click(function() {
-                    var testData = {"companyName": "Road International Transport and Logistics GmbH (Austria)"};
+                    var testData = {"companyName": "United Kingdom Trailer Manufacturer Ltd"};
                     $('input[name=company-name]').val(testData.companyName);
                 });
                 $('#company').show();
                 $('#personal').hide();
-                $('#name-input').html('<div class="form-group"><label class="form-label" for="company-name">Company name<span class="error-message input">Cannot be empty</span></label><input class="form-control form-control-full" id="company-name" name="company-name" type="text"></div>');
+                $('#name-input').html('\
+                <div class="form-group">\
+                    <label class="form-label" for="company-name">\
+                        <!-- Company name -->\
+                        <span class="error-message input">\Cannot be empty</span>\
+                    </label>\
+                    <input class="form-control form-control-3-4" id="company-name" name="company-name" type="text">\
+                </div>');
             } else if (type == "personal") {
                 $('h1').click(function() {
-                    var testData = { "firstName": "Al", "lastName": "Selsig" };
+                    var testData = { "firstName": "Al", "lastName": "Selsigen" };
                     $('input[name=title]').val(testData.title);
                     $('input[name=first-name]').val(testData.firstName);
                     $('input[name=last-name]').val(testData.lastName);
@@ -124,6 +131,8 @@
                     validInput = false;
                     hideErrors();
                     showErrors();
+                    $('.error-summary-list li a').html('Provide a company name to continue');
+                    $('.error-message').html('Provide a company name');
                 }
             } else if (type == "personal") {
                 if ((!value1) || (!value2)) {

@@ -4,6 +4,24 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        /* .error-message { display: none; }
+        ul.error-summary-list li { display: none; } */
+
+        .form-date .form-group {
+            float: left;
+            width: 50px;
+            margin-right: 20px;
+            margin-bottom: 0;
+            clear: none;
+        }
+        .form-date .form-group label {
+            display: block;
+            padding-bottom: 2px;
+        }
+        .form-date .form-group input { width: 100%; }
+        .form-date .form-group-year { width: 70px; }
+    </style>
 {% endblock %}
 
 
@@ -14,37 +32,52 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
-                <!-- <form> -->
-                    <div class="form-group">
-                        <fieldset data-required data-start="Date" data-error="Cannot be empty">
+                <div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+                    <h2 class="heading-medium error-summary-heading" id="error-summary-heading">There has been a problem</h2>
+
+                    <p>Amend the following to continue</p>
+
+                    <ul class="error-summary-list">
+                        <li><a href="#error-link">Select an option to continue</a></li>
+
+                        <li class="date-empty"><a href="#error-link">Provide a date to continue</a></li>
+                        <li class="day"><a href="#day">Provide a day to continue</a></li>
+                        <li class="month"><a href="#month">Provide a month to continue</a></li>
+                        <li class="year"><a href="#year">Provide a year to continue</a></li>
+                    </ul>
+                </div>
+
+                <form>
+                    <div class="form-group form-date">
+                        <fieldset>
                             <legend>
                                 <h1 class="heading-large">
                                     <span class="question"></span>
                                 </h1>
                                 <span class="form-hint">For example, 7 9 2018</span>
+                                <span class="error-message date-empty">Provide a date</span>
+                                <span class="error-message date-incomplete">Date is incomplete</span>
                             </legend>
 
                             <div class="form-date">
                                 <div class="form-group form-group-day">
-                                    <label class="form-label" for="day">Day</label>
-                                    <input class="form-control" id="day" name="day" type="text" pattern="[0-9]*" min="0" max="31" aria-describedby="dob-hint">
+                                    <label class="form-label" for="removal-day">Day</label>
+                                    <input class="form-control" id="removal-day" name="removal-day" type="number" pattern="[0-9]*">
                                 </div>
                                 <div class="form-group form-group-month">
-                                    <label class="form-label" for="month">Month</label>
-                                    <input class="form-control" id="month" name="month" type="text" pattern="[0-9]*" min="0" max="12">
+                                    <label class="form-label" for="removal-month">Month</label>
+                                    <input class="form-control" id="removal-month" name="removal-month" type="number" pattern="[0-9]*">
                                 </div>
                                 <div class="form-group form-group-year">
-                                    <label class="form-label" for="year">Year</label>
-                                    <input class="form-control" id="year" name="year" type="text" pattern="[0-9]*" min="0" max="2018">
+                                    <label class="form-label" for="removal-year">Year</label>
+                                    <input class="form-control" id="removal-year" name="removal-year" type="number" pattern="[0-9]*">
                                 </div>
                             </div>
                         </fieldset>
                     </div>
-                    {% include "includes/buttons/continue.html" %}
+                </form>
 
-                <!-- </form> -->
-
-                <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
+                {% include "includes/buttons/continue.html" %}
             </div>
         </div>
     </main>
@@ -58,9 +91,9 @@
     <script type="text/javascript">
         $('h1').click(function() {
             var testData = { "day": "7", "month": "9", "year": "2018" };
-            $('input[id=day]').val(testData.day);
-            $('input[id=month]').val(testData.month);
-            $('input[id=year]').val(testData.year);
+            $('input[id=removal-day]').val(testData.day);
+            $('input[id=removal-month]').val(testData.month);
+            $('input[id=removal-year]').val(testData.year);
         });
 
         if (member.disposal.type == 'sold') {
@@ -75,26 +108,66 @@
 
         $('.button').click(validate);
 
-        function validate() {
-            var day = $('input[id=day]').val();
-            var month = $('input[id=month]').val();
-            var year = $('input[id=year]').val();
 
-            if (
-                (day === '' || day === undefined) ||
-                (month === '' || month === undefined) ||
-                (year === '' || year === undefined)
-            ) {
-                checkErrors();
-            } else {
-                disposalDate = day + ' ' + month + ' ' + year;
+        function validate() {
+            var validInput = true;
+            hideErrors();
+
+            var removalDay = $('input[id=removal-day]').val();
+            var removalMonth = $('input[id=removal-month]').val();
+            var removalYear = $('input[id=removal-year]').val();
+
+            // Check to see if fields are empty
+            if (!removalDay && !removalMonth && !removalYear) {
+                validInput = false;
+                console.log('All empty');
+                fixPageTitle();
+                $('fieldset').closest('.form-group').addClass('form-group-error');
+                $('.error-summary').css('display', 'block').focus();
+                // $('.error-summary li.date-empty').css('display', 'block');
+                $('.date-empty').css('display', 'block');
+                // $('.error-message.date-empty').css('display', 'block');
+                $('legend').attr('id', 'error-link');
+                $('body').scrollTop(0);
+                $('.form-date').closest('form-group').addClass('form-control-error');
+
+            } else if (!removalDay || !removalMonth || !removalYear) {
+                // Do these everytime
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.date-incomplete').css('display', 'block');
+                $('body').scrollTop(0);
+                $('fieldset').closest('.form-group').first().addClass('form-group-error');
+
+                if (!removalDay) {
+                    console.log('Day empty');
+                    validInput = false;
+                    $('.day').css('display', 'block');
+                    $('.form-group-day').find('input').addClass('form-control-error');
+                }
+                if (!removalMonth) {
+                    console.log('Month empty');
+                    validInput = false;
+                    $('.month').css('display', 'block');
+                    $('.form-group-month').find('input').addClass('form-control-error');
+                }
+                if (!removalYear) {
+                    console.log('Year empty');
+                    validInput = false;
+                    $('.year').css('display', 'block');
+                    $('.form-group-year').find('input').addClass('form-control-error');
+                }
+            }
+
+            if (validInput) {
+                disposalDate = removalDay + ' ' + removalMonth + ' ' + removalYear;
                 if (member.disposal === undefined) {
                     member.disposal = {};
                 }
                 member.disposal.dateFull = disposalDate;
-                member.disposal.day = day;
-                member.disposal.month = month;
-                member.disposal.year = year;
+                member.disposal.day = removalDay;
+                member.disposal.month = removalMonth;
+                member.disposal.year = removalYear;
                 next();
             }
 

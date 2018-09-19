@@ -44,7 +44,8 @@ function fixPageTitle() {
 // Hide errors on page
 function hideErrors() {
   $('.error-summary').hide();
-  $('fieldset').closest('.form-group').removeClass('form-group-error');
+  // $('.error-summary li').hide();
+  $('.form-group').removeClass('form-group-error');
   $('.form-control').removeClass('form-control-error');
   $('.error-message').hide();
   $('.error-message.prog2').hide();

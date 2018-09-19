@@ -14,39 +14,31 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
-            <!-- <div class="error-summary hide" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
-                    <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There’s a problem with the information you have provided</h1>
+                {% include "includes/errors/error-summary.html" %}
 
-                    <p>Please amend the following details:</p>
-                    <ul class="error-summary-list">
-                        <li class="error-message postcode hide"><a href="#qpostcode">Provide a valid postcode</a></li>
-                    </ul>
-                </div> -->
+                <h1 class="heading-large">What is the new keepers address?</h1>
 
-                <form class="form">
-                    <div class="form-group">
-                        <fieldset>
-                            <legend>
-                                <h1 class="heading-large">What is the new keepers address?</h1>
-                            </legend>
+                <div class="form-group">
+                    <label class="form-label" for="number">Building name or number (optional)</label>
+                    <input class="form-control" id="number" name="number" type="text">
+                </div>
 
-                            <div class="form-group">
-                                <label class="form-label" for="number">Building name or number (optional)</label>
-                                <input class="form-control" id="number" name="number" type="text">
-                            </div>
-                            <div class="form-group postcode">
-                                <label class="form-label" for="postcode">Postcode</label>
-                                <input class="form-control" id="postcode" name="postcode" type="text">
-                            </div>
-                        </fieldset>
-                    </div>
+                <div class="form-group postcode">
+                    <fieldset>
+                        <label class="form-label" for="postcode">
+                            Postcode
+                            <legend></legend>
+                            {% include "includes/errors/error-message-input.html" %}
+                        </label>
+                        <input class="form-control" id="postcode" name="postcode" type="text">
+                    </fieldset>
+                </div><br>
 
-                    <div class="form-group">
-                        <button class="button" type="button" onclick="validate()">Find UK address</button>
-                    </div>
+                <div class="form-group">
+                    <button class="button" type="button" onclick="validate()">Find UK address</button>
+                </div>
 
-                    <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
-                </form>
+                <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
             </div>
         </div>
     </main>
@@ -74,11 +66,15 @@
 
             var postcode = $('input[name=postcode]').val();
             if ((postcode == '') || (postcode == undefined)) {
-                $('#qpostcode').addClass('error');
-                $('.postcode.error-message').show();
-                $('.error-summary').show();
-                $('body').scrollTop(0);
+                // $('#qpostcode').addClass('error');
+                // $('.postcode.error-message').show();
+                // $('.error-summary').show();
+                // $('body').scrollTop(0);
                 validInput = false;
+                showErrors();
+                $('input[name=postcode]').find().closest('form-group').addClass('form-control-error');
+                $('.error-summary-list li a').html('Provide a postcode to continue');
+                $('.error-message').html('Provide a postcode');
             } else {
                 request += "postcode=" + postcode;
             }

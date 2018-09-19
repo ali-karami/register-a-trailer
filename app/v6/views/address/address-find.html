@@ -77,7 +77,6 @@
                 $('input[name=postcode]').find().closest('form-group').addClass('form-control-error');
                 $('.error-summary-list li a').html('Provide a postcode to continue');
                 $('.error-message').html('Provide a postcode');
-                
             } else {
                 request += "postcode=" + postcode;
             }
@@ -90,6 +89,10 @@
             }
 
             if (validInput) {
+                if (member.addresses === undefined) {
+                    member.addresses = {};
+                }
+
                 // Create a playback string
                 $.getJSON('/api/address-lookup' + encodeURI(request), function(addresses) {
                     member.addresses = addresses;

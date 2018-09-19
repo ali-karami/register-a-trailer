@@ -8,6 +8,7 @@
         .accordion-section-header h2.heading-medium { padding-left: .5em; }
         .cya-question { padding-left: .5em; }
         .cya-change { padding-right: .5em !important; }
+        .paragraph { margin-bottom: 0; padding-bottom: 0; }
     </style>
 {% endblock %}
 
@@ -22,32 +23,15 @@
                 <div class="form-group">
                     <h1 class="heading-large">Trailers pending registration</h1>
 
-                    <p class="paragraph">These trailers have been saved</p>
-
                     <div class="form-group buttons">
                         <button class="button register blue">Register another trailer</button>
                         <button class="button continue blue">Go to payment</button>
                     </div>
 
+                    <p class="paragraph">These trailers have been saved</p>
+
                     <div class="accordion" id="trailer-list">
                     </div>
-
-                    <!-- <span id="radio-section">
-                        <div class="form-group radio">
-                            <fieldset class="inline">
-                                <legend><h2 class="heading-medium">Register another trailer?</h2></legend>
-
-                                <div class="multiple-choice">
-                                    <input id="radio-1" type="radio" name="radio-group" value="Y">
-                                    <label for="radio-1">Yes</label>
-                                </div>
-                                <div class="multiple-choice">
-                                    <input id="radio-2" type="radio" name="radio-group" value="N">
-                                    <label for="radio-2">No, go to payment</label>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </span> -->
                 </div>
 
                 <div class="form-group register">

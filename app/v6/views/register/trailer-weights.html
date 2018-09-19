@@ -6,6 +6,7 @@
     {% include "includes/phase-banner/standard-back.html" %}
     <style type="text/css">
         details { margin-top: .75em; }
+        ul.error-summary-list li { display: none; }
     </style>
 {% endblock %}
 
@@ -23,26 +24,15 @@
                     <p>Amend the following to continue</p>
 
                     <ul class="error-summary-list">
-                        <li><a href="#error-link-1">Gross weight cannot be empty</a></li>
-                        <li><a href="#error-link-2">Unladen weight cannot be empty</a></li>
+                        <li><a href="#error-link-1">Provide a gross weight to continue</a></li>
+                        <li><a href="#error-link-2">Provide an unladen weight to continue</a></li>
                     </ul>
                 </div>
 
                 <h1 class="heading-large"><span class="title">Enter trailer weights</span></h1>
 
-                <!-- <div class="form-group">
-                    <fieldset data-required data-start="Gross weight" data-error="Cannot be blank">
-                        <label class="form-label" for="full-name">
-                            Full name
-                            <span class="form-hint">As shown on your birth certificate or passport</span>
-                        </label>
-                        <legend>Full name</legend>
-                        <input id="full-name" class="form-control" name="full-name" type="text">
-                    </fieldset>
-                </div> -->
-
                 <div class="form-group">
-                    <fieldset data-required data-start="Gross weight" data-error="Cannot be empty">
+                    <fieldset>
                         <label class="form-label" for="gross-weight">
                             <legend>Gross weight (kg)</legend>
                             {% include "includes/errors/error-message-input.html" %}
@@ -66,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    <fieldset data-required data-start="Unladen weight" data-error="Cannot be empty">
+                    <fieldset>
                         <label class="form-label" for="unladen-weight">
                             <legend>Unladen weight (kg)</legend>
                             {% include "includes/errors/error-message-input-2.html" %}
@@ -117,43 +107,69 @@
             var value1 = $('input[name=gross-weight]').val();
             var value2 = $('input[name=unladen-weight]').val();
 
+            hideErrors();
+
             if (!value1) {
+                console.log('VALUE 1 IS BLANK');
                 validInput = false;
-                hideErrors();
-                showErrors();
+                fixPageTitle();
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:first-child').css('display', 'block');
+                $('.error-message.input').css('display', 'block');
+                $('legend').attr('id', 'error-link');
+                $('body').scrollTop(0);
                 $('input[name=gross-weight]').closest('form-group').addClass('form-control-error');
-                $('.error-summary-list li a').html('Provide a gross weight to continue');
                 $(function() {
-                    $('input[name=gross-weight]').find('error-message').html('Provide a gross weight');
+                    $('.error-message.input').html('Provide a gross weight');
                 });
             }
 
             if (!value2) {
+                console.log('VALUE 2 IS BLANK');
                 validInput = false;
-                hideErrors();
-                showErrors();
+                fixPageTitle();
+                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:last-child').css('display', 'block');
+                $('.error-message.input2').css('display', 'block');
+                $('legend').attr('id', 'error-link');
+                $('body').scrollTop(0);
                 $('input[name=unladen-weight]').closest('form-group').addClass('form-control-error');
-                $('.error-summary-list li a').html('Provide an unladen weight to continue');
                 $(function() {
-                    $('input[name=unladen-weight]').find().closest('error-message').html('Provide an unladen weight');
+                    $('.error-message.input2').html('Provide an unladen weight');
                 });
             }
 
-            if (value1 <= value2) {
+            if (
+                ((value1) && (value2)) &&
+                (value1 !== 0) &&
+                (value1 <= value2)
+            ) {
+                console.log('GROSS IS EQUAL OR LESS');
                 validInput = false;
-                hideErrors();
-                showErrors();
-                $('input[name=unladen-weight]').closest('form-group').addClass('form-control-error');
-                $('.error-summary-list li a').html('Provide an unladen weight to continue');
+                console.log("gross IS less than unladen");
+                fixPageTitle();
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:first-child').show();
+                $('.error-summary li:first-child a').html('Correct gross weight to continue');
+                $('.error-summary li:last-child').hide();
+                $('.error-message.input').css('display', 'block');
+                $('legend').attr('id', 'error-link');
+                $('body').scrollTop(0);
+                $('input[name=gross-weight]').closest('form-group').addClass('form-control-error');
                 $(function() {
-                    $('input[name=unladen-weight]').find().closest('error-message').html('Provide an unladen weight');
+                    $('.error-message.input').html('Gross weight cannot be the same or less than unladen weight');
                 });
+            }
+
+            if (((value1) && (value2)) && (value1 <= 750)) {
+                validInput = false;
+                go('/exit/under-750-register');
             }
 
             if (validInput) {
-                if (value1 < 750) {
-                    go('/exit/under-750-register');
-                }
                 if (changing == "true") {
                     member.trailers[member.currentTrailerPosition].gross = value1;
                     member.trailers[member.currentTrailerPosition].unladen = value2;
@@ -169,8 +185,6 @@
                     console.log('unladen = ' + member.trailer.unladen);
                     go('/register/saving-trailer');
                 }
-            } else {
-                checkErrors();
             }
         }
 

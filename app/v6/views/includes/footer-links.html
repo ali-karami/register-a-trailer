@@ -14,11 +14,12 @@
             <summary><span class="summary">Built by the Driver and Vehicle Licensing Agency</span></summary>
 
             <div class="panel panel-border-narrow">
-                <p>Some things to ‘member, or not.</p>
+                <p>Some things to ’member, or not.</p>
 
                 <p class="bold-medium">Users</p>
                 <ul class="list list-bullet">
-                    <li><a href="#" class="add-company">Add user</a></li>
+                    <li><a href="#" class="add-user">Add personal user</a></li>
+                    <li><a href="#" class="add-company">Add company</a></li>
                     <li><a href="#" class="delete-user">Delete user</a></li>
                 </ul>
 
@@ -51,9 +52,9 @@
                     <li></li>
                 </ul>
 
-                <p class="bold-medium">member</p>
+                <p class="bold-medium">’member</p>
                 <ul class="list list-bullet">
-                    <li><a href="#" class="clear-member">Clear member</a></li>
+                    <li><a href="#" class="clear-member">Clear ’member</a></li>
                 </ul>
             </div>
         </details>
@@ -75,7 +76,29 @@
         member.user.address.Line3 = '';
         member.user.address.City = 'Swansea';
         member.user.address.PostalCode = 'SA6 7JL';
+        member.user.address.Label = 'Driver & Vehicle Licensing Agency↵Longview Road↵Clase↵SWANSEA↵SA6 7JL↵UNITED KINGDOM'
         member.user.email = 'enquiries@alshaulage.com';
+        member.user.type = 'company';
+        location.reload();
+    });
+
+    $('a.add-user').click(function(e) {
+        e.preventDefault();
+        if (member.user === undefined) {
+            member.user = {};
+        }
+        if (member.user.address === undefined) {
+            member.user.address = {};
+        }
+        member.user.name = 'Al Selsigen';
+        member.user.address.Line1 = 'Longview Road';
+        member.user.address.Line2 = 'Clase';
+        member.user.address.Line3 = '';
+        member.user.address.City = 'Swansea';
+        member.user.address.PostalCode = 'SA6 7JL';
+        member.user.address.Label = 'Driver & Vehicle Licensing Agency↵Longview Road↵Clase↵SWANSEA↵SA6 7JL↵UNITED KINGDOM'
+        member.user.email = 'enquiries@alshaulage.com';
+        member.user.type = 'personal';
         location.reload();
     });
 

@@ -26,11 +26,16 @@
     <main id="content" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+
                 <h1 class="heading-large manage">Manage trailer <span class="trailer-reg"></span></h1>
 
                 <div class="form-group">
-                    <fieldset data-required data-start="What would you like to do?">
-                        <legend><h2 class="heading-medium">What would you like to do?</h2></legend>
+                    <fieldset>
+                        <legend>
+                            <h2 class="heading-medium">What would you like to do?</h2>
+                            {% include "includes/errors/error-message.html" %}
+                        </legend>
 
                         <div class="multiple-choice">
                             <input id="radio-1" type="radio" name="radio-group" value="certificate">
