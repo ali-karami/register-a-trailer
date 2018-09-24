@@ -16,7 +16,7 @@
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}
 
-                <h1 class="heading-large">Find your address</h1>
+                <h1 class="heading-large">Find your <span class="title"></span>address</span></h1>
 
                 <div class="form-group">
                     <label class="form-label" for="number">Building name or number (optional)</label>
@@ -30,7 +30,7 @@
                             <legend></legend>
                             {% include "includes/errors/error-message-input.html" %}
                         </label>
-                        <input class="form-control" id="postcode" name="postcode" type="text">
+                        <input class="form-control form-control-1-4" id="postcode" name="postcode" type="text">
                     </fieldset>
                 </div><br>
 
@@ -49,13 +49,14 @@
 {% block body_end %}
     <script type="text/javascript">
         $('h1').click(function() {
-            var testData = {
-                // "number": "122",
-                "postcode": "SA6 7JL"
-            };
-            // $('input[id=number]').val(testData.number);
+            var testData = { "postcode": "SA6 7JL" };
             $('input[id=postcode]').val(testData.postcode);
         });
+
+        try { var type = member.user.type; } catch(err){}
+        if (type == "company") {
+            $('.title').html('company ');
+        }
 
         var changing = location.search.split('change=')[1];
 

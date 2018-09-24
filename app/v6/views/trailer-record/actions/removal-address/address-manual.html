@@ -14,11 +14,7 @@
     <main id="content" role="main" tabindex="-1">
         <div class="grid-row">
             <div class="column-two-thirds">
-
-                <h1 class="heading-large">We weren’t able to match your address</h1>
-
-                <span class="form-hint">Instead, enter your address manually</span>
-                <br>
+                <h1 class="heading-large">Enter new keepers address</h1>
 
                 <form class="form">
                     <div class="form-group">
@@ -59,7 +55,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="button" type="button" onclick="validate()">Find address</button>
+                        <button class="button" type="button">Continue</button>
                     </div>
 
                     <a href="/trailer-record">Cancel and go to trailer record</a>
@@ -79,7 +75,7 @@
             var testData = {
                 "address1": "122 Burns Crescent",
                 "address2": "Edinburgh",
-                "posttown": "Edinburgh",
+                // "posttown": "Edinburgh",
                 "postcode": "EH1 9GP"
             };
             $('input[id=address1]').val(testData.address1);
@@ -94,6 +90,10 @@
 
         function checkAnswers() {
             var validInput = true;
+
+            if (member.address === undefined) {
+                member.address = {};
+            }
 
             // Hide before rechecking validation
             $('.address1.error-message').hide();
@@ -133,20 +133,19 @@
             }
 
             if (validInput) {
-                var address = address1 + "<br>";
-                if (address2 && address2.length>0 )
-                    address += address2+"<br>";
-                address += posttown+"<br>";
-                address += postcode;
-
-                member.address = address; 
+                member.disposal.address.Line1 = address1;
+                member.disposal.address.Line2 = address2;
+                member.disposal.address.City = posttown;
+                member.disposal.address.PostalCode = postcode;
+                delete member.address;
+                delete member.addresses;
 
                 next();
             }
         }
 
         function next() {
-            go('/create/email-address');
+            go('/trailer-record/actions/check-your-answers');
         }
     </script>
 {% endblock %}
