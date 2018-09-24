@@ -1,13 +1,13 @@
 <h2 class="visuallyhidden">Support links</h2>
 
-<ul>
+<ul style="width: 960px;">
     <li><a href="/create/how-dvla-uses-your-data">Feedback</a></li>
     <li><a href="/condition/add">Cookies</a></li>
     <!-- <li><a href="/cookies" target="_blank">Cookies</a></li> -->
     <li><a href="/address-confirm">Terms and conditions</a></li>
     <!-- <li><a href="/terms-and-conditions" target="_blank">Terms and conditions</a></li> -->
     <li><a href="/privacy-policy" target="_blank">Privacy policy</a></li>
-    <li><a href="/cymraeg">Cymraeg</a></li>
+    <li><a href="/cymraeg">Cymraeg</a></li><br>
     <li class="margin-bottom-0"><p class="margin-bottom-0">Built by the <a class="margin-bottom-0" href="https://www.gov.uk/government/organisations/driver-and-vehicle-licensing-agency">Driver and Vehicle Licensing Agency</a></p></li>
     <li class="li-member-things">
         <details class="member-things">
@@ -55,13 +55,29 @@
                 <p class="bold-medium">’member</p>
                 <ul class="list list-bullet">
                     <li><a href="#" class="clear-member">Clear ’member</a></li>
+                    <li><a href="#" class="clear-temp-member">Delete temporary ’members</a></li>
+                </ul>
+
+                <p class="bold-medium">Locations</p>
+                <ul class="list list-bullet">
+                    <li><a href="/trailer-record">Trailer record</a></li>
+                    <li><a href="/register/trailer-summary">Trailer summary</a></li>
+                    <li><a href="/trailer-record/change-details">Change details</a></li>
                 </ul>
             </div>
         </details>
     </li>
 </ul>
 
+<span id="scroll-here"></span>
+
 <script type="text/javascript">
+    $('details').click(function() {
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $('#scroll-here').offset().top
+        }, 800);
+    });
+
     $('a.add-company').click(function(e) {
         e.preventDefault();
         if (member.user === undefined) {
@@ -76,7 +92,7 @@
         member.user.address.Line3 = '';
         member.user.address.City = 'Swansea';
         member.user.address.PostalCode = 'SA6 7JL';
-        member.user.address.Label = 'Driver & Vehicle Licensing Agency↵Longview Road↵Clase↵SWANSEA↵SA6 7JL↵UNITED KINGDOM'
+        // member.user.address.Label = 'Driver & Vehicle Licensing Agency↵Longview Road↵Clase↵SWANSEA↵SA6 7JL↵UNITED KINGDOM'
         member.user.email = 'enquiries@alshaulage.com';
         member.user.type = 'company';
         location.reload();
@@ -96,7 +112,7 @@
         member.user.address.Line3 = '';
         member.user.address.City = 'Swansea';
         member.user.address.PostalCode = 'SA6 7JL';
-        member.user.address.Label = 'Driver & Vehicle Licensing Agency↵Longview Road↵Clase↵SWANSEA↵SA6 7JL↵UNITED KINGDOM'
+        // member.user.address.Label = 'Driver & Vehicle Licensing Agency↵Longview Road↵Clase↵SWANSEA↵SA6 7JL↵UNITED KINGDOM'
         member.user.email = 'enquiries@alshaulage.com';
         member.user.type = 'personal';
         location.reload();
@@ -123,8 +139,6 @@
         if (member.trailer === undefined) {
             member.trailer = {};
         }
-
-
 
         var i = 0;
         console.time('Adding trailers');
@@ -166,9 +180,19 @@
         }
     });
 
+    $('a.clear-temp-member').click(function(e) {
+        e.preventDefault();
+        delete member.address;
+        delete member.addressess;
+        delete member.trailer;
+        delete member.length;
+        location.reload();
+        $(document).scrollTop(0);
+    });
+
     $('a.clear-member').click(function(e) {
         e.preventDefault();
-        delete member;
+        member.clear();
         location.reload();
         $(document).scrollTop(0);
     });
