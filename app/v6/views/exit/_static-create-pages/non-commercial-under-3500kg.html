@@ -1,6 +1,6 @@
 {% extends "layout-v6.html" %}
 
-{% block page_title %} You do not need to create a trailer record {% endblock %}
+{% block page_title %} You cannot create a trailer record {% endblock %}
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
@@ -18,8 +18,10 @@
                     <h1 class="heading-large">You do not need to<br>create a trailer record</h1>
                 </div>
 
-                <p>Trailers travelling to <strong>[[ DYNAMIC COUNTRIES HERE ]]</strong> are not required to register,
-                    unless you pass through a foreign country that has ratified the 1968 Vienna Convention.</p>
+                <!-- <p>You only have to create a trailer record for non-commercial trailers that weigh over 3,500kg.</p> -->
+                <p>You only have to create a trailer record to register non-commercial trailers that weigh over 3,500kg in gross weight.</p>
+
+                <p>Under UK law you do not need to register your trailer, however you may be required to produce a UK Trailer Registration Certificate at foreign borders.</p>
 
                 <p>You can still create a trailer record if you want to.</p>
 
@@ -40,7 +42,7 @@
 {% block body_end %}
     <script type="text/javascript">
         $('.button').click(function() {
-            go('/create/what-to-expect');
+            go('https://www.gov.uk');
         });
     </script>
 {% endblock %}

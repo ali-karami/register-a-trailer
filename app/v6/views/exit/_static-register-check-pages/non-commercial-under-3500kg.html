@@ -1,6 +1,6 @@
 {% extends "layout-v6.html" %}
 
-{% block page_title %} You do not need to create a trailer record {% endblock %}
+{% block page_title %} You do not need to register this trailer {% endblock %}
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
@@ -15,18 +15,18 @@
         <div class="grid-row">
             <div class="column-two-thirds">
                 <div class="govuk-box-highlight grey">
-                    <h1 class="heading-large">You do not need to<br>create a trailer record</h1>
+                    <h1 class="heading-large">You do not need to<br>register this trailer</h1>
                 </div>
 
                 <!-- <p>You only have to create a trailer record for non-commercial trailers that weigh over 3,500kg.</p> -->
-                <p>You only have to create a trailer record to register non-commercial trailers that weigh over 3,500kg in gross weight.</p>
+                <p>You only have to register non-commercial trailers that weigh over 3,500kg in gross weight.</p>
 
                 <p>Under UK law you do not need to register your trailer, however you may be required to produce a UK Trailer Registration Certificate at foreign borders.</p>
 
-                <p>You can still create a trailer record if you want to.</p>
+                <p>You can still register this trailer if you want to.</p>
 
                 <div class="form-group">
-                    <button class="button">I still want to create a trailer record</button>
+                    <button class="button">I still want to register this trailer</button>
                 </div>
 
                 <a href="https://www.gov.uk">Return to GOV.UK</a>
@@ -42,7 +42,7 @@
 {% block body_end %}
     <script type="text/javascript">
         $('.button').click(function() {
-            go('/create/what-to-expect');
+            go('https://www.gov.uk');
         });
     </script>
 {% endblock %}

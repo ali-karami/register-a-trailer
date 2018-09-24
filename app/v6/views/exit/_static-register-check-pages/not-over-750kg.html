@@ -4,18 +4,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        dd { font-weight: 700; margin-bottom: .5em; padding-bottom: 1em; border-bottom: 1px solid #BFC1C3;}
-        .multiple-choice { margin-bottom: 10px !important; }
-        .column-third {
-            /* width: 100%; */
-            /* height: 5px; */
-            /* background-color: #005ea5; */
-            border-top: 10px solid #005ea5;
-        }
-        h2.heading-medium { margin-top: .5em; }
-        fieldset { margin-top: 0;}
-    </style>
 {% endblock %}
 
 
@@ -30,14 +18,13 @@
                     <h1 class="heading-large">You cannot register this trailer</h1>
                 </div>
 
-                <p>Trailers must weigh over 750kg in gross weight in order to register them.</p>
+                <p>You can only register trailers that weigh over 750kg in gross weight.</p>
 
                 <button class="button" type="submit">Register another trailer</button>
 
                 <p class="margin-top-1">
                     <a href="/trailer-record">Cancel and go to trailer record</a>
                 </p>
-
             </div>
         </div>
     </main>
@@ -52,6 +39,5 @@
         $('.button').click(function() {
             go('/register/have-registration-number');
         });
-
     </script>
 {% endblock %}

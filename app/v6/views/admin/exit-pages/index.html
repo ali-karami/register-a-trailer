@@ -1,0 +1,86 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Admin | Exit pages {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard.html" %}
+    <style type="text/css">
+        .grid-row.no-back { display: none; }
+        .grid-row.question { margin-top: 0; }
+        .heading-large { font-size: 24px; }
+        .heading-medium { font-size: 19px; }
+        .heading-small { font-size: 16px; }
+        .first { padding-left: 0; }
+        li a { font-size: 16px; }
+    </style>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main">
+        <div class="grid-row">
+            <div class="column-full">
+                <div class="breadcrumbs">
+                    <ol>
+                        <li><a href="/admin">Admin</a></li>
+                        <li>Static exit pages</li>
+                    </ol>
+                </div>
+
+                <h1 class="heading-large">Static exit pages</h1>
+
+                <a href="/exit" class="dynamic-exit-list">Page link</a>
+            </div>
+        </div>
+
+
+        <div class="grid-row">
+            <div class="column-full">
+                <div class="column-third first">
+                    <h2 class="heading-medium">Create flow</h2>
+
+                    <ol class="list list-bullet">
+                        <li><a href="/exit/_static-create-pages/not-over-750kg">not-over-750kg</a></li>
+                        <li><a href="/exit/_static-create-pages/not-outside-uk">not-outside-uk</a></li>
+                        <li><a href="/exit/_static-create-pages/not-travelling-through">not-travelling-through</a></li>
+                        <li><a href="/exit/_static-create-pages/non-commercial-under-3500kg">non-commercial-under-3500kg</a></li>
+                    </ol>
+                </div>
+
+                <div class="column-third">
+                    <h2 class="heading-medium">Register flow</h2>
+
+                    <ol class="list list-bullet">
+                        <li><a href="/exit/_static-register-check-pages/already-registered">already-registered</a></li>
+                        <li><a href="/exit/_static-register-check-pages/not-over-750kg">not-over-750kg</a></li>
+                        <li><a href="/exit/_static-register-check-pages/not-outside-uk">not-outside-uk</a></li>
+                        <li><a href="/exit/_static-register-check-pages/not-travelling-through">not-travelling-through</a></li>
+                        <li><a href="/exit/_static-register-check-pages/non-commercial-under-3500kg">non-commercial-under-3500kg</a></li>
+                    </ol>
+                </div>
+
+                <div class="column-third">
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('a.dynamic-exit-list').click(function() {
+            if (member.admin === undefined) {
+                member.admin = {};
+            }
+            member.admin.exit = 'dynamic list on';
+            go('/exit');
+        });
+    </script>
+{% endblock %}
