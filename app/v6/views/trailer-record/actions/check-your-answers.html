@@ -13,9 +13,12 @@
 {% block content %}
     <main id="content" role="main">
         <div class="grid-row">
-            <div class="column-two-thirds">
+            <div class="column-full">
                 <div class="form-group">
                     <h1 class="heading-large">Check your answers</h1>
+
+                    <h2 class="heading-medium">Trailer details</h2>
+                    <span id="trailer-details"></span>
 
                     <h2 class="heading-medium">Date of sale or transfer</h2>
                     <div class="form-group">
@@ -27,9 +30,6 @@
                             </div>
                         </dl>
                     </div>
-
-                    <h2 class="heading-medium">Trailer details</h2>
-                    <span id="trailer-details"></span>
 
                     <!-- only add a heading for a list if there is more than one list -->
                     <h2 class="heading-medium">New keeper details</h2>
@@ -53,10 +53,12 @@
                         </dl>
                     </div>
 
+                    <h3 class="heading-medium">Declaration</h3>
+
                     <p>By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
 
                     <div class="form-group">
-                        <button class="button">Accept and send application</button>
+                        <button class="button">Confirm and remove from trailer record</button>
                     </div>
 
                     <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
