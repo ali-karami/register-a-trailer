@@ -35,7 +35,7 @@
         }
 
         try {
-            var trailerList = '<div class="form-group"><table><thead><tr><th scope="col">Registration number</th><th scope="col">VIN/chassis</th></tr></thead><tbody>';
+            var trailerList = '<div class="form-group"><table><thead><tr><th scope="col">Registration number</th><th scope="col"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis</th></tr></thead><tbody>';
             for (i = 0; i < member.trailers.length; i++) {
                 if (member.trailers[i].registered == false) {
                     trailerList += '<tr>';
@@ -56,7 +56,7 @@
 
         // Paragraphs
         var emailConf = '<p>A confirmation email has been sent to <strong><span class="email">' + member.user.email + '</span></strong>.</p>';
-        var newCertificate = '<p>You’ll receive your new UK Trailer Registration Certificate<span id="plural">s</span> within <strong>3 to 5 working days</strong>. <span class="this-these"></span> must be kept with the trailer.</p>';
+        var newCertificate = '<p>You’ll receive your new <abbr title="United Kingdom">UK</abbr> Trailer Registration Certificate<span id="plural">s</span> within <strong>3 to 5 working days</strong>. <span class="this-these"></span> must be kept with the trailer.</p>';
         var gateway = '<p>Your Government Gateway email address has not changed.</p>';
         var confirmations = '<p>All future confirmations will be sent to your new email address (' + member.user.email + ').</p>';
         var receipt = '<p>A receipt of the transaction and an ' + enpac + ' has been sent to <strong>' + member.user.email + '</strong>.</p>';

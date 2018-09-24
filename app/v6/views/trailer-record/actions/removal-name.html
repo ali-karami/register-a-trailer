@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="panel panel-border-narrow js-hidden" id="name-input-no">
-                            <legend class="visuallyhidden">VIN or chassis number</legend>
+                            <legend class="visuallyhidden"><abbr title="Vehicle Identification Number">VIN</abbr> or chassis number</legend>
 
                             <div class="form-group">
                                 <label class="form-label name" for="name">
@@ -118,7 +118,7 @@
                     next();
                 } else {
                     showErrors2();
-                    // $('.error-message').html('VIN must be 17 characters');
+                    // $('.error-message').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
                 }
             } else if (value1 === 'private') {
                 if (!value3) {
@@ -135,7 +135,7 @@
                     next();
                 } else {
                     showErrors2();
-                    // $('.error-message').html('VIN must be 17 characters');
+                    // $('.error-message').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
                 }
             } else {
                 showErrors();

@@ -93,6 +93,8 @@ details.member-things .panel.panel-border-narrow  {
   background: $page-colour !important;
 }
 
+// Add a dotted line underneath abbreviations
+abbr { border-bottom: 1px dotted; }
 
 
 

@@ -91,9 +91,9 @@
                 $('#no-trailers').hide();
 
                 if (registeredTrailers <= 1) {
-                    var trailerRow = '<h2 class="heading-medium">' + registeredTrailers + ' trailer<span class="plural"></span></h2><table id="sortable-table"><thead><tr><th scope="col" id="reg">Registration number</th><th scope="col" id="vin">VIN/Chassis number</th><th scope="col" id="manu">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
+                    var trailerRow = '<h2 class="heading-medium">' + registeredTrailers + ' trailer<span class="plural"></span></h2><table id="sortable-table"><thead><tr><th scope="col" id="reg">Registration number</th><th scope="col" id="vin"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</th><th scope="col" id="manu">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
                 } else {
-                    var trailerRow = '<h2 class="heading-medium">' + registeredTrailers + ' trailer<span class="plural"></span></h2><table id="sortable-table"><thead><tr><th scope="col" onclick="sortTable(0)" id="reg" class="sort-default">Registration number</th><th scope="col" onclick="sortTable(1)" id="vin" class="sort-default">VIN/Chassis number</th><th scope="col" onclick="sortTable(2)" id="manu" class="sort-default">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
+                    var trailerRow = '<h2 class="heading-medium">' + registeredTrailers + ' trailer<span class="plural"></span></h2><table id="sortable-table"><thead><tr><th scope="col" onclick="sortTable(0)" id="reg" class="sort-default">Registration number</th><th scope="col" onclick="sortTable(1)" id="vin" class="sort-default"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</th><th scope="col" onclick="sortTable(2)" id="manu" class="sort-default">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
                 }
 
                 // for (i = 0; i < member.trailers.length; i++) {
@@ -103,11 +103,11 @@
                         trailerRow += '<td scope="row"><span class="table-label">Registration</span><span class="table-details">' + member.trailers[i].reg + '</span><a href="#" class="manage-link" data="' + i + '">Manage</a></td>';
                         if (!member.trailers[i].vin) {
                         } else {
-                            trailerRow += '<td scope="row"><span class="table-label">VIN</span><span class="table-details">' + member.trailers[i].vin + '</span></td>';
+                            trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + member.trailers[i].vin + '</span></td>';
                         }
                         if (!member.trailers[i].chassis) {
                         } else {
-                            trailerRow += '<td scope="row"><span class="table-label">VIN/Chassis</span><span class="table-details">' + member.trailers[i].chassis + '</span></td>';
+                            trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis</span><span class="table-details">' + member.trailers[i].chassis + '</span></td>';
                         }
                         trailerRow += '<td scope="row"><span class="table-label">Manufacturer</span><span class="table-details">' + member.trailers[i].manufacturer + '</span></td>';
                         trailerRow += '<td scope="row" id="manage"><a href="#" class="manage" data="' + i + '">Manage</a></td>';

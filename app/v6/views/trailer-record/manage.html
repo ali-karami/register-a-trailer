@@ -39,7 +39,7 @@
 
                         <div class="multiple-choice">
                             <input id="radio-1" type="radio" name="radio-group" value="certificate">
-                            <label for="radio-1">Order replacement UK Trailer Registration Certificate</label>
+                            <label for="radio-1">Order replacement <abbr title="United Kingdom">UK</abbr> Trailer Registration Certificate</label>
                         </div>
                         <div class="multiple-choice">
                             <input id="radio-2" type="radio" name="radio-group" value="remove">
@@ -88,12 +88,12 @@
             trailerDetails += '<dl>';
             if (!currentTrailer.vin) {
             } else {
-                trailerDetails += '<dt>VIN/Chassis number</dt>';
+                trailerDetails += '<dt><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</dt>';
                 trailerDetails += '<dd>' + currentTrailer.vin + '</dd>';
             }
             if (!currentTrailer.chassis) {
             } else {
-                trailerDetails += '<dt>VIN number</dt>';
+                trailerDetails += '<dt><abbr title="Vehicle Identification Number">VIN</abbr></dt>';
                 trailerDetails += '<dd>' + currentTrailer.chassis + '</dd>';
             }
             trailerDetails += '<dt>Manufacturer</dt>';

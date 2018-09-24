@@ -37,11 +37,11 @@
                         </div>
 
                         <div class="panel panel-border-narrow js-hidden" id="vin-input-yes">
-                            <legend class="visuallyhidden">VIN</legend>
+                            <legend class="visuallyhidden"><abbr title="Vehicle Identification Number">VIN</abbr></legend>
 
                             <div class="form-group">
                                 <label class="form-label vin" for="vin-number">
-                                    VIN
+                                    <abbr title="Vehicle Identification Number">VIN</abbr>
                                     {% include "includes/errors/error-message-2.html" %}
                                 </label>
                                 <input class="form-control" id="vin-number" type="text" name="vin-number">
@@ -49,11 +49,11 @@
                         </div>
 
                         <div class="panel panel-border-narrow js-hidden" id="vin-input-no">
-                            <legend class="visuallyhidden">VIN or chassis number</legend>
+                            <legend class="visuallyhidden"><abbr title="Vehicle Identification Number">VIN</abbr> or chassis number</legend>
 
                             <div class="form-group">
                                 <label class="form-label chassis" for="vin-chassis-number">
-                                    VIN or chassis number
+                                    <abbr title="Vehicle Identification Number">VIN</abbr> or chassis number
                                     {% include "includes/errors/error-message-2.html" %}
                                 </label>
                                 <input class="form-control" id="vin-chassis-number" type="text" name="vin-chassis-number">
@@ -113,10 +113,10 @@
             if (value1 === 'Y') {
                 if ((value2 === '') || (value2 === undefined)) {
                     validInput = false;
-                    $('.error-message.2').html('VIN cannot be empty');
+                    $('.error-message.2').html('<abbr title="Vehicle Identification Number">VIN</abbr> cannot be empty');
                 } else if ((value2 > 0)|| (value2 < 17) ) {
                     validInput = false;
-                    $('.error-message.2').html('VIN must be 17 characters');
+                    $('.error-message.2').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
                 }
 
                 if (validInput) {
@@ -145,12 +145,12 @@
                     next();
                 } else {
                     showErrors2();
-                    // $('.error-message').html('VIN must be 17 characters');
+                    // $('.error-message').html('<abbr title="Vehicle Identification Number">VIN</abbr>  must be 17 characters');
                 }
             } else if (value1 === 'N') {
                 if (!value3) {
                     validInput = false;
-                    $('.error-message.2').html('VIN cannot be empty');
+                    $('.error-message.2').html('<abbr title="Vehicle Identification Number">VIN</abbr> cannot be empty');
                 }
 
                 if (validInput) {
@@ -163,7 +163,7 @@
                     next();
                 } else {
                     showErrors2();
-                    // $('.error-message').html('VIN must be 17 characters');
+                    // $('.error-message').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
                 }
             } else {
                 showErrors();

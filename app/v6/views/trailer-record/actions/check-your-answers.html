@@ -118,13 +118,13 @@
             trailerDetails += '</div>';
             if (!currentTrailer.vin) {
             } else {
-                trailerDetails += '<div><dt>VIN/Chassis number</dt>';
+                trailerDetails += '<div><dt><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</dt>';
                 trailerDetails += '<dd class="cya-answer">' + currentTrailer.vin + '</dd><dd class="cya-change">&nbsp;</dd></div>';
             }
             if (!currentTrailer.chassis) {
             } else {
                 trailerDetails += '<div>';
-                        trailerDetails += '<dt class="cya-question">VIN number</dt>';
+                        trailerDetails += '<dt class="cya-question"><abbr title="Vehicle Identification Number">VIN</abbr></dt>';
                 trailerDetails += '<dd class="cya-answer">' + currentTrailer.chassis + '</dd><dd class="cya-change">&nbsp;</dd></div>';
             }
             trailerDetails += '<div>';
