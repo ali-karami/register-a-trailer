@@ -30,7 +30,7 @@
 
                 <p>If you do need to register you’ll need to create a trailer record. A trailer record is where you can register and manage your trailers.</p>
 
-                <p>You’ll have to pay a fee of <span id="registration-fee"></span> if you’re registering a trailer for the first time with DVLA.</p>
+                <p>You’ll have to pay a fee of <span id="registration-fee"></span> if you’re registering a trailer for the first time with DVLA or <span id="acquire-fee"></span> to acquire a trailer that’s been previously registered.</p>
 
                 <p>The replacement fee for UK Trailer Registration Certificates is <span id="replacement-fee"></span>.</p>
 
@@ -71,8 +71,9 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        $('#registration-fee').html('£' + trailerCost);
-        $('#replacement-fee').html('£' + certificateCost);
+        $('#registration-fee').html('£' + firstRegFee);
+        $('#acquire-fee').html('£' + acquireFee);
+        $('#replacement-fee').html('£' + duplicateCertFee);
 
         $('.button').click(function() {
             member.clear();
