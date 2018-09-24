@@ -37,11 +37,11 @@
                         </div>
 
                         <div class="panel panel-border-narrow js-hidden" id="vin-input-yes">
-                            <legend class="visuallyhidden">VIN number</legend>
+                            <legend class="visuallyhidden">VIN</legend>
 
                             <div class="form-group">
                                 <label class="form-label vin" for="vin-number">
-                                    VIN number
+                                    VIN
                                     {% include "includes/errors/error-message-2.html" %}
                                 </label>
                                 <input class="form-control" id="vin-number" type="text" name="vin-number">
@@ -63,6 +63,8 @@
                 </div>
 
                 {% include "includes/buttons/continue.html" %}
+
+                <a href="/register/trailer-summary" class="cancel-button">Cancel and go to trailers awaiting payment</a>
             </div>
         </div>
     </main>
@@ -88,6 +90,15 @@
             $('.form-control').removeClass('form-control-error');
             // resetErrors();
             // $('input').closest('.panel.panel-border-narrow').css({'border-left':'5px solid #bfc1c3','padding-left':'0.78947em'});
+        });
+
+        $(document).ready(function () {
+            getPendingTrailers();
+            if (pendingTrailers == 0) {
+                $('.cancel-button').hide();
+            } else {
+                $('.cancel-button').show();
+            }
         });
 
         $('.button').click(validate);
@@ -120,9 +131,12 @@
                             var weight2 = randomWeight(750,5000);
                             member.trailer.gross = weight2 + weight1;
                             member.trailer.unladen = weight2;
+                            var regType = randomRegistrationType();
+                            member.trailer.registrationType = regType;
                             console.log('manufacturer = ' + member.trailer.manufacturer);
                             console.log('gross = ' + member.trailer.gross);
                             console.log('unladen = ' + member.trailer.unladen);
+                            console.log('registration type = ' + member.trailer.registrationType);
                         } else {
                             console.log('vin = ' + member.trailer.vin);
                             member.trailer.vin = value2;

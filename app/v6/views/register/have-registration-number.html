@@ -20,7 +20,7 @@
                     <fieldset class="inline">
                         <legend>
                             <h1 class="heading-large">Does this trailer have a registration number?</h1>
-                            <p class="form-hint">This is not the registration number of the pulling cab or the identification number issued by DVSA known as the ‘C’ number or ministry ID number</p>
+                            <p class="lede">This is not the registration number of the pulling cab or the identification number issued by DVSA known as the ‘C’ number or ministry ID number</p>
                             {% include "includes/errors/error-message.html" %}
                         </legend>
 
@@ -40,7 +40,10 @@
                             </legend>
 
                             <div class="form-group">
-                                <label class="form-label" for="reg-number"><span class="reg-no-error">Registration</span> <span class="reg-error">number</span></label>
+                                <label class="form-label" for="reg-number">
+                                    <span class="reg-no-error">Registration</span> <span class="reg-error">number</span>
+                                    <span class="form-hint">For example, A1234567</span>
+                                </label>
                                 <input class="form-control" id="reg-number" type="text" name="reg-number">
                             </div>
                         </div>
@@ -48,6 +51,8 @@
                 </div>
 
                 {% include "includes/buttons/continue.html" %}
+
+                <a href="/register/trailer-summary" class="cancel-button">Cancel and go to trailers awaiting payment</a>
             </div>
         </div>
     </main>
@@ -64,10 +69,18 @@
         $('.reg-no-error').click(function() {
             $('input[id=reg-number]').val(randomReg());
         });
-
         $('.reg-error').click(function() {
             var testData = { 'reg': 'A3679333' };
             $('input[id=reg-number]').val(testData.reg);
+        });
+
+        $(document).ready(function () {
+            getPendingTrailers();
+            if (pendingTrailers == 0) {
+                $('.cancel-button').hide();
+            } else {
+                $('.cancel-button').show();
+            }
         });
 
         $('.button').click(validate);
@@ -90,7 +103,7 @@
 
                 if (validInput) {
                     if (value2 == 'A3679333') {
-                       go('/register/exit')
+                       go('/exit')
                     } else {
                         member.trailer.reg = value2;
                         next();

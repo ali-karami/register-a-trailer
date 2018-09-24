@@ -78,6 +78,8 @@
                 </form>
 
                 {% include "includes/buttons/continue.html" %}
+
+                <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
             </div>
         </div>
     </main>
@@ -98,12 +100,16 @@
 
         if (member.disposal.type == 'sold') {
             $('.question').html('When was this trailer sold or transferred?');
+            $('.button').html('Continue');
         } else if (member.disposal.type == 'scrapped') {
             $('.question').html('When was this trailer scrapped or written off?');
+            $('.button').html('Remove from trailer record');
         } else if (member.disposal.type == 'exported') {
             $('.question').html('When was this trailer exported?');
+            $('.button').html('Remove from trailer record');
         } else if (member.disposal.type == 'outside') {
             $('.question').html('When did you stop using this trailer outside of the <abbr title="United Kingdom">UK</abbr>?');
+            $('.button').html('Remove from trailer record');
         }
 
         $('.button').click(validate);

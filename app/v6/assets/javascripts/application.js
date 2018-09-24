@@ -32,14 +32,23 @@ function go(url) {
   window.location.href = url;
 }
 
+// Create random registration type
+function randomRegistrationType() {
+  var array = ['registered', 'unregistered'];
+  var type = array[Math.floor(Math.random() * array.length)];
+  return type;
+  // console.log(type);
+}
+
 // Set current trailer variable for shorter code
 try {
   var currentTrailer = member.trailers[member.currentTrailerPosition];
 } catch(err){}
 
-var trailerCost = 0;
-var certificateCost = 0;
-var enpac = 'electronic number plate authorisation certificate (eV948)';
+var firstRegFee = 26;
+var acquireFee = 21;
+var duplicateCertFee = 10;
+var enpac = 'electronic number plate authorisation certificate';
 
 // Create random registration number
 function randomReg() {
@@ -135,6 +144,38 @@ function getRegisteredTrailers() {
   } catch(err){
     console.log('No registered trailers exist');
   }
+}
+
+// Check registered/unregistered trailer amount
+var registeredTrailersAmount = 0;
+function getRegisteredTrailersAmount() {
+    try {
+        for (i = member.trailers.length - 1; i >= 0; i--) {
+            if ((member.trailers[i].registered == false) && (member.trailers[i].regType == 'registered')) {
+                registeredTrailersAmount++;
+            } else {
+                registeredTrailersAmount = registeredTrailersAmount;
+            }
+        }
+        // console.log(pendingTrailers + ' pending trailers');
+    } catch (err) {
+        console.log('No pending trailers exist');
+    }
+}
+var unregisteredTrailersAmount = 0;
+function getUnregisteredTrailersAmount() {
+    try {
+        for (i = member.trailers.length - 1; i >= 0; i--) {
+            if ((member.trailers[i].registered == false) && (member.trailers[i].regType == 'unregistered')) {
+                unregisteredTrailersAmount++;
+            } else {
+                unregisteredTrailersAmount = unregisteredTrailersAmount;
+            }
+        }
+        // console.log(pendingTrailers + ' pending trailers');
+    } catch (err) {
+        console.log('No pending trailers exist');
+    }
 }
 
 // function addCommas(commaValue) {

@@ -4,6 +4,10 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard.html" %}
+    <div class="grid-row back">
+        <a href="/trailer-record" class="link-back">Go to trailer record</a>
+    </div>
+
     <style type="text/css">
         .accordion-section-header h2.heading-medium { padding-left: .5em; }
         .cya-question { padding-left: .5em; }
@@ -18,13 +22,13 @@
 
 {% block content %}
     <main id="content" class="trailer-summary-page" role="main">
-        <div class="grid-row no-question">
+        <div class="grid-row">
             <div class="column-two-thirds">
                 <div class="form-group">
-                    <h1 class="heading-large">Trailers pending registration</h1>
+                    <h1 class="heading-large">Trailers awaiting payment</h1>
 
                     <div class="form-group buttons">
-                        <button class="button register blue">Register another trailer</button>
+                        <button class="button register blue">Add another trailer</button>
                         <button class="button continue blue">Go to payment</button>
                     </div>
 
@@ -42,7 +46,7 @@
             <div class="column-third">
                 <div id="order-summary">
                     <div class="payment-total">
-                        <h2 class="heading-medium">Order summary</h2>
+                        <h2 class="heading-medium">Payment summary</h2>
 
                         <div class="payment-items">
                             <span id="trailer-amount">0</span> x trailer<span id="plural">s</span> (£<span id="trailer-cost"></span>)
@@ -70,12 +74,12 @@
             $('#trailer-amount').html(pendingTrailers);
         }
 
-        $('#trailer-cost').html(trailerCost);
+        $('#trailer-cost').html(firstRegFee);
         $('#trailer-amount').html(pendingTrailers);
 
         var quantity = pendingTrailers;
         var cost = 0;
-        cost = pendingTrailers * trailerCost;
+        cost = pendingTrailers * firstRegFee;
         $('#cost').html('£' + cost);
 
         if (!member.trailers || member.trailers.length == 0) {

@@ -45,7 +45,7 @@
     <script type="text/javascript">
         $('.button').click(next);
 
-        $('#certificate-cost').html('£' + certificateCost + '.00');
+        $('#certificate-cost').html('£' + duplicateCertFee);
 
         $('#name').html(member.user.name).css('text-transform', 'capitalize');
         var addressPlayback = '';
@@ -57,7 +57,7 @@
         $('#address').html(addressPlayback);
 
         function next() {
-            member.cost = certificateCost;
+            member.cost = duplicateCertFee;
             go('/payment');
         }
     </script>

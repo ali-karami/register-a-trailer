@@ -74,7 +74,8 @@
         // From change-details
         var name = '<div class="govuk-box-highlight"><h1 class="heading-large"></h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
         var address = '<div class="govuk-box-highlight"><h1 class="heading-large">Address changed successfully</h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
-        var email = '<div class="govuk-box-highlight"><h1 class="heading-large">Email address changed successfully</h1></div>' + emailConf + confirmations + gateway + buttonDetails + linkRecord;
+        // var email = '<div class="govuk-box-highlight"><h1 class="heading-large">Email address changed successfully</h1></div>' + emailConf + confirmations + gateway + buttonDetails + linkRecord;
+        var email = '<div class="govuk-box-highlight"><h1 class="heading-large">Email address changed successfully</h1></div>' + emailConf + buttonDetails + linkRecord;
         // From manage
         var removed = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer removed successfully</h1></div>' + emailConf + trailerRemoved + buttonRecord;
         var exported = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer exported successfully</h1></div>' + emailConf + trailerRemoved + removeReg + buttonRecord;
@@ -83,7 +84,7 @@
         // var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div><span id="trailer-list">' + trailerList + '</span>' + receipt + newCertificate + next + buttonRecord;
         var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div>' + trailerList + receipt + newCertificate + next + buttonRecord;
         // var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div><span id="trailer-list">' + trailerList + '</span>' + emailConf + newCertificate + buttonRecord;
-        var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
+        var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate<br>ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
         var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer record created successfully</h1></div>' + registerTrailers + buttonRecord;
 
         // $(document).ready(function() {
@@ -110,9 +111,9 @@
             if (value === 'email-address') {
                 $('#page-content').html(email);
                 if (member.user.type == 'company') {
-                    $('.heading-large').html('Company email address changed');
+                    $('.heading-large').html('Company email address<br>changed successfully');
                 } else if (member.user.type == 'personal') {
-                    $('.heading-large').html('Email address changed');
+                    $('.heading-large').html('Email address changed successfully');
                 }
             }
 

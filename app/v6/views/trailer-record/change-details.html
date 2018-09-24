@@ -56,6 +56,15 @@
 
 {% block body_end %}
     <script type="text/javascript">
+        try { var type = member.user.type; } catch(err){}
+        if (type == "company") {
+            document.title = 'Change your company details';
+            $('#record-type').show();
+        } else if (type == "personal") {
+            document.title = 'Your details';
+            $('#record-type').hide();
+        }
+
         try {
             $('#name').html(member.user.name).css('text-transform', 'capitalize');
             var addressPlayback = '';

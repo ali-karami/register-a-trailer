@@ -78,6 +78,8 @@
                 </div>
 
                 {% include "includes/buttons/continue.html" %}
+
+                <a href="/register/trailer-summary" class="cancel-button">Cancel and go to trailers awaiting payment</a>
             </div>
         </div>
     </main>
@@ -99,6 +101,15 @@
 
         var url = document.referrer.substring(document.referrer.lastIndexOf('/') + 1).split("?")[0];
         console.log('url = ' + url);
+
+        $(document).ready(function () {
+            getPendingTrailers();
+            if (pendingTrailers == 0) {
+                $('.cancel-button').hide();
+            } else {
+                $('.cancel-button').show();
+            }
+        });
 
         $('.button').click(validate);
 
