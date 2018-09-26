@@ -107,18 +107,27 @@
             var cantRegister = '<div class="govuk-box-highlight grey"><h1 class="heading-large">You cannot register this trailer</h1></div>';
             // Content
             var alreadyRegistered = '<p>Our records show the trailer has already been registered.</p>';
+            var over750 = '<p>You can only register trailers that weigh over 750kg in gross weight.</p>';
             // Buttons
             var buttonBought = '<div class="form-group"><button class="button bought">Tell us you have bought a trailer</button></div>';
+            var buttonAddTrailer = '<div class="form-group"><button class="button add">Add another trailer</button></div>';
             // Links
             var goToTrailerRecord = '<a href="/trailer-record">Go to trailer record</a>';
+            var cancelGoTrailerRecord = '<a href="/trailer-record">Cancel and go to trailer record</a>';
 
-                                // Heading      // Paragraph            // Button       // Link
-            var regExists =     cantRegister +  alreadyRegistered +     buttonBought +  goToTrailerRecord;
+                                // Heading          // Paragraph            // Button           // Link
+            var regExists =     cantRegister +      alreadyRegistered +     buttonBought +      goToTrailerRecord;
+            var notOver750 =    cantRegister +      over750 +               buttonAddTrailer +  cancelGoTrailerRecord;
 
             // register/have-registration-number
             if (getRefUrl() === "have-registration-number") {
                 document.title = 'This trailer has already been registered';
                 $('#page-content').html(regExists);
+            }
+            // register/trailer-weights
+            if (getRefUrl() === 'trailer-weights') {
+                document.title = 'You cannot register this trailer';
+                $('#page-content').html(notOver750);
             }
         }
 

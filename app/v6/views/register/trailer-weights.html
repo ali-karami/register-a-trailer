@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <fieldset>
                         <label class="form-label" for="gross-weight">
-                            <legend>Gross weight (kg)</legend>
+                            <legend class="gross-weight">Gross weight (kg)</legend>
                             {% include "includes/errors/error-message-input.html" %}
                         </label>
                         <input class="form-control" id="gross-weight" name="gross-weight" type="text">
@@ -97,6 +97,10 @@
         $('h1').click(function() {
             $('input[id=gross-weight]').val(unladen + gross);
             $('input[id=unladen-weight]').val(unladen);
+        });
+        $('.gross-weight').click(function() {
+            $('input[id=gross-weight]').val(600);
+            $('input[id=unladen-weight]').val(500);
         });
 
         var url = document.referrer.substring(document.referrer.lastIndexOf('/') + 1).split("?")[0];
@@ -177,7 +181,7 @@
 
             if (((value1) && (value2)) && (value1 <= 750)) {
                 validInput = false;
-                go('/exit/under-750-register');
+                go('/exit');
             }
 
             if (validInput) {
