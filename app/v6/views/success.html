@@ -28,11 +28,20 @@
 {% block body_end %}
     <script type="text/javascript">
         var value = getRefUrl();
+        getRegisteredTrailers();
 
         if (value === 'check-your-answers') {
             $('.grid-row.phase .phase-banner').css({'float':'none','width':'100%'});
             $('.logged-user').css('display', 'none');
         }
+
+        $(document).ready(function() {
+            if (registeredTrailers === 1) {
+                $('.this-these').html('This');
+            } else if ((registeredTrailers === 0) || (registeredTrailers > 1)) {
+                $('.this-these').html('These');
+            }
+        });
 
         try {
             var trailerList = '<div class="form-group"><table><thead><tr><th scope="col">Registration number</th><th scope="col"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis</th></tr></thead><tbody>';
@@ -120,12 +129,6 @@
             if (value === 'processing') {
                 if (member.paymentType === 'register') {
                     $('#page-content').html(register);
-
-                    if (registeredTrailers === 1) {
-                        $('.this-these').html('This');
-                    } else if ((registeredTrailers === 0) || (registeredTrailers > 1)) {
-                        $('.this-these').html('These');
-                    }
                 }
                 if (member.paymentType === 'duplicate') {
                     $('#page-content').html(duplicate);
