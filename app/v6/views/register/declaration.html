@@ -36,7 +36,7 @@
                         <p>It is optional to register for all other trailers.</p>
 
                         <div class="form-group">
-                            <p>If you’re still unsure, you can <a href="/register/check/trailer-weights">check if you need to register your trailer</a>.</p>
+                            <p>If you’re still unsure, you can <a href="#" class="check">check if you need to register your trailer</a>.</p>
                         </div>
 
                         {% include "includes/errors/error-message.html" %}
@@ -63,6 +63,15 @@
 {% block body_end %}
     <script type="text/javascript">
         $('.button').click(validate);
+
+        $('a.check').click(function(e) {
+            e.preventDefault();
+            if (member.trailer === undefined) {
+                member.trailer = {};
+            }
+            member.trailer.check = 'Y';
+            go('/register/check/trailer-weights');
+        });
 
         function validate() {
             var value = $('input[name=declaration]:checked').val();
