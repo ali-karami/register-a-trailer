@@ -10,3 +10,5 @@ node_modules/*
 .tmuxp.*
 package-lock.json
 app_old
+app/v6/views/_tests/
+CHANGELOG-v2.md
