@@ -10,6 +10,9 @@
             max-width: 20em;
             margin-bottom: 0;
         }
+        #other-title-span { display: none; }
+        #other-title-span .form-group { margin-bottom: 30px !important; }
+        /* .form-group.first { margin-bottom: 1em; } */
     </style>
 {% endblock %}
 
@@ -85,21 +88,33 @@
                 </div>');
             } else if (type == "personal") {
                 $('h1').click(function() {
-                    var testData = { "firstName": "Al", "lastName": "Selsigen" };
-                    $('input[name=title]').val(testData.title);
+                    var testData = { "title": "Mr", "firstName": "Al", "lastName": "Selsigen" };
+                    $('select[id=title]').val(testData.title);
                     $('input[name=first-name]').val(testData.firstName);
                     $('input[name=last-name]').val(testData.lastName);
                 });
                 $('#company').hide();
                 $('#personal').show();
                 $('#name-input').html('\
-                <div class="form-group">\
-                    <label class="form-label" for="title">\
-                        Title\
-                        <span class="error-message input">Cannot be empty</span>\
-                    </label>\
-                    <input class="form-control form-control-1-3" id="title" name="title" type="text">\
+                <div class="form-group first">\
+                    <label class="form-label" for="title">Title</label>\
+                    <select class="form-control form-control-1-4" id="title" name="title">\
+                        <option></option>\
+                        <option value="Mr">Mr</option>\
+                        <option value="Mrs">Mrs</option>\
+                        <option value="Miss">Miss</option>\
+                        <option value="Ms">Ms</option>\
+                        <option value="Other">Other</option>\
+                    </select>\
                 </div>\
+                <span id="other-title-span">\
+                    <div class="form-group">\
+                        <div class="panel panel-border-narrow">\
+                            <label class="form-label" for="other-title">Other title</label>\
+                            <input class="form-control" id="other-title" name="other-title" type="text">\
+                        </div>\
+                    </div>\
+                </span>\
                 <div class="form-group">\
                     <label class="form-label" for="first-name">\
                         First name\
@@ -117,11 +132,22 @@
             }
         });
 
+        $(document).ready(function(){
+            $('select').change(function(){
+                var title = $('#title option:selected').val();
+                if (title === 'Other') {
+                    $('#other-title-span').show();
+                } else {
+                    $('#other-title-span').hide();
+                }
+            });
+        });
+
         $('.button').click(validate);
 
         function validate() {
             var validInput = true;
-            var value1a = $('input[name=title]').val();
+            var value1a = $('select[id=title]').val();
             var value1 = $('input[name=first-name]').val();
             var value2 = $('input[name=last-name]').val();
             var value3 = $('input[name=company-name]').val();
@@ -179,14 +205,14 @@
         var changing = location.search.split('change=')[1];
         if (changing === 'true') {
             if (type == "company") {
-                document.title = 'Change your company name';
-                $('.title').html('Change your company name');
+                document.title = 'What is your company name?';
+                $('.title').html('What is your company name?');
                 $('.error-message').html('Enter your company name');
                 $('.paragraph').hide();
                 $('.button').html('Save and continue');
             } else if (type == "personal") {
-                document.title = 'Change your name';
-                $('.title').html('Change your name');
+                document.title = 'What is you name?';
+                $('.title').html('What is you name?');
                 $('.error-message').html('Enter your name');
                 $('.paragraph').hide();
                 $('.button').html('Save and continue');

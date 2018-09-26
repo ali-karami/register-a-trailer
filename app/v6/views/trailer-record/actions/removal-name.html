@@ -8,6 +8,8 @@
         .error-summary,
         .error-message { display: none; }
         .multiple-choice { margin-bottom: 10px !important; }
+        #other-title-span { display: none; }
+        #other-title-span .form-group { margin-bottom: 30px !important; }
     </style>
 {% endblock %}
 
@@ -53,11 +55,47 @@
                             <legend class="visuallyhidden"><abbr title="Vehicle Identification Number">VIN</abbr> or chassis number</legend>
 
                             <div class="form-group">
-                                <label class="form-label name" for="name">
+
+                                <div class="form-group first">
+                                    <label class="form-label" for="title">Title</label>
+                                    <select class="form-control form-control-1-4" id="title" name="title">
+                                        <option></option>
+                                        <option value="Mr">Mr</option>
+                                        <option value="Mrs">Mrs</option>
+                                        <option value="Miss">Miss</option>
+                                        <option value="Ms">Ms</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <span id="other-title-span">
+                                    <div class="form-group">
+                                        <div class="panel panel-border-narrow">
+                                            <label class="form-label title" for="other-title">Other title</label>
+                                            <input class="form-control" id="other-title" name="other-title" type="text">
+                                        </div>
+                                    </div>
+                                </span>
+                                <div class="form-group">
+                                    <label class="form-label" for="first-name">
+                                        First name
+                                        <span class="error-message input">Cannot be empty</span>
+                                    </label>
+                                    <input class="form-control" id="first-name" name="first-name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="last-name">
+                                        Last name
+                                        <span class="error-message input2">Cannot be empty</span>
+                                    </label>
+                                    <input class="form-control" id="last-name" name="last-name" type="text">
+                                </div>
+
+
+                                <!-- <label class="form-label name" for="name">
                                     Name
                                     {% include "includes/errors/error-message-2.html" %}
                                 </label>
-                                <input class="form-control" id="name" type="text" name="name">
+                                <input class="form-control" id="name" type="text" name="name"> -->
                             </div>
                         </div>
                     </fieldset>
@@ -82,9 +120,12 @@
             $('input[id=company-name]').val(testData.name);
         });
 
-        $('.form-label.name').click(function() {
-            var testData = { "name": "Al Selsigen" };
-            $('input[id=name]').val(testData.name);
+
+        $('#first-name').click(function() {
+            var testData = { "title": "Mr", "firstName": "Al", "lastName": "Selsigen" };
+            $('select[id=title]').val(testData.title);
+            $('input[name=first-name]').val(testData.firstName);
+            $('input[name=last-name]').val(testData.lastName);
         });
 
         $('.multiple-choice').change(function() {
@@ -94,6 +135,15 @@
             // $('input').closest('.panel.panel-border-narrow').css({'border-left':'5px solid #bfc1c3','padding-left':'0.78947em'});
         });
 
+        $('select').change(function(){
+            var title = $('#title option:selected').val();
+            if (title === 'Other') {
+                $('#other-title-span').show();
+            } else {
+                $('#other-title-span').hide();
+            }
+        });
+
         $('.button').click(validate);
 
         function validate() {
@@ -101,7 +151,9 @@
             var validInput = true;
             var value1 = $('input[name=sale-type]:checked').val();
             var value2 = $('input[name=company-name]').val();
-            var value3 = $('input[name=name]').val();
+            var value3 = $('select[id=title]').val();
+            var value4 = $('input[name=first-name]').val();
+            var value5 = $('input[name=last-name]').val();
 
             if (value1 === 'company') {
                 if ((value2 === '') || (value2 === undefined)) {
@@ -121,16 +173,19 @@
                     // $('.error-message').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
                 }
             } else if (value1 === 'private') {
-                if (!value3) {
+                if ((!value3) && (!value4) && (!value5)) {
                     validInput = false;
                     $('.error-message.2').html('Name cannot be empty');
                 }
 
                 if (validInput) {
+                    member.disposal.title = value3;
+                    member.disposal.firstName = value4;
+                    member.disposal.lastName = value5;
+
                     if (changing == "true") {
                         go('/trailer-record/actions/check-your-answers');
                     } else {
-                        member.disposal.name = value3;
                     }
                     next();
                 } else {
