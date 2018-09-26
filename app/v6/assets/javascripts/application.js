@@ -151,7 +151,7 @@ var registeredTrailersAmount = 0;
 function getRegisteredTrailersAmount() {
     try {
         for (i = member.trailers.length - 1; i >= 0; i--) {
-            if ((member.trailers[i].registered == false) && (member.trailers[i].regType == 'registered')) {
+            if ((member.trailers[i].registered == false) && (member.trailers[i].registrationType == 'registered')) {
                 registeredTrailersAmount++;
             } else {
                 registeredTrailersAmount = registeredTrailersAmount;
@@ -166,7 +166,7 @@ var unregisteredTrailersAmount = 0;
 function getUnregisteredTrailersAmount() {
     try {
         for (i = member.trailers.length - 1; i >= 0; i--) {
-            if ((member.trailers[i].registered == false) && (member.trailers[i].regType == 'unregistered')) {
+            if ((member.trailers[i].registered == false) && (member.trailers[i].registrationType == 'unregistered')) {
                 unregisteredTrailersAmount++;
             } else {
                 unregisteredTrailersAmount = unregisteredTrailersAmount;

@@ -4,15 +4,12 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard.html" %}
-    <div class="grid-row back">
-        <a href="/trailer-record" class="link-back">Go to trailer record</a>
-    </div>
-
     <style type="text/css">
         .accordion-section-header h2.heading-medium { padding-left: .5em; }
         .cya-question { padding-left: .5em; }
         .cya-change { padding-right: .5em !important; }
         .paragraph { margin-bottom: 0; padding-bottom: 0; }
+        .accordion#registered-list .accordion-controls { display: none; }
     </style>
 {% endblock %}
 
@@ -22,17 +19,20 @@
 
 {% block content %}
     <main id="content" class="trailer-summary-page" role="main">
-        <div class="grid-row">
+        <div class="grid-row no-question">
             <div class="column-two-thirds">
                 <div class="form-group">
-                    <h1 class="heading-large">Trailers awaiting payment</h1>
+                    <h1 class="heading-large">Trailers pending registration</h1>
 
                     <div class="form-group buttons">
-                        <button class="button register blue">Add another trailer</button>
+                        <button class="button register blue">Register another trailer</button>
                         <button class="button continue blue">Go to payment</button>
                     </div>
 
                     <p class="paragraph">These trailers have been saved</p>
+
+                    <!-- <div class="accordion" id="unregistered-list">
+                    </div> -->
 
                     <div class="accordion" id="trailer-list">
                     </div>
@@ -46,13 +46,21 @@
             <div class="column-third">
                 <div id="order-summary">
                     <div class="payment-total">
-                        <h2 class="heading-medium">Payment summary</h2>
+                        <h2 class="heading-medium">Order summary</h2>
 
                         <div class="payment-items">
-                            <span id="trailer-amount">0</span> x trailer<span id="plural">s</span> (£<span id="trailer-cost"></span>)
+                            <span id="first-reg">
+                                <span id="first-reg-amount">0</span> x first registration<span id="plural">s</span>
+                                (£<span id="first-reg-fee"></span>)<br>
+                            </span>
+                            <span id="acquire">
+                                <span id="acquire-amount">0</span> x change of keeper<span id="plural">s</span>
+                                (£<span id="acquire-fee"></span>)<br>
+                            </span>
+                            <!-- <span id="trailer-total">0</span> -->
                         </div>
                         <div class="">Amount to pay</div>
-                        <div id="cost">0</div>
+                        <div id="total-cost">0</div>
                     </div>
                 </div>
             </div>
@@ -69,18 +77,41 @@
         delete member.trailer;
         delete member.currentTrailerPosition;
 
+        // Create random registration type
+        // function randomRegistrationType() {
+        //     var array = ['registered', 'unregistered'];
+        //     var type = array[Math.floor(Math.random() * array.length)];
+        //     return type;
+        //     // console.log(type);
+        // }
+
         if (getPendingTrailers()) {
             console.log(getPendingTrailers());
             $('#trailer-amount').html(pendingTrailers);
         }
 
-        $('#trailer-cost').html(firstRegFee);
-        $('#trailer-amount').html(pendingTrailers);
+        if (getRegisteredTrailersAmount()) {
+            console.log(getRegisteredTrailersAmount());
+            $('#first-reg-amount').html(registeredTrailersAmount);
+        }
 
-        var quantity = pendingTrailers;
-        var cost = 0;
-        cost = pendingTrailers * firstRegFee;
-        $('#cost').html('£' + cost);
+        if (getUnregisteredTrailersAmount()) {
+            console.log(getUnregisteredTrailersAmount());
+            $('#acquire-amount').html(unregisteredTrailersAmount);
+        }
+
+        $('#first-reg-fee').html(firstRegFee);
+        $('#acquire-fee').html(acquireFee);
+
+        $('#first-reg-amount').html(registeredTrailersAmount);
+        $('#acquire-amount').html(unregisteredTrailersAmount);
+        // $('#trailer-total').html(pendingTrailers);
+
+        var quantity1 = registeredTrailersAmount * firstRegFee;
+        var quantity2 = unregisteredTrailersAmount * acquireFee;
+        var cost = quantity1 + quantity2;
+        $('#total-cost').html('£' + cost);
+
 
         if (!member.trailers || member.trailers.length == 0) {
             $('.paragraph').html('You have no trailers pending registration');
@@ -113,6 +144,7 @@
                     } else {
                         trailerList += '<div><dt class="cya-question">Registration number</dt>';
                         trailerList += '<dd class="cya-answer">' + member.trailers[i].reg + '</dd>';
+                        // trailerList += '<dd class="cya-change"><a href="/register/have-registration-number?change=true" data="' + i + '">Change<span class="visually-hidden"> registration number</span></a></dd>';
                         trailerList += '<dd class="cya-change"><a href="/register/have-registration-number?change=true" data="' + i + '">Change<span class="visually-hidden"> registration number</span></a></dd>';
                         trailerList += '</div>';
                     }
@@ -138,9 +170,9 @@
                     // $('.heading-large').html('No trailers pending registration');
                     // $('.paragraph').hide();
                     // $('#trailer-list').hide();
-                    // $('#radio-section').hide();
+                    // // $('#radio-section').hide();
                     // $('.column-third').hide();
-                    // $('.form-group.continue').hide();
+                    // $('.form-group.buttons').hide();
                     // $('.form-group.register').show();
                 }
             }
