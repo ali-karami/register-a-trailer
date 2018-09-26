@@ -183,7 +183,8 @@
     $('a.clear-temp-member').click(function(e) {
         e.preventDefault();
         delete member.address;
-        delete member.addressess;
+        delete member.addresses;
+        delete member.exit;
         delete member.trailer;
         delete member.length;
         location.reload();
