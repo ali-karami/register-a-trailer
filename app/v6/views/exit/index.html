@@ -47,18 +47,18 @@
         // CREATE FLOWS
         if (member.exit === 'create') {
             // Heading
-            var cantCreateRecord =  '<div class="govuk-box-highlight grey"><h1 class="heading-large">You cannot create a trailer record</h1></div>';
-            var doNotNeedRecord =   '<div class="govuk-box-highlight grey"><h1 class="heading-large">You do not need to<br>create a trailer record</h1></div>';
+            var cantCreateRecord =  '<div class="govuk-box-highlight grey"><h1 class="heading-large">You cannot create a trailer account</h1></div>';
+            var doNotNeedRecord =   '<div class="govuk-box-highlight grey"><h1 class="heading-large">You do not need to<br>create a trailer account</h1></div>';
             // Content
-            var over750 = '<p>To create a trailer record, trailers must weigh over 750kg in gross weight.</p>';
-            var outsideUk = '<p>You only have to create a trailer record if you will use the trailers outside of the UK.</p>';
-            var stillCreate = '<p>You can still create a trailer record if you want to.</p>';
+            var over750 = '<p>To create a trailer account, trailers must weigh over 750kg in gross weight.</p>';
+            var outsideUk = '<p>You only have to create a trailer account if you will use the trailers outside of the UK.</p>';
+            var stillCreate = '<p>You can still create a trailer account if you want to.</p>';
             var travelling = '<p>Trailers travelling to <span class="countries"></span> are not required to register, unless you pass through a foreign country that has ratified the 1968 Vienna Convention.</p>';
-            var over3500kg = '<p>You only have to create a trailer record to register non-commercial trailers that weigh over 3,500kg in gross weight.</p>';
+            var over3500kg = '<p>You only have to create a trailer account to register non-commercial trailers that weigh over 3,500kg in gross weight.</p>';
             var ukLaw = '<p>Under <abbr title="United Kingdom">UK</abbr> law you do not need to register your trailer, however you may be required to produce a <abbr title="United Kingdom">UK</abbr> Trailer Registration Certificate at foreign borders.</p>';
             // Buttons
             var buttonGOVUK = '<div class="form-group"><button class="button gov">Return to GOV.UK</button></div>';
-            var buttonCreate = '<div class="form-group"><button class="button create">I still want to create a trailer record</button></div>';
+            var buttonCreate = '<div class="form-group"><button class="button create">I still want to create a trailer account</button></div>';
             // Links
             var linkGOVUK = '<a href="https://www.gov.uk">Return to GOV.UK</a>';
 
@@ -70,17 +70,17 @@
 
             // create/over-750kg
             if (getRefUrl() === 'over-750kg') {
-                document.title = 'You cannot create a trailer record';
+                document.title = 'You cannot create a trailer account';
                 $('#page-content').html(notOver750kg);
             }
             // create/used-outside-uk
             if (getRefUrl() === 'used-outside-uk') {
-                document.title = 'You do not need to create a trailer record';
+                document.title = 'You do not need to create a trailer account';
                 $('#page-content').html(notOutsideUk);
             }
             // create/travelling-through
             if (getRefUrl() === 'travelling-through') {
-                document.title = 'You do not need to create a trailer record';
+                document.title = 'You do not need to create a trailer account';
                 $('#page-content').html(notTravThrough);
                 var countries = '';
                 for (i=0; i < member.countries.length; i++) {
@@ -96,7 +96,7 @@
             }
             // create/used-commercially
             if (getRefUrl() === 'used-commercially') {
-                document.title = 'You do not need to create a trailer record';
+                document.title = 'You do not need to create a trailer account';
                 $('#page-content').html(notCommercial);
             }
         }
@@ -112,12 +112,12 @@
             var buttonBought = '<div class="form-group"><button class="button bought">Tell us you have bought a trailer</button></div>';
             var buttonAddTrailer = '<div class="form-group"><button class="button add">Add another trailer</button></div>';
             // Links
-            var goToTrailerRecord = '<a href="/trailer-record">Go to trailer record</a>';
-            var cancelGoTrailerRecord = '<a href="/trailer-record">Cancel and go to trailer record</a>';
+            var cancelGoTrailerDashboard = '<a href="/trailer-record">Cancel and go to trailer record</a>';
+            var goToTrailerDashboard = '<a href="/trailer-record">Go to trailer dashboard</a>';
 
                                 // Heading          // Paragraph            // Button           // Link
-            var regExists =     cantRegister +      alreadyRegistered +     buttonBought +      goToTrailerRecord;
-            var notOver750 =    cantRegister +      over750 +               buttonAddTrailer +  cancelGoTrailerRecord;
+            var regExists =     cantRegister +      alreadyRegistered +     buttonBought +      goToTrailerDashboard;
+            var notOver750 =    cantRegister +      over750 +               buttonAddTrailer +  cancelGoTrailerDashboard;
 
             // register/have-registration-number
             if (getRefUrl() === "have-registration-number") {
@@ -145,7 +145,7 @@
             var buttonAddTrailer = '<div class="form-group"><button class="button add">Add another trailer</button></div>';
             var buttonRegister = '<div class="form-group"><button class="button">I still want to register this trailer</button></div>';
             // Links
-            var cancelGoTrailerRecord = '<a href="/trailer-record">Cancel and go to trailer record</a>';
+            var cancelGoTrailerRecord = '<a href="/trailer-record">Cancel and go to trailer dashboard</a>';
 
                                 // Heading          // Paragraph                    // Button           //Link
             var notOver750 =    cantRegister +      over750 +                       buttonAddTrailer +  cancelGoTrailerRecord;
@@ -214,18 +214,18 @@
 
 /*
         // Heading
-        var recordNotFoundH = '<div class="govuk-box-highlight grey"><h1 class="heading-large">Trailer record not found</h1></div>';
+        var recordNotFoundH = '<div class="govuk-box-highlight grey"><h1 class="heading-large">Trailer account not found</h1></div>';
         // Content
-        var recordNotFoundP = '<p>There is no trailer record linked to this Government Gateway ID</p><p>If you’re registering trailers for a company, you must be logged in using your company’s details</p><p>If you have created a trailer record using this Government Gateway ID, you will need to call DVLA by phone.</p>';
+        var recordNotFoundP = '<p>There is no trailer account linked to this Government Gateway ID</p><p>If you’re registering trailers for a company, you must be logged in using your company’s details</p><p>If you have created a trailer account using this Government Gateway ID, you will need to call DVLA by phone.</p>';
         var telephone = '<p><a href="tel:03007906802">0300 790 6802</a><br>Monday to Friday, 8am to 7pm<br>Saturday, 8am to 2pm<br><a href="">Find out about call charges</a></p>';
         // Buttons
-        var buttonCreate = '<div class="form-group"><button class="button">Create a trailer record</button></div>';
+        var buttonCreate = '<div class="form-group"><button class="button">Create a trailer account</button></div>';
 
         var signin = recordNotFoundH + recordNotFoundP + telephone + buttonCreate + linkGov;
 
         // scp/sign-in
         if (value === 'sign-in') {
-            document.title = 'Trailer record not found';
+            document.title = 'Trailer account not found';
             $('#page-content').html(signin);
         }
 */

@@ -62,15 +62,15 @@
         var receipt = '<p>A receipt of the transaction and an ' + enpac + ' has been sent to <strong>' + member.user.email + '</strong>.</p>';
         var manage = '<p>To manage your trailers you will need your Government Gateway ID and password.</p>';
         var next = '<h2 class="heading-medium">What to do next</h2><p>Get number plates made up with your nearest <a href="">registered number plate supplier (RNPS)</a> using the ' + enpac + '. You do not need to wait for the registration certificate to arrive in the post to get number plates.</p><p>You can <a href="">print this page</a> for your records.</p>';
-        var trailerRemoved = '<p>This trailer has been removed from your trailer record.</p>';
+        var trailerRemoved = '<p>This trailer has been removed from your trailer account.</p>';
         var removeReg = '<p>Once the trailer has been exported you may take the registration number off.</p>';
         var registerTrailers = '<p>You can now register your trailers.</p>';
         //Buttons
-        var buttonRecord = '<div class="form-group"><button class="button record">Go to trailer record</button></div>';
+        var buttonRecord = '<div class="form-group"><button class="button record">Go to trailer dashboard</button></div>';
         var buttonDetails = '<div class="form-group"><button class="button company" type="submit">Go to company details</button></div>';
         // Links
         var linkRegister = '<a id="return-to-record" href="/register/declaration">Register more trailers</a>';
-        var linkRecord = '<a id="return-to-record" href="/trailer-record">Go to trailer record</a>';
+        var linkRecord = '<a id="return-to-record" href="/trailer-record">Go to trailer dashboard</a>';
         // From change-details
         var name = '<div class="govuk-box-highlight"><h1 class="heading-large"></h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
         var address = '<div class="govuk-box-highlight"><h1 class="heading-large">Address changed successfully</h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
@@ -85,7 +85,7 @@
         var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div>' + trailerList + receipt + newCertificate + next + buttonRecord;
         // var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div><span id="trailer-list">' + trailerList + '</span>' + emailConf + newCertificate + buttonRecord;
         var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate<br>ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
-        var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer record created successfully</h1></div>' + registerTrailers + buttonRecord;
+        var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer account created successfully</h1></div>' + registerTrailers + buttonRecord;
 
         // $(document).ready(function() {
             if (value === 'name') {
