@@ -127,12 +127,18 @@
                             member.trailer.vin = value2;
                             var manufacturer = randomManufacturer();
                             member.trailer.manufacturer = manufacturer;
-                            var weight1 = randomWeight(1,5000);
-                            var weight2 = randomWeight(750,5000);
-                            member.trailer.gross = weight2 + weight1;
-                            member.trailer.unladen = weight2;
-                            var regType = randomRegistrationType();
-                            member.trailer.registrationType = regType;
+
+                            if (!member.trailer.unladen) {
+                                var weight2 = randomWeight(750,5000);
+                                member.trailer.unladen = weight2;
+                            }
+                            if (!member.trailer.gross) {
+                                var weight1 = randomWeight(1,5000);
+                                member.trailer.gross = weight2 + weight1;
+                            }
+
+                            var registrationType = randomRegistrationType();
+                            member.trailer.registrationType = registrationType;
                             console.log('manufacturer = ' + member.trailer.manufacturer);
                             console.log('gross = ' + member.trailer.gross);
                             console.log('unladen = ' + member.trailer.unladen);
@@ -140,6 +146,9 @@
                         } else {
                             console.log('vin = ' + member.trailer.vin);
                             member.trailer.vin = value2;
+                            member.trailer.registrationType = 'unregistered';
+                            console.log('Registration type = ' + member.trailer.registrationType);
+
                         }
                     }
                     next();
