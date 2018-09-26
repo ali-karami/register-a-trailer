@@ -52,17 +52,19 @@
                             </div>
                         </dl>
                     </div>
-
-                    <h3 class="heading-medium">Declaration</h3>
-
-                    <p>By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
-
-                    <div class="form-group">
-                        <button class="button">Confirm and remove from trailer record</button>
-                    </div>
-
-                    <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
                 </div>
+            </div>
+
+            <div class="column-two-thirds">
+                <h3 class="heading-medium">Declaration</h3>
+
+                <p>By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
+
+                <div class="form-group">
+                    <button class="button">Confirm and remove from trailer record</button>
+                </div>
+
+                <a href="/trailer-record" onclick="deleteDisposal()">Cancel and go to trailer record</a>
             </div>
         </div>
     </main>
@@ -101,7 +103,7 @@
         var date = day + ' ' + months[month] + ' ' + year;
         $('#date').html(date);
 
-        $('#name').html(member.disposal.name).css('text-transform', 'capitalize');
+        $('#name').html(member.disposal.title + ' ' + member.disposal.firstName + ' ' + member.disposal.lastName).css('text-transform', 'capitalize');
 
         var currentTrailer = member.trailers[member.currentTrailerPosition];
 
