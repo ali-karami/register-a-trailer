@@ -14,6 +14,18 @@
     <main id="content" role="main" tabindex="-1">
         <div class="grid-row">
             <div class="column-two-thirds">
+                <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+                    <h1 class="heading-medium error-summary-heading" id="error-summary-heading">There has been a problem</h1>
+
+                    <p>Amend the following to continue</p>
+                    <ul class="error-summary-list">
+                        <li class="error-message address1"><a href="#qaddress">House number/name and street cannot be empty</a></li>
+                        <li class="error-message posttown"><a href="#qposttown">Post town cannot be empty</a></li>
+                        <li class="error-message postcode"><a href="#qpostcode">Postcode cannot be empty</a></li>
+                        <!-- <li class="postcode error-message format"><a href="#qpostcode">Provide correct postcode format</a></li> -->
+                    </ul>
+                </div>
+
                 <h1 class="heading-large">Enter your <span class="title"></span>address</span></h1>
 
                 <form class="form">
@@ -22,9 +34,10 @@
                             <legend class="visuallyhidden">Enter your address</legend>
 
                             <div class="form-group" id="qaddress">
-                                <label class="form-label" for="address1">
+                                <label class="form-label" for="address1" id="address-test-data">
                                     Building and street
                                     <span class="form-hint"></span>
+                                    <span class="error-message address1">Provide an address</span>
                                 </label>
                                 <input spellcheck="false" class="form-control" id="address1" name="address1" type="text" value="">
                             </div>
@@ -37,17 +50,19 @@
                             </div>
 
                             <div class="form-group" id="qposttown">
-                                <label class="form-label" for="posttown">
+                                <label class="form-label" for="posttown" id="posttown-test-data">
                                     Town or city
                                     <span class="form-hint"></span>
+                                    <span class="error-message posttown">Provide a town or city</span>
                                 </label>
                                 <input spellcheck="false" class="form-control form-control-1-3" id="posttown" name="posttown" type="text" value="">
                             </div>
 
                             <div class="form-group" id="qpostcode">
-                                <label class="form-label" for="postcode">
+                                <label class="form-label" for="postcode" id="postcode-test-data">
                                     Postcode
                                     <span class="form-hint"></span>
+                                    <span class="error-message postcode">Provide a postcode</span>
                                 </label>
                                 <input spellcheck="false" class="form-control form-control-1-4" id="postcode" name="postcode" type="text" value="">
                             </div>
@@ -81,6 +96,18 @@
             $('input[id=posttown]').val(testData.posttown);
             $('input[id=postcode]').val(testData.postcode);
         });
+        $('#address-test-data').click(function() {
+            var testData = { "address1": "122 Burns Crescent" };
+            $('input[id=address1]').val(testData.address1);
+        });
+        $('#posttown-test-data').click(function() {
+            var testData = { "posttown": "Edinburgh" };
+            $('input[id=posttown]').val(testData.posttown);
+        });
+        $('#postcode-test-data').click(function() {
+            var testData = { "postcode": "EH1 9GP" };
+            $('input[id=postcode]').val(testData.postcode);
+        });
 
         try { var type = member.user.type; } catch(err){}
         if (type == "company") {
@@ -97,15 +124,63 @@
             }
 
             // Hide before rechecking validation
-            $('.address1.error-message').hide();
-            $('#qaddress').removeClass('form-group-error error');
-            $('.posttown.error-message').hide();
-            $('#qposttown').removeClass('form-group-error error');
-            $('.postcode.error-message').hide();
-            $('#qpostcode').removeClass('form-group-error error');
-            $('.postcode.format.error-message').hide();
+            hideErrors();
 
             var addressLine1 = $('input[name=address1]').val();
+            var addressPosttown = $('input[name=posttown]').val();
+            var addressPostcode = $('input[name=postcode]').val();
+
+            if ((!addressLine1) && (!addressPosttown) && (!addressPostcode)) {
+                validInput = false;
+                $('#qpostcode').css('margin-bottom', '0');
+                showErrors();
+                console.log('ALL blank');
+            } else {
+                if (!addressLine1) {
+                    fixPageTitle();
+                    $('#qaddress').addClass('form-group-error');
+                    $('.error-summary').css('display', 'block').focus();
+                    //   $('.form-control').addClass('form-control-error');
+                    $('.error-message.address1').css('display', 'block');
+                    $('body').scrollTop(0);
+                    validInput = false;
+                }
+                if (!addressPosttown) {
+                    fixPageTitle();
+                    $('#qposttown').addClass('form-group-error');
+                    $('.error-summary').css('display', 'block').focus();
+                    //   $('.form-control').addClass('form-control-error');
+                    $('.error-message.posttown').css('display', 'block');
+                    $('body').scrollTop(0);
+                    validInput = false;
+                }
+                if (!addressPostcode) {
+                    fixPageTitle();
+                    $('#qpostcode').addClass('form-group-error');
+                    $('.error-summary').css('display', 'block').focus();
+                    //   $('.form-control').addClass('form-control-error');
+                    $('.error-message.postcode').css('display', 'block');
+                    $('body').scrollTop(0);
+                    validInput = false;
+                }
+            }
+
+            if (validInput) {
+                member.user.address.Line1 = addressLine1;
+                try {
+                    member.user.address.Line2 = addressLine2;
+                } catch(err){}
+                member.user.address.City = addressPosttown;
+                member.user.address.PostalCode = addressPostcode;
+                delete member.address;
+                delete member.addresses;
+
+                console.log('TRUE');
+                next();
+            }
+
+
+/*
             var addressLine2 = $('input[name=address2]').val();
             if ((addressLine1 == '') || (addressLine1 == undefined)) {
                 $('#qaddress').addClass('form-group-error error');
@@ -115,7 +190,6 @@
                 validInput = false;
             }
 
-            var addressPosttown = $('input[name=posttown]').val();
             if ((addressPosttown == '') || (addressPosttown == undefined)) {
                 $('#qposttown').addClass('form-group-error error');
                 showerror('.posttown.error-message');
@@ -124,7 +198,6 @@
                 validInput = false;
             }
 
-            var addressPostcode = $('input[name=postcode]').val();
             if ((addressPostcode == '') || (addressPostcode == undefined)) {
                 $('#qpostcode').addClass('form-group-error error');
                 showerror('.postcode.error-message');
@@ -132,16 +205,9 @@
                 $('body').scrollTop(0);
                 validInput = false;
             }
+*/
 
-            if (validInput) {
-                member.user.address.Line1 = addressLine1;
-                member.user.address.Line2 = addressLine2;
-                member.user.address.City = addressPosttown;
-                member.user.address.PostalCode = addressPostcode;
-                delete member.address;
-                delete member.addresses;
-                next();
-            }
+
         }
 
         function next() {
