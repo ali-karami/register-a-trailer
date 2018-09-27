@@ -81,7 +81,7 @@
         var linkRegister = '<a id="return-to-record" href="/register/declaration">Register more trailers</a>';
         var linkRecord = '<a id="return-to-record" href="/trailer-record">Go to trailer dashboard</a>';
         // From change-details
-        var name = '<div class="govuk-box-highlight"><h1 class="heading-large"></h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
+        var name = '<div class="govuk-box-highlight"><h1 class="heading-large">Name changed successfully</h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
         var address = '<div class="govuk-box-highlight"><h1 class="heading-large">Address changed successfully</h1></div>' + emailConf + newCertificate + buttonDetails + linkRecord;
         // var email = '<div class="govuk-box-highlight"><h1 class="heading-large">Email address changed successfully</h1></div>' + emailConf + confirmations + gateway + buttonDetails + linkRecord;
         var email = '<div class="govuk-box-highlight"><h1 class="heading-large">Email address changed successfully</h1></div>' + emailConf + buttonDetails + linkRecord;
@@ -114,6 +114,8 @@
                     $('.heading-large').html('Company address changed');
                 } else if (member.user.type == 'personal') {
                     $('.heading-large').html('Address changed');
+                } else {
+                    $('.heading-large').html('Address changed');
                 }
             }
 
@@ -122,6 +124,8 @@
                 if (member.user.type == 'company') {
                     $('.heading-large').html('Company email address<br>changed successfully');
                 } else if (member.user.type == 'personal') {
+                    $('.heading-large').html('Email address changed successfully');
+                } else {
                     $('.heading-large').html('Email address changed successfully');
                 }
             }
