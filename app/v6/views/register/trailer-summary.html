@@ -97,11 +97,22 @@
             console.log(getRegisteredTrailersAmount());
             $('#first-reg-amount').html(registeredTrailersAmount);
         }
+        if (registeredTrailersAmount == 0) {
+            $('#first-reg').hide();
+        } else {
+            $('#first-reg').show();
+        }
 
         if (getUnregisteredTrailersAmount()) {
             console.log(getUnregisteredTrailersAmount());
             $('#acquire-amount').html(unregisteredTrailersAmount);
         }
+        if (unregisteredTrailersAmount == 0) {
+            $('#acquire').hide();
+        } else {
+            $('#acquire').show();
+        }
+
 
         $('#first-reg-fee').html(firstRegFee);
         $('#acquire-fee').html(acquireFee);
@@ -114,7 +125,6 @@
         var quantity2 = unregisteredTrailersAmount * acquireFee;
         var cost = quantity1 + quantity2;
         $('#total-cost').html('£' + cost);
-
 
         if (!member.trailers || member.trailers.length == 0) {
             $('.paragraph').html('You have no trailers pending registration');
