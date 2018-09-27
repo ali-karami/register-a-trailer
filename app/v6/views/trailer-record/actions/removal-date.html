@@ -165,6 +165,7 @@
             }
 
             if (validInput) {
+                removalMonth = removalMonth.replace(/^0+/, '');
                 disposalDate = removalDay + ' ' + removalMonth + ' ' + removalYear;
                 if (member.disposal === undefined) {
                     member.disposal = {};
