@@ -65,11 +65,11 @@
             // Links
             var linkGOVUK = '<a href="https://www.gov.uk">Return to GOV.UK</a>';
 
-                                    // Heading              // Paragraph                        // Button       //Link
-            var notOver750kg =   cantCreateRecord +      over750 +                           buttonGOVUK;
-            var notOutsideUk =   doNotNeedRecord +       outsideUk + stillCreate +           buttonCreate +  linkGOVUK;
-            var notTravThrough = doNotNeedRecord +       travelling + stillCreate +          buttonCreate +  linkGOVUK;
-            var notCommercial =  doNotNeedRecord +       over3500kg + ukLaw + stillCreate +  buttonCreate +  linkGOVUK;
+                                    // Heading              // Paragraph                // Button       //Link
+            var notOver750kg =      cantCreateRecord +      over750 +                   buttonGOVUK;
+            var notOutsideUk =      doNotNeedRecord +       outsideUk + stillCreate +   buttonCreate +  linkGOVUK;
+            var notTravThrough =    doNotNeedRecord +       travelling + stillCreate +  buttonCreate +  linkGOVUK;
+            var notCommercial =     doNotNeedRecord +       over3500kg + stillCreate +  buttonCreate +  linkGOVUK;
 
             // create/over-750kg
             if (getRefUrl() === 'over-750kg') {
@@ -168,11 +168,17 @@
             if (getRefUrl() === 'trailer-weights') {
                 document.title = 'You cannot register this trailer';
                 $('#page-content').html(notOver750);
+                $('.button').click(function() {
+                    go('/trailer-record');
+                });
             }
             // register/check/used-outside-uk
             if (getRefUrl() === 'used-outside-uk') {
                 document.title = 'You cannot register this trailer';
                 $('#page-content').html(notOutsideUk);
+                $('.button').click(function() {
+                    go('/register/have-registration-number');
+                });
             }
             // register/check/not-travelling-through
             if (getRefUrl() === 'travelling-through') {
@@ -189,6 +195,10 @@
                     }
                 }
                 $('.countries').html(countries);
+
+                $('.button').click(function() {
+                    go('/register/have-registration-number');
+                });
             }
         }
 
@@ -196,13 +206,6 @@
             if (member.exit === 'create') {
                 if (getRefUrl() === "used-outside-uk") {
                     go('/create/record-type');
-                }
-            } else if (member.exit === 'check') {
-                if (getRefUrl() === "travelling-through") {
-                    go('/create/what-to-expect');
-                }
-                if (getRefUrl() === "under-weight") {
-                    go('/trailer-record');
                 }
             } else if (member.exit === 'register') {
             }
