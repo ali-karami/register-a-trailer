@@ -100,7 +100,7 @@
         month = member.disposal.month;
         year = member.disposal.year;
 
-        var date = day + ' ' + months[month] + ' ' + year;
+        var date = day + ' ' + months[month - 1] + ' ' + year;
         $('#date').html(date);
 
         $('#name').html(member.disposal.title + ' ' + member.disposal.firstName + ' ' + member.disposal.lastName).css('text-transform', 'capitalize');
