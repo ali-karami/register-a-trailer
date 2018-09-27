@@ -112,12 +112,12 @@
         } else {
             var trailerDetails = '<div class="form-group"><dl class="govuk-check-your-answers cya-questions-short">';
 
-
             trailerDetails += '<div>';
             trailerDetails += '<dt class="cya-question">Registration number</dt>';
             trailerDetails += '<dd class="cya-answer">' + currentTrailer.reg + '</dd>';
             trailerDetails += '<dd class="cya-change">&nbsp;</dd>';
             trailerDetails += '</div>';
+
             if (!currentTrailer.vin) {
             } else {
                 trailerDetails += '<div><dt><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</dt>';
@@ -129,6 +129,7 @@
                         trailerDetails += '<dt class="cya-question"><abbr title="Vehicle Identification Number">VIN</abbr></dt>';
                 trailerDetails += '<dd class="cya-answer">' + currentTrailer.chassis + '</dd><dd class="cya-change">&nbsp;</dd></div>';
             }
+
             trailerDetails += '<div>';
             trailerDetails += '<dt class="cya-question">Manufacturer</dt>';
             trailerDetails += '<dd class="cya-answer">' + currentTrailer.manufacturer + '</dd>';
@@ -146,7 +147,6 @@
             trailerDetails += '<dd class="cya-answer">' + Number(currentTrailer.unladen).toLocaleString('en') + 'kg</dd>';
             trailerDetails += '<dd class="cya-change">&nbsp;</dd>';
             trailerDetails += '</div>';
-
 
             $('#trailer-details').html(trailerDetails + '</dl></div>');
         }

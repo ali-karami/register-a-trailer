@@ -108,7 +108,7 @@
         if (member.exit === 'register') {
             // Heading
             var cantRegister = '<div class="govuk-box-highlight grey"><h1 class="heading-large">You cannot register this trailer</h1></div>';
-            var weightChangeH1 = '<div class="govuk-box-highlight grey"><h1 class="heading-large">Confirm trailer weight change</h1></div>';
+            var weightChangeH1 = '<h1 class="heading-large">Confirm trailer weight change</h1>';
             // Content
             var alreadyRegistered = '<p>Our records show the trailer has already been registered.</p>';
             var over750 = '<p>You can only register trailers that weigh over 750kg in gross weight.</p>';
@@ -116,7 +116,7 @@
             // Buttons
             var buttonBought = '<div class="form-group"><button class="button bought">Tell us you have bought a trailer</button></div>';
             var buttonAddTrailer = '<div class="form-group"><button class="button add">Add another trailer</button></div>';
-            var buttonConfirmRemove = '<div class="form-group"><button class="button add">Confirm and remove from trailer account</button></div>';
+            var buttonConfirmRemove = '<div class="form-group"><button class="button remove">Confirm and remove from trailer account</button></div>';
             // Links
             var cancelGoTrailerDashboard = '<a href="/trailer-record">Cancel and go to trailer dashboard</a>';
             var goToTrailerDashboard = '<a href="/trailer-record">Go to trailer dashboard</a>';
@@ -222,6 +222,14 @@
 
         $('.button.add').click(function() {
             go('/register/have-registration-number');
+        });
+
+        $('.button.remove').click(function() {
+            if (member.disposal === undefined) {
+                member.disposal = {};
+            }
+            member.disposal.type = 'weight';
+            go('/success');
         });
 
 /*

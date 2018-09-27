@@ -169,6 +169,10 @@
                     $('#page-content').html(recordCreated);
                 }
             }
+
+            if (value === 'exit') {
+                $('#page-content').html(removed);
+            }
         // });
 
         $('.button.record').click(next1);

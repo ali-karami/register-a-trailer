@@ -1,0 +1,41 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Confirm trailer weight change {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">Confirm trailer weight change</h1>
+
+                <p>Trailers under 750kg in gross weight will be removed from your account.</p>
+
+                <div class="form-group">
+                    <button class="button">Confirm and remove from trailer account</button>
+                </div>
+
+                <a href="/trailer-record">Cancel and go to trailer dashboard</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/trailer-record');
+        });
+    </script>
+{% endblock %}
