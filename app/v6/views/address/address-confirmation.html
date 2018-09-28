@@ -60,10 +60,11 @@
 
         function next() {
             if (changing == "true") {
-                if (refUrl == 'check-your-answers') {
+                if (member.flow == 'create') {
                     member.user.address = member.address;
                     delete member.address;
                     delete member.addresses;
+                    delete member.flow;
                     go('/create/check-your-answers');
                 } else {
                     member.user.address = member.address;

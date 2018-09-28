@@ -206,12 +206,15 @@
                 validInput = false;
             }
 */
-
-
         }
 
         function next() {
-            go('/trailer-record/change-details');
+            if (member.flow == 'create') {
+                delete member.flow;
+                go('/create/check-your-answers');
+            } else {
+                go('/trailer-record/change-details');
+            }
         }
     </script>
 {% endblock %}

@@ -35,7 +35,7 @@
                             <div>
                                 <dt class="cya-question">Address</dt>
                                 <dd class="cya-answer"><span id="address"></span></dd>
-                                <dd class="cya-change"><a href="/create/address-find?change=true">Change<span class="visually-hidden"> home address</span></a></dd>
+                                <dd class="cya-change"><a href="/address/address-find?change=true" class="address-change">Change<span class="visually-hidden"> home address</span></a></dd>
                             </div>
 
                             <div>
@@ -70,6 +70,15 @@
         if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
         $('#address').html(addressPlayback);
         $('#email').html(member.user.email);
+
+        $('a.address-change').click(function(e) {
+            e.preventDefault();
+            if (member.flow === undefined) {
+                member.flow = {};
+            }
+            member.flow = 'create';
+            go('/address/address-find?change=true');
+        });
 
         $('.button').click(next);
 
