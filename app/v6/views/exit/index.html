@@ -31,13 +31,12 @@
             member.exit = {};
         }
 
-
         var referrer = document.referrer;
-        if (referrer.indexOf('create') > -1) {
+        if (referrer.indexOf('/create/') > -1) {
             member.exit = 'create';
         }
-        if (referrer.indexOf('register') > -1) {
-            if (referrer.indexOf('check') > -1) {
+        if (referrer.indexOf('/register/') > -1) {
+            if (referrer.indexOf('/check/') > -1) {
                 member.exit = 'check';
             } else {
                 member.exit = 'register';
