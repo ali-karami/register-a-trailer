@@ -106,12 +106,14 @@
                        go('/exit')
                     } else {
                         member.trailer.reg = value2;
+                        member.trailer.registrationType = 'registered';
                         next();
                     }
                 }
             } else if (value1 === 'N') {
                 member.trailer.reg = randomReg();
                 member.trailer.regRandom = "Y";
+                member.trailer.registrationType = 'unregistered';
                 next();
             } else {
                 showErrors();

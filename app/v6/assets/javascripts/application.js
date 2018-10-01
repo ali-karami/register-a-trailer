@@ -33,12 +33,12 @@ function go(url) {
 }
 
 // Create random registration type
-function randomRegistrationType() {
-  var array = ['registered', 'unregistered'];
-  var type = array[Math.floor(Math.random() * array.length)];
-  return type;
-  // console.log(type);
-}
+// function randomRegistrationType() {
+//   var array = ['registered', 'unregistered'];
+//   var type = array[Math.floor(Math.random() * array.length)];
+//   return type;
+//   // console.log(type);
+// }
 
 // Set current trailer variable for shorter code
 try {
