@@ -14,7 +14,7 @@
     <main id="content" role="main" tabindex="-1">
         <div class="grid-row">
             <div class="column-two-thirds">
-                <h1 class="heading-large">Sign in using Government Gateway</h1>
+                <h1 class="heading-large"><span class="continue-scp">Sign in</span> using <span class="error-page">Government</span> <span class="scp-exists">Gateway</span></h1>
 
                 <div class="form-group">
                     <fieldset>
@@ -59,15 +59,25 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        $('h1').click(function() {
-            var testData = {"userId": "enquiries@alshaulage.com"};
+        $('.continue-scp').click(function() {
+            var testData = { "userId": "enquiries@alshaulage.com", "password": "successful" };
             $('input[id=user-id]').val(testData.userId);
+            $('input[id=password]').val(testData.password);
+        });
+        $('.error-page').click(function() {
+            var testData = { "userId": "enquiries@alshaulage.com", "password": "unsuccessful" };
+            $('input[id=user-id]').val(testData.userId);
+            $('input[id=password]').val(testData.password);
+        });
+        $('.scp-exists').click(function() {
+            var testData = { "userId": "enquiries@alshaulage.com", "password": "exists" };
+            $('input[id=user-id]').val(testData.userId);
+            $('input[id=password]').val(testData.password);
         });
 
         $('.button').click(validate);
 
         function validate() {
-            resetErrors();
             var validInput = true;
             var value1 = $('input[name=user-id]').val();
             var value2 = $('input[name=password]').val();
@@ -81,19 +91,16 @@
             }
 
             if (validInput) {
-                if (value2 === 'record') {
-                    next();
-                } else if (value2 === 'norecord') {
+                if (value2 === 'successful') {
+                    go('/scp/email-address');
+                } else if (value2 === 'unsuccessful') {
                     go('/exit');
+                } else if (value2 === 'exists') {
+                    go('/create/how-dvla-uses-your-data');
                 }
-
             } else {
                 showErrors();
             }
-        }
-
-        function next() {
-            go('/scp/email-address');
         }
     </script>
 {% endblock %}

@@ -68,7 +68,11 @@
             }
 
             function next() {
-                go('/create/what-to-expect');
+                if (member.exit === 'scp') {
+                    go('how-dvla-uses-your-data');
+                } else {
+                    go('/create/what-to-expect');
+                }
             }
         }
     </script>

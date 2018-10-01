@@ -45,11 +45,39 @@
         if (referrer.indexOf('change=true') > -1) {
             var changing = 'true';
         }
+        if (referrer.indexOf('/scp/') > -1) {
+            member.exit = 'scp';
+        }
 
-        // CREATE FLOWS
+        // SCP FLOW
+        if (member.exit === 'scp') {
+            // Heading
+            var accountNotFound = '<div class="govuk-box-highlight grey"><h1 class="heading-large">Trailer account<br>could not be found</h1></div>';
+            // Content
+            var noLinkedAccount = '<p>There is no trailer account linked to this Government Gateway ID.</p>';
+            // Buttons
+            var buttonCreate = '<div class="form-group"><button class="button scp">Create a trailer account</button></div>';
+            // Links
+            var linkLogout = '<a href="/scp/sign-in">Log out</a>';
+
+                            // Heading          // Paragraph        // Button       //Link
+            var signin =    accountNotFound +   noLinkedAccount +   buttonCreate +  linkLogout;
+            // scp/sign-in
+            if (getRefUrl() === 'sign-in') {
+                document.title = 'Trailer account could not be found';
+                $('#page-content').html(signin);
+            }
+
+            $('.button.scp').click(function() {
+                member.exit = 'scp';
+                go('/create/over-750kg');
+            });
+        }
+
+
         if (member.exit === 'create') {
             // Heading
-            var cantCreateRecord =  '<div class="govuk-box-highlight grey"><h1 class="heading-large">You cannot create a trailer account</h1></div>';
+            var cantCreateRecord =  '<div class="govuk-box-highlight grey"><h1 class="heading-large">You cannot create a<br>trailer account</h1></div>';
             var doNotNeedRecord =   '<div class="govuk-box-highlight grey"><h1 class="heading-large">You do not need to<br>create a trailer account</h1></div>';
             // Content
             var over750 = '<p>To create a trailer account, trailers must weigh over 750kg in gross weight.</p>';
@@ -233,23 +261,5 @@
             member.disposal.type = 'weight';
             go('/success');
         });
-
-/*
-        // Heading
-        var recordNotFoundH = '<div class="govuk-box-highlight grey"><h1 class="heading-large">Trailer account not found</h1></div>';
-        // Content
-        var recordNotFoundP = '<p>There is no trailer account linked to this Government Gateway ID</p><p>If you’re registering trailers for a company, you must be logged in using your company’s details</p><p>If you have created a trailer account using this Government Gateway ID, you will need to call DVLA by phone.</p>';
-        var telephone = '<p><a href="tel:03007906802">0300 790 6802</a><br>Monday to Friday, 8am to 7pm<br>Saturday, 8am to 2pm<br><a href="">Find out about call charges</a></p>';
-        // Buttons
-        var buttonCreate = '<div class="form-group"><button class="button">Create a trailer account</button></div>';
-
-        var signin = recordNotFoundH + recordNotFoundP + telephone + buttonCreate + linkGov;
-
-        // scp/sign-in
-        if (value === 'sign-in') {
-            document.title = 'Trailer account not found';
-            $('#page-content').html(signin);
-        }
-*/
     </script>
 {% endblock %}
