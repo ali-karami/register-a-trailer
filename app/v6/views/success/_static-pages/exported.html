@@ -1,0 +1,45 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Trailer exported successfully {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight">
+                    <h1 class="heading-large">Trailer exported successfully</h1>
+                </div>
+
+                <p>A confirmation email has been sent to <strong>enquiries@alshaulage.com</strong>.</p>
+
+                <p>This trailer has been removed from your trailer account.</p>
+
+                <p>Once the trailer has been exported you may take the registration number off.</p>
+
+                <div class="form-group">
+                    <button class="button">Go to trailer dashboard</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/trailer-record');
+        });
+    </script>
+{% endblock %}

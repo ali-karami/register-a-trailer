@@ -94,13 +94,13 @@
         var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div>' + trailerList + receipt + newCertificate + next + buttonRecord;
         // var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div><span id="trailer-list">' + trailerList + '</span>' + emailConf + newCertificate + buttonRecord;
         var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate<br>ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
-        var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer account created successfully</h1></div>' + registerTrailers + buttonRecord;
+        var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer account<br>created successfully</h1></div>' + registerTrailers + buttonRecord;
 
         // $(document).ready(function() {
             if (value === 'name') {
                 $('#page-content').html(name);
                 if (member.user.type == 'company') {
-                    $('.heading-large').html('Company name changed successfully');
+                    $('.heading-large').html('Company name<br>changed successfully');
                 } else if (member.user.type == 'personal') {
                     $('.heading-large').html('Name changed successfully');
                 } else {
@@ -111,7 +111,7 @@
             if (value === 'address-confirmation') {
                 $('#page-content').html(address);
                 if (member.user.type == 'company') {
-                    $('.heading-large').html('Company address changed');
+                    $('.heading-large').html('Company address<br>changed successfully');
                 } else if (member.user.type == 'personal') {
                     $('.heading-large').html('Address changed');
                 } else {

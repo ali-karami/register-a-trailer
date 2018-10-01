@@ -1,0 +1,43 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Email address changed successfully {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight">
+                    <h1 class="heading-large">Email address<br>changed successfully</h1>
+                </div>
+
+                <p>A confirmation email has been sent to <strong>enquiries@alshaulage.com</strong>.</p>
+
+                <div class="form-group">
+                    <button class="button">Go to company details</button>
+                </div>
+
+                <a href="/trailer-record">Go to trailer dashboard</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/trailer-record/change-details');
+        });
+    </script>
+{% endblock %}
