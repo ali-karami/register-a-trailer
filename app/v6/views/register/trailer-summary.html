@@ -93,36 +93,37 @@
             $('#trailer-amount').html(pendingTrailers);
         }
 
+        // ACQUIRE/REGISTERED
         if (getRegisteredTrailersAmount()) {
             console.log(getRegisteredTrailersAmount());
             $('#first-reg-amount').html(registeredTrailersAmount);
         }
         if (registeredTrailersAmount == 0) {
-            $('#first-reg').hide();
-        } else {
-            $('#first-reg').show();
-        }
-
-        if (getUnregisteredTrailersAmount()) {
-            console.log(getUnregisteredTrailersAmount());
-            $('#acquire-amount').html(unregisteredTrailersAmount);
-        }
-        if (unregisteredTrailersAmount == 0) {
             $('#acquire').hide();
         } else {
             $('#acquire').show();
         }
 
+        // FIRST REG/UNREGISTERED
+        if (getUnregisteredTrailersAmount()) {
+            console.log(getUnregisteredTrailersAmount());
+            $('#acquire-amount').html(unregisteredTrailersAmount);
+        }
+        if (unregisteredTrailersAmount == 0) {
+            $('#first-reg').hide();
+        } else {
+            $('#first-reg').show();
+        }
 
         $('#first-reg-fee').html(firstRegFee);
         $('#acquire-fee').html(acquireFee);
 
-        $('#first-reg-amount').html(registeredTrailersAmount);
-        $('#acquire-amount').html(unregisteredTrailersAmount);
+        $('#first-reg-amount').html(unregisteredTrailersAmount);
+        $('#acquire-amount').html(registeredTrailersAmount);
         // $('#trailer-total').html(pendingTrailers);
 
-        var quantity1 = registeredTrailersAmount * firstRegFee;
-        var quantity2 = unregisteredTrailersAmount * acquireFee;
+        var quantity1 = registeredTrailersAmount * acquireFee;
+        var quantity2 = unregisteredTrailersAmount * firstRegFee;
         var cost = quantity1 + quantity2;
         $('#total-cost').html('£' + cost);
 
