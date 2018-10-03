@@ -156,33 +156,33 @@
                 });
             }
 
-            if (
-                ((value1) && (value2)) &&
-                (value1 !== 0) &&
-                (value1 <= value2)
-            ) {
-                console.log('GROSS IS EQUAL OR LESS');
-                validInput = false;
-                console.log("gross IS less than unladen");
-                fixPageTitle();
-                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
-                $('.error-summary').css('display', 'block').focus();
-                $('.error-summary li:first-child').show();
-                $('.error-summary li:first-child a').html('Correct gross weight to continue');
-                $('.error-summary li:last-child').hide();
-                $('.error-message.input').css('display', 'block');
-                $('legend').attr('id', 'error-link');
-                $('body').scrollTop(0);
-                $('input[name=gross-weight]').closest('form-group').addClass('form-control-error');
-                $(function() {
-                    $('.error-message.input').html('Gross weight cannot be the same or less than unladen weight');
-                });
-            }
+            // if (
+            //     ((value1) && (value2)) &&
+            //     (value1 !== 0) &&
+            //     (value1 <= value2)
+            // ) {
+            //     console.log('GROSS IS EQUAL OR LESS');
+            //     validInput = false;
+            //     console.log("gross IS less than unladen");
+            //     fixPageTitle();
+            //     $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+            //     $('.error-summary').css('display', 'block').focus();
+            //     $('.error-summary li:first-child').show();
+            //     $('.error-summary li:first-child a').html('Correct gross weight to continue');
+            //     $('.error-summary li:last-child').hide();
+            //     $('.error-message.input').css('display', 'block');
+            //     $('legend').attr('id', 'error-link');
+            //     $('body').scrollTop(0);
+            //     $('input[name=gross-weight]').closest('form-group').addClass('form-control-error');
+            //     $(function() {
+            //         $('.error-message.input').html('Gross weight cannot be the same or less than unladen weight');
+            //     });
+            // }
 
-            if (((value1) && (value2)) && (value1 <= 750)) {
-                validInput = false;
-                go('/exit');
-            }
+            // if (((value1) && (value2)) && (value1 <= 750)) {
+            //     validInput = false;
+            //     go('/exit');
+            // }
 
             if (validInput) {
                 if (changing == "true") {
