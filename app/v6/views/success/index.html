@@ -27,8 +27,7 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        // var value = getRefUrl();
-        var value = 'address-confirmation';
+        var value = getRefUrl();
         getRegisteredTrailers();
 
         if (value === 'check-your-answers') {
@@ -97,13 +96,6 @@
         var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate<br>ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
         var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer account<br>created successfully</h1></div>' + registerTrailers + buttonRecord;
 
-
-        if (member.disposal === undefined) {
-            member.disposal = {};
-        }
-
-        var value = 'exit';
-        
         // $(document).ready(function() {
             if (value === 'name') {
                 $('#page-content').html(name);
@@ -162,23 +154,29 @@
                 $('.this-these').html('This');
             }
 
-            if (value === 'removal-date') {
-                if (member.disposal.type === 'exported') {
-                    $('#page-content').html(exported);
-                } else {
-                    $('#page-content').html(removed);
+            if ((value === 'removal-date') || (value === 'check-your-answers')) {
+                if (member.disposal === undefined) {
+                    member.disposal = {};
                 }
-            }
 
-            if (value === 'check-your-answers') {
-                try {
-                    if (member.disposal.type === 'sold') {
-                        $('#page-content').html(removed);
+                if (value === 'removal-date') {
+                    if (member.disposal.type === 'exported') {
+                        $('#page-content').html(exported);
                     } else {
+                        $('#page-content').html(removed);
+                    }
+                }
+
+                if (value === 'check-your-answers') {
+                    try {
+                        if (member.disposal.type === 'sold') {
+                            $('#page-content').html(removed);
+                        } else {
+                            $('#page-content').html(recordCreated);
+                        }
+                    } catch(err){
                         $('#page-content').html(recordCreated);
                     }
-                } catch(err){
-                    $('#page-content').html(recordCreated);
                 }
             }
 
