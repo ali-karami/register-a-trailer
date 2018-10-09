@@ -29,52 +29,54 @@
                     </ul>
                 </div>
 
-                <h1 class="heading-large"><span class="title">Enter trailer weights</span></h1>
+                <div class="form-group all-errors">
+                    <h1 class="heading-large"><span class="title">Enter trailer weights</span></h1>
 
-                <div class="form-group">
-                    <fieldset>
-                        <label class="form-label" for="gross-weight">
-                            <legend class="gross-weight">Gross weight (kg)</legend>
-                            {% include "includes/errors/error-message-input.html" %}
-                        </label>
-                        <input class="form-control" id="gross-weight" name="gross-weight" type="text">
-                    </fieldset>
-                </div>
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="form-label" for="gross-weight">
+                                <legend class="gross-weight">Gross weight (kg)</legend>
+                                {% include "includes/errors/error-message-input.html" %}
+                            </label>
+                            <input class="form-control" id="gross-weight" name="gross-weight" type="number">
+                        </fieldset>
+                    </div>
 
-                <div class="form-group">
-                    <details>
-                        <summary>
-                            <span class="summary">What is gross weight?</span>
-                        </summary>
+                    <div class="form-group">
+                        <details>
+                            <summary>
+                                <span class="summary">What is gross weight?</span>
+                            </summary>
 
-                        <div class="panel panel-border-narrow">
-                            <p>This is specified by the manufacturer and it means the maximum weight the trailer is allowed to be when fully loaded.
-                                It is the unladen weight of the trailer plus the maximum permitted payload.
-                                It is also known as the Maximum Permissible Mass.</p>
-                        </div>
-                    </details>
-                </div>
+                            <div class="panel panel-border-narrow">
+                                <p>This is specified by the manufacturer and it means the maximum weight the trailer is allowed to be when fully loaded.
+                                    It is the unladen weight of the trailer plus the maximum permitted payload.
+                                    It is also known as the Maximum Permissible Mass.</p>
+                            </div>
+                        </details>
+                    </div>
 
-                <div class="form-group">
-                    <fieldset>
-                        <label class="form-label" for="unladen-weight">
-                            <legend>Unladen weight (kg)</legend>
-                            {% include "includes/errors/error-message-input-2.html" %}
-                        </label>
-                        <input class="form-control" id="unladen-weight" name="unladen-weight" type="text">
-                    </fieldset>
-                </div>
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="form-label" for="unladen-weight">
+                                <legend>Unladen weight (kg)</legend>
+                                {% include "includes/errors/error-message-input-2.html" %}
+                            </label>
+                            <input class="form-control" id="unladen-weight" name="unladen-weight" type="number">
+                        </fieldset>
+                    </div>
 
-                <div class="form-group">
-                    <details>
-                        <summary>
-                            <span class="summary">What is unladen weight?</span>
-                        </summary>
+                    <div class="form-group">
+                        <details>
+                            <summary>
+                                <span class="summary">What is unladen weight?</span>
+                            </summary>
 
-                        <div class="panel panel-border-narrow">
-                            <p>The weight of an empty trailer, including any permanent modifications.</p>
-                        </div>
-                    </details>
+                            <div class="panel panel-border-narrow">
+                                <p>The weight of an empty trailer, including any permanent modifications.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
                 {% include "includes/buttons/continue.html" %}
@@ -91,10 +93,9 @@
 
 {% block body_end %}
     <script type="text/javascript">
-        var gross = randomWeight(1,5000);
-        var unladen = randomWeight(750,5000);
-
         $('h1').click(function() {
+            var gross = randomWeight(751,250000);
+            var unladen = randomWeight(100,150000);
             $('input[id=gross-weight]').val(unladen + gross);
             $('input[id=unladen-weight]').val(unladen);
         });
@@ -119,70 +120,145 @@
 
         function validate() {
             var validInput = true;
-            var value1 = $('input[name=gross-weight]').val();
-            var value2 = $('input[name=unladen-weight]').val();
+            var value1 = parseInt($('input[name=gross-weight]').val());
+            var value2 = parseInt($('input[name=unladen-weight]').val());
 
-            hideErrors();
+            hideErrors2();
 
             if (!value1) {
-                console.log('VALUE 1 IS BLANK');
                 validInput = false;
+                console.log('GROSS IS EMPTY');
                 fixPageTitle();
-                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
                 $('.error-summary').css('display', 'block').focus();
                 $('.error-summary li:first-child').css('display', 'block');
+                $('.error-summary li:first-child a').html('Gross weight cannot be empty');
+                $(document).find('input').first().addClass('form-control-error');
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
                 $('.error-message.input').css('display', 'block');
-                $('legend').attr('id', 'error-link');
+                $('.error-message.input').html('Provide a gross weight');
                 $('body').scrollTop(0);
-                $('input[name=gross-weight]').closest('form-group').addClass('form-control-error');
-                $(function() {
-                    $('.error-message.input').html('Provide a gross weight');
-                });
             }
 
             if (!value2) {
-                console.log('VALUE 2 IS BLANK');
                 validInput = false;
+                console.log('UNLADEN IS EMPTY');
                 fixPageTitle();
-                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
                 $('.error-summary').css('display', 'block').focus();
                 $('.error-summary li:last-child').css('display', 'block');
+                $('.error-summary li:last-child a').html('Unladen weight cannot be empty');
+                $(document).find('input').last().addClass('form-control-error');
+                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
                 $('.error-message.input2').css('display', 'block');
-                $('legend').attr('id', 'error-link');
+                $('.error-message.input2').html('Provide an unladen weight');
                 $('body').scrollTop(0);
-                $('input[name=unladen-weight]').closest('form-group').addClass('form-control-error');
-                $(function() {
-                    $('.error-message.input2').html('Provide an unladen weight');
-                });
             }
 
-            // if (
-            //     ((value1) && (value2)) &&
-            //     (value1 !== 0) &&
-            //     (value1 <= value2)
-            // ) {
-            //     console.log('GROSS IS EQUAL OR LESS');
-            //     validInput = false;
-            //     console.log("gross IS less than unladen");
-            //     fixPageTitle();
-            //     $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
-            //     $('.error-summary').css('display', 'block').focus();
-            //     $('.error-summary li:first-child').show();
-            //     $('.error-summary li:first-child a').html('Correct gross weight to continue');
-            //     $('.error-summary li:last-child').hide();
-            //     $('.error-message.input').css('display', 'block');
-            //     $('legend').attr('id', 'error-link');
-            //     $('body').scrollTop(0);
-            //     $('input[name=gross-weight]').closest('form-group').addClass('form-control-error');
-            //     $(function() {
-            //         $('.error-message.input').html('Gross weight cannot be the same or less than unladen weight');
-            //     });
-            // }
+            if (!value1 && !value2) {
+                return;
+            }
 
-            // if (((value1) && (value2)) && (value1 <= 750)) {
-            //     validInput = false;
-            //     go('/exit');
-            // }
+            if (value1 <= 750) {
+                validInput = false;
+                console.log('GROSS IS LESS THAN 751');
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:first-child').css('display', 'block');
+                $('.error-summary li:first-child a').html('Gross weight must be more than 750kg');
+                $(document).find('input').first().addClass('form-control-error');
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.input').css('display', 'block');
+                $('.error-message.input').html('Enter a gross weight more than 750kg');
+                $('body').scrollTop(0);
+            }
+
+            if (value1 > 250000) {
+                validInput = false;
+                console.log('GROSS IS MORE THAN 44000');
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:first-child').css('display', 'block');
+                $('.error-summary li:first-child a').html('Gross weight must be 250,000kg or less');
+                $(document).find('input').first().addClass('form-control-error');
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.input').css('display', 'block');
+                $('.error-message.input').html('Enter a gross weight 250,000kg or less');
+                $('body').scrollTop(0);
+            }
+
+            if (value2 < 100) {
+                validInput = false;
+                console.log('UNLADEN IS LESS THAN 100');
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:last-child').css('display', 'block');
+                $('.error-summary li:last-child a').html('Unladen weight must be 100kg or more');
+                $(document).find('input').last().addClass('form-control-error');
+                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.input2').css('display', 'block');
+                $('.error-message.input2').html('Enter an unladen weight 100kg or more');
+                $('body').scrollTop(0);
+            }
+
+            if (value2 > 249999) {
+                validInput = false;
+                console.log('UNLADEN IS 249999');
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:last-child').css('display', 'block');
+                $('.error-summary li:last-child a').html('Unladen weight must be less than 250,000kg');
+                $(document).find('input').last().addClass('form-control-error');
+                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.input2').css('display', 'block');
+                $('.error-message.input2').html('Enter an unladen weight less than 250,000kg');
+                $('body').scrollTop(0);
+            }
+
+            if ((value1 == value2) && validInput) {
+                validInput = false;
+                console.log('GROSS AND UNLADEN ARE SAME');
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:first-child').css('display', 'block');
+                $('.error-summary li:first-child a').html('Gross weight and unladen weight cannot be the same');
+                $(document).find('input').first().addClass('form-control-error');
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.input').css('display', 'block');
+                $('.error-message.input').html('Enter a gross weight that is more than the unladen weight');
+                $(document).find('input').last().addClass('form-control-error');
+                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.input2').css('display', 'block');
+                $('.error-message.input2').html('Enter an unladen weight that is less than the gross weight');
+                $('body').scrollTop(0);
+            }
+
+            if ((value2 > value1) && validInput) {
+                validInput = false;
+                console.log('UNLADEN IS MORE THAN GROSS');
+                fixPageTitle();
+                $('.error-summary').css('display', 'block').focus();
+                $('.error-summary li:first-child').css('display', 'block');
+                $('.error-summary li:first-child a').html('Gross weight must be more than the unladen weight');
+                $('.error-message.input').css('display', 'block');
+                $('.error-message.input').html('Enter a gross weight that is more than the unladen weight');
+                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                $(document).find('input').first().addClass('form-control-error');
+                $('.error-summary li:last-child').css('display', 'block');
+                $('.error-summary li:last-child a').html('Unladen weight must be less than gross weight');
+                $('input[name=unladen-weight]').closest('.form-group').addClass('form-group-error');
+                $(document).find('input').last().addClass('form-control-error');
+                $('.error-message.input2').css('display', 'block');
+                $('.error-message.input2').html('Enter an unladen weight that is less than the gross weight');
+                $('body').scrollTop(0);
+            }
+
+            function hideErrors2() {
+                $('.error-summary').hide();
+                $('.error-summary li').hide();
+                $('.form-group').removeClass('form-group-error');
+                $('.form-control').removeClass('form-control-error');
+                $('.error-message').hide();
+                $('body').scrollTop(0);
+            }
 
             if (validInput) {
                 if (changing == "true") {
