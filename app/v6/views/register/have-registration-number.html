@@ -43,6 +43,7 @@
                                 <label class="form-label" for="reg-number">
                                     <span class="reg-no-error">Registration</span> <span class="reg-error">number</span>
                                     <span class="form-hint">For example, A1234567</span>
+                                    {% include "includes/errors/error-message-reg.html" %}
                                 </label>
                                 <input class="form-control" id="reg-number" type="text" name="reg-number">
                             </div>
@@ -101,9 +102,19 @@
                     $('.error-message').hide();
                 }
 
+                if (value2.length < 8) {
+                    validInput = false;
+                    showErrors2();
+                    $(function() {
+                        $('.error-summary-list li a').html('Registration number cannot be less than 8 characters');
+                        $('.error-message.reg').css('display', 'block');
+                        $('.error-message.reg').html('Enter 8 character registration number');
+                    });
+                }
+
                 if (validInput) {
                     if (value2 == 'A3679333') {
-                       go('/exit')
+                        go('/exit')
                     } else {
                         member.trailer.reg = value2;
                         member.trailer.registrationType = 'registered';
@@ -117,7 +128,7 @@
                 next();
             } else {
                 showErrors();
-                $('.error-message.2').hide();
+                $('.error-message.prog2').hide();
             }
         }
 
@@ -141,7 +152,7 @@
             // $('#over-3500').addClass('form-group-error');
             $('.form-control').addClass('form-control-error');
             $('.error-message').show().css('display', 'block');
-            // $('.error-message.2').hide();
+            // $('.error-message.prog2').hide();
             $('.error-summary').show().focus();
             $('legend').attr('id', 'error-link');
         }
@@ -158,7 +169,7 @@
             $('#over-3500').addClass('form-group-error');
             $('.form-control').addClass('form-control-error');
             $('.error-message').hide();
-            $('.error-message.2').show();
+            $('.error-message.prog2').show();
             $('.error-summary').show().focus();
             $('legend').attr('id', 'error-link');
         }
@@ -168,7 +179,7 @@
             $('fieldset').closest('.form-group').removeClass('form-group-error');
             $('.form-control').removeClass('form-control-error');
             $('.error-message').hide();
-            $('.error-message.2').hide();
+            $('.error-message.prog2').hide();
             $('legend').attr('id', 'error-link');
         }
 
