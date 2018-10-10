@@ -4,6 +4,16 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
+    <style type="text/css">
+        .multiple-choice,
+        .multiple-choice label,
+        form,
+        fieldset,
+        #address-radio-list { margin-bottom: 0; padding-bottom: 0; }
+
+        .no-top { margin-top: 0; padding-top: 0; }
+        .error-summary p { display: none; }
+    </style>
 {% endblock %}
 
 
@@ -13,6 +23,10 @@
 {% block content %}
     <main id="content" role="main" tabindex="-1">
         <div class="grid-row">
+            <div class="column-two-thirds">
+                {% include "includes/errors/error-summary.html" %}
+            </div>
+
             <div class="column-full">
                 <h1 class="heading-large">Select your address from the list</h1>
 
@@ -21,11 +35,22 @@
                         <fieldset>
                             <legend class="visuallyhidden">Select your address from the list</legend>
 
-                            <div class="form-group" id="address-list">
+                            {% include "includes/errors/error-message.html" %}
+
+                            <div class="form-group" id="address-radio-list">
                             </div>
+
                         </fieldset>
                     </div>
                 </form>
+                <p class="no-top">or</p>
+
+                <p><a href="/address/address-manual">Enter address manually</a></p>
+
+
+                <div class="form-group">
+                    <button class="button" type="button" onclick="validate()">Continue</button>
+                </div>
             </div>
         </div>
     </main>
@@ -39,37 +64,65 @@
     <script type="text/javascript">
         var changing = location.search.split('change=')[1];
 
-        var addressHTML = '';
+        var radioList = '';
         for (var i = 0; i < member.addresses.length; ++i) {
-            addressHTML += '<p><a href="javascript:select('+ i +')">' + member.addresses[i].Line1 + ', ';
+            radioList += '<div class="multiple-choice">';
+            radioList += '<input id="radio-inline-' + i + '" type="radio" name="radio-group" value="' + i + '">';
+            radioList += '<label for="radio-inline-' + i + '">';
+            radioList += member.addresses[i].Line1 + ', ';
             if (member.addresses[i].Line2 !== '') {
-                addressHTML += member.addresses[i].Line2 + ', ';
+                radioList += member.addresses[i].Line2 + ', ';
             }
             if (member.addresses[i].Line3 !== '') {
-                addressHTML += member.addresses[i].Line3 + ', ';
+                radioList += member.addresses[i].Line3 + ', ';
             }
             if (member.addresses[i].Line4 !== '') {
-                addressHTML += member.addresses[i].Line4 + ', ';
+                radioList += member.addresses[i].Line4 + ', ';
             }
             if (member.addresses[i].Line5 !== '') {
-                addressHTML += member.addresses[i].Line5 + ', ';
+                radioList += member.addresses[i].Line5 + ', ';
             }
-            addressHTML += member.addresses[i].City + ', ';
-            addressHTML += member.addresses[i].PostalCode + '</a></p>';
+            radioList += member.addresses[i].City + ', ';
+            radioList += member.addresses[i].PostalCode + '</a></p>';
+            radioList += '</label>';
+            radioList += '</div>';
         }
-        addressHTML += '<p>or</p>';
-        addressHTML += '<a href="/address/address-manual">Enter address manually</a>';
 
-        $('#address-list').html(addressHTML);
+        $('#address-radio-list').html(radioList);
 
-        function select(index) {
+
+        function validate() {
+            var validInput = true;
+            var value = $('input[name=radio-group]:checked').val();
+
+            if (!value) {
+                validInput = false;
+                hideErrors();
+                showErrors();
+                $('.error-summary-list li a').html('Select an address to continue');
+                $('.error-message').html('Select an address');
+            }
+
+            if (validInput) {
+                member.address = member.addresses[value];
+                next();
+            }
+        }
+
+        function next() {
             if (changing == "true") {
-                member.address = member.addresses[index];
                 go('/address/address-confirmation?change=true');
             } else {
-                member.user.address = member.addresses[index];
                 go('/address/address-confirmation');
             }
         }
+
+        // function next() {
+        //     if (changing == "true") {
+        //         go('/address/address-confirmation?change=true');
+        //     } else {
+        //         go('/address/address-confirmation');
+        //     }
+        // }
     </script>
 {% endblock %}
