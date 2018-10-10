@@ -55,7 +55,11 @@
 
         $('a.address-incorrect').click(function(e) {
             e.preventDefault();
-            go('/address/address-manual');
+            if (changing == "true") {
+                go('/address/address-manual?change=true');
+            } else {
+                go('/address/address-manual');
+            }
         });
 
         function next() {

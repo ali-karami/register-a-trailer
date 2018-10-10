@@ -91,7 +91,7 @@
         var weight = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer weights<br>changed successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
         // From payment
         // var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div><span id="trailer-list">' + trailerList + '</span>' + receipt + newCertificate + next + buttonRecord;
-        var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration<br>successful</h1></div>' + trailerList + receipt + newCertificate + next + buttonRecord;
+        var register = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer registration successful</h1></div>' + trailerList + receipt + newCertificate + next + buttonRecord;
         // var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate ordered successfully</h1></div><span id="trailer-list">' + trailerList + '</span>' + emailConf + newCertificate + buttonRecord;
         var duplicate = '<div class="govuk-box-highlight"><h1 class="heading-large">Replacement certificate<br>ordered successfully</h1></div>' + emailConf + newCertificate + buttonRecord;
         var recordCreated = '<div class="govuk-box-highlight"><h1 class="heading-large">Trailer account<br>created successfully</h1></div>' + registerTrailers + buttonRecord;
@@ -108,7 +108,7 @@
                 }
             }
 
-            if (value === 'address-confirmation') {
+            if ((value === 'address-confirmation') || (value === 'address-manual')) {
                 $('#page-content').html(address);
                 if (member.user.type == 'company') {
                     $('.heading-large').html('Company address<br>changed successfully');
@@ -155,9 +155,9 @@
             }
 
             if ((value === 'removal-date') || (value === 'check-your-answers')) {
-                if (member.disposal === undefined) {
-                    member.disposal = {};
-                }
+                // if (member.disposal === undefined) {
+                //     member.disposal = {};
+                // }
 
                 if (value === 'removal-date') {
                     if (member.disposal.type === 'exported') {
