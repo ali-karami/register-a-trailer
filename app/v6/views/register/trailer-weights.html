@@ -158,17 +158,18 @@
             }
 
             if (value1 <= 750) {
-                validInput = false;
-                console.log('GROSS IS LESS THAN 751');
-                fixPageTitle();
-                $('.error-summary').css('display', 'block').focus();
-                $('.error-summary li:first-child').css('display', 'block');
-                $('.error-summary li:first-child a').html('Gross weight must be more than 750kg');
-                $(document).find('input').first().addClass('form-control-error');
-                $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
-                $('.error-message.input').css('display', 'block');
-                $('.error-message.input').html('Enter a gross weight more than 750kg');
-                $('body').scrollTop(0);
+                go('/exit');
+                // validInput = false;
+                // console.log('GROSS IS LESS THAN 751');
+                // fixPageTitle();
+                // $('.error-summary').css('display', 'block').focus();
+                // $('.error-summary li:first-child').css('display', 'block');
+                // $('.error-summary li:first-child a').html('Gross weight must be more than 750kg');
+                // $(document).find('input').first().addClass('form-control-error');
+                // $('input[name=gross-weight]').closest('.form-group').addClass('form-group-error');
+                // $('.error-message.input').css('display', 'block');
+                // $('.error-message.input').html('Enter a gross weight more than 750kg');
+                // $('body').scrollTop(0);
             }
 
             if (value1 > 250000) {
@@ -213,7 +214,7 @@
                 $('body').scrollTop(0);
             }
 
-            if ((value1 == value2) && validInput) {
+            if (validInput && (value1 == value2)) {
                 validInput = false;
                 console.log('GROSS AND UNLADEN ARE SAME');
                 fixPageTitle();
@@ -231,7 +232,7 @@
                 $('body').scrollTop(0);
             }
 
-            if ((value2 > value1) && validInput) {
+            if (validInput && (value2 > value1)) {
                 validInput = false;
                 console.log('UNLADEN IS MORE THAN GROSS');
                 fixPageTitle();
@@ -261,6 +262,10 @@
             }
 
             if (validInput) {
+                if (member.trailer === undefined) {
+                    member.trailer = {};
+                }
+
                 if (changing == "true") {
                     member.trailers[member.currentTrailerPosition].gross = value1;
                     member.trailers[member.currentTrailerPosition].unladen = value2;
