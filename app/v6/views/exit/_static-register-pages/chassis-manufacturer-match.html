@@ -1,0 +1,44 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} This trailer has already been registered {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight grey">
+                    <h1 class="heading-large">You cannot register this trailer</h1>
+                </div>
+
+                <p>The chassis number <strong>4W289151</strong> and manufacturer <strong>Chieftain Trailers Ltd</strong> matches a trailer that has already been registered.</p>
+
+                <p>You may have entered the chassis number incorrectly.</p>
+
+                <details>
+                    <summary><span class="summary">The chassis number is correct</span></summary>
+
+                    <div class="panel panel-border-narrow">
+                        <p>If you’ve entered the chassis number correctly you’ll need to:</p>
+                        <p><strong>Call <abbr title="Driver and Vehicle Licensing Agency">DVLA</abbr></strong></p>
+                        <p>0300 790 6802<br>Monday to Friday, 8am to 7pm<br>Saturday, 8am to 2pm</p>
+                        <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
+                    </div>
+                </details>
+
+                <div class="form-group">
+                    <button class="button">Re-enter chassis number</button>
+                </div>
+
+                <a href="/trailer-record">Cancel and go to trailer dashboard</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
