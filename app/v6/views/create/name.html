@@ -5,15 +5,6 @@
 {% block head %}
     {% include "includes/head.html" %}
     {% include "includes/scripts/default.html" %}
-    <style type="text/css">
-        .autocomplete-wrapper {
-            max-width: 20em;
-            margin-bottom: 0;
-        }
-        #other-title-span { display: none; }
-        #other-title-span .form-group { margin-bottom: 30px !important; }
-        /* .form-group.first { margin-bottom: 1em; } */
-    </style>
 {% endblock %}
 
 {% block after_header %}
@@ -25,7 +16,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+    <main id="content" class="create-name" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}

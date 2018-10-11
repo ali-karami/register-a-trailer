@@ -4,10 +4,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        .error-summary,
-        .error-message { display: none; }
-    </style>
 {% endblock %}
 
 
@@ -15,7 +11,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+    <main id="content" class="have-vin-number" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}

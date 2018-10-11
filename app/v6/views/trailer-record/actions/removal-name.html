@@ -4,13 +4,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        .error-summary,
-        .error-message { display: none; }
-        .multiple-choice { margin-bottom: 10px !important; }
-        #other-title-span { display: none; }
-        #other-title-span .form-group { margin-bottom: 30px !important; }
-    </style>
 {% endblock %}
 
 
@@ -18,7 +11,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+    <main id="content" class="removal-name" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}

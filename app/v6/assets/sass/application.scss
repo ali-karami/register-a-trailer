@@ -271,6 +271,31 @@ abbr { border-bottom: 1px dotted; }
 
 
 
+// /processing.html
+// ==========================================================================
+#content.processing {
+  a#proposition-name {
+    display: none;
+    color: black !important;
+  }
+  .logged-user { display: none; }
+  .center { text-align: center; }
+}
+
+
+
+
+
+// /address/address-confirmation.html
+// ==========================================================================
+#content.address-confirmation {
+  dd { font-weight: 700; }
+}
+
+
+
+
+
 // /trailer-record/index.html
 // ==========================================================================
 #content.trailer-record {
@@ -422,12 +447,89 @@ table#sortable-table a.manage-link { display: none; }
   }
 }
 
+// trailer-record/manage.html
+#content.trailer-record-manage {
+  fieldset { margin-top: 0;}
+  h2.heading-medium { margin-top: .5em; }
+  .multiple-choice { margin-bottom: 10px !important; }
+  .column-third {
+    /* width: 100%; */
+    /* height: 5px; */
+    /* background-color: #005ea5; */
+    border-top: 10px solid #005ea5;
+  }
+  dd {
+    font-weight: 700;
+    margin-bottom: .5em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #BFC1C3; }
+}
+
+// trailer-record/actions/removal-name.html
+#content.removal-name {
+  .error-summary,
+  .error-message { display: none; }
+  .multiple-choice { margin-bottom: 10px !important; }
+  #other-title-span { display: none; }
+  #other-title-span .form-group { margin-bottom: 30px !important; }
+}
+
+// trailer-record/actions/removal-date.html
+#content.removal-date {
+  /* .error-message { display: none; }
+  ul.error-summary-list li { display: none; } */
+
+  .form-date .form-group {
+    float: left;
+    width: 50px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    clear: none;
+  }
+
+  .form-date .form-group label {
+    display: block;
+    padding-bottom: 2px;
+  }
+
+  .form-date .form-group input { width: 100%; }
+  .form-date .form-group-year { width: 70px; }
+}
+
+// trailer-record/actions/removal-address.html
+#content.removal-address {
+  dd { font-weight: 700; }
+}
 
 
 
+
+
+
+// REGISTER FLOW
+// ==========================================================================
+
+// register/have-vin-number.html
+#content.have-vin-number {
+  .error-summary,
+  .error-message { display: none; }
+}
+
+// register/trailer-manufacturer.html
+#content.trailer-manufacturer {
+  .autocomplete-wrapper {
+    max-width: 20em;
+    margin-bottom: 2rem;
+  }
+}
+
+// register/trailer-weights.html
+#content.trailer-weights {
+  details { margin-top: .75em; }
+  ul.error-summary-list li { display: none; }
+}
 
 // register/trailer-summary.html
-// ==========================================================================
 #content.trailer-summary-page {
   .column-third { margin-top: .1em; }
 
@@ -502,4 +604,55 @@ table#sortable-table a.manage-link { display: none; }
     font-size: 24px;
     font-weight: 700;
   }
+}
+
+// REGISTER/CHECK FLOW
+// ==========================================================================
+// register/check/trailer-weights.html
+#content.check-trailer-weights {
+  details { margin-top: .75em; }
+}
+
+
+
+
+
+// CREATE FLOW
+// ==========================================================================
+// create/what-to-expect.html
+#content.what-to-expect {
+  #company,
+  #personal { display: none; }
+}
+
+// create/name.html
+#content.create-name {
+  .autocomplete-wrapper {
+    max-width: 20em;
+    margin-bottom: 0;
+  }
+  #other-title-span { display: none; }
+  #other-title-span .form-group { margin-bottom: 30px !important; }
+  /* .form-group.first { margin-bottom: 1em; } */
+}
+
+
+
+
+
+// ADMIN
+// ==========================================================================
+#content.admin,
+#content.admin-exit-pages {
+  .grid-row.no-back { display: none; }
+  .grid-row.question { margin-top: 0; }
+  .heading-large { font-size: 24px; }
+  .heading-medium { font-size: 19px; }
+  .heading-small { font-size: 16px; }
+  .first { padding-left: 0; }
+  li a { font-size: 16px; }
+}
+
+#content.admin-exit-pages {
+  .removed { text-decoration: line-through; }
 }

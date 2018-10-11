@@ -5,11 +5,6 @@
 {% block head %}
     {% include "includes/head.html" %}
     {% include "includes/scripts/default.html" %}
-    <style type="text/css">
-        a#proposition-name { display: none; color: black !important; }
-        .logged-user { display: none; }
-        .center { text-align: center; }
-    </style>
 {% endblock %}
 
 {% block after_header %}
@@ -21,7 +16,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+    <main id="content" class="processing" role="main">
         <div class="grid-row no-question">
             <div class="column-full center">
                 <div class="form-group">

@@ -4,18 +4,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        dd { font-weight: 700; margin-bottom: .5em; padding-bottom: 1em; border-bottom: 1px solid #BFC1C3; }
-        .multiple-choice { margin-bottom: 10px !important; }
-        .column-third {
-            /* width: 100%; */
-            /* height: 5px; */
-            /* background-color: #005ea5; */
-            border-top: 10px solid #005ea5;
-        }
-        h2.heading-medium { margin-top: .5em; }
-        fieldset { margin-top: 0;}
-    </style>
 {% endblock %}
 
 
@@ -23,7 +11,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+    <main id="content" class="trailer-record-manage" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}
