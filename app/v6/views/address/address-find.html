@@ -19,7 +19,7 @@
                 <h1 class="heading-large">Find your <span class="title"></span>address</span></h1>
 
                 <div class="form-group">
-                    <label class="form-label" for="number">Building name or number (optional)</label>
+                    <label class="form-label" for="number"><span class="building">Building</span> number (optional)</label>
                     <input class="form-control" id="number" name="number" type="text">
                 </div>
 
@@ -56,6 +56,9 @@
         try { var type = member.user.type; } catch(err){}
         if (type == "company") {
             $('.title').html('company ');
+            $('.building').html('Building');
+        } else {
+            $('.building').html('House');
         }
 
         var changing = location.search.split('change=')[1];

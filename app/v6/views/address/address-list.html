@@ -4,16 +4,6 @@
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
-    <style type="text/css">
-        .multiple-choice,
-        .multiple-choice label,
-        form,
-        fieldset,
-        #address-radio-list { margin-bottom: 0; padding-bottom: 0; }
-
-        .no-top { margin-top: 0; padding-top: 0; }
-        .error-summary p { display: none; }
-    </style>
 {% endblock %}
 
 
@@ -21,7 +11,7 @@
 
 
 {% block content %}
-    <main id="content" role="main" tabindex="-1">
+    <main id="content" class="address-list" role="main" tabindex="-1">
         <div class="grid-row">
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}
@@ -39,14 +29,13 @@
 
                             <div class="form-group" id="address-radio-list">
                             </div>
-
                         </fieldset>
                     </div>
                 </form>
-                <p class="no-top">or</p>
 
-                <p><a href="/address/address-manual">Enter address manually</a></p>
+                <p class="or">or</p>
 
+                <p class="manual"><a class="manual-link" href="">Enter address manually</a></p>
 
                 <div class="form-group">
                     <button class="button" type="button" onclick="validate()">Continue</button>
@@ -90,6 +79,11 @@
 
         $('#address-radio-list').html(radioList);
 
+        $('a.manual-link').click(function(e) {
+            e.preventDefault();
+            member.postcodeTemp = member.addresses[0].PostalCode;;
+            go('/address/address-manual');
+        });
 
         function validate() {
             var validInput = true;
@@ -116,13 +110,5 @@
                 go('/address/address-confirmation');
             }
         }
-
-        // function next() {
-        //     if (changing == "true") {
-        //         go('/address/address-confirmation?change=true');
-        //     } else {
-        //         go('/address/address-confirmation');
-        //     }
-        // }
     </script>
 {% endblock %}

@@ -14,7 +14,7 @@
 
 
 {% block content %}
-<main id="content" role="main" tabindex="-1">
+    <main id="content" role="main" tabindex="-1">
         <div class="grid-row">
             <div class="column-two-thirds">
                 <form class="form">
@@ -91,6 +91,7 @@
             if (member.address.Line1) { addressPlayback += member.address.Line1 + '<br>'; }
             if (member.address.Line2) { addressPlayback += member.address.Line2 + '<br>'; }
             if (member.address.Line3) { addressPlayback += member.address.Line3 + '<br>'; }
+            if (member.address.Line4) { addressPlayback += member.address.Line4 + '<br>'; }
             if (member.address.City) { addressPlayback += member.address.City + '<br>'; }
             if (member.address.PostalCode) { addressPlayback += member.address.PostalCode; }
             $('#address').html(addressPlayback);
@@ -99,6 +100,7 @@
             if (member.user.address.Line1) { addressPlayback += member.user.address.Line1 + '<br>'; }
             if (member.user.address.Line2) { addressPlayback += member.user.address.Line2 + '<br>'; }
             if (member.user.address.Line3) { addressPlayback += member.user.address.Line3 + '<br>'; }
+            if (member.user.address.Line4) { addressPlayback += member.user.address.Line4 + '<br>'; }
             if (member.user.address.City) { addressPlayback += member.user.address.City + '<br>'; }
             if (member.user.address.PostalCode) { addressPlayback += member.user.address.PostalCode; }
             $('#address').html(addressPlayback);

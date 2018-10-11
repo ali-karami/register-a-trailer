@@ -212,6 +212,9 @@ abbr { border-bottom: 1px dotted; }
 }
 
 
+
+
+
 // Blue button
 // ==========================================================================
 .button {
@@ -225,6 +228,27 @@ abbr { border-bottom: 1px dotted; }
     /* -webkit-box-shadow: 0 2px 0 #003259; */
     /* box-shadow: 0 2px 0 #003259 */
   }
+}
+
+
+
+
+
+// /address-list.html
+// ==========================================================================
+#content.address-list {
+  form,
+  fieldset,
+  #address-radio-list,
+  .multiple-choice,
+  .multiple-choice label { margin-bottom: 0; padding-bottom: 0; }
+
+  .error-summary p { display: none; }
+
+  .form-group:first-child { margin-bottom: 1.05263em; }
+
+  p.or { margin-top: 0; margin-bottom: 1.05263em; padding-top: 0; }
+  p.manual { margin-bottom: 1.5em !important; }
 }
 
 
@@ -406,16 +430,27 @@ table#sortable-table a.manage-link { display: none; }
 // ==========================================================================
 #content.trailer-summary-page {
   .column-third { margin-top: .1em; }
+
   .accordion.with-js { border: none; }
   .accordion-section {
     border: 2px solid $border-colour;
     margin-bottom: .5em;
   }
-  .accordion-section-header { background-color: $highlight-colour; }
+  .accordion-section-header {
+    background-color: $highlight-colour;
+
+    h2.heading-medium { padding-left: .5em; }
+  }
   .accordion-section-body {
     padding-top: .75em;
   }
-  .cya-question { width: 40%; }
+  .accordion#registered-list .accordion-controls { display: none; }
+
+  .cya-question {
+    width: 40%;
+    padding-left: .5em;
+  }
+  .cya-change { padding-right: .5em !important; }
   .remove-row {
     background-color: $highlight-colour;
     min-height: 30px;
@@ -428,6 +463,7 @@ table#sortable-table a.manage-link { display: none; }
     }
   }
 
+  .paragraph { margin-bottom: 0; padding-bottom: 0; }
   .button.blue { margin-right: 1em; }
 
   // .remove-row
