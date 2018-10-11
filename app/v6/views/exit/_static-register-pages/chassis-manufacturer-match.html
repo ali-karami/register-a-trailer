@@ -22,16 +22,22 @@
 
                 <p>You may have entered the chassis number incorrectly.</p>
 
-                <details>
-                    <summary><span class="summary">The chassis number is correct</span></summary>
+                <div class="form-group">
+                    <details>
+                        <summary><span class="summary">The chassis number is correct</span></summary>
 
-                    <div class="panel panel-border-narrow">
-                        <p>If you’ve entered the chassis number correctly you’ll need to:</p>
-                        <p><strong>Call <abbr title="Driver and Vehicle Licensing Agency">DVLA</abbr></strong></p>
-                        <p>0300 790 6802<br>Monday to Friday, 8am to 7pm<br>Saturday, 8am to 2pm</p>
-                        <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
-                    </div>
-                </details>
+                        <div class="panel panel-border-narrow">
+                            <p>If you’ve entered the VIN correctly you’ll need to:</p>
+
+                            <strong>Call DVLA</strong>
+
+                            <p>0300 790 6802<br>
+                            Monday to Friday, 8am to 7pm<br>
+                            Saturday, 8am to 2pm</p>
+                            <a href="">Find out about call charges</a>
+                        </div>
+                    </details>
+                </div>
 
                 <div class="form-group">
                     <button class="button">Re-enter chassis number</button>
@@ -41,4 +47,16 @@
             </div>
         </div>
     </main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/register/have-vin-number');
+        });
+    </script>
 {% endblock %}
