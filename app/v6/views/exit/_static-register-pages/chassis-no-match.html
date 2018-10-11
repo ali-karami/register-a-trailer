@@ -1,0 +1,61 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} You cannot register this trailer {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard-back.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <main id="content" role="main" tabindex="-1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="govuk-box-highlight grey">
+                    <h1 class="heading-large">You cannot register this trailer</h1>
+                </div>
+
+                <p>The chassis number <strong>4W289151</strong> does not match the registration number <strong>A3679333</strong>.</p>
+
+                <p>You may have entered the chassis number incorrectly.</p>
+
+                <div class="form-group">
+                    <details>
+                        <summary><span class="summary">The chassis number is correct</span></summary>
+
+                        <div class="panel panel-border-narrow">
+                            <p>If you’ve entered the VIN correctly you’ll need to:</p>
+
+                            <strong>Call DVLA</strong>
+
+                            <p>0300 790 6802<br>
+                            Monday to Friday, 8am to 7pm<br>
+                            Saturday, 8am to 2pm</p>
+                            <a href="">Find out about call charges</a>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="form-group">
+                    <button class="button">Re-enter chassis number</button>
+                </div>
+
+                <a href="/trailer-record">Cancel and go to trailer dashboard</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        $('.button').click(function() {
+            go('/register/have-vin-number');
+        });
+    </script>
+{% endblock %}

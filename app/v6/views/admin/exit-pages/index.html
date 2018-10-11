@@ -12,6 +12,7 @@
         .heading-small { font-size: 16px; }
         .first { padding-left: 0; }
         li a { font-size: 16px; }
+        .removed { text-decoration: line-through; }
     </style>
 {% endblock %}
 
@@ -50,21 +51,26 @@
                 </div>
 
                 <div class="column-third">
-                    <h3 class="heading-medium">Check flow</h3>
+                    <h3 class="heading-medium">Register flow</h3>
 
                     <ol class="list list-bullet">
-                        <li><a href="/exit/_static-register-check-pages/not-over-750kg">not-over-750kg</a></li>
-                        <li><a href="/exit/_static-register-check-pages/not-outside-uk">not-outside-uk</a></li>
-                        <li><a href="/exit/_static-register-check-pages/not-travelling-through">not-travelling-through</a></li>
-                        <li><a href="/exit/_static-register-check-pages/non-commercial-under-3500kg">non-commercial-under-3500kg</a></li>
+                        <li class="removed"><a href="/exit/_static-register-pages/already-registered">already-registered</a></li>
+                        <li><a href="/exit/_static-register-pages/registration-not-found">registration-not-found</a></li>
+                        <li><a href="/exit/_static-register-pages/vin-match">vin-match</a></li>
+                        <li><a href="/exit/_static-register-pages/vin-no-match">vin-no-match</a></li>
+                        <li><a href="/exit/_static-register-pages/chassis-manufacturer-match">chassis-manufacturer-match</a></li>
+                        <li><a href="/exit/_static-register-pages/chassis-no-match">chassis-no-match</a></li>
                     </ol>
                 </div>
 
                 <div class="column-third">
-                    <h3 class="heading-medium">Register flow</h3>
+                    <h3 class="heading-medium removed">Check flow</h3>
 
                     <ol class="list list-bullet">
-                        <li><a href="/exit/_static-register-check-pages/already-registered">already-registered</a></li>
+                        <li class="removed"><a href="/exit/_static-register-check-pages/not-over-750kg">not-over-750kg</a></li>
+                        <li class="removed"><a href="/exit/_static-register-check-pages/not-outside-uk">not-outside-uk</a></li>
+                        <li class="removed"><a href="/exit/_static-register-check-pages/not-travelling-through">not-travelling-through</a></li>
+                        <li class="removed"><a href="/exit/_static-register-check-pages/non-commercial-under-3500kg">non-commercial-under-3500kg</a></li>
                     </ol>
                 </div>
             </div>
