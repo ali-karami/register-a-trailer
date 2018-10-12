@@ -148,7 +148,7 @@
             var buttonConfirmRemove = '<div class="form-group"><button class="button remove">Confirm and remove from trailer account</button></div>';
             var buttonReenter = '<div class="form-group"><button class="button add">Re-enter registration number</button></div>';
             // Links
-            var cancelGoTrailerDashboard = '<a href="/trailer-record">Cancel and go to trailer dashboard</a>';
+            var cancelGoTrailerDashboard = '<a class="link" href="/trailer-record">Cancel and go to trailer dashboard</a>';
             // var goToTrailerDashboard = '<a href="/trailer-record">Go to trailer dashboard</a>';
 
                                 // Heading          // Paragraph                // Button               // Link
@@ -176,6 +176,15 @@
                     $('#page-content').html(notOver750);
                 }
             }
+
+            $(document).ready(function () {
+                getPendingTrailers();
+                if (pendingTrailers == 0) {
+                    $('.link').html('Cancel and go to trailer dashboard');
+                } else {
+                    $('.link').html('Cancel and go to trailers pending payment');
+                }
+            });
         }
 
         // CHECK FLOWS
