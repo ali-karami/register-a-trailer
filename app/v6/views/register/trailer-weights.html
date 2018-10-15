@@ -90,8 +90,8 @@
 {% block body_end %}
     <script type="text/javascript">
         $('h1').click(function() {
-            var gross = randomWeight(751,250000);
-            var unladen = randomWeight(100,150000);
+            var gross = randomWeight(751,100000);
+            var unladen = randomWeight(100,100000);
             $('input[id=gross-weight]').val(unladen + gross);
             $('input[id=unladen-weight]').val(unladen);
         });
@@ -170,7 +170,7 @@
 
             if (value1 > 250000) {
                 validInput = false;
-                console.log('GROSS IS MORE THAN 44000');
+                console.log('GROSS IS MORE THAN 250000');
                 fixPageTitle();
                 $('.error-summary').css('display', 'block').focus();
                 $('.error-summary li:first-child').css('display', 'block');
@@ -258,25 +258,25 @@
             }
 
             if (validInput) {
-                // if (member.trailer === undefined) {
-                //     member.trailer = {};
-                // }
+                if (member.trailer === undefined) {
+                    member.trailer = {};
+                }
 
-                // if (changing == "true") {
-                //     member.trailers[member.currentTrailerPosition].gross = value1;
-                //     member.trailers[member.currentTrailerPosition].unladen = value2;
-                //     if (url == 'trailer-summary') {
-                //         go('/register/trailer-summary');
-                //     } else {
-                //         go('/success');
-                //     }
-                // } else {
-                //     member.trailer.gross = value1;
-                //     member.trailer.unladen = value2;
-                //     console.log('gross = ' + member.trailer.gross);
-                //     console.log('unladen = ' + member.trailer.unladen);
-                //     go('/register/saving-trailer');
-                // }
+                if (changing == "true") {
+                    member.trailers[member.currentTrailerPosition].gross = value1;
+                    member.trailers[member.currentTrailerPosition].unladen = value2;
+                    if (url == 'trailer-summary') {
+                        go('/register/trailer-summary');
+                    } else {
+                        go('/success');
+                    }
+                } else {
+                    member.trailer.gross = value1;
+                    member.trailer.unladen = value2;
+                    console.log('gross = ' + member.trailer.gross);
+                    console.log('unladen = ' + member.trailer.unladen);
+                    go('/register/saving-trailer');
+                }
             }
         }
 
