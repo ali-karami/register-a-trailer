@@ -16,6 +16,7 @@ $path: "/public/v6/images/";
 @import 'patterns/accordion';
 @import 'patterns/autocomplete';
 @import 'patterns/errors';
+@import 'patterns/number-plate';
 
 // Related items
 // (These styles will be moved to GOV.UK elements, duplicating here for now.)
@@ -50,7 +51,6 @@ strong { font-weight: 700; }
 // .inline .multiple-choice:first-child { margin-bottom: .25em !important; }
 // fieldset { margin-top: 1.5em; }
 // .heading-large { margin-top: 0; }
-
 // .grid-row.no-back { min-height: 51px; }
 
 // Margin padding
@@ -74,7 +74,7 @@ details.member-things  {
   display: block;
 
   summary {
-    color: #dee0e2;
+    color: $grey-3;
     cursor: pointer;
     position: relative;
     margin-bottom: 0.26316em;
@@ -171,8 +171,8 @@ abbr { border-bottom: 1px dotted; }
 }
 .error-message { margin-bottom: 0.25em; }
 .error-message.prog2 {
-  margin-top: 1em !important;
-  margin-bottom: 1em !important;
+  margin-top: .5em !important;
+  margin-bottom: .5em !important;
 }
 
 .form-group.declaration-input { margin-bottom: 0 !important; }
@@ -224,7 +224,7 @@ abbr { border-bottom: 1px dotted; }
     &:hover { background-color: darken($link-colour, 5%); }
     &:focus { background-color: $link-colour; }
       // background: #1B75BB;
-    // color: #FFFFFF;
+    // color: $page-colour;
     /* -webkit-box-shadow: 0 2px 0 #003259; */
     /* box-shadow: 0 2px 0 #003259 */
   }
@@ -276,7 +276,7 @@ abbr { border-bottom: 1px dotted; }
 #content.processing {
   a#proposition-name {
     display: none;
-    color: black !important;
+    color: $black !important;
   }
   .logged-user { display: none; }
   .center { text-align: center; }
@@ -328,7 +328,7 @@ abbr { border-bottom: 1px dotted; }
   #trailer-bar {
     width: 100%;
     height: 5px;
-    background-color: #005ea5;
+    background-color: $govuk-blue;
   }
 
   #manage { text-align: right; font-weight: 700; }
@@ -455,8 +455,8 @@ table#sortable-table a.manage-link { display: none; }
   .column-third {
     /* width: 100%; */
     /* height: 5px; */
-    /* background-color: #005ea5; */
-    border-top: 10px solid #005ea5;
+    /* background-color: $govuk-blue; */
+    border-top: 10px solid $govuk-blue;
   }
   dd {
     font-weight: 700;
@@ -570,7 +570,7 @@ table#sortable-table a.manage-link { display: none; }
 
   // .remove-row
   // .button.remove {
-  //   background-color: #005EA5;
+  //   background-color: $govuk-blue;
   //   border-bottom: 0;
   // }
 }
