@@ -65,7 +65,7 @@ function randomReg() {
 function randomVin() {
   var vin = '';
   var possibleNumber = "0123456789";
-  var possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var possibleLetters = "ABCDEFGHJKLMNPRSTUVWXYZ";
 
   for (var i = 0; i < 1; i++) vin += possibleNumber.charAt(Math.floor(Math.random() * possibleNumber.length));
   for (var i = 0; i < 2; i++) vin += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length));
