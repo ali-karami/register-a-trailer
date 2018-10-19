@@ -43,7 +43,9 @@ $path: "/public/v6/images/";
 
 // global use
 // ==========================================================================
-strong { font-weight: 700; }
+
+strong,
+.strong { font-weight: 700; }
 .visually-hidden { display: none; }
 // details { margin-bottom: 1em; }
 // summary { margin-bottom: 2em; }
@@ -93,7 +95,10 @@ details.member-things .panel.panel-border-narrow  {
 }
 
 // Add a dotted line underneath abbreviations
-abbr { border-bottom: 1px dotted; }
+abbr[title] {
+  cursor: help;
+  text-decoration: underline dotted;
+}
 
 
 
@@ -289,6 +294,25 @@ abbr { border-bottom: 1px dotted; }
 // ==========================================================================
 #content.address-confirmation {
   dd { font-weight: 700; }
+}
+
+
+
+
+
+// register/have-registration-number.html
+// ==========================================================================
+.column-third.govuk-related-items {
+  margin-top: -1.3em;
+
+  #registration-number {
+    background: url('/public/v6/images/example-plate-310x210.png') no-repeat center;
+    background-size: contain;
+    width: 105px;
+    height: 73px;
+    margin: 0 auto;
+    padding-bottom: 1.4em;
+  }
 }
 
 

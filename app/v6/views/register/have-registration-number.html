@@ -20,7 +20,9 @@
                     <fieldset class="inline">
                         <legend>
                             <h1 class="heading-large">Does this trailer have a registration number?</h1>
-                            <p class="lede">This is not the registration number of the pulling cab or the identification number issued by DVSA known as the ‘C’ number or ministry ID number</p>
+                            <!-- <p class="lede">This is not the registration number of the pulling cab or the identification number issued by DVSA known as the ‘C’ number or ministry ID number</p> -->
+                            <!-- <p class="form-hint">For example,<br><span class="number-plate">A1B2<br>C3D4</span></p> -->
+
                             {% include "includes/errors/error-message.html" %}
                         </legend>
 
@@ -42,7 +44,6 @@
                             <div class="form-group">
                                 <label class="form-label" for="reg-number">
                                     <span class="reg-no-error">Registration</span> <span class="reg-error">number</span>
-                                    <span class="form-hint">For example, A1234567</span>
                                     {% include "includes/errors/error-message-reg.html" %}
                                 </label>
                                 <input class="form-control" id="reg-number" type="text" name="reg-number">
@@ -54,6 +55,14 @@
                 {% include "includes/buttons/continue.html" %}
 
                 <a href="/register/trailer-summary" class="cancel-button">Cancel and go to trailers pending payment</a>
+            </div>
+
+            <div class="column-third govuk-related-items">
+                <h2 class="heading-small">Trailer registration number format</h2>
+
+                <div id="registration-number"></div>
+
+                <p>A trailer registration number starts with a letter (but not a ‘C’) and is followed by 7 numbers.</p>
             </div>
         </div>
     </main>
