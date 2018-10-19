@@ -109,10 +109,13 @@
             if (value1 === 'Y') {
                 if ((value2 === '') || (value2 === undefined)) {
                     validInput = false;
-                    $('.error-message.2').html('<abbr title="Vehicle Identification Number">VIN</abbr> cannot be empty');
+                    showErrors2();
+                    $('.error-summary li:first-child a').html('VIN cannot be empty');
+                    $('.error-message.prog2').html('Provide a VIN');
+
                 } else if ((value2 > 0)|| (value2 < 17) ) {
                     validInput = false;
-                    $('.error-message.2').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
+                    $('.error-message.prog2').html('<abbr title="Vehicle Identification Number">VIN</abbr> must be 17 characters');
                 }
 
                 if (validInput) {
@@ -202,20 +205,17 @@
         }
 
         function showErrors2() {
-            var title = $(document).prop('title');
-            if (title.indexOf('Error') > -1) {
-            } else {
-                $(document).prop('title', 'Error: ' + title);
-            }
-            $('body').scrollTop(0);
+            fixPageTitle();
+            $('.error-summary').css('display', 'block').focus();
+            // $('.error-summary li:last-child a').html('Unladen weight cannot be empty');
             $('fieldset').closest('.form-group').addClass('form-group-error');
             $('input').closest('.panel.panel-border-narrow').css({'border-left':'none','padding-left':'0'});
             $('#over-3500').addClass('form-group-error');
             $('.form-control').addClass('form-control-error');
             $('.error-message').hide();
-            $('.error-message.2').show().css('display', 'block');
-            $('.error-summary').show().focus();
+            $('.error-message.prog2').css('display', 'block');
             $('legend').attr('id', 'error-link');
+            $('body').scrollTop(0);
         }
 
         function hideErrors() {
