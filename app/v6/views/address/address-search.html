@@ -1,0 +1,84 @@
+{% extends "layout-v6.html" %}
+
+{% block page_title %} Find your address {% endblock %}
+
+{% block after_header %}
+    {% include "includes/phase-banner/standard.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+<main id="content" class="processing" role="main">
+    <div class="grid-row no-question">
+        <div class="column-full center">
+            <div class="form-group">
+                <h1 class="heading-large">Finding your address</h1>
+
+                <p>This may take a few seconds.</p>
+
+                <img src="/public/v6/images/progress.gif" width="50px" />
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+
+
+
+
+{% block body_end %}
+    <script type="text/javascript">
+        var changing = location.search.split('change=')[1];
+
+        var request = '?';
+
+        if (member.search.postcode) {
+            request += "postcode=" + member.search.postcode;
+        } else {
+            // Do nothing
+        }
+
+        if (member.search.number) {
+            request += "&number=" + member.search.number;
+        } else {
+            // Do nothing
+        }
+
+        // Create a playback string
+        $.getJSON('/api/address-lookup' + encodeURI(request), function(addresses) {
+            member.addresses = addresses;
+
+            if (member.addresses.length === 1) {
+                // Load address into fields and allow to manually edit
+                member.address = member.addresses[0];
+
+                if (changing == "true") {
+                    go('/address/address-confirmation?change=true');
+                } else {
+                    go('/address/address-confirmation');
+                }
+            } else if (member.addresses.length > 1) {
+                // Show list of addresses
+
+                if (changing == "true") {
+                    go('/address/address-list?change=true');
+                } else {
+                    go('/address/address-list');
+                }
+            } else {
+                // No results, enter manually
+
+                if (changing == "true") {
+                    go('/address/address-manual?change=true');
+                } else {
+                    go('/address/address-manual');
+                }
+            }
+            console.log(addresses);
+        });
+    </script>
+{% endblock %}

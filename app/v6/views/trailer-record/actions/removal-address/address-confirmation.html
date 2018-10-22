@@ -29,7 +29,7 @@
                         </fieldset>
                     </div>
 
-                    <a href="/address/address-manual">This address is not correct</a><br><br>
+                    <a href="/trailer-record/actions/removal-address/address-manual">This address is not correct</a><br><br>
 
                     <div class="form-group">
                         <button class="button" type="button">Yes, continue</button>
@@ -53,9 +53,11 @@
         $('.button').click(next);
 
         function next() {
-            member.disposal.address = member.address;
+            // member.disposal.address = member.address;
             delete member.address;
             delete member.addresses;
+            delete member.search.postcode;
+            delete member.search.number;
 
             if (changing == "true") {
                 if (refUrl == 'check-your-answers') {

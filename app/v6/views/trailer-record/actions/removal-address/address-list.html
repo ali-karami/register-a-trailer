@@ -101,6 +101,8 @@
 
             if (validInput) {
                 member.disposal.address = member.addresses[value];
+                member.posttownTemp = member.addresses[0].City;
+                member.postcodeTemp = member.addresses[0].PostalCode;
                 next();
             }
         }

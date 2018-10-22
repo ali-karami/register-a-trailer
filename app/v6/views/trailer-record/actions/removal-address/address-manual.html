@@ -34,8 +34,8 @@
                             <legend class="visuallyhidden">Enter new keeper’s address</legend>
 
                             <div class="form-group" id="qaddress">
-                                <label class="form-label visuallyhidden" for="address1">
-                                    Address line 1
+                                <label class="form-label" for="address1">
+                                    Address
                                     <span class="form-hint"></span>
                                 </label>
                                 <span class="error-message address1">Provide an address</span>
@@ -63,22 +63,14 @@
                                 <input spellcheck="false" class="form-control form-control-3-4" id="address4" name="address4" type="text" value="">
                             </div>
 
-                            <div class="form-group" id="qposttown">
-                                <label class="form-label" for="posttown">
-                                    Post town
-                                    <span class="form-hint"></span>
-                                    <span class="error-message posttown">Provide a post town</span>
-                                </label>
-                                <input spellcheck="false" class="form-control form-control-1-2" id="posttown" name="posttown" type="text" value="">
+                            <div class="form-group">
+                                <p>Post town<br>
+                                <span id="posttown" class="strong">Post town</strong></span></p>
                             </div>
 
-                            <div class="form-group" id="qpostcode">
-                                <label class="form-label" for="postcode">
-                                    Postcode
-                                    <span class="form-hint"></span>
-                                    <span class="error-message postcode">Provide a postcode</span>
-                                </label>
-                                <input spellcheck="false" class="form-control form-control-1-4" id="postcode" name="postcode" type="text" value="">
+                            <div class="form-group">
+                                <p >Postcode<br>
+                                <span id="postcode" class="strong">postcode</span></p>
                             </div>
                         </fieldset>
                     </div>
@@ -102,15 +94,18 @@
     <script type="text/javascript">
         $('h1').click(function() {
             var testData = {
-                "address1": "122 Burns Crescent",
-                // "address2": "Edinburgh",
-                "posttown": "Edinburgh",
-                "postcode": "EH1 9GP"
+                "address1": "Singleton Hospital",
+                "address2": "Sketty Lane",
+                "address3": "Sketty",
             };
             $('input[id=address1]').val(testData.address1);
-            // $('input[id=address2]').val(testData.address2);
-            $('input[id=posttown]').val(testData.posttown);
-            $('input[id=postcode]').val(testData.postcode);
+            $('input[id=address2]').val(testData.address2);
+            $('input[id=address3]').val(testData.address3);
+        });
+
+        $(document).ready(function () {
+            $('#posttown').html(member.posttownTemp);
+            $('#postcode').html(member.postcodeTemp);
         });
 
         $('input[id=postcode]').val(member.postcodeTemp);
@@ -130,8 +125,8 @@
             hideErrors();
 
             var addressLine1 = $('input[name=address1]').val();
-            var addressPosttown = $('input[name=posttown]').val();
-            var addressPostcode = $('input[name=postcode]').val();
+            var addressPosttown = member.posttownTemp;
+            var addressPostcode = member.postcodeTemp;
 
             if (!addressLine1) {
                 validInput = false;
@@ -143,39 +138,29 @@
                 $('body').scrollTop(0);
             }
 
-            if (!addressPosttown) {
+            if (addressLine1.length > 45) {
                 validInput = false;
                 fixPageTitle();
                 $('.error-summary').css('display', 'block').focus();
-                $(document).find('input:eq(4)').addClass('form-control-error');
-                $('input[name=posttown]').closest('.form-group').addClass('form-group-error');
-                $('.error-message.posttown').css('display', 'block');
-                $('body').scrollTop(0);
-            }
-
-            if (!addressPostcode) {
-                validInput = false;
-                fixPageTitle();
-                $('.error-summary').css('display', 'block').focus();
-                $(document).find('input').last().addClass('form-control-error');
-                $('input[name=postcode]').closest('.form-group').addClass('form-group-error');
-                $('.error-message.postcode').css('display', 'block');
+                $(document).find('input').first().addClass('form-control-error');
+                $('input[name=address1]').closest('.form-group').addClass('form-group-error');
+                $('.error-message.address1.high').css('display', 'block');
                 $('body').scrollTop(0);
             }
 
             if (validInput) {
-                member.user.address.Line1 = addressLine1;
+                member.disposal.address.Line1 = addressLine1;
                 try {
-                    member.user.address.Line2 = addressLine2;
+                    member.disposal.address.Line2 = addressLine2;
                 } catch(err){}
                 try {
-                    member.user.address.Line3 = addressLine3;
+                    member.disposal.address.Line3 = addressLine3;
                 } catch(err){}
                 try {
-                    member.user.address.Line4 = addressLine4;
+                    member.disposal.address.Line4 = addressLine4;
                 } catch(err){}
-                member.user.address.City = addressPosttown;
-                member.user.address.PostalCode = addressPostcode;
+                member.disposal.address.City = addressPosttown;
+                member.disposal.address.PostalCode = addressPostcode;
                 delete member.postcodeTemp;
                 delete member.address;
                 delete member.addresses;

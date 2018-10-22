@@ -60,30 +60,27 @@
         $('.button').click(validate);
 
         function validate() {
-            // resetErrors();
             var validInput = true;
-            var request = '?';
 
             var postcode = $('input[name=postcode]').val();
             if ((postcode == '') || (postcode == undefined)) {
-                // $('#qpostcode').addClass('error');
-                // $('.postcode.error-message').show();
-                // $('.error-summary').show();
-                // $('body').scrollTop(0);
                 validInput = false;
                 showErrors();
                 $('input[name=postcode]').find().closest('form-group').addClass('form-control-error');
                 $('.error-summary-list li a').html('Provide a postcode to continue');
                 $('.error-message').html('Provide a postcode');
             } else {
-                request += "postcode=" + postcode;
+                if (member.search === undefined) {
+                    member.search = {};
+                }
+                member.search.postcode = postcode;
             }
 
             var number = $('input[name=number]').val();
             if ((number == '') || (number == undefined)) {
                 // Do nothing
             } else {
-                request += "&number=" + number;
+                member.search.number = number;
             }
 
             if (validInput) {
@@ -91,42 +88,7 @@
                     member.addresses = {};
                 }
 
-                // Create a playback string
-                $.getJSON('/api/address-lookup' + encodeURI(request), function(addresses) {
-                    member.addresses = addresses;
-
-                    if (member.addresses.length === 1) {
-                        // Load address into fields and allow to manually edit
-                        member.address = member.addresses[0];
-
-                        if (changing == "true") {
-                            go('/trailer-record/actions/removal-address/address-confirmation?change=true');
-                        } else {
-                            go('/trailer-record/actions/removal-address/address-confirmation');
-                        }
-                    } else if (member.addresses.length > 1) {
-                        // Show list of addresses
-
-                        if (changing == "true") {
-                            go('/trailer-record/actions/removal-address/address-list?change=true');
-                        } else {
-                            go('/trailer-record/actions/removal-address/address-list');
-                        }
-                    } else {
-                        // No results, enter manually
-
-                        if (changing == "true") {
-                            go('/trailer-record/actions/removal-address/address-manual?change=true');
-                        } else {
-                            go('/trailer-record/actions/removal-address/address-manual');
-                        }
-                    }
-                    console.log(addresses);
-                });
-
-                //next();
-            } else {
-                // showErrors();
+                go('/trailer-record/actions/removal-address/address-search');
             }
         }
     </script>

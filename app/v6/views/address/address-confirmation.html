@@ -52,6 +52,8 @@
 
         $('a.address-incorrect').click(function(e) {
             e.preventDefault();
+            member.posttownTemp = member.addresses[0].City;
+            member.postcodeTemp = member.addresses[0].PostalCode;
             if (changing == "true") {
                 go('/address/address-manual?change=true');
             } else {
@@ -66,11 +68,15 @@
                     delete member.address;
                     delete member.addresses;
                     delete member.flow;
+                delete member.search.postcode;
+                delete member.search.number;
                     go('/create/check-your-answers');
                 } else {
                     member.user.address = member.address;
                     delete member.address;
                     delete member.addresses;
+                delete member.search.postcode;
+                delete member.search.number;
                     go('/success');
                 }
             } else {
