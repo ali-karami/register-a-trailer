@@ -11,7 +11,7 @@
 
 
 {% block content %}
-    <main id="content" role="main">
+    <main id="content" class="have-registration-number" role="main">
         <div class="grid-row">
             <div class="column-two-thirds">
                 {% include "includes/errors/error-summary.html" %}
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <fieldset class="inline">
                         <legend>
-                            <h1 class="heading-large">Does this trailer have a registration number?</h1>
+                            <h1 class="heading-large">Does this trailer have a<br>registration number?</h1>
                             <!-- <p class="lede">This is not the registration number of the pulling cab or the identification number issued by DVSA known as the ‘C’ number or ministry ID number</p> -->
                             <!-- <p class="form-hint">For example,<br><span class="number-plate">A1B2<br>C3D4</span></p> -->
 
@@ -60,7 +60,9 @@
             <div class="column-third govuk-related-items">
                 <h2 class="heading-small">Trailer registration number format</h2>
 
-                <div id="registration-number"></div>
+                <div id="number-plate-container">
+                    <span class="number-plate">A123<br>4567</span>
+                </div>
 
                 <p>A trailer registration number starts with a letter (but not a ‘C’) and is followed by 7 numbers.</p>
             </div>

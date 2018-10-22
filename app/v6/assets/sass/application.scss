@@ -16,6 +16,7 @@ $path: "/public/v6/images/";
 @import 'patterns/accordion';
 @import 'patterns/autocomplete';
 @import 'patterns/errors';
+@import 'patterns/number-plate';
 
 // Related items
 // (These styles will be moved to GOV.UK elements, duplicating here for now.)
@@ -302,16 +303,41 @@ abbr[title] {
 
 // register/have-registration-number.html
 // ==========================================================================
+#content.have-registration-number {
+  .grid-row.question {
+    .column-two-thirds {
+      width: 65.2% !important;
+    }
+  }
+}
+
+
+
+
+
 .column-third.govuk-related-items {
   margin-top: -1.3em;
 
-  #registration-number {
-    background: url('/public/v6/images/example-plate-310x210.png') no-repeat center;
-    background-size: contain;
+  #number-plate-container {
     width: 105px;
-    height: 73px;
     margin: 0 auto;
-    padding-bottom: 1.4em;
+    padding-bottom: .23em;
+  
+    .number-plate {
+      font: 34px "CharlesWrightBoldCaps", "nta", Arial, sans-serif;
+      width: 105px;
+      height: 78px;
+      background-color: $page-colour;
+      border: 3px solid $text-colour;
+      border-radius: 0.3em;
+      text-transform: uppercase;
+      color: $text-colour;
+      line-height: 1;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
   }
 }
 
