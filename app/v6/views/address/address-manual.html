@@ -199,12 +199,18 @@
         }
 
         function next() {
-            if (member.flow == 'create') {
-                delete member.flow;
-                go('/create/check-your-answers');
+            if (changing === 'true') {
+                if (member.flow == 'create') {
+                    delete member.flow;
+                    go('/create/check-your-answers');
+                } else {
+                    go('/success');
+                }
             } else {
-                go('/success');
+                go('/create/email-address');
             }
         }
+
+        var changing = location.search.split('change=')[1];
     </script>
 {% endblock %}
