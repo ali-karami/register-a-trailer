@@ -126,6 +126,7 @@
             fixPageTitle();
             $('body').scrollTop(0);
             $('fieldset').closest('.form-group').addClass('form-group-error');
+            $('fieldset').first().closest('.form-group').removeClass('form-group-error');
             $('#over-3500').addClass('form-group-error');
             $('.form-control').addClass('form-control-error');
             $('.error-message').hide();
