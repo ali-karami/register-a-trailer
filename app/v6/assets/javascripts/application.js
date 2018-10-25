@@ -19,13 +19,13 @@ $(document).ready(function () {
 })
 
 // Allow continue from enter press
-$(function () {
-  $('#content').keyup(function (event) {
-    if (event.keyCode == 13) {
-      $('.button').click();
-    }
-  });
-});
+//$(function () {
+//  $('#content').keyup(function (event) {
+//    if (event.keyCode == 13) {
+//      $('.button').click();
+//    }
+//  });
+//});
 
 // Shorthand URL
 function go(url) {

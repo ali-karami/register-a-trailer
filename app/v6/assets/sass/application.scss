@@ -55,7 +55,7 @@ strong { font-weight: 700; }
 // Margin padding
 .margin-top-0 { margin-top: 0 !important; }
 .margin-top-1 { margin-top: 1em !important; }
-// .margin-top-2 { margin-top: 2em !important; }
+.margin-top-2 { margin-top: 2em !important; }
 .margin-bottom-0 { margin-bottom: 0 !important; }
 .form-control#postcode { text-transform: uppercase; }
 // #plural { display: none; }
@@ -95,6 +95,10 @@ details.member-things .panel.panel-border-narrow  {
 // Add a dotted line underneath abbreviations
 abbr { border-bottom: 1px dotted; }
 
+
+.float-right {
+    float: right;
+}
 
 
 
@@ -654,4 +658,16 @@ table#sortable-table a.manage-link { display: none; }
 
 #content.admin-exit-pages {
   .removed { text-decoration: line-through; }
+}
+
+
+// Search within results table
+// ==========================================================================
+
+.inset-search {
+    input {
+        min-width: 300px;
+        padding-left: 10px;
+        font-size: 16px;
+    }
 }
