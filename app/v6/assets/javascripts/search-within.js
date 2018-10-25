@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('#searchWithinButton').click(function(e){
-        searchwithin(e)
+        searchWithin(e)
     });
     
     $('#searchWithinForm').submit(function(e){
