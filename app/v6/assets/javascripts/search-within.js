@@ -27,7 +27,8 @@ function searchWithin(e){
                 trailerRow += '<tr>';
                 trailerRow += '<td scope="row"><span class="table-label">Registration</span><span class="table-details">' + results[i].reg + '</span><a href="#" class="manage-link" data="' + i + '">Manage</a></td>';
 
-                if (!results[i].vin) {
+                if (results[i].chassis) {
+                    trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + results[i].chassis + '</span></td>';
                 } else {
                     trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + results[i].vin + '</span></td>';
                 }
@@ -55,13 +56,26 @@ function searchPartials(input, dataSource){
     for (var i = 0; i < items.length; i++) {
         var counter = 0;
         for (var s = 0; s < inputs.length; s++) {
-            if (items[i].reg.toUpperCase().includes(inputs[s]) || items[i].vin.toUpperCase().includes(inputs[s]) || items[i].manufacturer.toUpperCase().includes(inputs[s])) {
-                counter++;
-                if (counter == inputs.length) {
-                    counter = 0;
-                    if (holding.includes(items[i])) {
-                    } else {
-                        holding.push(items[i]);
+            if (items[i].vin){
+                if (items[i].reg.toUpperCase().includes(inputs[s]) || items[i].vin.toUpperCase().includes(inputs[s]) || items[i].manufacturer.toUpperCase().includes(inputs[s])) {
+                    counter++;
+                    if (counter == inputs.length) {
+                        counter = 0;
+                        if (holding.includes(items[i])) {
+                        } else {
+                            holding.push(items[i]);
+                        }
+                    }
+                }
+            } else {
+                if (items[i].reg.toUpperCase().includes(inputs[s]) || items[i].chassis.toUpperCase().includes(inputs[s]) || items[i].manufacturer.toUpperCase().includes(inputs[s])) {
+                    counter++;
+                    if (counter == inputs.length) {
+                        counter = 0;
+                        if (holding.includes(items[i])) {
+                        } else {
+                            holding.push(items[i]);
+                        }
                     }
                 }
             }
