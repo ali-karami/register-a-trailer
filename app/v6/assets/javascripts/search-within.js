@@ -17,29 +17,40 @@ function searchWithin(e){
         var results = searchPartials(input, member.trailers);
 
         if (results.length == 0) {
-            alert("no results found");
+
+            var heading = '<h2 class="heading-medium">0 trailers</h2>';
+            
+            var noResults = '<div class="no-search-results">No trailers found</div>';
+            
+            $('#trailer-table').html(heading + noResults);      
+        
+        
         } else {
-                var trailerRow = '<h2 class="heading-medium">' + results.length + ' trailer<span class="plural"></span></h2><table id="sortable-table"><thead><tr><th scope="col" onclick="sortTable(0)" id="reg" class="sort-default">Registration number</th><th scope="col" onclick="sortTable(1)" id="vin" class="sort-default"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</th><th scope="col" onclick="sortTable(2)" id="manu" class="sort-default">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
-        }
+            var heading = '<h2 class="heading-medium">' + results.length + ' trailer<span class="plural"></span></h2>';
+            
+            var trailerHeader = '<table id="sortable-table"><thead><tr><th scope="col" onclick="sortTable(0)" id="reg" class="sort-default">Registration number</th><th scope="col" onclick="sortTable(1)" id="vin" class="sort-default"><abbr title="Vehicle Identification Number">VIN</abbr>/Chassis number</th><th scope="col" onclick="sortTable(2)" id="manu" class="sort-default">Manufacturer</th><th scope="col">&nbsp;</th></tr></thead><tbody>';
+            
+            var trailerRow = '';
 
-        for (i = results.length - 1; i >= 0; i--) {
-            if (results[i].registered == true) {
-                trailerRow += '<tr>';
-                trailerRow += '<td scope="row"><span class="table-label">Registration</span><span class="table-details">' + results[i].reg + '</span><a href="#" class="manage-link" data="' + i + '">Manage</a></td>';
+            for (i = results.length - 1; i >= 0; i--) {
+                if (results[i].registered == true) {
+                    trailerRow += '<tr>';
+                    trailerRow += '<td scope="row"><span class="table-label">Registration</span><span class="table-details">' + results[i].reg + '</span><a href="#" class="manage-link" data="' + i + '">Manage</a></td>';
 
-                if (results[i].chassis) {
-                    trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + results[i].chassis + '</span></td>';
-                } else {
-                    trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + results[i].vin + '</span></td>';
+                    if (results[i].chassis) {
+                        trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + results[i].chassis + '</span></td>';
+                    } else {
+                        trailerRow += '<td scope="row"><span class="table-label"><abbr title="Vehicle Identification Number">VIN</abbr></span><span class="table-details">' + results[i].vin + '</span></td>';
+                    }
+                    trailerRow += '<td scope="row"><span class="table-label">Manufacturer</span><span class="table-details">' + results[i].manufacturer + '</span></td>';
+                    trailerRow += '<td scope="row" id="manage"><a href="#" class="manage" data="' + i + '">Manage</a></td>';
+                    // trailerRow += '<a href="#" class="manage-link" data="' + i + '">Manage</a>';
+                    trailerRow += '</tr>';
                 }
-                trailerRow += '<td scope="row"><span class="table-label">Manufacturer</span><span class="table-details">' + results[i].manufacturer + '</span></td>';
-                trailerRow += '<td scope="row" id="manage"><a href="#" class="manage" data="' + i + '">Manage</a></td>';
-                // trailerRow += '<a href="#" class="manage-link" data="' + i + '">Manage</a>';
-                trailerRow += '</tr>';
             }
-        }
 
-        $('#trailer-table').html(trailerRow + '</tbody></table>');
+            $('#trailer-table').html(heading + trailerHeader + trailerRow + '</tbody></table>');
+        }
     }
 }
 

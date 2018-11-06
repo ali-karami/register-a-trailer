@@ -678,3 +678,17 @@ table#sortable-table a.manage-link { display: none; }
         margin-bottom: 1.5em;
     }
 }
+
+table {
+    #reg { width: 30% }
+    #vin { width: 30% }
+    #manu { width: 450% }
+}
+
+.no-search-results {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    border-top: solid 1px grey;
+    border-bottom: solid 1px grey;
+}
