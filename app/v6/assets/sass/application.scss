@@ -58,7 +58,7 @@ strong,
 // Margin padding
 .margin-top-0 { margin-top: 0 !important; }
 .margin-top-1 { margin-top: 1em !important; }
-// .margin-top-2 { margin-top: 2em !important; }
+.margin-top-2 { margin-top: 2em !important; }
 .margin-bottom-0 { margin-bottom: 0 !important; }
 .form-control#postcode { text-transform: uppercase; }
 // #plural { display: none; }
@@ -101,6 +101,10 @@ abbr[title] {
   text-decoration: underline dotted;
 }
 
+
+.float-right {
+    float: right;
+}
 
 
 
@@ -704,4 +708,37 @@ table#sortable-table a.manage-link { display: none; }
 
 #content.admin-exit-pages {
   .removed { text-decoration: line-through; }
+}
+
+
+// Search within results table
+// ==========================================================================
+
+.inset-search {
+    input {
+        min-width: 300px;
+        padding-left: 10px;
+        font-size: 16px;
+        min-height: 40px;
+    }
+}
+
+#trailer-table {
+    h2 {
+        margin-bottom: 1.5em;
+    }
+}
+
+table {
+    #reg { width: 25% }
+    #vin { width: 30% }
+    #manu { width: 45% }
+}
+
+.no-search-results {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    border-top: solid 1px grey;
+    border-bottom: solid 1px grey;
 }
