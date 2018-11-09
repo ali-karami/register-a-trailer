@@ -313,6 +313,42 @@ abbr[title] {
       width: 65.2% !important;
     }
   }
+
+  .column-third {
+    padding: 0;
+
+      .card {
+      
+        .header {
+          padding: 13px 19px 10px;
+          background-color: $link-colour;
+          color: $page-colour;
+          text-align: center;
+
+          h2.heading-small {
+            margin: 0;
+          }
+        }
+        
+        .body {
+          background-color: $highlight-colour;
+          padding: 1em;
+          
+          img {
+            display: block;
+            margin: 0 auto;
+            padding-bottom: 19px;
+          }
+
+          .footer {
+            margin: 0;
+          }
+
+        }
+      }
+  }
+
+  
 }
 
 
@@ -322,27 +358,27 @@ abbr[title] {
 .column-third.govuk-related-items {
   margin-top: -1.3em;
 
-  #number-plate-container {
-    width: 105px;
-    margin: 0 auto;
-    padding-bottom: .23em;
+  // #number-plate-container {
+  //   width: 105px;
+  //   margin: 0 auto;
+  //   padding-bottom: .23em;
   
-    .number-plate {
-      font: 34px "CharlesWrightBoldCaps", "nta", Arial, sans-serif;
-      width: 105px;
-      height: 78px;
-      background-color: $page-colour;
-      border: 3px solid $text-colour;
-      border-radius: 0.3em;
-      text-transform: uppercase;
-      color: $text-colour;
-      line-height: 1;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-  }
+  //   .number-plate {
+  //     font: 34px "CharlesWrightBoldCaps", "nta", Arial, sans-serif;
+  //     width: 105px;
+  //     height: 78px;
+  //     background-color: $page-colour;
+  //     border: 3px solid $text-colour;
+  //     border-radius: 0.3em;
+  //     text-transform: uppercase;
+  //     color: $text-colour;
+  //     line-height: 1;
+  //     display: inline-flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     text-align: center;
+  //   }
+  // }
 }
 
 
@@ -742,3 +778,4 @@ table {
     border-top: solid 1px grey;
     border-bottom: solid 1px grey;
 }
+
