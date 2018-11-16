@@ -1,6 +1,6 @@
 {% extends "layout-v6.html" %}
 
-{% block page_title %} Will you be travelling through any other countries to get to Spain? {% endblock %}
+{% block page_title %} Will you be travelling through any other countries? {% endblock %}
 
 {% block after_header %}
     {% include "includes/phase-banner/standard-back.html" %}
@@ -58,6 +58,8 @@
             }
         }
         $('.countries').html(countries);
+
+        document.title = 'Will you be travelling through any other countries to get to and from ' + countries + '?';
 
         $('.button').click(validate);
 
